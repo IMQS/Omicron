@@ -1,0 +1,38 @@
+\documentclass{article}
+\title{Instagram Research}
+\author{M. Rozenkrantz}
+
+\begin{document}
+\maketitle
+
+\section{The Instagram API}
+Here follows a list of methods that I think would be helpful to the project.
+\begin{itemize}
+\item{Media Search} Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days. This can be used to check whether there are any posts from a certain location - added as a parameter in the search made by the first response. This joined with a tag search could be our answer.
+\item{Tag Name}
+This returns information about how many times a certain tag has been used. This could be useful to see if there are any results that have used, for example, 'NoWater' as a tag. If it can be joined with the above this will give us our info.
+\item{Tag Name Recent}
+Perhaps a better alternative to the above - you can search for specific tags from a specific time period.
+\item{}
+\item{}
+\end{itemize}
+
+\subsection{Other methods}
+Here follows a list of other methods I think we would need to implement in order to use the above methods.
+\begin{itemize}
+\item{Method to call current UNIX timestamp}
+\item{Method to convert time (potentially from different time zones) to UNIX timestamp format.}
+\end{itemize}
+
+\section{Impediments}
+One needs a domain before you can register to use the Instagram API.  \verb5http://instagram.com/developer/register/#5 also asks for a telephone number and a description of what you intend to build using the API.
+
+The biggest problem that I can foresee is that very very few pictures have location data attached to them. Out of 16 random pictures only 2 had geo-data. If this project is to be successful I would suggest a campaign encouraging people to upload specific tags for specific problems and to attach their location to pictures.
+
+I am having difficulties with finding the correct GPS coordinates to use as a reference for searching.
+
+One would also need to get the current time in a UNIX timestamp format as well as specify a 'start' time period (in UNIX timestamp format) - to limit the search results.
+
+I am unsure of how to 'join' different calls to the Instagram database.
+
+\end{document}
