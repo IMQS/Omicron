@@ -12,15 +12,15 @@ Using Twitter to retrieve geo-locational information from the tweets. Twitter us
 
 \end{itemize}
 
-These calls are all made as a REST Call which supports the json, XML,RSS and atom formats. The API's requires a oauth call to authenticate the user before a call is allowed otherwise it will return a json with a Bad Authentication data error(215) message . It uses a base URL \verb+https://api.twitter.com/1.1/+
+These calls are all made as a REST Call which supports the json, xml,RSS and atom formats. The API's requires a oauth call to authenticate the user before a call is allowed otherwise it will return a json with a Bad Authentication data error(215) message . It uses a base url \verb+https://api.twitter.com/1.1/+
 \section{Search API}
-Only has one REST call, used for Querying all tweets for keywords, hash tags, treads and tweets specifying users \verb+search/tweets.json+
+Only has one REST call, used for Querying all tweets for keywords, hashtags, treads and tweets specifying users \verb+search/tweets.json+
 \section{REST API}
-Allows dev's the access of twitters primitives such as the time lines and status updates. Also allows posting updates, tweeting, replying to tweets, retweeting and favoriting tweets. 
+Allows dev's the access of twitters primitives such as the timelines and status updates. Also allows posting updates, tweeting, replying to tweets, retweeting and favouriting tweets. 
 This method allows access to a theoretical maximum of 3,200 statuses.
 
 \section{Streaming API}
-Real time tweets for data intensive needs for analytical and data mining needs, large amount of key words and geo-tagged data from certain regoins.
+Real time tweets for data intesive needs for analytics and data mining needs, large amount of key words and geo-tagged data from certain regoins.
 This allowes up to 1,500  status request. 
 
 \section{Retrieving Geo-spacial Information from tweets}
