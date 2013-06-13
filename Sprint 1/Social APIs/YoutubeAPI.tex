@@ -1,0 +1,47 @@
+\documentclass{article}
+\title{Research}
+\begin{document}
+\maketitle
+\section{Functionality}
+There are three API`s that youtube provide Players API, Data API, Analytics API and Live Streaming API.
+Note In version 3.0 of the DATA API can only search for a specific country and not loction. In the second version it was possible but that feature is disabled 
+\subsection{Players API}
+It is used to choose a media player , embed and customize the player.
+\subsection{Data API}
+You can use the API to fetch search results and to retrieve, insert, update, and delete resources like videos or playlists. Is a Rest API and return json object.
+Example of a query result.
+\begin{verbatim}
+{
+  "kind": "youtube#searchResult",
+  "etag": etag,
+  "id": {
+    "kind": string,
+    "videoId": string,
+    "channelId": string,
+    "playlistId": string
+  },
+  "snippet": {
+    "publishedAt": datetime,
+    "channelId": string,
+    "title": string,
+    "description": string,
+    "thumbnails": {
+      (key): {
+        "url": string,
+        "width": unsigned integer,
+        "height": unsigned integer
+      }
+    },
+    "channelTitle": string
+  }
+}
+\end{verbatim}
+For more information look at \verb*https://developers.google.com/youtube/v3/docs/search*
+
+\subsection{Analytics API}
+The YouTube Analytics API lets your application retrieve viewing statistics, popularity metrics, and demographic information for YouTube videos and channels
+\subsection{Live Streaming API}
+The YouTube Live Streaming API lets you create, update, and manage live events on YouTube. Using the API, you can schedule events (broadcasts) and associate them with video streams, which represent the actual broadcast content.
+
+Ref https://developers.google.com/youtube/
+\end{document}
