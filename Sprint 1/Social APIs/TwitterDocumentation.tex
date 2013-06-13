@@ -1,0 +1,35 @@
+\documentclass{article}
+\title{Using Twitter API 1.1 to retrieve geo-spacial information from Tweets}
+\author{J,\ J,\ Martin}
+\begin{document}
+\maketitle
+\section{Introduction}
+Using Twitter to retrieve geo-locational information from the tweets. Twitter uses the REST API 1.1 which is broken down into 3 api's to retrieve information from 
+\begin{itemize}
+\item Search API
+\item REST API
+\item Streaming API
+
+\end{itemize}
+
+These calls are all made as a REST Call which supports the json, xml,RSS and atom formats. The API's requires a oauth call to authenticate the user before a call is allowed otherwise it will return a json with a Bad Authentication data error(215) message . It uses a base url \verb+https://api.twitter.com/1.1/+
+\section{Search API}
+Only has one REST call, used for Querying all tweets for keywords, hashtags, treads and tweets specifying users \verb+search/tweets.json+
+\section{REST API}
+Allows dev's the access of twitters primitives such as the timelines and status updates. Also allows posting updates, tweeting, replying to tweets, retweeting and favouriting tweets. 
+This method allows access to a theoretical maximum of 3,200 statuses.
+
+\section{Streaming API}
+Real time tweets for data intesive needs for analytics and data mining needs, large amount of key words and geo-tagged data from certain regoins.
+This allowes up to 1,500  status request. 
+
+\section{Retrieving Geo-spacial Information from tweets}
+Finding the tweets in a given location requires 2 api calls, one to find the location coordinates of the region and the second to find the all the resulting tweets in that region relavent to the search. In a search each tweet has a lot of information provided to, in each tweet there is a variable ``coordinates" which contains a type ``Point" that contains the coordinates of where the tweet was uploaded, however if coordinates is null then the users setting prevent the location from being uploaded.
+Uses \verb+geo/search.json+ to find the regions gps coordinates and \verb+search/tweets.json+ with the results from the first call to refine the search. This will return the json tweets with the geo-spacial data contained inside of it.
+
+\section{Problems}
+To get the gps information a user would have to specify in their settings allowing twitter to take the gps data otherwise, Twitter compares the gps location and finds the region and posts the region with the tweet rendering tweets useless to pin-point the location.
+
+\section{Conclusion}
+Twitter will be a viable option for retrieving locations from the users, However this isn't twitters default behaviour which may reduce the number of tweets containing accurate loction information from to respond with.
+\end{document}
