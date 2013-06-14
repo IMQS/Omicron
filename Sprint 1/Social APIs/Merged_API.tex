@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\title{Research of possible APIs}
+\author{M. Arzul, \\
+J. Martin, \\
+S. Schreiber, \\
+M. Rozenkrantz}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+The following APIs were considered; Facebook, Instagram, Twitter, Waze, GoogleMaps and Youtube.
+
+\section{Facebook}
+\subsection{Overview}
+Facebook for developers is divided up into plaforms. Each of those platforms have their own API; these are Social Plugins, Facebook Login, Open Graph, Facebook's API, Games, Media, Payments, App Center, Promote Your App, iOS and Andriod.
+\subsection{Social Plugins}
+Social plugins lets you see what your friends have liked, commented on or shared on sites across the web.(Not useful).
+\subsection{Facebook login}
+This API makes it possible to use your Facebook details to automatically register for
+a given website.(Could be useful but no obvious application for our project).
+\subsection{Open Graph}
+Open Graph lets apps tell stories on Facebook through a structured and strongly typed API. People use stories to share the things that they are doing, the people they are doing them with and the places where they happen. (Not useful, further details was left out).
+\subsection{Facebooks API}
+This includes two API, which are used depeneding on your requirements.
+\subsubsection{Graph API}
+Used to search for posts, pictures, places and the amount of likes.
+It can search for places in a certain area, however posts can not be narrowed down within that area. (i.e you can find posts from Stellenbosch but not from specific locations in Stellenbosch). (Not specific enough to be useful).
+\subsubsection{Facebook Query Language -- FQL}
+Is build on top of the Graph API but works more like a Structured Query Language.
+It has the same functionality as the Graph API but results from one query can be used in another query. 
+It can search for posts by a certain area (such as Stellenbosch) but the following must hold:
+\begin{itemize}
+\item The user allowed their location to be added to the post AND
+\item you were tagged in the post OR
+\item a friend was tagged in the post OR
+\item you created the post OR
+\item a friend created the post.
+\end{itemize}
+(Similar to the Graph API this is not specific enough to be useful).
+\subsubsection{Internationalization}
+Is a translation framework. (Not useful).
+\subsection{Payments}
+Facebook Payments gives you a safe and easy way to enable people to pay for digital items in your game. (Not useful).
+
+\section{Instagram}
+\subsection{Overview} 
+Most of the methods in the Instagram API deal with finding specific information regarding users their popularity on the site so are not relevant and have been left out for simplification.
+\subsection{Media Search} Search for media in a given area. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days. This can be used to check whether there are any posts from a certain location - added as a parameter in the search made by the first response. This joined with a tag search could be a solution to the problem of mining relevant data.
+\subsection{Tag Name}
+This returns information about how many times a certain tag has been used. This could be useful to see if there are any results that have used, for example, 'NoWater' as a tag. Ideally it should be joined with the above.
+\subsection{Tag Name Recent}
+Perhaps a better alternative to Tag Name - you can search for specific tags from a specific time period.
+\subsection{Location Search}
+This is an method to do a search by location - either by GPS coordinates or by foursquare locations. However I have not been able to get this to work effectively.
+\subsection{Other}
+These are other methods and information that will be needed if the Instagram API is to be used:
+\begin{itemize}
+\item{Method to generate current UNIX time-stamp}
+\item{Method to convert time (potentially from different time zones) to UNIX timestamp format.}
+\item{Method to find GPS location if , for example, 'Cape Town' is searched for.}
+\end{itemize}
+Here are some potential impediments that may hamper using the Instagram API:
+\begin{itemize}
+\item{One needs a domain before you can register to use the Instagram API.  \verb5http://instagram.com/developer/register/#5 also asks for a telephone number and a description of what you intend to build using the API.}
+\item{The biggest potential problem is that very very few pictures have location data attached to them. Out of 16 random pictures only 2 had geo-data. If this project is to be successful I would suggest a campaign encouraging people to upload specific tags for specific problems and to attach their location to pictures.}
+\item{Difficulties with finding the correct GPS coordinates to use as a reference for searching.}
+\item{One would also need to get the current time in a UNIX time-stamp format as well as specify a 'start' time period (in UNIX time-stamp format) -- to limit the search results.}
+\item{How to 'join' different calls to the Instagram database.}
+\end{itemize}
+
+\section{Twitter}
+\subsection{Overview}
+Twitter will be a viable option for retrieving locations from the users, However this is not Twitters default behaviour which may reduce the number of tweets containing accurate location information.
+
+Using Twitter to retrieve geo-locational information from the tweets. Twitter uses the REST API 1.1 which is broken down into 3 APIs to retrieve information from, namely; the Search API, the REST API and the Streaming API.
+
+These calls are all made as a REST Call which supports the json, xml,RSS and atom formats. The APIs require a OAuth call to authenticate the user before a call is allowed otherwise it will return a json with a Bad Authentication data error(215) message.
+\subsection{Search API}
+Only has one REST call, used for Querying all tweets for keywords, hashtags, treads and tweets specifying users. (Potentially useful).
+\subsection{REST API}
+Allows developers access to Twitter's primitives such as timelines and status updates. Also allows posting updates, tweeting, replying to tweets, retweeting and favouriting tweets. This method allows access to a theoretical maximum of 3,200 statuses. (Potentially useful, if there is a work around for the limited data).
+\subsection{Streaming API}
+Real time tweets for data intensive needs such as analytics or data mining. Returns a large amount of key words and geo-tagged data from certain regions. This allows up to 1,500 status requests. (Potentially useful, if there is a work around for the limited data).
+\subsection{Retrieving Geo-spacial Information from tweets}
+Finding the tweets in a given location requires 2 API calls, one to find the GPS coordinates of the region and the second to find the all the tweets in that region which are relevant to the search. In a search each tweet has a lot of information provided -- there is a variable 'coordinates' which contains a type 'Point' which is the coordinates of where the tweet was uploaded from. However if coordinates are null it is because the user's settings prevent the location from being uploaded.
+Uses \verb+geo/search.json+ to find the region's GPS coordinates and \verb+search/tweets.json+ to refine the search. This will return json encoded tweets containing geo-spacial data.
+\subsection{Hindrances}
+To get the GPS information a user would have to allow Twitter permission to take the GPS data. Otherwise, Twitter compares the GPS location and finds the region and posts the region with the tweet rendering tweets useless for pin-pointing the location.
+
+\section{Waze}
+\subsection{Overview}
+Waze is an online real-time traffic monitor. This detects the speed of the vehicle and determines whether it is stuck in traffic by comparing the speed limit in the area. It allows you to communicate to fellow Wazers and report traffic incidents, speed cameras, traffic jams and other such incidents that can take place on the roads.
+
+This application only has an Android and iPhone application. There are no REST calls in the websites API -- it is still under developement. Therefore this social application will be unable to allow the retrieval of geo-spacial data.
+
+\section{GoogleMaps}
+
+
+\section{Youtube}
+\subsection{Overview}
+There are four APIs which Youtube provides; Players API, Data API, Analytics API and Live Streaming API.
+Note: in version 3.0 of the Data API, one can only search for a country and not a specific location. In the second version it was possible but that feature has since been disabled.
+\subsection{Players API}
+It is used to choose a media player, embed and customize the player. (Not useful).
+\subsection{Data API}
+You can use the API to fetch search results and to retrieve, insert, update, and delete resources like videos or playlists. Is a Rest call and returns a json object. (Not useful, as it doesn't contain geo-locations and simply displays the type of each element of the json object).
+\subsection{Analytics API}
+The YouTube Analytics API lets your application retrieve viewing statistics, popularity metrics, and demographic information for YouTube videos and channels. (Not useful).
+\subsection{Live Streaming API}
+The YouTube Live Streaming API lets you create, update, and manage live events on YouTube. Using the API, you can schedule events (broadcasts) and associate them with video streams, which represent the actual broadcast content. (Not useful).
+
+\section{Conclusion}
+We have found that the following social media networks are not suitable to our project; Waze, Facebook, and Youtube.
+
+The following social media networks however do have the potential to be used; Instagram, Twitter and GoogleMaps.
