@@ -1,0 +1,61 @@
+\documentclass{article}
+\title{Google Maps API}
+\date{13 June 2013}
+\author{Michelle Arzul}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This document aims to describe the various APIs useful to our purposes that are provided by Google Maps and related products.
+
+\section{Using Google Maps in a web page}
+
+The most straightforward use for Google Maps API is to embed a map into a web page using JavaScript. This essentially sits a script inside a canvas \texttt{div} element. The explicitly defined size of this will determine the size of the map. A number of viewing options (center, zoom, view type, etc) can be specified in a map options variable. By creating a \texttt{Map} object with the canvas element and options as parameters, the map can now be loaded asynchronously by calling the \texttt{initialize} method at an \texttt{onload} event.
+
+For more details:
+
+\noindent\texttt{https://developers.google.com/maps/documentation/javascript/\\tutorial}
+
+\section{Importing data with GeoJSON}
+
+A Maps API application as described above is able to accept an parse new data from various sources:
+\begin{itemize}
+\item A local file, via XMLHttpRequest
+\item A CORS-enabled server
+\item JSONP requests
+\end{itemize}
+
+GeoJSON is a standard for geographic data. It is a subset of JSON, so anything that can handle JSON can also handle GeoJSON. \footnote{GeoJSON specification: \texttt{http://www.geojson.org/geojson-spec.html}}
+
+Requesting data from local and remote servers is fairly straightforward, provided certain prerequisites are met (for local, must be on the same domain; for remote, must be CORS-enabled).
+
+JSONP makes use of a request script and a callback script which is defined by the target. However this is a risky process, since whatever is returned is used as a script, which can be dangerous.
+
+The data is parsed according to the GeoJSON specification.
+
+There are also a number of third-party utilities that can convert between data standards, such as \texttt{geojason.info}.
+
+For more details:
+
+\noindent\verb#https://developers.google.com/maps/tutorials/data/importing_data#
+
+\section{Using Google Geocoding API}
+
+This API is particularly useful for the purposes being investigated. A geocoding request can return either in JSON or XML format.
+
+The search parameters must include either an address, a lat/lon value, or a component filter (can be an optional parameter if address is specified), plus whether or not the request comes from a device with a location sensor. Optional parameters include bounds, language, region code, and component filters.
+
+For our application and for the sake of uniformity, we are interested in the JSON return format.
+
+One can use this API either for coordinate lookup of an address, or a reverse geocoding (address lookup with coordinates).
+
+This API is very versatile and seems the most useful for our purposes, in conjunction with the data import utilities.
+
+For more details:
+
+\noindent\texttt{https://developers.google.com/maps/documentation/geocoding/}
+
+\end{document}
