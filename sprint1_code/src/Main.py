@@ -6,4 +6,7 @@ Created on 14 Jun 2013
 
 if __name__ == '__main__':
     print "Hello"
+    print 23141
+    print "Melode"
+    print "hello"
     pass
