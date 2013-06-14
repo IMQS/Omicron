@@ -4,7 +4,7 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-Using Twitter to retrieve geo-spacial information from the tweets. Twitter uses the REST API 1.1 which is broken down into 3 api's to retrieve information from 
+Using Twitter to retrieve geo-locational information from the tweets. Twitter uses the REST API 1.1 which is broken down into 3 api's to retrieve information from 
 \begin{itemize}
 \item Search API
 \item REST API
