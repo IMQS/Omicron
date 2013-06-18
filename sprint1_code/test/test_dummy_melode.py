@@ -12,7 +12,7 @@ class Test(unittest.TestCase):
         pass
 
     def test_add_5_6(self):
-        self.assertEqual(ex.add_five(6), 10)
+        self.assertEqual(ex.add_five(6), 11)
 
     def test_add_5_25(self):
         self.assertEqual(ex.add_five(25), 30)
