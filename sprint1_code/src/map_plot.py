@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from random import random as r
 import math
+import Image
 
 def plot(coords):
 	'''Takes a list of pairs (2-tuples) of floats which represent X/Y coordinates of points and makes a simple scatter plot of them within a box that in X and Y spans the floor and ceiling integers of the minima and maxima respectively.'''
@@ -28,41 +29,54 @@ def random_coords(num, range):
 		points.append(((r()*range,r()*range)))
 	return points
 
-def heatmap(coords):
+def heatmap(n, dim):
+	'''Creates a heatmap for n random points with coordinates between 0 and dim.'''
+	coords = random_coords(n, dim/10)
+	
 	x_coords = []
 	y_coords = []
 	for point in coords:
-		x_coords.append(point[0])
-		y_coords.append(point[1])
-		print "processing: ("+str(point[0])+", "+str(point[1])+")"
+		x_coords.append(point[0]*10)
+		y_coords.append(point[1]*10)
+	
+	x_min_floor = int(min(x_coords))
+	x_max_ciel = int(max(x_coords))+1
+	y_min_floor = int(min(y_coords))
+	y_max_ciel = int(max(y_coords))+1
 	
 	heatmap = [[]]
-	xdim = (int(max(x_coords))+1-int(min(x_coords))) * 10
-	ydim = (int(max(y_coords))+1-int(min(y_coords))) * 10
-	for i in xrange(ydim):
-		heatmap[i] = [0.0]*xdim
+	rdim = (x_max_ciel - x_min_floor) * 10
+	cdim = (y_max_ciel - x_min_floor) * 10
+	for i in xrange(cdim-1):
+		heatmap[i] = [0.0]*rdim
 		heatmap.append([])
-	heatmap[ydim] = [0.0]*xdim
+	heatmap[cdim-1] = [0.0]*rdim
 #	print heatmap
 	
 	for point in coords:
-		for i in xrange(ydim):
-			for j in xrange(xdim):
-				heatmap[j][i] += gauss(1, dist(point,i,j))
+		print "Processing: ("+str(point[0])+", "+str(point[1])+")"
+		for i in xrange(cdim):
+			for j in xrange(rdim):
+				heatmap[cdim-i-1][rdim-j-1] += gauss(1-(n/dim), heat_dist(point,j,i))
 	
+	heatmap.reverse()
+	for row in heatmap:
+		row.reverse()
 	
+	plt.xlim(x_min_floor, x_max_ciel)
+	plt.ylim(x_min_floor, x_max_ciel)
+#	plt.xlim(0,rdim-1)
+#	plt.ylim(0,cdim-1)
 	
-	plt.xlim(int(min(x_coords)),int(max(x_coords))+1)
-	plt.ylim(int(min(y_coords)),int(max(y_coords))+1)
-#	plt.xlim(0,xdim)
-#	plt.ylim(0,ydim)
 	plt.imshow(heatmap)
+	
 	plt.scatter(x_coords, y_coords)
+	
 	plt.show()
 
-def dist(point, x, y):
+def heat_dist(point, x, y):
 	'''Returns the Euclidean distance between a point and a pixel on an image.'''
-	return math.sqrt((point[0]-x)**2+(point[1]-y)**2)
+	return math.sqrt((point[0]-x/10.)**2+(point[1]-y/10.)**2)
 
 def gauss(var, x):
 	'''Returns the y value at x for a normal distribution with variance var in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the center of the curve is 0 since no mean is defined, and the maximum value is always 1.'''
@@ -80,11 +94,10 @@ def plot_gauss(var, lim):
 	plot(coords)
 
 if __name__ == "__main__":
-	coords = random_coords(10, 10)
 #	plot_random(20, 100)
 #	heatmap([(0.25,0.25),(0.5,0.5),(0.75,0.75)])
 #	plot_gauss(1, 3)
-	heatmap(coords)
+	heatmap(5, 50)
 
 
 
