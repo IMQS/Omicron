@@ -7,14 +7,25 @@
 \begin{document}
 \maketitle
 \section{Python Testing}
-Here follows a summary of sorts. For more information and complete examples please visit \verb5http://docs.python.org/2/library/unittest.html5.
+For more information and complete examples of how to write unittest test-cases please visit \verb5http://docs.python.org/2/library/unittest.html5$\,$.
 
-\section{Misc things that are important}
-\begin{itemize}
-\item{\textbf{Help} can be found by running - \verb5 python -m unittest -h5}
-\item{include \verb! suite = unittest.TestLoader().loadTestsFromTestCase(TestSequenceFunctions)!
-\verb!unittest.TextTestRunner(verbosity=2).run(suite)! (as in the example on the website) to receive a method name and the status of the test. You could also use \verb5 if __name__ == '__main__':    unittest.main()5 but that only returns how many test cases passed and how many failed. I would strongly suggest we make the first option our \textbf{standard when writing test cases}.}
-\item{To \textbf{run} the test case you can simply type \verb5python testcasename.py5 and voila!}
-\end{itemize}
+\section{Conventions}
+\paragraph{Repository conventions} Before committing any changes that have been made, the repository shall first be pulled, and then the commit and push may follow. Commit messages shall be as short as possible while still being as informative as possible. These messages shall not be omitted when committing and pushing to the repository.
+\paragraph{Saving of test-cases} Test-cases shall be saved within the repository in the following folder - \verb{\sprint1_code\test{.
+\paragraph{Naming of test-cases} Test-cases shall be named as follows - 
+
+\noindent\verb{tests_<module_name_being_tested>.py{$\,$. Note: no capital letters, underscores separated words.
+
+
+\paragraph{Naming of functions} All functions within a test-case shall be named as follows - 
+
+\noindent\verb{test_<function_your_working_with>_<description_of_what's_being_tested>{
+
+\section{Miscellaneous things that are important}
+
+\paragraph{Help} for manual running of test-cases can be found by running - 
+
+\noindent \verb5 python -m unittest -h5
+
 
 \end{document}
