@@ -29,9 +29,16 @@ def random_coords(num, range):
 		points.append(((r()*range,r()*range)))
 	return points
 
-def heatmap(n, dim):
-	'''Creates a heatmap for n random points with coordinates between 0 and dim.'''
-	coords = random_coords(n, dim/10)
+def heatmap(n, dim, coords):
+	'''Creates a heatmap for the given coordinates in coords or, if coords is None, n random points with coordinates between 0 and dim. Variance is adjusted according to point density. If coordinates are specified, n is recalculated and dim is taken as the bounds.'''
+	
+	if coords == None:
+		coords = random_coords(n, dim/10)
+	else:
+		n = len(coords)
+		for point in coords:
+			point[0] /= 10
+			point[1] /= 10
 	
 	x_coords = []
 	y_coords = []
@@ -54,24 +61,20 @@ def heatmap(n, dim):
 #	print heatmap
 	
 	for point in coords:
-		print "Processing: ("+str(point[0])+", "+str(point[1])+")"
+		print "Processing: ("+str(point[0]*10)+", "+str(point[1]*10)+")"
 		for i in xrange(cdim):
 			for j in xrange(rdim):
-				heatmap[cdim-i-1][rdim-j-1] += gauss(1-(n/dim), heat_dist(point,j,i))
+				heatmap[cdim-i-1][rdim-j-1] += gauss(1-(n/(dim*dim)), heat_dist(point,j,i))
 	
 	heatmap.reverse()
 	for row in heatmap:
 		row.reverse()
 	
-	plt.xlim(x_min_floor, x_max_ciel)
-	plt.ylim(x_min_floor, x_max_ciel)
-#	plt.xlim(0,rdim-1)
-#	plt.ylim(0,cdim-1)
+	plt.xlim(0, dim)
+	plt.ylim(0, dim)
 	
 	plt.imshow(heatmap)
-	
 	plt.scatter(x_coords, y_coords)
-	
 	plt.show()
 
 def heat_dist(point, x, y):
@@ -97,7 +100,8 @@ if __name__ == "__main__":
 #	plot_random(20, 100)
 #	heatmap([(0.25,0.25),(0.5,0.5),(0.75,0.75)])
 #	plot_gauss(1, 3)
-	heatmap(5, 50)
+#	coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]]
+	heatmap(10, 100, None)
 
 
 

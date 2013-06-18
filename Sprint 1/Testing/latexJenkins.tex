@@ -1,103 +1,134 @@
-\documentclass[a4paper]{article}
+\documentclass{article}
 \title{Jenkins and Github setup}
 \author{Shaun Schreiber}
+
+
 \begin{document}
 \maketitle
-\section{Install Jenkins}
-Install jenkins in either of the following two ways.
-\subsection{First}
-Open the terminal by holding the following command Ctrl + Alt + t.
-Then download the jenkins.war file, by typing the following command int the terminal.\\
-\verb#wget http://mirrors.jenkins-ci.org/war/latest/jenkins.war#\\
-Then run the following command to start jenkins.\\
-\verb#java -jar jenkins.war#\\
-Note if any error accures make sure that the newest jre is installed.
-this is done by the following command.\\
-\verb#sudo apt-get install openjdk-6-jre#
-or
-\verb#sudo apt-get install openjdk-6-jdk#
-\subsection{Second}
-Open the terminal by holding the following command Ctrl + Alt + t.
+
+\section{Installing Jenkins}
+Jenkins can be installed using either of the following methods. 
+\subsection{Jenkins - Method one}
+Open the terminal by holding the following command \verb5ctrl + alt + t5.
 \begin{itemize}
-\item \verb#wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -#
-\item \verb#sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'#
+\item{Download the jenkins.war file, by typing the following command into the terminal,\\
+\verb#wget http://mirrors.jenkins-ci.org/war/latest/jenkins.war#}
+\item{Run the following command to start Jenkins -- \verb#java -jar jenkins.war#\\}
+\end{itemize}
+Note if any error occurs make sure that the newest JRE (Java Runtime Environment) is installed.
+This is done by the running following command;\\
+\begin{itemize}
+\item{\verb#sudo apt-get install openjdk-6-jre# \textsc{\textbf{or}}}
+\item{\verb#sudo apt-get install openjdk-6-jdk#}
+\end{itemize}
+
+\subsection{Jenkins - Method two}
+Open the terminal by holding the following command \verb#ctrl + alt + t#.
+\begin{itemize}
+\item \verb#wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key# \verb#| sudo apt-key add -#
+\item \verb#sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ ># \\\verb#/etc/apt/sources.list.d/jenkins.list'#
 \item \verb#sudo apt-get update#
 \item \verb#sudo apt-get install jenkins#
 \end{itemize}
-\subsection{Test Installation}
-Open the following address in any browser on the Host machine.
-\verb#http://localhost:8080/#
-If it shows something that looks like a website your in the money else retry one of the options above.
+
+\subsection{Testing of Installation}
+Open the following address in any browser on the host machine.
+\begin{itemize}
+\item{\verb#http://localhost:8080/#}
+\end{itemize}
+If this returns some sort of website you have succeed. Otherwise (re)try one of the above options.
+
 \section{Setting up Github}
-Go the following link and sign up.
-\verb#https://github.com/#
-Now if it does not say your username on the top right of the screen then click on the sign in 
-button that is located in the top right of the screen and log in.
-Now click on the "new repository" button located on the bottem right of your screen then fill in the needed text boxes and click on the "create repository" button.
-Now you have a repository.
-\section{SETUP SSH KEY'S}
+Go the following link and create an account (or else log in)
+\begin{itemize}
+\item{\verb#https://github.com/#}
+\end{itemize}
+Now click on the "new repository" button located on the bottom right of your screen and fill in the required text boxes and click on the "create repository" button. Your repository has just been created.
+
+\section{Setting up SSH keys}
+
 \subsection{Setup}
-Now open a new terminal on the system where you installed jenkins and type the following commands in order.
+Open the terminal on the system where you have Jenkins installed and type the following commands, in this order:
 \begin{itemize}
 \item \verb#sudo su - jenkins#
 \item \verb#ssh-keygen -t rsa -C "your_email@example.com"#
 \end{itemize}
-Now got to github and login into your acount, go to the target repository. Then go to settings which is located on the right hand side of your screen. Now go to "Deploy Keys" and click "Add deploy key". The "title" text field can be anything but in the the "key" text box copy the contents of the \verb#id_rsa.pub#
-file. The contents can befound by typing the following commands in the terminal.
-\verb#cd ~/.ssh#
-\verb#gedit id_rsa.pub#
-or if gedit is not install
-\verb#cat id_rsa.pub#
-If cat is used copy ALL OF THE TEXT after the cat \verb#id_rsa.pub# command.
-Then click on the "Add key" button.
-\subsection{Test}
-Now open a terminal and type in the following command.
-\verb#ssh git@github.com#
- Do not proceed intil you get the message "You've successfully authenticated".
-\section{Install git and github plugins for jenkins}
-Now make sure jenkins is running, look at step 1 if you are not sure its running.Open jenkins in the browser.
-In the top left you will see "Manage Jenkins" click on it.
-Now navigate to "Manage plugins" and click on it, it can be located in the middle of the screen.
-Navigate to the "available" tab and find , select the "Github" and "Git" plugins. Now navigate to and click on the install without restart button.
-\section{Configure Jenkins and plugins}
-Navigate to \verb#Jenkins > Manage Jenkins > Configure System#.
-Now navigate to the label "git plugin" (not just "git") 
-and fill in the name and email.
-Then navigate to the label "Jenkins Location".
-The URL is the same as the one you typed into the textbox in the browser e.g.
-\verb#http://superfluous.imqs.co.za:8080/ or http://localhost:8080/#. The admin email address in not necessary but its can be any email address.
-Now navigate to the label "E-mail Notification". The "SMTP server" textbox e.g. for gmail is "smtp.gmail.com".
-Now click on advance and check Use SMTP Authentication.
-Type in your username and password for you email acount if its gmail then your email address and your password.
-Check Use SSL. The SMTP post is 465.
-Then scroll down and Save.
-\section{User settings and login}
-Go to \verb#Jenkins > Manage Jenkins > User Database#.
-Then select "Create user" , fill in the text fields and add. 
-Go to \verb#Jenkins > Manage Jenkins > Configure Global Security#.
-Navagate to the "Security Realm" section and select "Jenkins's own user database" and check the apearing check box. Navagate to the Authorization section and select "Matrix-based security". In the below textbox and the users names which you have already added previously, select the permisions and save.
-\section{Setup first job}
-go to \verb#jenkins > New Job#.
-Fill in the job name , select "Build a free-style software project" and
-click on "OK".Navigate to the "GitHub project" and populate the text field with the URL that points to
-your project e.g. \verb#Https://github.com/<owner name>/<repository name>/#\,.
-Now navigate to the "Source Code Management" section and select "git". The Repository URL looks as follow \verb#git@github.com:<owner>/<repository name>.git#\,.
-If you go to the repository on github and click on the ssh tab the link that is in the text field next to the ssh tab is the corrent url. Leave the "Branch Specifier" textbox empty.
-Now navigate to the "Build Triggers section".
-If you want to build/compile periodically then select either "Poll SCM" or "Build periodically" the difference is Poll will only build if there is a change where as "Build periodically" will run all the test again even if there is a no new changes.
-Now navigate to the "Build" section and select "add build step". Select "execute shell" and type a variation of the following command.
+
+Now got to \verb#Github.com# and login into your account. 
 \begin{itemize}
-\item cd \verb#<to the directory of where your src and test file will be>#
-\item nosetests   
+\item{Navigate to the target repository.}
+\item{Go to settings which is located on the right hand side of your screen.}
+\item{Now go to "Deploy Keys" and click "Add deploy key". The "Title" text field can be anything but the "Key" text box must contain the contents of \verb#id_rsa.pub# file.}
+    \begin{itemize} 
+    The contents can befound by typing the following commands in the terminal.
+    \item{\verb#cd ~/.ssh#}
+    \item{\verb#gedit id_rsa.pub# \textsc{\textbf{or}} if gedit is not installed}
+    \item{\verb#cat id_rsa.pub#$\,$. If cat is used copy ALL OF THE TEXT after the \verb#cat id_rsa.pub# command.}
+    \end{itemize}
+\item{Then click on the "Add key" button.}
 \end{itemize}
-and select "Save".
+
+\subsection{Testing of SSH key setup}
+Open the terminal and type in the following command.
+\begin{itemize}
+\item{\verb#ssh git@github.com#}
+\end{itemize}
+DO NOT proceed until you get the message "You've successfully authenticated".
+
+
+\section{Installing git and Github plugins for Jenkins}
+Make sure Jenkins is running (look at section 1, if you are not sure whether it's running.) 
+\begin{itemize}
+\item{Open the Jenkins site in your browser.}
+\item{Click on "Manage Jenkins", in the top left of your screen.}
+\item{Now navigate to and click on "Manage plugins" (it can be located in the middle of the screen).}
+\item{Navigate to the "Available" tab so that you may find and select the "Github" and "Git" plugins (you may have to search for these).}
+\item{Click on the "Install without restart" button.}
+\end{itemize}
+
+
+\section{Configure Jenkins and plugins}
+\begin{itemize}
+\item{Navigate to \verb#Jenkins > Manage Jenkins > Configure System#.}
+\item{Navigate to the label "git plugin" (not just "git") and fill in the relevant name and email.}
+\item{Now navigate to the label "Jenkins Location". The URL is the same as the one you typed into the textbox in the browser e.g.\\
+\verb#http://superfluous.imqs.co.za:8080/ or http://localhost:8080/#. The admin email address in not necessary as it can be any valid email address.}
+\item{Find the label "E-mail Notification". Then the "SMTP server" textbox e.g. for gmail is "smtp.gmail.com".}
+\item{Click on advance and check Use SMTP Authentication. Type in your username and password for the email accounts you wish to notify. If it's gmail then enter your email address and your password.}
+\item{Check Use SSL. The SMTP post is 465.}
+\item{Scroll down and save these changes.}
+\end{itemize}
+
+\section{User and login settings}
+\begin{itemize}
+\item{Go to \verb#Jenkins > Manage Jenkins > User Database#.}
+\item{Select "Create user", fill in the text fields and add the new user.}
+\item{Go to \verb#Jenkins > Manage Jenkins > Configure Global Security#.}
+\item{Navigate to the "Security Realm" section and select "Jenkins's own user database" and check the check box which appears.}
+\item{Navigate to the "Authorization section" and select "Matrix-based security". In the textbox, below, add the users names which you added previously, allow the permissions as needed and save.}
+\end{itemize}
+
+\section{Setup First Job}
+\begin{itemize}
+\item{Go to \verb#jenkins > New Job#.}
+\item{Fill in the job name , select "Build a free-style software project" and
+click on "OK".}
+\item{Navigate to the "GitHub project" and populate the text field with the URL that points to
+your project e.g.\\\verb#Https://github.com/<owner name>/<repository name>/#\,.}
+\item{Go to the "Source Code Management" section and select "git". The Repository URL looks as follows \\\verb#git@github.com:<owner>/<repository name>.git#\,.}
+If you go to the repository on Github and click on the SSH tab, the link that is in the text field next to the SSH tab is the current URL.
+\item{Leave the "Branch Specifier" textbox empty.}
+\item{Navigate to the "Build Triggers section". If you want to build/compile periodically then select either "Poll SCM" or "Build periodically". The difference is that Poll will only build when a change has occured, where as "Build periodically" will run all the tests every time even if there are no new changes.}
+\item{Go to the "Build" section and select "add build step". Select "execute shell" and type a variation of the following command.
+\begin{itemize}
+\item{\verb#cd <to the directory of where your src and test file will be>#}
+\item nosetests   
+\end{itemize}}
+\item{and select "Save".}
+\end{itemize}
+
 \section{Set python project in git}
-Follow the following totorial. 
+Please see the following tutorial for how to set up a Python project in GIT. \\
 \verb#http://bhfsteve.blogspot.com/2012/04/automated-python-unit-testing-code.html#
-
-
-
-
-
 
 \end{document}
