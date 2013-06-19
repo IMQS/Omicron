@@ -4,6 +4,7 @@ Created on 18 Jun 2013
 @author: Shaun Schreiber
 '''
 import social_platform
+import json
 
 class gateway(object):
     '''
@@ -33,7 +34,6 @@ class gateway(object):
                 raise NotImplementedError
             else:
                 platform_objects.append(available_platforms[current_platform])
-                
         return platform_objects
                 
     def execute_requests(self, platforms, key_words):
@@ -48,3 +48,7 @@ class gateway(object):
             @rtype: GeoJSON Array
         '''
         
+    def GET(self):
+        return "Hello World!"  
+if __name__ == "__main__":
+    pass

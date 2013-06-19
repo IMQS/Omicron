@@ -6,7 +6,7 @@ Created on 19 Jun 2013
 
 class social_platform(object):
     '''
-    
+        Basic structure that is needed to communicate with a social API
     ''' 
     def request_geographical(self, criteria = None, center = None, radius = None):
         '''
