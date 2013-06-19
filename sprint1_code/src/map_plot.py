@@ -33,18 +33,18 @@ def heatmap(n, dim, coords):
 	'''Creates a heatmap for the given coordinates in coords or, if coords is None, n random points with coordinates between 0 and dim. Variance is adjusted according to point density. If coordinates are specified, n is recalculated and dim is taken as the bounds.'''
 	
 	if coords == None:
-		coords = random_coords(n, dim/10)
+		coords = random_coords(n, dim/4)
 	else:
 		n = len(coords)
 		for point in coords:
-			point[0] /= 10
-			point[1] /= 10
+			point[0] /= 4
+			point[1] /= 4
 	
 	x_coords = []
 	y_coords = []
 	for point in coords:
-		x_coords.append(point[0]*10)
-		y_coords.append(point[1]*10)
+		x_coords.append(point[0]*4)
+		y_coords.append(point[1]*4)
 	
 	x_min_floor = int(min(x_coords))
 	x_max_ciel = int(max(x_coords))+1
@@ -52,34 +52,32 @@ def heatmap(n, dim, coords):
 	y_max_ciel = int(max(y_coords))+1
 	
 	heatmap = [[]]
-	rdim = (x_max_ciel - x_min_floor) * 10
-	cdim = (y_max_ciel - x_min_floor) * 10
+	rdim = (x_max_ciel - x_min_floor) * 4
+	cdim = (y_max_ciel - x_min_floor) * 4
 	for i in xrange(cdim-1):
 		heatmap[i] = [0.0]*rdim
 		heatmap.append([])
 	heatmap[cdim-1] = [0.0]*rdim
 #	print heatmap
 	
+	var = 1 / ((128.*n)/(dim*dim))
+	
 	for point in coords:
-		print "Processing: ("+str(point[0]*10)+", "+str(point[1]*10)+")"
+		print "Processing: ("+str(point[0]*4)+", "+str(point[1]*4)+")"
 		for i in xrange(cdim):
 			for j in xrange(rdim):
-				heatmap[cdim-i-1][rdim-j-1] += gauss(1-(n/(dim*dim)), heat_dist(point,j,i))
-	
-	heatmap.reverse()
-	for row in heatmap:
-		row.reverse()
-	
+				heatmap[i][j] += gauss(var, heat_dist(point,j,i))
+		
 	plt.xlim(0, dim)
 	plt.ylim(0, dim)
 	
-	plt.imshow(heatmap)
+	plt.imshow(heatmap, cmap='hot')
 	plt.scatter(x_coords, y_coords)
 	plt.show()
 
 def heat_dist(point, x, y):
 	'''Returns the Euclidean distance between a point and a pixel on an image.'''
-	return math.sqrt((point[0]-x/10.)**2+(point[1]-y/10.)**2)
+	return math.sqrt((point[0]-x/4.)**2+(point[1]-y/4.)**2)
 
 def gauss(var, x):
 	'''Returns the y value at x for a normal distribution with variance var in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the center of the curve is 0 since no mean is defined, and the maximum value is always 1.'''
@@ -101,7 +99,7 @@ if __name__ == "__main__":
 #	heatmap([(0.25,0.25),(0.5,0.5),(0.75,0.75)])
 #	plot_gauss(1, 3)
 #	coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]]
-	heatmap(10, 100, None)
+	heatmap(5, 100, None)
 
 
 
