@@ -19,4 +19,4 @@ class Gateway(object):
             @rtype: social_platform
         '''
         
-    def
+    
