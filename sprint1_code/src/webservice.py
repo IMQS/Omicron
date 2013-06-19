@@ -7,7 +7,7 @@ import web
 import json
 import Gateway
 
-urls = ("/gateway","Gateway.gateway" )
+urls = ("/gateway","Gateway.gateway")
 
 if __name__ == '__main__':
     app = web.application(urls, globals())

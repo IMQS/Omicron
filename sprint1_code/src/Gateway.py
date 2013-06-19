@@ -49,6 +49,6 @@ class gateway(object):
         '''
         
     def GET(self):
-        return "Hello World!"  
+        return "Not Implemented."
 if __name__ == "__main__":
     pass
