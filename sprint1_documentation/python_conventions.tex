@@ -1,18 +1,17 @@
 \documentclass{article}
 
-\title{Python test cases}
+\title{Python}
 \author{}
 \date{}
 
-collaboration 
-
 \begin{document}
 \maketitle
-\section{Python Testing}
-For more information and complete examples of how to write unittest test-cases please visit \verb5http://docs.python.org/2/library/unittest.html5$\,$.
-
 \section{Conventions}
 \paragraph{Repository conventions} Before committing any changes that have been made, the repository shall first be pulled, and then the commit and push may follow. Commit messages shall be as short as possible while still being as informative as possible. These messages shall not be omitted when committing and pushing to the repository.
+\paragraph{Naming functions and modules} All functions and modules shall be named according to the following - \verb{<name_of_file>.py{\,. Note that there are \emph{no capitals} and \emph{underscores} as word separators.
+
+\paragraph{Private functions} These shall be saved as follows \verb{_<private_function_name>.py{\,. Note that there is an underscore preceding the function name.
+
 \paragraph{Saving of test-cases} Test-cases shall be saved within the repository in the following folder - \verb{\sprint1_code\test{.
 \paragraph{Naming of test-cases} Test-cases shall be named as follows - 
 
@@ -23,7 +22,9 @@ For more information and complete examples of how to write unittest test-cases p
 
 \noindent\verb{test_<function_your_working_with>_<description_of_what's_being_tested>{
 
-\section{Miscellaneous things that are important}
+\section{Python Testing}
+For more information and complete examples of how to write unittest test-cases please visit \verb5http://docs.python.org/2/library/unittest.html5$\,$.
+\subsection{Miscellaneous things that are important}
 
 \paragraph{Python Nose} If a test-case fails, Nose will produce an output which can be used by Jenkins so that Jenkins may log the fail and email the relevant parties.
 \paragraph{Help} for manual running of test-cases can be found by running - 

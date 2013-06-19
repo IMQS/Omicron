@@ -31,6 +31,13 @@ Please note that \verb7py:7 can be left out as Python is the default domain.
 \paragraph{Create a link to a specific object within the Sphinx documentation}
 \verb7:py:func:`enumerate`7 will create a link to the function enumerate where it appears in the actual Sphinx documentation.
 
-\paragraph{Using Autodoc} Firstly one must make sure that \verb7sphinx.ext.autodoc7 in the \verb7conf.py7 file is assigned to the list \verb7extensions7.
+\paragraph{Using Autodoc} Firstly one must make sure that \verb7sphinx.ext.autodoc7 in the \verb7conf.py7 file is assigned to the list \verb7extensions7. \\
+You may then use \verb7.. autofunction:: io.open 7 to read the signiture and docstring from the \verb7io.open()7 function. Similarily \begin{verbatim}
+.. automodule:: io
+   :members:
+\end{verbatim} will document the whole \verb7io7 class.
+
+\section{Formatting and markup}
+Please follow this link \verb&http://sphinx-doc.org/rest.html& to find out how to add markups, if nessicary. The website is very complete and easy to follow.
 
 \end{document}
