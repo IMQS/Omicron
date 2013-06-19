@@ -37,3 +37,17 @@ class social_platform(object):
             @type area: String 
         '''
         raise NotImplementedError
+
+class twitter_platform(social_platform):
+    def request_geographical(self, criteria=None, center=None, radius=None):
+        "TODO:"
+        
+    def repuest_area(self, criteria = None, area = None ):
+        "TODO:"
+        
+class instagram_platform(social_platform):
+    def request_geographical(self, criteria=None, center=None, radius=None):
+        "TODO:"
+        
+    def repuest_area(self, criteria = None, area = None ):
+        "TODO:"

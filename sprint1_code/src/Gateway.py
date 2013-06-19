@@ -3,14 +3,14 @@ Created on 18 Jun 2013
 
 @author: Shaun Schreiber
 '''
-from social_platform import social_platform as sp
+import social_platform
 
 class gateway(object):
     '''
         Extract raw data from the sosial media API's and returns a GeoJSON object. 
     '''
          
-    def _select_sosial_media(self, names):
+    def _available_sosial_media(self, names):
         '''
             Checks to see if the selected social API's are available. If not then the following exception 
             will be raised "NotImplementedError" else it will return a list of social_platform objects.
@@ -22,7 +22,20 @@ class gateway(object):
             @return: List of social_platform objects. 
             @rtype: social_platform
         '''
+        available_platforms = {}
+        platform_objects = []
         
+        available_platforms['twitter'] = social_platform.twitter_platform()
+        available_platforms['instagram'] = social_platform.instagram_platform()
+        
+        for current_platform in names:
+            if (not available_platforms.has_key(current_platform)):
+                raise NotImplementedError
+            else:
+                platform_objects.append(available_platforms[current_platform])
+                
+        return platform_objects
+                
     def execute_requests(self, platforms, key_words):
         '''
             @param self: a Pointer to the current object.
