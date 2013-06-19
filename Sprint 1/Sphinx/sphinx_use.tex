@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\title{Using Sphinx}
+\author{M. Rozenkrantz}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Sphinx in Python}
+The following serves as a summary of the most important things to know about incorporating Sphinx into your Python comments. The full specification for the Python domain can be found at \\
+\verb7http://sphinx-doc.org/domains.html#the-python-domain7\,.
+\paragraph{How to create function names and parameters}
+\begin{verbatim}
+.. py:function:: enumerate(sequence[, start=0])
+
+   ...
+\end{verbatim}
+There are other directives for documenting other types of Python objects, such as \verb7py:class7 and \verb7py:method7.
+Please note that \verb7py:7 can be left out as Python is the default domain.
+
+\paragraph{How to add a short description following the function name.}\footnote{The \emph{*} characters which frame 'sequence' serves to make the word sequence appear in \textit{italics}}
+
+\begin{verbatim}
+.. function:: enumerate(sequence[, start=0])
+
+   Return an iterator that yields tuples of an index and an item of the
+   *sequence*. (And so on.)
+\end{verbatim}
+
+\paragraph{Create a link to a specific object within the Sphinx documentation}
+\verb7:py:func:`enumerate`7 will create a link to the function enumerate where it appears in the actual Sphinx documentation.
+
+\paragraph{Using Autodoc} Firstly one must make sure that \verb7sphinx.ext.autodoc7 in the \verb7conf.py7 file is assigned to the list \verb7extensions7.
+
+\end{document}
