@@ -9,6 +9,3 @@ Task: Gateway structure.
     *Select geographical region (center and radius) (input and behind the scenes)
 
 Task: "cURL" vs "requests - HTTP for humans"
-
-Note: http://stackoverflow.com/questions/4547849/good-examples-of-python-docstrings-for-sphinx
->>>good examples of sphinx
