@@ -17,67 +17,64 @@ def plot(coords):
 	plt.scatter(x_coords, y_coords, )
 	plt.show()
 
-def plot_random(num, range):
+def plot_random(num, bounds):
 	'''Plots num random points with coordinates in the range [0,range)'''
-	points = random_coords(num, range)
+	points = random_coords(num, bounds)
 	plot(points)
 
-def random_coords(num, range):
-	'''Returns num random points with coordinates in the range [0,range).'''
+def random_coords(num, bounds):
+	'''Returns num random points with coordinates within the bounds which are in the form [left, right, bottom, top]..'''
 	points = []
+	xdim = bounds[1] - bounds[0]
+	ydim = bounds[3] - bounds[2]
 	for i in xrange(num):
-		points.append(((r()*range,r()*range)))
+		x = r()*xdim + bounds[0]
+		y = r()*ydim + bounds[2]
+		points.append((x, y))
 	return points
 
-def heatmap(n, dim, coords):
-	'''Creates a heatmap for the given coordinates in coords or, if coords is None, n random points with coordinates between 0 and dim. Variance is adjusted according to point density. If coordinates are specified, n is recalculated and dim is taken as the bounds.'''
+def heatmap(n, bounds, coords):
+	'''Creates a heatmap for the given coordinates in coords or, if coords is None, n random points with coordinates within bounds. Variance is adjusted according to point density. If coordinates are specified, n is recalculated. The bounds are in the form [left, right, bottom, top].'''
 	
 	if coords == None:
-		coords = random_coords(n, dim/4)
+		coords = random_coords(n, bounds)
 	else:
 		n = len(coords)
-		for point in coords:
-			point[0] /= 4
-			point[1] /= 4
 	
 	x_coords = []
 	y_coords = []
 	for point in coords:
-		x_coords.append(point[0]*4)
-		y_coords.append(point[1]*4)
-	
-	x_min_floor = int(min(x_coords))
-	x_max_ciel = int(max(x_coords))+1
-	y_min_floor = int(min(y_coords))
-	y_max_ciel = int(max(y_coords))+1
+		x_coords.append(point[0])
+		y_coords.append(point[1])
 	
 	heatmap = [[]]
-	rdim = (x_max_ciel - x_min_floor) * 4
-	cdim = (y_max_ciel - x_min_floor) * 4
+	rdim = bounds[1] - bounds[0]
+	cdim = bounds[3] - bounds[2]
 	for i in xrange(cdim-1):
 		heatmap[i] = [0.0]*rdim
 		heatmap.append([])
 	heatmap[cdim-1] = [0.0]*rdim
-#	print heatmap
 	
-	var = 1 / ((128.*n)/(dim*dim))
+	var = 1 / ((32.*n)/(rdim*cdim))
 	
 	for point in coords:
-		print "Processing: ("+str(point[0]*4)+", "+str(point[1]*4)+")"
+		print "Processing: ("+str(point[0])+", "+str(point[1])+")"
 		for i in xrange(cdim):
 			for j in xrange(rdim):
-				heatmap[i][j] += gauss(var, heat_dist(point,j,i))
+				heatmap[i][j] += gauss(var,
+				heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
+				# the +.5 is to account for pixel center
 		
-	plt.xlim(0, dim)
-	plt.ylim(0, dim)
+	plt.xlim(bounds[0], bounds[1])
+	plt.ylim(bounds[2], bounds[3])
 	
-	plt.imshow(heatmap, cmap='hot')
+	plt.imshow(heatmap, cmap='hot', origin='lower', extent=bounds)
 	plt.scatter(x_coords, y_coords)
 	plt.show()
 
 def heat_dist(point, x, y):
 	'''Returns the Euclidean distance between a point and a pixel on an image.'''
-	return math.sqrt((point[0]-x/4.)**2+(point[1]-y/4.)**2)
+	return math.sqrt((point[0]-x)**2+(point[1]-y)**2)
 
 def gauss(var, x):
 	'''Returns the y value at x for a normal distribution with variance var in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the center of the curve is 0 since no mean is defined, and the maximum value is always 1.'''
@@ -99,19 +96,6 @@ if __name__ == "__main__":
 #	heatmap([(0.25,0.25),(0.5,0.5),(0.75,0.75)])
 #	plot_gauss(1, 3)
 #	coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]]
-	heatmap(5, 100, None)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	bounds = [-20,30,-10,25]
+	heatmap(10, bounds, None)
 
