@@ -48,7 +48,7 @@ class gateway(object):
             @rtype: GeoJSON Array
         '''
         
-    def GET(self):
-        return "Not Implemented."
+    def GET(self, platforms, key_words):
+        return platforms + key_words
 if __name__ == "__main__":
     pass
