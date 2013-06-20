@@ -1,6 +1,14 @@
+'''
+@author: Michelle Arzul
+@date: 18 June 2013
+'''
+
 def plot(coords):
-	'''Makes a simple scatter plot of given coordinates within a box that in X and Y spans the floor and ceiling integers of the minima and maxima respectively.
-	@param coords A list of pairs (2-tuples) of floats which represent X/Y coordinates of points.
+	'''
+	Makes a simple scatter plot of given coordinates within a box that in X and Y spans the floor and ceiling integers of the minima and maxima respectively.
+	@param coords: The X, Y coordinates of points.
+	@type coords: List of 2-tuples of floats
+	@rtype: Void
 	'''
 	x_coords = []
 	y_coords = []
@@ -14,19 +22,27 @@ def plot(coords):
 	plt.show()
 
 def plot_random(num, bounds):
-	'''Plots random points.
-	@param num The number of points to generate.
-	@param bounds The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	'''
+	Plots random points.
+	@param num: The number of points to generate.
+	@type num: Integer
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@rtype: Void
 	'''
 	from random import random as r
 	points = random_coords(num, bounds)
 	plot(points)
 
 def random_coords(num, bounds):
-	'''Returns random points.
-	@param num The number of points to generate.
-	@param bounds The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
-	@return A list of 2-tuples of floats that represents a set of X, Y coordinates.
+	'''
+	Returns random points.
+	@param num: The number of points to generate.
+	@type num: Integer
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@return: List of 2-tuples of floats that represents a set of X, Y coordinates.
+	@rtype: List of 2-tuples of floats
 	'''
 	from random import random as r
 	points = []
@@ -39,10 +55,14 @@ def random_coords(num, bounds):
 	return points
 
 def heatmap(bounds, coords):
-	'''Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density.
-	@param bounds A list of 4 floats that denote the left, right, bottom, and top limits of the extent respectively.
-	@param coords List of 2-tuples of floats that represent point coordinates.
-	@return A list of lists of floats the represents the pixel matrix of the heatmap.
+	'''
+	Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density.
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@param coords: The X, Y coordinates of points.
+	@type coords: List of 2-tuples of floats@return:  A heatmap represented by a pixel matrix.
+	@return: A pixel matrix heatmap for the given points.
+	@rtype: Rectangular numpy matrix of floats
 	'''
 	import numpy as np
 	
@@ -71,9 +91,13 @@ def heatmap(bounds, coords):
 	return heatmap
 
 def show_heatmap(heatmap, bounds):
-	'''Displays a heatmap within certain bounds.
-	@param heatmap The list of lists of floats that represents the pixel matrix of the heatmap.
-	@param bounds The bounding box of the figure.
+	'''
+	Displays a heatmap within certain bounds.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@rtype: Void
 	'''
 	import numpy as np
 	import matplotlib.pyplot as plt
@@ -86,8 +110,11 @@ def show_heatmap(heatmap, bounds):
 	print "Done."
 
 def save_heatmap(heatmap):
-	''' Saves a heatmap to file, in a subfolder named "heatmaps" with the naming convention "heatmap_###" where ### is a 3-digit number that is 1 larger than the largest number already present.
-	@param heatmap The list of lists of floats that represents the pixel matrix of the heatmap.
+	'''
+	Saves a heatmap to file, in a subfolder named "heatmaps" with the naming convention "heatmap_###" where ### is a 3-digit number that is 1 larger than the largest number already present.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@rtype: Void
 	'''
 	import numpy as np
 	from scipy import misc
@@ -110,28 +137,42 @@ def save_heatmap(heatmap):
 	print "Done."
 
 def heat_dist(point, x, y):
-	'''Returns the Euclidean distance between a point and a pixel on an image.
-	@param point The 2-tuple of the point's coordinates.
-	@param x The x-coordinate of the pixel.
-	@param y The y-coordinate of the pixel.
-	@return The Euclidean distance between the point and the pixel.
+	'''
+	Returns the Euclidean distance between a point and a pixel on an image.
+	@param point: The point's coordinates.
+	@type point: 2-tuple of floats.
+	@param x: The x-coordinate of the pixel.
+	@type x: Integer
+	@param y: The y-coordinate of the pixel.
+	@type y: Integer
+	@return: The Euclidean distance between the point and the pixel.
+	@rtype: Float
 	'''
 	from math import sqrt
 	return sqrt((point[0]-x)**2+(point[1]-y)**2)
 
 def gauss(var, x):
-	'''Returns the y value at x for a normal distribution with variance var in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the center of the curve is 0 since no mean is defined, and the maximum value is always 1.
-	@param var The variance to use for this curve.
-	@param x The distance from the point.
-	@return The value of the given curve at x.
+	'''
+	Returns the y value at x for a normal distribution with variance var in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the center of the curve is 0 since no mean is defined, and the maximum value is always 1.
+	@param var: The variance to use for this curve.
+	@type var: Float
+	@param x: The distance from the point.
+	@type x: Float
+	@return: The value of the given curve at x.
+	@rtype: Float
 	'''
 	from math import e
 	return e ** (-(x*x)/(2*var))
 
 def plot_gauss(var, lim):
-	'''Plots a Gaussian distribution.
-	@param var Variance of the curve.
-	@param lim Upper limit of plot (lower is 0).'''
+	'''
+	Plots a Gaussian distribution.
+	@param var: Variance of the curve.
+	@type var: Float
+	@param lim: Upper limit of plot (lower is 0).
+	@type lim: Float
+	@rtype: Void
+	'''
 	coords = []
 	for i in range(lim):
 		for j in range(10):
@@ -149,4 +190,3 @@ if __name__ == "__main__":
 	heatmap = heatmap(bounds, coords)
 	show_heatmap(heatmap, bounds)
 	save_heatmap(heatmap)
-
