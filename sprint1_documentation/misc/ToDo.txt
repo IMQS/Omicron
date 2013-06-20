@@ -21,3 +21,11 @@ especially:
 http://epydoc.sourceforge.net/manual-docstring.html
 http://epydoc.sourceforge.net/manual-epytext.html
 http://epydoc.sourceforge.net/manual-fields.html
+
+*******************************
+HOW TO PUT JSON:
+http://stackoverflow.com/questions/9733638/post-json-using-python-request
+url = "http://localhost:8080"
+data = {'sender': 'Alice', 'receiver': 'Bob', 'message': 'We did it!'}
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url, data=json.dumps(data), headers=headers)

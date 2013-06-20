@@ -12,3 +12,12 @@ Task: "cURL" vs "requests - HTTP for humans"
 
 Note: http://stackoverflow.com/questions/4547849/good-examples-of-python-docstrings-for-sphinx
 >>>good examples of sphinx
+
+********************************
+Note: read through this site for info on Epydocs
+http://epydoc.sourceforge.net/
+
+especially:
+http://epydoc.sourceforge.net/manual-docstring.html
+http://epydoc.sourceforge.net/manual-epytext.html
+http://epydoc.sourceforge.net/manual-fields.html
