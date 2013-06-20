@@ -76,16 +76,15 @@ class gateway(object):
             This function is only for handling rest calls to /gateway.
             Cycles through each variable in the platform list and executes a search with the
             given keywords on each platform. Parameter platforms and key_words are encoded into
-            the POST call.
+            a JSON Object that will be received from a POST call.
             
-            @param platforms: List of social media platforms.
-            @type platforms: String
-            @param key_words: List of key words that will be used in the search.
-            @type key_words: String
+            @param Data: List of social media platforms.
+            @type Data: JSON Object
             @param self: a Pointer to the current object.
             @type self: gateway
             @return: The raw data that was fetched from the social media API's.
             @rtype: GeoJSON array 
         '''
+        
 if __name__ == "__main__":
     pass
