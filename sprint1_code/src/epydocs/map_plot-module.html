@@ -52,7 +52,14 @@
 </table>
 <!-- ==================== MODULE DESCRIPTION ==================== -->
 <h1 class="epydoc">Module map_plot</h1><p class="nomargin-top"><span class="codelink"><a href="map_plot-pysrc.html">source&nbsp;code</a></span></p>
-<!-- ==================== FUNCTIONS ==================== -->
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        Michelle Arzul
+      </p>
+      <p><strong>Date:</strong>
+        18 June 2013
+      </p>
+</div><!-- ==================== FUNCTIONS ==================== -->
 <a name="section-Functions"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
@@ -71,7 +78,7 @@
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Void</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -90,7 +97,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Void</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -108,7 +115,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">List of 2-tuples of floats</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -126,7 +133,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Rectangular numpy matrix of floats</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -145,7 +152,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Void</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -163,7 +170,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Void</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -183,7 +190,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -203,7 +210,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -222,7 +229,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Void</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -298,9 +305,13 @@
   
   <p>Makes a simple scatter plot of given coordinates within a box that in 
   X and Y spans the floor and ceiling integers of the minima and maxima 
-  respectively. @param coords A list of pairs (2-tuples) of floats which 
-  represent X/Y coordinates of points.</p>
+  respectively.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats) - The X, Y coordinates of points.</li>
+    </ul></dd>
+    <dt>Returns: Void</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -319,10 +330,15 @@
     </td>
   </tr></table>
   
-  <p>Plots random points. @param num The number of points to generate. 
-  @param bounds The bounding coordinates of the points to generate, in the 
-  form [left, right, bottom, top].</p>
+  <p>Plots random points.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>num</code></strong> (Integer) - The number of points to generate.</li>
+        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
+          [left, right, bottom, top].</li>
+    </ul></dd>
+    <dt>Returns: Void</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -341,11 +357,17 @@
     </td>
   </tr></table>
   
-  <p>Returns random points. @param num The number of points to generate. 
-  @param bounds The bounding coordinates of the points to generate, in the 
-  form [left, right, bottom, top]. @return A list of 2-tuples of floats 
-  that represents a set of X, Y coordinates.</p>
+  <p>Returns random points.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>num</code></strong> (Integer) - The number of points to generate.</li>
+        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
+          [left, right, bottom, top].</li>
+    </ul></dd>
+    <dt>Returns: List of 2-tuples of floats</dt>
+        <dd>List of 2-tuples of floats that represents a set of X, Y 
+          coordinates.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -365,12 +387,17 @@
   </tr></table>
   
   <p>Creates a heatmap within the specified bounds for the given 
-  coordinates. Variance is adjusted according to point density. @param 
-  bounds A list of 4 floats that denote the left, right, bottom, and top 
-  limits of the extent respectively. @param coords List of 2-tuples of 
-  floats that represent point coordinates. @return A list of lists of 
-  floats the represents the pixel matrix of the heatmap.</p>
+  coordinates. Variance is adjusted according to point density.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
+          [left, right, bottom, top].</li>
+        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats@return:  A heatmap represented by a 
+          pixel matrix.) - The X, Y coordinates of points.</li>
+    </ul></dd>
+    <dt>Returns: Rectangular numpy matrix of floats</dt>
+        <dd>A pixel matrix heatmap for the given points.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -389,10 +416,15 @@
     </td>
   </tr></table>
   
-  <p>Displays a heatmap within certain bounds. @param heatmap The list of 
-  lists of floats that represents the pixel matrix of the heatmap. @param 
-  bounds The bounding box of the figure.</p>
+  <p>Displays a heatmap within certain bounds.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>heatmap</code></strong> (Rectangular numpy matrix of floats) - A pixel matrix heatmap.</li>
+        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
+          [left, right, bottom, top].</li>
+    </ul></dd>
+    <dt>Returns: Void</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -412,10 +444,13 @@
   
   <p>Saves a heatmap to file, in a subfolder named &quot;heatmaps&quot; 
   with the naming convention &quot;heatmap_###&quot; where ### is a 3-digit
-  number that is 1 larger than the largest number already present. @param 
-  heatmap The list of lists of floats that represents the pixel matrix of 
-  the heatmap.</p>
+  number that is 1 larger than the largest number already present.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>heatmap</code></strong> (Rectangular numpy matrix of floats) - A pixel matrix heatmap.</li>
+    </ul></dd>
+    <dt>Returns: Void</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -436,10 +471,16 @@
   </tr></table>
   
   <p>Returns the Euclidean distance between a point and a pixel on an 
-  image. @param point The 2-tuple of the point's coordinates. @param x The 
-  x-coordinate of the pixel. @param y The y-coordinate of the pixel. 
-  @return The Euclidean distance between the point and the pixel.</p>
+  image.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>point</code></strong> (2-tuple of floats.) - The point's coordinates.</li>
+        <li><strong class="pname"><code>x</code></strong> (Integer) - The x-coordinate of the pixel.</li>
+        <li><strong class="pname"><code>y</code></strong> (Integer) - The y-coordinate of the pixel.</li>
+    </ul></dd>
+    <dt>Returns: Float</dt>
+        <dd>The Euclidean distance between the point and the pixel.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -461,9 +502,15 @@
   <p>Returns the y value at x for a normal distribution with variance var 
   in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the 
   center of the curve is 0 since no mean is defined, and the maximum value 
-  is always 1. @param var The variance to use for this curve. @param x The 
-  distance from the point. @return The value of the given curve at x.</p>
+  is always 1.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>var</code></strong> (Float) - The variance to use for this curve.</li>
+        <li><strong class="pname"><code>x</code></strong> (Float) - The distance from the point.</li>
+    </ul></dd>
+    <dt>Returns: Float</dt>
+        <dd>The value of the given curve at x.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -482,9 +529,14 @@
     </td>
   </tr></table>
   
-  <p>Plots a Gaussian distribution. @param var Variance of the curve. 
-  @param lim Upper limit of plot (lower is 0).</p>
+  <p>Plots a Gaussian distribution.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>var</code></strong> (Float) - Variance of the curve.</li>
+        <li><strong class="pname"><code>lim</code></strong> (Float) - Upper limit of plot (lower is 0).</li>
+    </ul></dd>
+    <dt>Returns: Void</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -512,7 +564,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Jun 20 15:53:49 2013
+    Generated by Epydoc 3.0.1 on Thu Jun 20 16:20:12 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
