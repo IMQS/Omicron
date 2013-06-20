@@ -5,6 +5,7 @@ Created on 18 Jun 2013
 '''
 import social_platform
 import json
+import web
 
 class gateway(object):
     '''
@@ -38,6 +39,9 @@ class gateway(object):
                 
     def execute_requests(self, platforms, key_words):
         '''
+            Cycles through each variable in the platform list and executes a search with the
+            given keywords on each platform.
+            
             @param self: a Pointer to the current object.
             @type self: gateway
             @param platforms: List of social media platforms.
@@ -48,7 +52,40 @@ class gateway(object):
             @rtype: GeoJSON Array
         '''
         
-    def GET(self, platforms, key_words):
-        return platforms + key_words
+    def GET(self):
+        '''
+            This function is only for handling rest calls to /gateway.
+            Cycles through each variable in the platform list and executes a search with the
+            given keywords on each platform. Parameter platforms and key_words are encoded into
+            the GET call.
+            
+            @param platforms: List of social media platforms.
+            @type platforms: String
+            @param key_words: List of key words that will be used in the search.
+            @type key_words: String
+            @param self: a Pointer to the current object.
+            @type self: gateway
+            @return: The raw data that was fetched from the social media API's.
+            @rtype: GeoJSON array 
+        '''
+        user_data = web.input()
+        return "Selected platforms : " + str(user_data.platforms) + " , Key_words: " +  str(user_data.key_words)
+    
+    def POST(self):
+        '''
+            This function is only for handling rest calls to /gateway.
+            Cycles through each variable in the platform list and executes a search with the
+            given keywords on each platform. Parameter platforms and key_words are encoded into
+            the POST call.
+            
+            @param platforms: List of social media platforms.
+            @type platforms: String
+            @param key_words: List of key words that will be used in the search.
+            @type key_words: String
+            @param self: a Pointer to the current object.
+            @type self: gateway
+            @return: The raw data that was fetched from the social media API's.
+            @rtype: GeoJSON array 
+        '''
 if __name__ == "__main__":
     pass
