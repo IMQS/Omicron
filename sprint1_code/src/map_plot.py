@@ -92,7 +92,7 @@ def heatmap(bounds, coords):
 
 def show_heatmap(heatmap, bounds):
 	'''
-	Displays a heatmap within certain bounds.
+	Displays a heatmap within certain bounds using matplotlib.pyplot.
 	@param heatmap: A pixel matrix heatmap.
 	@type heatmap: Rectangular numpy matrix of floats
 	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
@@ -108,6 +108,20 @@ def show_heatmap(heatmap, bounds):
 	plt.imshow(heatmap, cmap='hot', origin='lower', extent=bounds)
 	plt.show()
 	print "Done."
+
+def show_3D_heatmap(heatmap):
+	'''
+	Displays a heatmap in 3D using MayaVi.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@rtype: Void
+	'''
+	import numpy as np
+	from mayavi import mlab
+	rescale = heatmap * 255. / heatmap.max()
+	rescale = rescale[::-1]
+	mlab.surf(rescale)
+	mlab.show()
 
 def save_heatmap(heatmap):
 	'''
@@ -190,3 +204,4 @@ if __name__ == "__main__":
 	heatmap = heatmap(bounds, coords)
 	show_heatmap(heatmap, bounds)
 	save_heatmap(heatmap)
+#	show_3D_heatmap(heatmap)
