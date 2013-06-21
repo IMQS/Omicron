@@ -52,7 +52,7 @@ class social_platform(object):
             HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.
             
             @param self: Pointer to the current object.
-            @type self: social_platform  
+            @type self: social_platform  s
         '''
         consumer_key           = "JqsyRIEqze8MtUXvZ6PtVw"
         consumer_secret        = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
