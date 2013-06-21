@@ -20,5 +20,5 @@ class test_class_string_operations(unittest.TestCase):
 	def test_string_int_concatination_hello_4(self):
 		self.assertEqual(so.string_int_concatination("hello",4), "hello4")
 if __name__ == "__main__":
-	unittest_main()
+	unittest.main()
 		

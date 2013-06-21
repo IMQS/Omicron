@@ -51,44 +51,69 @@ class social_platform(object):
             A HTTPS POST is made on port 443 with the Headers and Parameters to the websites Authentication api, then a getresponse() call is made by the
             HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.
             
+            saves access_token in the object, also returns access_token
+            Not all Exceptions have been caught  !
             @param self: Pointer to the current object.
-            @type self: social_platform  s
+            @type self: social_platform
         '''
-        consumer_key           = "JqsyRIEqze8MtUXvZ6PtVw"
-        consumer_secret        = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
+        urllib.quote(self.consumer_key)     #URL encoding
+        urllib.quote(self.consumer_secret)    #URL encoding
 
-        urllib.quote(consumer_key)     #URL encoding
-        urllib.quote(consumer_secret)    #URL encoding
-
-        encoded = base64.b64encode(str(consumer_key)+":"+str(consumer_secret))    #base64 encoding to twitter standards
+        encoded = base64.b64encode(str(self.consumer_key)+":"+str(self.consumer_secret))    #base64 encoding to twitter standards
         headers = { "User-Agent":"TeamOmicron","Authorization": "Basic %s" % encoded,"Content-type": "application/x-www-form-urlencoded;charset=UTF-8",'Accept-Encoding': 'gzip,deflate'}         #declear headers
         params = urllib.urlencode({'grant_type':'client_credentials'})        #declear parameters aka body of html
-        conn = httplib.HTTPSConnection("api.twitter.com:443")            #host api in httpsconnection
+        conn = httplib.HTTPSConnection(self.HttpsConnectionString)            #host api in httpsconnection
         #conn.set_debuglevel(1)
         print "Requesting"
-        conn.request("POST", "/oauth2/token",params, headers)
+        conn.request("POST", self.HttpsOAuthString,params, headers)
         print "Request Completed"
-        
-        
         response = conn.getresponse()
-        print response.status, response.reason
-        EncryptedData = response.read()
+        if(str(response.status) != "200"):
+            print "Error http request failed status"+str(response.status)+" Reason: "+str(response.reason)
+            return None
+        encrypted_data = response.read()        
+        decrypted_data = self.decrypt_response(encrypted_data,response.getheaders()) #html object of decoded data
+        decrypted_data = ast.literal_eval(decrypted_data)
+        access_token = None                     #convert to dictionary
+        try:
+            access_token = decrypted_data["access_token"]
+        except TypeError:
+            print "Access Token not assigned by social media"
+            return None
+        except KeyError:
+            print "Access Token not assigned by social media"
+            return None
         
-        
-        print response.getheaders()
-        print EncryptedData
-        
-        Bufferdata = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(EncryptedData))    #decoding of the data
-        data = Bufferdata.read()                            #html object of decoded data
-        conn.close()
-        data = ast.literal_eval(data)                     #convert to dictionary
-        Access_Token = data["access_token"]
-        return data
+        self.access_token = access_token
+        return access_token
+    
+    def decrypt_response(self,encrypted_data,headers):
+        encryption_type = None
+        buffer_data = None
+        decrypted_data = None
+        for i in headers:
+            if(i[0] == "content-encoding"):
+                encryption_type = i[1]
+                break;
+        if(encryption_type == "gzip"):
+            buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))    #decoding of the data
+            decrypted_data = buffer_data.read()
+        return decrypted_data
+    
     def authenticate_headers(self):
-
-        raise NotImplementedError
+        ''' Returns headers with Authorzation of the application in the header. Uses self.access_token defined in use of authenticate().  
+            authenticate() method must first be called 
+            
+        '''
+        headers = { "User-Agent":"TeamOmicron","Authorization": "Bearer %s" % self.access_token,"Content-type": "application/x-www-form-urlencoded;charset=UTF-8",'Accept-Encoding': 'gzip,deflate'} 
+        return headers
     
 class twitter_platform(social_platform):
+    def __init__(self):
+        self.consumer_key           = "JqsyRIEqze8MtUXvZ6PtVw"
+        self.consumer_secret        = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
+        self.HttpsConnectionString  = "api.twitter.com:443"
+        self.HttpsOAuthString       = "/oauth2/token"
     def request_geographical(self, criteria=None, center=None, radius=None):
         "TODO:"
         
