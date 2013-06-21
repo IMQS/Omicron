@@ -116,12 +116,16 @@ def show_3D_heatmap(heatmap):
 	@type heatmap: Rectangular numpy matrix of floats
 	@rtype: Void
 	'''
+	print "Loading 3D modules..."
 	import numpy as np
 	from mayavi import mlab
+	print "Done."
+	print "Displaying 3D heatmap..."
 	rescale = heatmap * 255. / heatmap.max()
 	rescale = rescale[::-1]
-	mlab.surf(rescale)
+	mlab.surf(rescale, colormap='hot', vmin=0, vmax=255)
 	mlab.show()
+	print "Done."
 
 def save_heatmap(heatmap):
 	'''
@@ -133,10 +137,18 @@ def save_heatmap(heatmap):
 	import numpy as np
 	from scipy import misc
 	from os import listdir
-	
+		
 	print "Saving to disk..."
 	rescale = heatmap * 255. / heatmap.max()
-	rescale = rescale[::-1]
+	#rescale = rescale[::-1]
+	cmap = misc.imread("cmap.png")[0]
+	rescale_color = []
+	print len(rescale)
+	print len(rescale[0])
+	for r in xrange(len(rescale)):
+		rescale_color.append([])
+		for c in xrange(len(rescale[r])):
+			rescale_color[r].append(cmap[int(rescale[r][c])])
 	maxi = 0
 	flist = listdir('./heatmaps')
 	for item in flist:
@@ -148,6 +160,7 @@ def save_heatmap(heatmap):
 	while len(num) < 3:
 		num = '0'+num
 	misc.imsave('heatmaps/heatmap_'+num+'.png', rescale)
+	misc.imsave('heatmaps/heatmap_color_'+num+'.png', rescale_color)
 	print "Done."
 
 def heat_dist(point, x, y):
@@ -199,9 +212,10 @@ if __name__ == "__main__":
 #	plot_random(20, 100)
 #	plot_gauss(1, 3)
 #	coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]]
-	bounds = [-100,100,-100,100]
+	bounds = [-50,50,-50,50]
 	coords = random_coords(10, bounds)
 	heatmap = heatmap(bounds, coords)
-	show_heatmap(heatmap, bounds)
-	save_heatmap(heatmap)
+#	show_heatmap(heatmap, bounds)
 #	show_3D_heatmap(heatmap)
+	save_heatmap(heatmap)
+
