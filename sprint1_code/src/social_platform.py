@@ -107,7 +107,51 @@ class twitter_platform(social_platform):
         self.HttpsOAuthString = "/oauth2/token"
         self.access_token = None
     def request_geographical(self, criteria=None, center=None, radius=None):
-        "TODO:"
+        ''' Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
+            and the following error message will be returned "query not suitable".
+            
+            @param self: Pointer to the current object.
+            @type self: social_platform  
+            @param criteria: a List of key words.
+            @type criteria: List 
+            @param center: It is a tuple that consists of longitude and latitude.
+            @type center: Tuple of floats
+            @param radius: Is the distance from the center that will be covered by the search.
+            @type radius: float 
+        '''
+        if(criteria == None):
+            print "Tag_list is empty"
+            return None
+        if(len(criteria) == 0):
+            print "Tag_list is empty"
+            return None
+        if(self.access_token == None):
+            print "Please Request Authorization from Twitter"
+            return None
+        tags = ""
+        for i in criteria:
+            tags = tags+" "+i
+        tags = tags.strip()
+        tags = {"q":tags,"count":100}
+        
+        if(center != None and len(center) == 2 and radius != None):
+            tags['geocode'] = str(center[0]) +" "+str(center[1]) +" "+str(radius)+"km"
+        
+        
+        params = urllib.urlencode(tags)
+        conn = httplib.HTTPSConnection(self.HttpsConnectionString)
+        head = self.authenticate_headers()
+        conn.request("GET","/1.1/search/tweets.json?"+params,"",head)
+        response = conn.getresponse()
+        if(response.status != 200):
+            print "Error Failed to get Twitter data"
+            return None
+        result_set = response.read()
+ 
+        result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
+        conn.close()
+        result_set = json.loads(result_set)
+        return result_set
         
     def request_area(self, criteria=None, area=None):
         "TODO:"
