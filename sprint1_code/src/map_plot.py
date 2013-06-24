@@ -56,7 +56,7 @@ def random_coords(num, bounds):
 
 def heatmap(bounds, coords):
 	'''
-	Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density.
+	Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density. If the area of the bounds is zero, None is returned.
 	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
 	@type bounds: List of 4 ints
 	@param coords: The X, Y coordinates of points.
@@ -66,12 +66,16 @@ def heatmap(bounds, coords):
 	'''
 	import numpy as np
 	
+	rdim = bounds[1] - bounds[0]
+	cdim = bounds[3] - bounds[2]
+	
+	if cdim*rdim == 0:
+		print "AREA OF BOUNDS IS ZERO: NO HEATMAP RETURNED"
+		return None
+	
 	n = len(coords)
 	print n, "points provided."
 	
-	rdim = bounds[1] - bounds[0]
-	cdim = bounds[3] - bounds[2]
-
 	heatmap = np.array([[0.]*rdim]*cdim)
 	
 	print "For bounds "+str(bounds)+", extent is "+str(rdim)+" by "+str(cdim)+" and area is "+str(rdim*cdim)+"."
