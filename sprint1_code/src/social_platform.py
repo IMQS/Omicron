@@ -60,15 +60,22 @@ class social_platform(object):
         '''
         raise NotImplemented
     def test_connection(self):
+        ''' Pings a server to test if it is able to communicate to the network before making any calls to its ReST API
+        '''
         print "Testing Connection"
         try:
-            print self.HttpsConnectionString
-            urllib2.urlopen("http://twitter.com", timeout=1)
+            urllib2.urlopen(self.TestConnectionString, timeout=1)
         except urllib2.URLError:
             print "Exception Caught : connection to twitter timed out"
             return False
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
+        '''Decrypts response from a ReST call
+        @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted
+        @type encrypted: String
+        @param headers: The header response from the server, containing the encryption method
+        @param type: Dictionary   
+        '''
         if (encrypted_data == None):
             print "No encrypted data"
             return None
@@ -98,6 +105,7 @@ class twitter_platform(social_platform):
         self.consumer_key = "JqsyRIEqze8MtUXvZ6PtVw"
         self.consumer_secret = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
         self.HttpsConnectionString = "api.twitter.com:443"
+        self.TestConnectionString = "twitter.com"
         self.HttpsOAuthString = "/oauth2/token"
         self.access_token = None
     def request_geographical(self, criteria=None, center=None, radius=None):
@@ -158,7 +166,13 @@ class twitter_platform(social_platform):
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
         return headers
     def get_data(self, tag_list=None):
-        ''' if its hash tags it works on an 'AND' basis, word basis its on an 'OR' '''
+        ''' Returns a JSON object containing all the Tweets from Twitter with the tags from the tag_list
+            note: if its hash tags it works on an 'AND' basis, word basis its on an 'OR' 
+            @param self: Pointer to the current object
+            @type self: twitter_platform
+            @param tag_list: a list of tags that the user would like to search for either words or hash tags
+            @type tag_list: Iterable object of strings 
+        '''
         if(tag_list == None):
             print "Tag_list is empty"
             return None
@@ -172,17 +186,11 @@ class twitter_platform(social_platform):
         for i in tag_list:
             tags = tags+" "+i
         tags = tags.strip()
-        
         tags = {"q":tags,"count":100}
-        '''TODO: search by location '''
-        params = urllib.urlencode(tags)            #declear parameters aka body of html
-        print "Parameters"
-        print params
         
-        conn = httplib.HTTPSConnection(self.HttpsConnectionString)            #host api in httpsconnection
-        conn.set_debuglevel(1)
-        #SearchTweets = "/1.1/search/tweets.json?" + params1
-        print params
+        '''TODO: search by location '''
+        params = urllib.urlencode(tags)
+        conn = httplib.HTTPSConnection(self.HttpsConnectionString)
         head = self.authenticate_headers()
         conn.request("GET","/1.1/search/tweets.json?"+params,"",head)
         response = conn.getresponse()
@@ -193,10 +201,13 @@ class twitter_platform(social_platform):
  
         result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
         conn.close()
-        print type(result_set)
         result_set = json.loads(result_set)
         return result_set
     def extract_location(self,result_set=None):
+        '''Returns a list of geo-spatial coordinate tuples 
+        @param result_set: A JSON object from the L{get_data()} method containing a Tweets
+        @type result_set: A JSON object
+        '''
         if(result_set == None):
             print "Result_set undefined"
             return None
