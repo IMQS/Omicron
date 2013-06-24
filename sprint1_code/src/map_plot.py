@@ -137,30 +137,34 @@ def save_heatmap(heatmap):
 	import numpy as np
 	from scipy import misc
 	from os import listdir
+	from matplotlib.pyplot import cm
 		
 	print "Saving to disk..."
-	rescale = heatmap * 255. / heatmap.max()
-	#rescale = rescale[::-1]
-	cmap = misc.imread("cmap.png")[0]
-	rescale_color = []
-	print len(rescale)
-	print len(rescale[0])
-	for r in xrange(len(rescale)):
-		rescale_color.append([])
-		for c in xrange(len(rescale[r])):
-			rescale_color[r].append(cmap[int(rescale[r][c])])
+	
+	cmap = cm.ScalarMappable()
+	cmap.set_cmap('hot')
+	cmap.set_clim(0, heatmap.max())
+	heatmap_color = []
+	heatmap = heatmap[::-1]
+	
+	for r in xrange(len(heatmap)):
+		heatmap_color.append([])
+		for c in xrange(len(heatmap[r])):
+			heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
+			
 	maxi = 0
 	flist = listdir('./heatmaps')
 	for item in flist:
-		if item.startswith('heatmap_'):
+		if item.startswith('heatmap_') and not (item.startswith('heatmap_color_')):
 			num = int(item.__getslice__(8, len(item)-4))
 			if num > maxi:
 				maxi = num
 	num = str(maxi+1)
 	while len(num) < 3:
 		num = '0'+num
-	misc.imsave('heatmaps/heatmap_'+num+'.png', rescale)
-	misc.imsave('heatmaps/heatmap_color_'+num+'.png', rescale_color)
+	misc.imsave('heatmaps/heatmap_'+num+'.png', heatmap)
+	misc.imsave('heatmaps/heatmap_color_'+num+'.png', heatmap_color)
+	
 	print "Done."
 
 def heat_dist(point, x, y):
@@ -215,7 +219,8 @@ if __name__ == "__main__":
 	bounds = [-50,50,-50,50]
 	coords = random_coords(10, bounds)
 	heatmap = heatmap(bounds, coords)
-#	show_heatmap(heatmap, bounds)
-#	show_3D_heatmap(heatmap)
 	save_heatmap(heatmap)
+	show_heatmap(heatmap, bounds)
+#	show_3D_heatmap(heatmap)
+
 
