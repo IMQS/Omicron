@@ -10,11 +10,12 @@ import gzip
 import StringIO
 import ast
 import urllib2
+import json
 class social_platform(object):
     '''
         Basic structure that is needed to communicate with a social API
     ''' 
-    def request_geographical(self, criteria = None, center = None, radius = None):
+    def request_geographical(self, criteria=None, center=None, radius=None):
         '''
             Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
@@ -30,7 +31,7 @@ class social_platform(object):
         '''
         raise NotImplementedError
     
-    def repuest_area(self, criteria = None, area = None ):
+    def request_area(self, criteria=None, area=None):
         '''
             Queries the underlining social API with the search area defined by a geographical area e.g. Cape Town. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
@@ -67,8 +68,13 @@ class social_platform(object):
             print "Exception Caught : connection to twitter timed out"
             return False
         return True
-    def decrypt_response(self,encrypted_data,headers):
-        encryption_type = None
+    def decrypt_response(self, encrypted_data=None, headers=None):
+        if (encrypted_data == None):
+            print "No encrypted data"
+            return None
+        if (headers == None):
+            print "No header data"
+            return None
         buffer_data = None
         decrypted_data = None
         for i in headers:
@@ -76,26 +82,28 @@ class social_platform(object):
                 encryption_type = i[1]
                 break;
         if(encryption_type == "gzip"):
-            buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))    #decoding of the data
+            buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))  # decoding of the data
             decrypted_data = buffer_data.read()
         else:
-            print str(encryption_type)+" : Unknown decryption method"
+            print str(encryption_type) + " : Unknown decryption method"
         return decrypted_data
     
     def authenticate_headers(self):
         raise NotImplemented
+    def get_data(self):
+        raise NotImplemented
     
 class twitter_platform(social_platform):
     def __init__(self):
-        self.consumer_key           = "JqsyRIEqze8MtUXvZ6PtVw"
-        self.consumer_secret        = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
-        self.HttpsConnectionString  = "api.twitter.com:443"
-        self.HttpsOAuthString       = "/oauth2/token"
+        self.consumer_key = "JqsyRIEqze8MtUXvZ6PtVw"
+        self.consumer_secret = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
+        self.HttpsConnectionString = "api.twitter.com:443"
+        self.HttpsOAuthString = "/oauth2/token"
         self.access_token = None
     def request_geographical(self, criteria=None, center=None, radius=None):
         "TODO:"
         
-    def repuest_area(self, criteria = None, area = None ):
+    def request_area(self, criteria=None, area=None):
         "TODO:"
     def authenticate(self):
         '''
@@ -111,27 +119,27 @@ class twitter_platform(social_platform):
             @param self: Pointer to the current object.
             @type self: social_platform
         '''
-        urllib2.quote(self.consumer_key)     #URL encoding
-        urllib2.quote(self.consumer_secret)    #URL encoding
+        urllib2.quote(self.consumer_key)  # URL encoding
+        urllib2.quote(self.consumer_secret)  # URL encoding
         if(self.test_connection() == False):
             print "Connection Error"
             return None
-        encoded = base64.b64encode(str(self.consumer_key)+":"+str(self.consumer_secret))    #base64 encoding to twitter standards
-        headers = { "User-Agent":"TeamOmicron","Authorization": "Basic %s" % encoded,"Content-type": "application/x-www-form-urlencoded;charset=UTF-8",'Accept-Encoding': 'gzip,deflate'}         #declear headers
-        params = urllib.urlencode({'grant_type':'client_credentials'})        #declear parameters aka body of html
-        conn = httplib.HTTPSConnection(self.HttpsConnectionString)            #host api in httpsconnection
-        #conn.set_debuglevel(1)
+        encoded = base64.b64encode(str(self.consumer_key) + ":" + str(self.consumer_secret))  # base64 encoding to twitter standards
+        headers = { "User-Agent":"TeamOmicron", "Authorization": "Basic %s" % encoded, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'}  # declear headers
+        params = urllib.urlencode({'grant_type':'client_credentials'})  # declear parameters aka body of html
+        conn = httplib.HTTPSConnection(self.HttpsConnectionString)  # host api in httpsconnection
+        # conn.set_debuglevel(1)
         print "Requesting"
-        conn.request("POST", self.HttpsOAuthString,params, headers)
+        conn.request("POST", self.HttpsOAuthString, params, headers)
         print "Request Completed"
         response = conn.getresponse()
         if(str(response.status) != "200"):
-            print "Error http request failed status"+str(response.status)+" Reason: "+str(response.reason)
+            print "Error http request failed status" + str(response.status) + " Reason: " + str(response.reason)
             return None
         encrypted_data = response.read()        
-        decrypted_data = self.decrypt_response(encrypted_data,response.getheaders()) #html object of decoded data
+        decrypted_data = self.decrypt_response(encrypted_data, response.getheaders())  # html object of decoded data
         decrypted_data = ast.literal_eval(decrypted_data)
-        access_token = None                     #convert to dictionary
+        access_token = None  # convert to dictionary
         try:
             access_token = decrypted_data["access_token"]
         except TypeError:
@@ -147,12 +155,67 @@ class twitter_platform(social_platform):
         ''' Returns headers with Authorzation of the application in the header. Uses self.access_token defined in use of authenticate().  
             authenticate() method must first be called 
         '''
-        headers = { "User-Agent":"TeamOmicron","Authorization": "Bearer %s" % self.access_token,"Content-type": "application/x-www-form-urlencoded;charset=UTF-8",'Accept-Encoding': 'gzip,deflate'} 
+        headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
         return headers
+    def get_data(self, tag_list=None):
+        ''' if its hash tags it works on an 'AND' basis, word basis its on an 'OR' '''
+        if(tag_list == None):
+            print "Tag_list is empty"
+            return None
+        if(len(tag_list) == 0):
+            print "Tag_list is empty"
+            return None
+        if(self.access_token == None):
+            print "Please Request Authorization from Twitter"
+            return None
+        tags = ""
+        for i in tag_list:
+            tags = tags+" "+i
+        tags = tags.strip()
         
+        tags = {"q":tags,"count":100}
+        '''TODO: search by location '''
+        params = urllib.urlencode(tags)            #declear parameters aka body of html
+        print "Parameters"
+        print params
+        
+        conn = httplib.HTTPSConnection(self.HttpsConnectionString)            #host api in httpsconnection
+        conn.set_debuglevel(1)
+        #SearchTweets = "/1.1/search/tweets.json?" + params1
+        print params
+        head = self.authenticate_headers()
+        conn.request("GET","/1.1/search/tweets.json?"+params,"",head)
+        response = conn.getresponse()
+        if(response.status != 200):
+            print "Error Failed to get Twitter data"
+            return None
+        result_set = response.read()
+ 
+        result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
+        conn.close()
+        print type(result_set)
+        result_set = json.loads(result_set)
+        return result_set
+    def extract_location(self,result_set=None):
+        if(result_set == None):
+            print "Result_set undefined"
+            return None
+        set = result_set['statuses']
+        geo_set = []
+        for tweet in set:
+            if(tweet['geo'] != None):
+                geo_set.append(tuple([tweet['geo']['coordinates'][0],tweet['geo']['coordinates'][1]]))
+        print geo_set
 class instagram_platform(social_platform):
     def request_geographical(self, criteria=None, center=None, radius=None):
         "TODO:"
         
-    def repuest_area(self, criteria = None, area = None ):
+    def request_area(self, criteria=None, area=None):
         "TODO:"
+'''
+k = twitter_platform()
+k.authenticate()
+set = k.get_data(tag_list=["#snow","#winter"])
+print type(set)
+k.extract_location(result_set=set)
+'''

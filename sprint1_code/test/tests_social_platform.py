@@ -24,6 +24,9 @@ class test_class_social_platform(unittest.TestCase):
     def test_decrypt_response(self):
         
         pass
+    def test_twitter_get_data(self):
+        self.twitterObject.authenticate()
+        self.assertNotEqual(self.twitterObject.get_data(tag_list=["#snow","#winter"]),None)
     def testName(self):
         pass
 
