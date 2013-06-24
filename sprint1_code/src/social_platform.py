@@ -119,6 +119,7 @@ class twitter_platform(social_platform):
             @param radius: Is the distance from the center that will be covered by the search.
             @type radius: float 
         '''
+        
         if(criteria == None):
             print "Tag_list is empty"
             return None
