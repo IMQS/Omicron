@@ -5,7 +5,6 @@ Created on 21 Jun 2013
 '''
 import unittest
 import social_platform as sp
-import gzip
 class test_class_social_platform(unittest.TestCase):
 
 
