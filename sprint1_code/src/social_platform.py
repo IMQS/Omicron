@@ -223,8 +223,8 @@ class instagram_platform(social_platform):
         
     def request_area(self, criteria=None, area=None):
         "TODO:"
-
-k = twitter_platform()
-k.authenticate()
-set = k.get_data(tag_list=["#snow","#winter"])
-print k.extract_location(result_set=set)
+if __name__ == '__main__':
+    k = twitter_platform()
+    k.authenticate()
+    set = k.get_data(tag_list=["#snow","#winter"])
+    print k.extract_location(result_set=set)
