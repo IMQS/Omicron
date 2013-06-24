@@ -72,9 +72,9 @@ class social_platform(object):
     def decrypt_response(self, encrypted_data=None, headers=None):
         '''Decrypts response from a ReST call
         @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted
-        @type encrypted: String
+        @type encrypted_data: String
         @param headers: The header response from the server, containing the encryption method
-        @param type: Dictionary   
+        @type headers: Dictionary   
         '''
         if (encrypted_data == None):
             print "No encrypted data"
