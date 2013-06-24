@@ -105,7 +105,7 @@ class twitter_platform(social_platform):
         self.consumer_key = "JqsyRIEqze8MtUXvZ6PtVw"
         self.consumer_secret = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
         self.HttpsConnectionString = "api.twitter.com:443"
-        self.TestConnectionString = "twitter.com"
+        self.TestConnectionString = "http://twitter.com"
         self.HttpsOAuthString = "/oauth2/token"
         self.access_token = None
     def request_geographical(self, criteria=None, center=None, radius=None):
@@ -216,17 +216,15 @@ class twitter_platform(social_platform):
         for tweet in set:
             if(tweet['geo'] != None):
                 geo_set.append(tuple([tweet['geo']['coordinates'][0],tweet['geo']['coordinates'][1]]))
-        print geo_set
+        return geo_set
 class instagram_platform(social_platform):
     def request_geographical(self, criteria=None, center=None, radius=None):
         "TODO:"
         
     def request_area(self, criteria=None, area=None):
         "TODO:"
-'''
+
 k = twitter_platform()
 k.authenticate()
 set = k.get_data(tag_list=["#snow","#winter"])
-print type(set)
-k.extract_location(result_set=set)
-'''
+print k.extract_location(result_set=set)
