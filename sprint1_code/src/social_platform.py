@@ -30,7 +30,6 @@ class social_platform(object):
             @type radius: float 
         '''
         raise NotImplementedError
-    
     def request_area(self, criteria=None, area=None):
         '''
             Queries the underlining social API with the search area defined by a geographical area e.g. Cape Town. If any of the parameter are none then the query gets rejected 
@@ -93,11 +92,10 @@ class social_platform(object):
             decrypted_data = buffer_data.read()
         else:
             print str(encryption_type) + " : Unknown decryption method"
-        return decrypted_data
-    
+        return decrypted_data 
     def authenticate_headers(self):
         raise NotImplemented
-    def get_data(self):
+    def get_data(self, tag_list=None):
         raise NotImplemented
     
 class twitter_platform(social_platform):

@@ -80,30 +80,6 @@ class HeatMapTest(unittest.TestCase):
 		self.assertEqual(int(hm[0][0]*1e16)/1.e16,
 			int(map_plot.gauss(.25,sqrt(.5))*2*1e16)/1.e16)
 	
-	########## Saving tests ##########
-	
-	def test_save_name(self):
-		"""Tests if the heatmap saving function produces output files that use the correct nomenclature."""
-		import sys, os
-		actualstdout = sys.stdout
-		sys.stdout = open(os.devnull,'w')
-		maxi = 0
-		flist = os.listdir('./heatmaps')
-		for item in flist:
-			if item.startswith('heatmap_') and not (item.startswith('heatmap_color_')):
-				num = int(item.__getslice__(8, len(item)-4))
-				if num > maxi:
-					maxi = num
-		num = str(maxi+1)
-		while len(num) < 3:
-			num = '0'+num
-		hm = map_plot.heatmap([0,2,0,2],[(0,0),(1,1)])
-		map_plot.save_heatmap(hm)
-		sys.stdout = actualstdout
-		self.assertTrue(('heatmap_'+str(num)+'.png') in os.listdir('./heatmaps'))
-		self.assertTrue(('heatmap_color_'+str(num)+'.png') in os.listdir('./heatmaps'))
-		os.remove('./heatmaps/heatmap_'+str(num)+'.png')
-		os.remove('./heatmaps/heatmap_color_'+str(num)+'.png')
 
 if __name__ == '__main__':
 	unittest.main()
