@@ -78,6 +78,8 @@ class social_platform(object):
         if(encryption_type == "gzip"):
             buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))    #decoding of the data
             decrypted_data = buffer_data.read()
+        else:
+            print str(encryption_type)+" : Unknown decryption method"
         return decrypted_data
     
     def authenticate_headers(self):
@@ -154,5 +156,3 @@ class instagram_platform(social_platform):
         
     def repuest_area(self, criteria = None, area = None ):
         "TODO:"
-k = twitter_platform()
-k.authenticate()
