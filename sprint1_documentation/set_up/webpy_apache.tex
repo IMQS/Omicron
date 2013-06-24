@@ -1,0 +1,105 @@
+\documentclass[a4paper]{article}
+\author{Shaun Schreiber}
+\title{Setting apache 2.4 and web.py}
+\begin{document}
+\maketitle
+\section{Install}
+\subsection{Apache 2.4}
+Open a terminal and type the following commands.
+\begin{itemize}
+\item sudo apt-get install apache2-dev
+\item sudo apt-get install apache2-threaded-de
+\item sudo apt-get install libapache2-mod-wsgi
+\item sudo apt-get install libapache2-mod-python
+\end{itemize}
+\subsection{web.py}
+Open a terminal and type the following commands.
+\begin{itemize}
+\item sudo apt-get update
+\item sudo apt-get install python-pip
+\item sudo pip install web.py
+\end{itemize}
+\section{Setting up basic project with Apache and web.py}
+\subsection{Setting up the frame work}
+Open a terminal and type the following commands.
+\begin{itemize}
+\item sudo mkdir \verb#/var/www/webpy-app/<app name>#
+\item sudo mkdir \verb#/var/www/webpy-app/<app name>/logs#
+\item Create two files in logs access.log and error.log
+\item Create a python file in the \verb#/var/www/webpy-app/<app name># directory. Lets call it main.py
+\item cd \verb#/etc/apache2/sites-available#
+\item Create file with no extension with the name of your project, lets call it \verb#<project name># . Note the project name can be the same as your \verb#<app name># but it doesn't have to be.
+\item sudo cp \verb#./<project name> ../sites-enabled#
+\end{itemize}
+\subsection{Configure apache 2.4}
+First we need to and our connect our server ip to a name. Note \framebox{www.mysite.co.za} is meant by the server name. So go to the following directory \verb#/etc# and open the file hosts. Now add the follow line just below localhost \framebox{127.0.0.1 mysite.co.za}. Note I am using the localhost IP as my server IP as a demostration.
+Save the file Note you will need to be a super user to save.
+Navigate to the following directory \verb#/etc/apache2/sites-enabled# and open the <project name> file and type the following.
+\begin{verbatim}
+<VirtualHost <server name> or IP:port>
+     #ServerAdmin [your admin mail address]
+     ServerName superfluous.imqs.co.za
+     ServerAlias superfluous.imqs.co.za
+     DocumentRoot /var/www/webpy-app/<app name>>
+     DirectoryIndex <main python file name>.py
+     WSGIScriptAlias /omicron /var/www/webpy-app/<app name>/<main python file name>.py/
+     ErrorLog /var/www/webpy-app/<app name>/logs/error.log
+     CustomLog /var/www/webpy-app/<app name>/logs/access.log combined
+     addType text/html .py
+<Files <main python file>.py>
+        SetHandler wsgi-script
+        Options ExecCGI FollowSymlinks
+</Files>
+<Directory /var/www/webpy-app/<app name>>
+        Options +ExecCGI +Indexes +MultiViews +FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        allow from all
+</Directory>
+</VirtualHost>
+\end{verbatim}
+You can test the configuration by typing the following command.
+\begin{itemize}
+\item sudo apachectl configtest
+\end{itemize}
+Only continue if the last line reads Syntax OK.
+Now navigate to \verb#/var/www/webpy-app/<app name>/# and open your main python file and type the following.
+\begin{verbatim}
+import sys
+sys.path.append("/var/www/webpy-app/<app name>/")
+import web
+if app_path: # Apache
+    os.chdir(app_path)
+else: # CherryPy
+    app_path = os.getcwd()
+urls = (
+    '/(.*)', 'hello'
+)
+# WARNING
+# web.debug = True and autoreload = True
+# can mess up your session: I've personally experienced it
+web.debug = False # You may wish to place this in a config file
+app = web.application(urls, globals(), autoreload=False)
+application = app.wsgifunc() # needed for running with apache as wsgi. The reason is because wsgi requires a application method and app.wsgifunc returns the corrent application method for your project.
+class hello:
+    def GET(self, name):
+        if not name:
+            name = 'World'
+        return 'Hello, ' + name + '!'
+if __name__ == "__main__":
+    app.run()
+\end{verbatim}
+Save the file and restart apache by typing one the following commands.
+\begin{itemize}
+\item sudo service apache2 restart
+\item sudo apachectl restart
+\end{itemize}
+To test your server open the browser, modify and type the following \verb#<server name>/<project name>/hello# into your browser.
+If you are looking for more information you can visit the following links.
+\begin{itemize}
+\item \verb#http://www.hyperink.com/blog/?p=13#
+\item \verb#http://webpy.org/cookbook/mod_wsgi-apache-ubuntu#
+\item \verb#http://webpy.org/cookbook/cgi-apache#
+\item \verb#http://www.youtube.com/watch?v=831OahgMR9k#
+\end{itemize}
+\end{document}
