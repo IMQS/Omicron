@@ -157,7 +157,7 @@ def save_heatmap(heatmap):
 			heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
 			
 	maxi = 0
-	flist = listdir('./heatmaps')
+	flist = listdir('../src/heatmaps')
 	for item in flist:
 		if item.startswith('heatmap_') and not (item.startswith('heatmap_color_')):
 			num = int(item.__getslice__(8, len(item)-4))
@@ -166,8 +166,8 @@ def save_heatmap(heatmap):
 	num = str(maxi+1)
 	while len(num) < 3:
 		num = '0'+num
-	misc.imsave('heatmaps/heatmap_'+num+'.png', heatmap)
-	misc.imsave('heatmaps/heatmap_color_'+num+'.png', heatmap_color)
+	misc.imsave('../src/heatmaps/heatmap_'+num+'.png', heatmap)
+	misc.imsave('../src/heatmaps/heatmap_color_'+num+'.png', heatmap_color)
 	
 	print "Done."
 
