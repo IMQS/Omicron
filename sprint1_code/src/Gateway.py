@@ -32,7 +32,7 @@ class gateway(object):
         
         for current_platform in names:
             if (not available_platforms.has_key(current_platform)):
-                raise NotImplementedError
+                return None
             else:
                 platform_objects.append(available_platforms[current_platform])
         return platform_objects
@@ -69,6 +69,14 @@ class gateway(object):
             @rtype: GeoJSON array 
         '''
         user_data = web.input()
+        isvalide = self._available_sosial_media(str(user_data.platforms).split(' '))
+        if isvalide == None:
+            "@todo: change that it returns a JSONobject"
+            return "One or more platforms were unavailable."
+        else :
+            for social_plat in isvalide:
+                social_plat.authenticate()
+                
         return "Selected platforms : " + str(user_data.platforms) + " , Key_words: " +  str(user_data.key_words)
     
     def POST(self):
