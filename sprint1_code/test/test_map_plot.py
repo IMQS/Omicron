@@ -88,7 +88,7 @@ class HeatMapTest(unittest.TestCase):
 		actualstdout = sys.stdout
 		sys.stdout = open(os.devnull,'w')
 		maxi = 0
-		flist = os.listdir('./heatmaps')
+		flist = os.listdir('../src/heatmaps')
 		for item in flist:
 			if item.startswith('heatmap_') and not (item.startswith('heatmap_color_')):
 				num = int(item.__getslice__(8, len(item)-4))
