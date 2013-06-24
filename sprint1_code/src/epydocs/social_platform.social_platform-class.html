@@ -112,13 +112,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#repuest_area" class="summary-sig-name">repuest_area</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_area" class="summary-sig-name">request_area</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">area</span>=<span class="summary-sig-default">None</span>)</span><br />
       Queries the underlining social API with the search area defined by a 
       geographical area e.g.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.repuest_area">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_area">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -150,9 +150,28 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="decrypt_response"></a><span class="summary-sig-name">decrypt_response</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">encrypted_data</span>,
-        <span class="summary-sig-arg">headers</span>)</span></td>
+          <td><span class="summary-sig"><a name="test_connection"></a><span class="summary-sig-name">test_connection</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Pings a server to test if it is able to communicate to the network 
+      before making any calls to its ReST API</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.test_connection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#decrypt_response" class="summary-sig-name">decrypt_response</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">encrypted_data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">headers</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Decrypts response from a ReST call</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.decrypt_response">source&nbsp;code</a></span>
             
@@ -168,10 +187,25 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns headers with Authorzation of the application in the header.</td>
+          <td><span class="summary-sig"><a name="authenticate_headers"></a><span class="summary-sig-name">authenticate_headers</span>(<span class="summary-sig-arg">self</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_data"></a><span class="summary-sig-name">get_data</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.get_data">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -275,19 +309,19 @@ object --+
   </dl>
 </td></tr></table>
 </div>
-<a name="repuest_area"></a>
+<a name="request_area"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">repuest_area</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_area</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">area</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.repuest_area">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_area">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -343,24 +377,30 @@ object --+
   </dl>
 </td></tr></table>
 </div>
-<a name="authenticate_headers"></a>
+<a name="decrypt_response"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate_headers</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">decrypt_response</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">encrypted_data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">headers</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.decrypt_response">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Returns headers with Authorzation of the application in the header. 
-  Uses self.access_token defined in use of authenticate(). authenticate() 
-  method must first be called</p>
+  <p>Decrypts response from a ReST call</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>encrypted_data</code></strong> (String) - A encrypted response from a ReST call that needs to be decrypted</li>
+        <li><strong class="pname"><code>headers</code></strong> (Dictionary) - The header response from the server, containing the encryption 
+          method</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -388,7 +428,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jun 24 08:25:51 2013
+    Generated by Epydoc 3.0.1 on Mon Jun 24 13:30:10 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

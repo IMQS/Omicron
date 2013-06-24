@@ -1,40 +1,43 @@
-\documentclass[a4paper]{article}
+\documentclass{article}
 \author{Shaun Schreiber}
-\title{Setting apache 2.4 and web.py}
+\title{Setting up Apache 2.4 and web.py}
+\date{}
+
 \begin{document}
 \maketitle
-\section{Install}
+
+\section{Installation}
 \subsection{Apache 2.4}
-Open a terminal and type the following commands.
+Type the following commands into the terminal:
 \begin{itemize}
-\item sudo apt-get install apache2-dev
-\item sudo apt-get install apache2-threaded-de
-\item sudo apt-get install libapache2-mod-wsgi
-\item sudo apt-get install libapache2-mod-python
+\item \verb#sudo apt-get install apache2-dev#
+\item \verb#sudo apt-get install apache2-threaded-de#
+\item \verb#sudo apt-get install libapache2-mod-wsgi#
+\item \verb#sudo apt-get install libapache2-mod-python#
 \end{itemize}
 \subsection{web.py}
-Open a terminal and type the following commands.
+Type the following commands into the terminal:
 \begin{itemize}
-\item sudo apt-get update
-\item sudo apt-get install python-pip
-\item sudo pip install web.py
+\item \verb#sudo apt-get update#
+\item \verb#sudo apt-get install python-pip#
+\item \verb#sudo pip install web.py#
 \end{itemize}
-\section{Setting up basic project with Apache and web.py}
-\subsection{Setting up the frame work}
-Open a terminal and type the following commands.
+
+\section{Setting up basic project}
+\subsection{Frame work}
+Type the following commands into the terminal:
 \begin{itemize}
-\item sudo mkdir \verb#/var/www/webpy-app/<app name>#
-\item sudo mkdir \verb#/var/www/webpy-app/<app name>/logs#
-\item Create two files in logs access.log and error.log
-\item Create a python file in the \verb#/var/www/webpy-app/<app name># directory. Lets call it main.py
-\item cd \verb#/etc/apache2/sites-available#
-\item Create file with no extension with the name of your project, lets call it \verb#<project name># . Note the project name can be the same as your \verb#<app name># but it doesn't have to be.
-\item sudo cp \verb#./<project name> ../sites-enabled#
+\item \verb#sudo mkdir /var/www/webpy-app/<app name>#
+\item \verb#sudo mkdir /var/www/webpy-app/<app name>/logs#
+\item Create two files in logs -- access.log and error.log
+\item Create a python file in the \verb#/var/www/webpy-app/<app name># directory. Lets call it \verb#main.py#
+\item \verb#cd /etc/apache2/sites-available#
+\item Create file without an extension with the name same name as your project, lets call it \verb#<project name># . Note the project name could be the same as your \verb#<app name># but it does not have to be.
+\item \verb#sudo cp ./<project name> ../sites-enabled#
 \end{itemize}
-\subsection{Configure apache 2.4}
-First we need to and our connect our server ip to a name. Note \framebox{www.mysite.co.za} is meant by the server name. So go to the following directory \verb#/etc# and open the file hosts. Now add the follow line just below localhost \framebox{127.0.0.1 mysite.co.za}. Note I am using the localhost IP as my server IP as a demostration.
-Save the file Note you will need to be a super user to save.
-Navigate to the following directory \verb#/etc/apache2/sites-enabled# and open the <project name> file and type the following.
+\subsection{Configure Apache 2.4}
+Firstly connect the server IP to a name. Note that \framebox{www.mysite.co.za} refers to the server name. Next go to the \verb#/etc# directory and open the file hosts. Add \framebox{127.0.0.1 mysite.co.za} just below localhost. Note that I am using the localhost IP address as my server IP for this demonstration. Save the file -- you will need to have super user privileges to do this.
+Navigate to \verb#/etc/apache2/sites-enabled#, open the $<$project name$>$ file and type the following:
 \begin{verbatim}
 <VirtualHost <server name> or IP:port>
      #ServerAdmin [your admin mail address]
@@ -42,7 +45,8 @@ Navigate to the following directory \verb#/etc/apache2/sites-enabled# and open t
      ServerAlias superfluous.imqs.co.za
      DocumentRoot /var/www/webpy-app/<app name>>
      DirectoryIndex <main python file name>.py
-     WSGIScriptAlias /omicron /var/www/webpy-app/<app name>/<main python file name>.py/
+     WSGIScriptAlias /omicron /var/www/webpy-app/<app name>
+        /<main python file name>.py/
      ErrorLog /var/www/webpy-app/<app name>/logs/error.log
      CustomLog /var/www/webpy-app/<app name>/logs/access.log combined
      addType text/html .py
@@ -58,12 +62,12 @@ Navigate to the following directory \verb#/etc/apache2/sites-enabled# and open t
 </Directory>
 </VirtualHost>
 \end{verbatim}
-You can test the configuration by typing the following command.
+You can test the configuration by typing the following command:
 \begin{itemize}
-\item sudo apachectl configtest
+\item \verb#sudo apachectl configtest#
 \end{itemize}
-Only continue if the last line reads Syntax OK.
-Now navigate to \verb#/var/www/webpy-app/<app name>/# and open your main python file and type the following.
+Only continue if the last line reads "\verb3Syntax OK3".
+Navigate to \verb#/var/www/webpy-app/<app name>/#, open \verb#main.py# and type the following:
 \begin{verbatim}
 import sys
 sys.path.append("/var/www/webpy-app/<app name>/")
@@ -89,12 +93,12 @@ class hello:
 if __name__ == "__main__":
     app.run()
 \end{verbatim}
-Save the file and restart apache by typing one the following commands.
+Save the file and restart Apache by typing one of the following commands:
 \begin{itemize}
-\item sudo service apache2 restart
-\item sudo apachectl restart
+\item \verb#sudo service apache2 restart# \textbf{\textsc{or}}
+\item \verb#sudo apachectl restart#
 \end{itemize}
-To test your server open the browser, modify and type the following \verb#<server name>/<project name>/hello# into your browser.
+To test the server; open the browser, and type the following \verb#<server name>/<project name>/hello# into your browser.
 If you are looking for more information you can visit the following links.
 \begin{itemize}
 \item \verb#http://www.hyperink.com/blog/?p=13#

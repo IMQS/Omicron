@@ -122,12 +122,85 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#repuest_area" class="summary-sig-name">repuest_area</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#request_area" class="summary-sig-name">request_area</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">area</span>=<span class="summary-sig-default">None</span>)</span><br />
       TODO:</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.repuest_area">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.request_area">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#authenticate" class="summary-sig-name">authenticate</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Authenticates the Application &quot;TeamOmicron&quot; for read-only 
+      access to the social media platform.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns headers with Authorzation of the application in the header.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate_headers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#get_data" class="summary-sig-name">get_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag_list</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Returns a JSON object containing all the Tweets from Twitter with the
+      tags from the tag_list note: if its hash tags it works on an 'AND' 
+      basis, word basis its on an 'OR'</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.get_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#extract_location" class="summary-sig-name">extract_location</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">result_set</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Returns a list of geo-spatial coordinate tuples</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.extract_location">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -138,9 +211,8 @@
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="social_platform.social_platform-class.html">social_platform</a></code></b>:
-      <code><a href="social_platform.social_platform-class.html#authenticate">authenticate</a></code>,
-      <code><a href="social_platform.social_platform-class.html#authenticate_headers">authenticate_headers</a></code>,
-      <code><a href="social_platform.social_platform-class.html#decrypt_response">decrypt_response</a></code>
+      <code><a href="social_platform.social_platform-class.html#decrypt_response">decrypt_response</a></code>,
+      <code><a href="social_platform.social_platform-class.html#test_connection">test_connection</a></code>
       </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
@@ -259,19 +331,19 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="repuest_area"></a>
+<a name="request_area"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">repuest_area</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_area</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">area</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.repuest_area">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.request_area">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -285,8 +357,129 @@
           city)</li>
     </ul></dd>
     <dt>Overrides:
-        <a href="social_platform.social_platform-class.html#repuest_area">social_platform.repuest_area</a>
+        <a href="social_platform.social_platform-class.html#request_area">social_platform.request_area</a>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="authenticate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Authenticates the Application &quot;TeamOmicron&quot; for read-only 
+  access to the social media platform. Uses the self.consumer_key and 
+  self.consumer_secret initialize in the social media platform object. 
+  Encodes the consumer_key and consumer_secret by encoding to URL encode 
+  (RFC 1783), concatinates the two encoded values separated by a colon and 
+  encodes the concatinated string in base64 binary to text. Uses the base64
+  encode string and added to the header of the HTTPS request as 
+  &quot;'Authorization': 'Basic %s' %EncodedString&quot; with parameters to
+  the request &quot;'grant_type':'client_credentials'&quot;. A HTTPS POST 
+  is made on port 443 with the Headers and Parameters to the websites 
+  Authentication api, then a getresponse() call is made by the HTTPS 
+  connection,read and then decrypted using gzip. With the resulting data a 
+  string which is casted into a dictionary for easy access.</p>
+  <p>saves access_token in the object, also returns access_token Not all 
+  Exceptions have been caught  !</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="social_platform.social_platform-class.html#authenticate">social_platform.authenticate</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="authenticate_headers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate_headers</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate_headers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns headers with Authorzation of the application in the header. 
+  Uses self.access_token defined in use of authenticate(). authenticate() 
+  method must first be called</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="social_platform.social_platform-class.html#authenticate_headers">social_platform.authenticate_headers</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag_list</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.get_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a JSON object containing all the Tweets from Twitter with the 
+  tags from the tag_list note: if its hash tags it works on an 'AND' basis,
+  word basis its on an 'OR'</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (twitter_platform) - Pointer to the current object</li>
+        <li><strong class="pname"><code>tag_list</code></strong> (Iterable object of strings) - a list of tags that the user would like to search for either 
+          words or hash tags</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="social_platform.social_platform-class.html#get_data">social_platform.get_data</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="extract_location"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">extract_location</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">result_set</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.extract_location">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a list of geo-spatial coordinate tuples</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>result_set</code></strong> (A JSON object) - A JSON object from the <a 
+          href="social_platform.twitter_platform-class.html#get_data" 
+          class="link">get_data()</a> method containing a Tweets</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -314,7 +507,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jun 24 08:25:51 2013
+    Generated by Epydoc 3.0.1 on Mon Jun 24 13:30:10 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

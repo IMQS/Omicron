@@ -52,20 +52,20 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="webservice-module.html">Module webservice</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Created on 19 Jun 2013</tt> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">@author: evilclam</tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
-<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">web</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module Gateway=Gateway-module.html"><a title="Gateway" class="py-name" href="#" onclick="return doclink('link-0', 'Gateway', 'link-0');">Gateway</a></tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable webservice.urls=webservice-module.html#urls"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-1', 'urls', 'link-1');">urls</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"/gateway"</tt><tt class="py-op">,</tt><tt class="py-string">"Gateway.gateway"</tt><tt class="py-op">)</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-name">app</tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt class="py-name">application</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-2', 'urls', 'link-1');">urls</a></tt><tt class="py-op">,</tt> <tt class="py-name">globals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-name">app</tt><tt class="py-op">.</tt><tt class="py-name">run</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/bin/bash python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Created on 19 Jun 2013</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">@author: evilclam</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'/var/www/webpy-app/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">web</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module Gateway=Gateway-module.html"><a title="Gateway" class="py-name" href="#" onclick="return doclink('link-0', 'Gateway', 'link-0');">Gateway</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable webservice.urls=webservice-module.html#urls"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-1', 'urls', 'link-1');">urls</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"/gateway"</tt><tt class="py-op">,</tt><tt class="py-string">"Gateway.gateway"</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable webservice.app=webservice-module.html#app"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-2', 'app', 'link-2');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Variable webservice.application=webservice-module.html#application"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-3', 'application', 'link-3');">application</a></tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-4', 'urls', 'link-1');">urls</a></tt><tt class="py-op">,</tt> <tt class="py-name">globals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt id="link-5" class="py-name"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-5', 'application', 'link-3');">application</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-6', 'app', 'link-2');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">wsgifunc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 <a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
@@ -96,7 +96,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jun 24 08:25:52 2013
+    Generated by Epydoc 3.0.1 on Mon Jun 24 13:30:10 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
