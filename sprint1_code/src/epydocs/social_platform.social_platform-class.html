@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Gateway.gateway</title>
+  <title>social_platform.social_platform</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -34,8 +34,8 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        <a href="Gateway-module.html">Module&nbsp;Gateway</a> ::
-        Class&nbsp;gateway
+        <a href="social_platform-module.html">Module&nbsp;social_platform</a> ::
+        Class&nbsp;social_platform
       </span>
     </td>
     <td>
@@ -45,23 +45,28 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="Gateway.gateway-class.html"
+            >]&nbsp;|&nbsp;<a href="social_platform.social_platform-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class gateway</h1><p class="nomargin-top"><span class="codelink"><a href="Gateway-pysrc.html#gateway">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class social_platform</h1><p class="nomargin-top"><span class="codelink"><a href="social_platform-pysrc.html#social_platform">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
-        <strong class="uidshort">gateway</strong>
+        <strong class="uidshort">social_platform</strong>
 </pre>
 
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="social_platform.instagram_platform-class.html">instagram_platform</a></li><li>, <a href="social_platform.twitter_platform-class.html">twitter_platform</a></li>  </ul>
+</dd></dl>
+
 <hr />
-<p>Extract raw data from the sosial media API's and returns a GeoJSON 
-  object.</p>
+<p>Basic structure that is needed to communicate with a social API</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -80,17 +85,20 @@ object --+
     </table>
   </td>
 </tr>
-<tr class="private">
+<tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">social_platform</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="Gateway.gateway-class.html#_available_sosial_media" class="summary-sig-name" onclick="show_private();">_available_sosial_media</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">names</span>)</span><br />
-      Checks to see if the selected social API's are available.</td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_geographical" class="summary-sig-name">request_geographical</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">center</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">radius</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Queries the underlining social API with the search area defined by a 
+      circle.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="Gateway-pysrc.html#gateway._available_sosial_media">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_geographical">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -100,17 +108,17 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">GeoJSON Array</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="Gateway.gateway-class.html#execute_requests" class="summary-sig-name">execute_requests</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">platforms</span>,
-        <span class="summary-sig-arg">key_words</span>)</span><br />
-      Cycles through each variable in the platform list and executes a 
-      search with the given keywords on each platform.</td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#repuest_area" class="summary-sig-name">repuest_area</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">area</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Queries the underlining social API with the search area defined by a 
+      geographical area e.g.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="Gateway-pysrc.html#gateway.execute_requests">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.repuest_area">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -120,14 +128,15 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">GeoJSON array</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="Gateway.gateway-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      This function is only for handling rest calls to /gateway.</td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate" class="summary-sig-name">authenticate</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Authenticates the Application &quot;TeamOmicron&quot; for read-only 
+      access to the social media platform.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="Gateway-pysrc.html#gateway.GET">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -137,14 +146,32 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">GeoJSON array</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="Gateway.gateway-class.html#POST" class="summary-sig-name">POST</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      This function is only for handling rest calls to /gateway.</td>
+          <td><span class="summary-sig"><a name="decrypt_response"></a><span class="summary-sig-name">decrypt_response</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">encrypted_data</span>,
+        <span class="summary-sig-arg">headers</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="Gateway-pysrc.html#gateway.POST">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.decrypt_response">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns headers with Authorzation of the application in the header.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -215,121 +242,125 @@ object --+
   </td>
 </tr>
 </table>
-<a name="_available_sosial_media"></a>
-<div class="private">
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">_available_sosial_media</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">names</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="Gateway-pysrc.html#gateway._available_sosial_media">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Checks to see if the selected social API's are available. If not then 
-  the following exception will be raised &quot;NotImplementedError&quot; 
-  else it will return a list of social_platform objects.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (gateway) - a Pointer to the current object.</li>
-        <li><strong class="pname"><code>names</code></strong> (List) - list of string names.</li>
-    </ul></dd>
-    <dt>Returns: social_platform</dt>
-        <dd>List of social_platform objects.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="execute_requests"></a>
+<a name="request_geographical"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">execute_requests</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">platforms</span>,
-        <span class="sig-arg">key_words</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_geographical</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">center</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">radius</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="Gateway-pysrc.html#gateway.execute_requests">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_geographical">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Cycles through each variable in the platform list and executes a 
-  search with the given keywords on each platform.</p>
+  <p>Queries the underlining social API with the search area defined by a 
+  circle. If any of the parameter are none then the query gets rejected and
+  the following error message will be returned &quot;query not 
+  suitable&quot;.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (gateway) - a Pointer to the current object.</li>
-        <li><strong class="pname"><code>platforms</code></strong> (List) - List of social media platforms.</li>
-        <li><strong class="pname"><code>key_words</code></strong> (List) - List of key words that will be used in the search.</li>
+        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>criteria</code></strong> (List) - a List of key words.</li>
+        <li><strong class="pname"><code>center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
+        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the center that will be covered by the 
+          search.</li>
     </ul></dd>
-    <dt>Returns: GeoJSON Array</dt>
-        <dd>The raw data that was fetched from the social media API's.</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="GET"></a>
+<a name="repuest_area"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GET</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">repuest_area</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">area</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="Gateway-pysrc.html#gateway.GET">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.repuest_area">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>This function is only for handling rest calls to /gateway. Cycles 
-  through each variable in the platform list and executes a search with the
-  given keywords on each platform. Parameter platforms and key_words are 
-  encoded into the GET call.</p>
+  <p>Queries the underlining social API with the search area defined by a 
+  geographical area e.g. Cape Town. If any of the parameter are none then 
+  the query gets rejected and the following error message will be returned 
+  &quot;query not suitable&quot;.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>platforms</code></strong> (String) - List of social media platforms.</li>
-        <li><strong class="pname"><code>key_words</code></strong> (String) - List of key words that will be used in the search.</li>
-        <li><strong class="pname"><code>self</code></strong> (gateway) - a Pointer to the current object.</li>
+        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>criteria</code></strong> (List) - a List of key words.</li>
+        <li><strong class="pname"><code>area</code></strong> (String) - Name of the area. Will be in the following format (country state 
+          city)</li>
     </ul></dd>
-    <dt>Returns: GeoJSON array</dt>
-        <dd>The raw data that was fetched from the social media API's.</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="POST"></a>
+<a name="authenticate"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">POST</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="Gateway-pysrc.html#gateway.POST">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>This function is only for handling rest calls to /gateway. Cycles 
-  through each variable in the platform list and executes a search with the
-  given keywords on each platform. Parameter platforms and key_words are 
-  encoded into a JSON Object that will be received from a POST call.</p>
+  <p>Authenticates the Application &quot;TeamOmicron&quot; for read-only 
+  access to the social media platform. Uses the self.consumer_key and 
+  self.consumer_secret initialize in the social media platform object. 
+  Encodes the consumer_key and consumer_secret by encoding to URL encode 
+  (RFC 1783), concatinates the two encoded values separated by a colon and 
+  encodes the concatinated string in base64 binary to text. Uses the base64
+  encode string and added to the header of the HTTPS request as 
+  &quot;'Authorization': 'Basic %s' %EncodedString&quot; with parameters to
+  the request &quot;'grant_type':'client_credentials'&quot;. A HTTPS POST 
+  is made on port 443 with the Headers and Parameters to the websites 
+  Authentication api, then a getresponse() call is made by the HTTPS 
+  connection,read and then decrypted using gzip. With the resulting data a 
+  string which is casted into a dictionary for easy access.</p>
+  <p>saves access_token in the object, also returns access_token Not all 
+  Exceptions have been caught  !</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>Data</code></strong> (JSON Object) - List of social media platforms.</li>
-        <li><strong class="pname"><code>self</code></strong> (gateway) - a Pointer to the current object.</li>
+        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: GeoJSON array</dt>
-        <dd>The raw data that was fetched from the social media API's.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="authenticate_headers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate_headers</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns headers with Authorzation of the application in the header. 
+  Uses self.access_token defined in use of authenticate(). authenticate() 
+  method must first be called</p>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>

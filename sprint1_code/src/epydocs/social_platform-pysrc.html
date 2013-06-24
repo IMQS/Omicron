@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>social_platform</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;social_platform
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="social_platform-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="social_platform-module.html">Module social_platform</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Created on 19 Jun 2013</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@author: evilclam</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">urllib</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">base64</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">httplib</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">gzip</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ast</tt> </tt>
+<a name="social_platform"></a><div id="social_platform-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="social_platform-toggle" onclick="return toggle('social_platform');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="social_platform.social_platform-class.html">social_platform</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="social_platform-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        Basic structure that is needed to communicate with a social API</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt>  </tt>
+<a name="social_platform.request_geographical"></a><div id="social_platform.request_geographical-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="social_platform.request_geographical-toggle" onclick="return toggle('social_platform.request_geographical');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.social_platform-class.html#request_geographical">request_geographical</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">center</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">radius</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform.request_geographical-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="social_platform.request_geographical-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">            Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected </tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">            and the following error message will be returned "query not suitable".</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: Pointer to the current object.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: social_platform  </tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">            @param criteria: a List of key words.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">            @type criteria: List </tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">            @param center: It is a tuple that consists of longitude and latitude.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">            @type center: Tuple of floats</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">            @param radius: Is the distance from the center that will be covered by the search.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">            @type radius: float </tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">     </tt>
+<a name="social_platform.repuest_area"></a><div id="social_platform.repuest_area-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="social_platform.repuest_area-toggle" onclick="return toggle('social_platform.repuest_area');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.social_platform-class.html#repuest_area">repuest_area</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">area</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform.repuest_area-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="social_platform.repuest_area-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">            Queries the underlining social API with the search area defined by a geographical area e.g. Cape Town. If any of the parameter are none then the query gets rejected </tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">            and the following error message will be returned "query not suitable".</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: Pointer to the current object.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: social_platform  </tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">            @param criteria: a List of key words.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">            @type criteria: List </tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">            @param area: Name of the area. Will be in the following format (country state city)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">            @type area: String </tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div><a name="social_platform.authenticate"></a><div id="social_platform.authenticate-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="social_platform.authenticate-toggle" onclick="return toggle('social_platform.authenticate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.social_platform-class.html#authenticate">authenticate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform.authenticate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="social_platform.authenticate-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">            Authenticates the Application "TeamOmicron" for read-only access to the social media platform. Uses the self.consumer_key and self.consumer_secret</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">            initialize in the social media platform object. Encodes the consumer_key and consumer_secret by encoding to URL encode (RFC 1783), concatinates the two encoded values</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">            separated by a colon and encodes the concatinated string in base64 binary to text. Uses the base64 encode string and added to the header of the </tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">            HTTPS request as "'Authorization': 'Basic %s' %EncodedString" with parameters to the request "'grant_type':'client_credentials'".</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">            A HTTPS POST is made on port 443 with the Headers and Parameters to the websites Authentication api, then a getresponse() call is made by the</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">            HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">            saves access_token in the object, also returns access_token</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">            Not all Exceptions have been caught  !</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: Pointer to the current object.</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: social_platform</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">quote</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_key</tt><tt class="py-op">)</tt>     <tt class="py-comment">#URL encoding</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">quote</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_secret</tt><tt class="py-op">)</tt>    <tt class="py-comment">#URL encoding</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">encoded</tt> <tt class="py-op">=</tt> <tt class="py-name">base64</tt><tt class="py-op">.</tt><tt class="py-name">b64encode</tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_key</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-string">":"</tt><tt class="py-op">+</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_secret</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>    <tt class="py-comment">#base64 encoding to twitter standards</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">headers</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"User-Agent"</tt><tt class="py-op">:</tt><tt class="py-string">"TeamOmicron"</tt><tt class="py-op">,</tt><tt class="py-string">"Authorization"</tt><tt class="py-op">:</tt> <tt class="py-string">"Basic %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">encoded</tt><tt class="py-op">,</tt><tt class="py-string">"Content-type"</tt><tt class="py-op">:</tt> <tt class="py-string">"application/x-www-form-urlencoded;charset=UTF-8"</tt><tt class="py-op">,</tt><tt class="py-string">'Accept-Encoding'</tt><tt class="py-op">:</tt> <tt class="py-string">'gzip,deflate'</tt><tt class="py-op">}</tt>         <tt class="py-comment">#declear headers</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-name">urllib</tt><tt class="py-op">.</tt><tt class="py-name">urlencode</tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'grant_type'</tt><tt class="py-op">:</tt><tt class="py-string">'client_credentials'</tt><tt class="py-op">}</tt><tt class="py-op">)</tt>        <tt class="py-comment">#declear parameters aka body of html</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">httplib</tt><tt class="py-op">.</tt><tt class="py-name">HTTPSConnection</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">HttpsConnectionString</tt><tt class="py-op">)</tt>            <tt class="py-comment">#host api in httpsconnection</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-comment">#conn.set_debuglevel(1)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Requesting"</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt class="py-name">request</tt><tt class="py-op">(</tt><tt class="py-string">"POST"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">HttpsOAuthString</tt><tt class="py-op">,</tt><tt class="py-name">params</tt><tt class="py-op">,</tt> <tt class="py-name">headers</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Request Completed"</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">response</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt class="py-name">getresponse</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">response</tt><tt class="py-op">.</tt><tt class="py-name">status</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-string">"200"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"Error http request failed status"</tt><tt class="py-op">+</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">response</tt><tt class="py-op">.</tt><tt class="py-name">status</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-string">" Reason: "</tt><tt class="py-op">+</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">response</tt><tt class="py-op">.</tt><tt class="py-name">reason</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">encrypted_data</tt> <tt class="py-op">=</tt> <tt class="py-name">response</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt>         </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">decrypted_data</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method social_platform.social_platform.decrypt_response()=social_platform.social_platform-class.html#decrypt_response"><a title="social_platform.social_platform.decrypt_response" class="py-name" href="#" onclick="return doclink('link-0', 'decrypt_response', 'link-0');">decrypt_response</a></tt><tt class="py-op">(</tt><tt class="py-name">encrypted_data</tt><tt class="py-op">,</tt><tt class="py-name">response</tt><tt class="py-op">.</tt><tt class="py-name">getheaders</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-comment">#html object of decoded data</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">decrypted_data</tt> <tt class="py-op">=</tt> <tt class="py-name">ast</tt><tt class="py-op">.</tt><tt class="py-name">literal_eval</tt><tt class="py-op">(</tt><tt class="py-name">decrypted_data</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">access_token</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt>                     <tt class="py-comment">#convert to dictionary</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">access_token</tt> <tt class="py-op">=</tt> <tt class="py-name">decrypted_data</tt><tt class="py-op">[</tt><tt class="py-string">"access_token"</tt><tt class="py-op">]</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"Access Token not assigned by social media"</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"Access Token not assigned by social media"</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">         </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">access_token</tt> <tt class="py-op">=</tt> <tt class="py-name">access_token</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">access_token</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">     </tt>
+<a name="social_platform.decrypt_response"></a><div id="social_platform.decrypt_response-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="social_platform.decrypt_response-toggle" onclick="return toggle('social_platform.decrypt_response');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.social_platform-class.html#decrypt_response">decrypt_response</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">encrypted_data</tt><tt class="py-op">,</tt><tt class="py-param">headers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform.decrypt_response-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="social_platform.decrypt_response-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-name">encryption_type</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">buffer_data</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">decrypted_data</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">headers</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"content-encoding"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-name">encryption_type</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt><tt class="py-op">;</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt><tt class="py-op">(</tt><tt class="py-name">encryption_type</tt> <tt class="py-op">==</tt> <tt class="py-string">"gzip"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-name">buffer_data</tt> <tt class="py-op">=</tt> <tt class="py-name">gzip</tt><tt class="py-op">.</tt><tt class="py-name">GzipFile</tt><tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">,</tt> <tt class="py-number">9</tt><tt class="py-op">,</tt> <tt class="py-name">StringIO</tt><tt class="py-op">.</tt><tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-name">encrypted_data</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>    <tt class="py-comment">#decoding of the data</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">            <tt class="py-name">decrypted_data</tt> <tt class="py-op">=</tt> <tt class="py-name">buffer_data</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">decrypted_data</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">     </tt>
+<a name="social_platform.authenticate_headers"></a><div id="social_platform.authenticate_headers-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="social_platform.authenticate_headers-toggle" onclick="return toggle('social_platform.authenticate_headers');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.social_platform-class.html#authenticate_headers">authenticate_headers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="social_platform.authenticate_headers-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="social_platform.authenticate_headers-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-docstring">''' Returns headers with Authorzation of the application in the header. Uses self.access_token defined in use of authenticate().  </tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">            authenticate() method must first be called </tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">headers</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"User-Agent"</tt><tt class="py-op">:</tt><tt class="py-string">"TeamOmicron"</tt><tt class="py-op">,</tt><tt class="py-string">"Authorization"</tt><tt class="py-op">:</tt> <tt class="py-string">"Bearer %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">access_token</tt><tt class="py-op">,</tt><tt class="py-string">"Content-type"</tt><tt class="py-op">:</tt> <tt class="py-string">"application/x-www-form-urlencoded;charset=UTF-8"</tt><tt class="py-op">,</tt><tt class="py-string">'Accept-Encoding'</tt><tt class="py-op">:</tt> <tt class="py-string">'gzip,deflate'</tt><tt class="py-op">}</tt>  </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">headers</tt> </tt>
+</div></div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">     </tt>
+<a name="twitter_platform"></a><div id="twitter_platform-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="twitter_platform-toggle" onclick="return toggle('twitter_platform');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="social_platform.twitter_platform-class.html">twitter_platform</a><tt class="py-op">(</tt><tt class="py-base-class">social_platform</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="twitter_platform-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="twitter_platform-expanded"><a name="twitter_platform.__init__"></a><div id="twitter_platform.__init__-def"><a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="twitter_platform.__init__-toggle" onclick="return toggle('twitter_platform.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.twitter_platform-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="twitter_platform.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="twitter_platform.__init__-expanded"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_key</tt>           <tt class="py-op">=</tt> <tt class="py-string">"JqsyRIEqze8MtUXvZ6PtVw"</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">consumer_secret</tt>        <tt class="py-op">=</tt> <tt class="py-string">"1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">HttpsConnectionString</tt>  <tt class="py-op">=</tt> <tt class="py-string">"api.twitter.com:443"</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">HttpsOAuthString</tt>       <tt class="py-op">=</tt> <tt class="py-string">"/oauth2/token"</tt> </tt>
+</div><a name="twitter_platform.request_geographical"></a><div id="twitter_platform.request_geographical-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="twitter_platform.request_geographical-toggle" onclick="return toggle('twitter_platform.request_geographical');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.twitter_platform-class.html#request_geographical">request_geographical</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">center</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">radius</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="twitter_platform.request_geographical-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="twitter_platform.request_geographical-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-docstring">"TODO:"</tt> </tt>
+</div><a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">         </tt>
+<a name="twitter_platform.repuest_area"></a><div id="twitter_platform.repuest_area-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="twitter_platform.repuest_area-toggle" onclick="return toggle('twitter_platform.repuest_area');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.twitter_platform-class.html#repuest_area">repuest_area</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">area</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="twitter_platform.repuest_area-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="twitter_platform.repuest_area-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-docstring">"TODO:"</tt> </tt>
+</div></div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">         </tt>
+<a name="instagram_platform"></a><div id="instagram_platform-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="instagram_platform-toggle" onclick="return toggle('instagram_platform');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="social_platform.instagram_platform-class.html">instagram_platform</a><tt class="py-op">(</tt><tt class="py-base-class">social_platform</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="instagram_platform-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="instagram_platform-expanded"><a name="instagram_platform.request_geographical"></a><div id="instagram_platform.request_geographical-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="instagram_platform.request_geographical-toggle" onclick="return toggle('instagram_platform.request_geographical');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.instagram_platform-class.html#request_geographical">request_geographical</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">center</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">radius</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="instagram_platform.request_geographical-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="instagram_platform.request_geographical-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-docstring">"TODO:"</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">         </tt>
+<a name="instagram_platform.repuest_area"></a><div id="instagram_platform.repuest_area-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="instagram_platform.repuest_area-toggle" onclick="return toggle('instagram_platform.repuest_area');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="social_platform.instagram_platform-class.html#repuest_area">repuest_area</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">criteria</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">area</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="instagram_platform.repuest_area-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="instagram_platform.repuest_area-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-docstring">"TODO:"</tt> </tt>
+</div></div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Jun 24 08:25:52 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
