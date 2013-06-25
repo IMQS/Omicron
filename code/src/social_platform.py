@@ -11,6 +11,7 @@ import StringIO
 import ast
 import urllib2
 import json
+
 class social_platform(object):
     '''
         Basic structure that is needed to communicate with a social API
@@ -287,8 +288,7 @@ class twitter_platform(social_platform):
             if(tweet['geo'] != None):
                 geo_set.append(tuple([tweet['geo']['coordinates'][0],tweet['geo']['coordinates'][1]]))
         return geo_set
-    
-    
+     
 class instagram_platform(social_platform):
     def request_center_radius(self, criteria=None, center=None, radius=None):
         "TODO:"     

@@ -61,7 +61,7 @@ class gateway(object):
             for social_plat in is_valid:
                 social_plat.authenticate()
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
-                return_data[social_plat.get_platform_name()] = data
+                return_data[social_plat.get_platform_name()] = social_plat.strip_data(data)
         return return_data
     
     def GET(self):
