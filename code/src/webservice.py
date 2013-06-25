@@ -2,7 +2,7 @@
 '''
 Created on 19 Jun 2013
 
-@author: evilclam
+@author: S. Schreiber
 '''
 import sys, os
 sys.path.append('/var/www/webpy-app/')

@@ -1,6 +1,7 @@
 '''
-@author: Michelle Arzul
-@date: 18 June 2013
+Created on 18 June 2013
+
+@author: M. Arzul
 '''
 
 def plot(coords):

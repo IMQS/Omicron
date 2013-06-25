@@ -1,7 +1,7 @@
 '''
 Created on 19 Jun 2013
 
-@author: evilclam
+@author: S. Schreiber, J. J. Martin
 '''
 import urllib
 import base64

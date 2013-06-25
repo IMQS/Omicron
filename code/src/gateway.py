@@ -1,7 +1,7 @@
 '''
 Created on 18 Jun 2013
 
-@author: Shaun Schreiber
+@author: S. Schreiber
 '''
 import social_platform
 import json
