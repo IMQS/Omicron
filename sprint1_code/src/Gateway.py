@@ -37,7 +37,7 @@ class gateway(object):
                 platform_objects.append(available_platforms[current_platform])
         return platform_objects
                 
-    def execute_requests(self, platforms, key_words):
+    def execute_requests(self, platforms, key_words, gps_center, radius):
         '''
             Cycles through each variable in the platform list and executes a search with the
             given keywords on each platform.
@@ -51,7 +51,17 @@ class gateway(object):
             @return: The raw data that was fetched from the social media API's.
             @rtype: GeoJSON Array
         '''
-        
+        isvalide = self._available_social_media(platforms)
+        return_data = {}
+        if isvalide == None:
+            "@todo: change that it returns a JSONobject"
+            return "One or more platforms were unavailable."
+        else :
+            for social_plat in isvalide:
+                social_plat.authenticate()
+                data = social_plat.request_geographical(key_words, gps_center, radius)
+                return_data[social_plat.get_platform_name()] = data
+        return return_data
     def GET(self):
         '''
             This function is only for handling rest calls to /gateway.
@@ -70,12 +80,17 @@ class gateway(object):
         '''
         user_data = web.input()
         isvalide = self._available_social_media(str(user_data.platforms).split(' '))
+        return_data = {}
         if isvalide == None:
             "@todo: change that it returns a JSONobject"
             return "One or more platforms were unavailable."
         else :
             for social_plat in isvalide:
                 social_plat.authenticate()
+                social_plat.authenticate()
+                data = social_plat.request_geographical(key_words, gps_center, radius)
+                return_data[social_plat.get_platform_name()] = data
+                
                 
         return "Selected platforms : " + str(user_data.platforms) + " , Key_words: " +  str(user_data.key_words)
     
@@ -95,4 +110,5 @@ class gateway(object):
         '''
         
 if __name__ == "__main__":
-    pass
+    obj = gateway()
+    print obj.execute_requests(['twitter'], ['#snow' ,'#winter'], [(56.7, 86.4)], 5000)

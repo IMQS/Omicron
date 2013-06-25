@@ -15,6 +15,12 @@ class social_platform(object):
     '''
         Basic structure that is needed to communicate with a social API
     ''' 
+    def get_platform_name(self):
+        '''
+            @return: Returns the current platforms name.
+            @rtype: String
+        '''
+        raise NotImplemented
     def request_geographical(self, criteria=None, center=None, radius=None):
         '''
             Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
@@ -106,6 +112,12 @@ class twitter_platform(social_platform):
         self.TestConnectionString = "http://twitter.com"
         self.HttpsOAuthString = "/oauth2/token"
         self.access_token = None
+    def get_platform_name(self):
+        '''
+            @return: Returns the current platforms name.
+            @rtype: String
+        '''
+        return "twitter"
     def request_geographical(self, criteria=None, center=None, radius=None):
         ''' Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
@@ -152,10 +164,9 @@ class twitter_platform(social_platform):
         result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
         conn.close()
         result_set = json.loads(result_set)
-        return result_set
-        
+        return self.extract_location(result_set)
     def request_area(self, criteria=None, area=None):
-        "TODO:"
+        return "TODO:"
     def authenticate(self):
         '''
             Authenticates the Application "TeamOmicron" for read-only access to the social media platform. Uses the self.consumer_key and self.consumer_secret
@@ -260,6 +271,8 @@ class twitter_platform(social_platform):
             if(tweet['geo'] != None):
                 geo_set.append(tuple([tweet['geo']['coordinates'][0],tweet['geo']['coordinates'][1]]))
         return geo_set
+    
+    
 class instagram_platform(social_platform):
     def request_geographical(self, criteria=None, center=None, radius=None):
         "TODO:"
