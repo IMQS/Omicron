@@ -12,7 +12,7 @@ class gateway(object):
         Extract raw data from the sosial media API's and returns a GeoJSON object. 
     '''
          
-    def _available_sosial_media(self, names):
+    def _available_social_media(self, names):
         '''
             Checks to see if the selected social API's are available. If not then the following exception 
             will be raised "NotImplementedError" else it will return a list of social_platform objects.
@@ -69,7 +69,7 @@ class gateway(object):
             @rtype: GeoJSON array 
         '''
         user_data = web.input()
-        isvalide = self._available_sosial_media(str(user_data.platforms).split(' '))
+        isvalide = self._available_social_media(str(user_data.platforms).split(' '))
         if isvalide == None:
             "@todo: change that it returns a JSONobject"
             return "One or more platforms were unavailable."
