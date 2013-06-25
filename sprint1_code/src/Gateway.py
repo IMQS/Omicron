@@ -88,7 +88,7 @@ class gateway(object):
             for social_plat in isvalide:
                 social_plat.authenticate()
                 social_plat.authenticate()
-                data = social_plat.request_geographical(key_words, gps_center, radius)
+                data = social_plat.request_geographical(str(user_data.key_words).split(' '), (float(str(user_data.key_words).split(' ')[0]),float(str(user_data.key_words).split(' ')[1])), float(user_data.raduis))
                 return_data[social_plat.get_platform_name()] = data
                 
                 
