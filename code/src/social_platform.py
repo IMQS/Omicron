@@ -75,11 +75,14 @@ class social_platform(object):
             return False
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
-        '''Decrypts response from a ReST call
+        '''
+        Decrypts response from a ReST call\
+        
         @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted
         @type encrypted_data: String
         @param headers: The header response from the server, containing the encryption method
-        @type headers: Dictionary   
+        @type headers: Dictionary
+        @TODO: add return and rtype
         '''
         if (encrypted_data == None):
             print "No encrypted data"
@@ -100,8 +103,21 @@ class social_platform(object):
             print str(encryption_type) + " : Unknown decryption method"
         return decrypted_data 
     def authenticate_headers(self):
+        '''
+            @TODO describe what it does.
+        '''
         raise NotImplemented
-    def get_data(self, tag_list=None):
+    def strip_data(self, data, selected_properties):
+        '''
+            Strips the given raw data so that only the selected properties remain.
+            
+            @param data: Raw data that needs to be  
+            @type data: JSON Object
+            @param selected_properties: List of properties that should be kept after stripping.
+            @type selected_properties: List of Strings
+            @return: The stripped data.
+            @rtype: JSON Object 
+        '''
         raise NotImplemented
     
 class twitter_platform(social_platform):
@@ -117,7 +133,7 @@ class twitter_platform(social_platform):
             @return: Returns the current platforms name.
             @rtype: String
         '''
-        return "twitter"
+        return "twitter"    
     def request_center_radius(self, criteria=None, center=None, radius=None):
         ''' Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
@@ -164,7 +180,7 @@ class twitter_platform(social_platform):
         result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
         conn.close()
         result_set = json.loads(result_set)
-        return self.extract_location(result_set)
+        return result_set
     def request_region(self, criteria=None, area=None):
         return "TODO:"
     def authenticate(self):
@@ -275,8 +291,7 @@ class twitter_platform(social_platform):
     
 class instagram_platform(social_platform):
     def request_center_radius(self, criteria=None, center=None, radius=None):
-        "TODO:"
-        
+        "TODO:"     
     def request_region(self, criteria=None, area=None):
         "TODO:"
 if __name__ == '__main__':

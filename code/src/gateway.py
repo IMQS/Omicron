@@ -63,6 +63,7 @@ class gateway(object):
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
                 return_data[social_plat.get_platform_name()] = data
         return return_data
+    
     def GET(self):
         '''
             Only for handling reST calls to the gateway.
