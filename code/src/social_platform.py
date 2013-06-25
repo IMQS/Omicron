@@ -21,32 +21,32 @@ class social_platform(object):
             @rtype: String
         '''
         raise NotImplemented
-    def request_geographical(self, criteria=None, center=None, radius=None):
+    def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         '''
             Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
             
             @param self: Pointer to the current object.
             @type self: social_platform  
-            @param criteria: a List of key words.
-            @type criteria: List 
-            @param center: It is a tuple that consists of longitude and latitude.
-            @type center: Tuple of floats
-            @param radius: Is the distance from the center that will be covered by the search.
+            @param search_tags: a List of key words.
+            @type search_tags: List 
+            @param gps_center: It is a tuple that consists of longitude and latitude.
+            @type gps_center: Tuple of floats
+            @param radius: Is the distance from the gps_center that will be covered by the search.
             @type radius: float 
         '''
         raise NotImplementedError
-    def request_area(self, criteria=None, area=None):
+    def request_region(self, search_tags=None, search_region=None):
         '''
-            Queries the underlining social API with the search area defined by a geographical area e.g. Cape Town. If any of the parameter are none then the query gets rejected 
+            Queries the underlining social API with the search search_region defined by a geographical search_region e.g. Cape Town. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
             
             @param self: Pointer to the current object.
             @type self: social_platform  
-            @param criteria: a List of key words.
-            @type criteria: List 
-            @param area: Name of the area. Will be in the following format (country state city)
-            @type area: String 
+            @param search_tags: a List of key words.
+            @type search_tags: List 
+            @param search_region: Name of the search_region. Will be in the following format (country state city)
+            @type search_region: String 
         '''
         raise NotImplementedError
     def authenticate(self):
@@ -118,7 +118,7 @@ class twitter_platform(social_platform):
             @rtype: String
         '''
         return "twitter"
-    def request_geographical(self, criteria=None, center=None, radius=None):
+    def request_center_radius(self, criteria=None, center=None, radius=None):
         ''' Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
             
@@ -165,7 +165,7 @@ class twitter_platform(social_platform):
         conn.close()
         result_set = json.loads(result_set)
         return self.extract_location(result_set)
-    def request_area(self, criteria=None, area=None):
+    def request_region(self, criteria=None, area=None):
         return "TODO:"
     def authenticate(self):
         '''
@@ -274,10 +274,10 @@ class twitter_platform(social_platform):
     
     
 class instagram_platform(social_platform):
-    def request_geographical(self, criteria=None, center=None, radius=None):
+    def request_center_radius(self, criteria=None, center=None, radius=None):
         "TODO:"
         
-    def request_area(self, criteria=None, area=None):
+    def request_region(self, criteria=None, area=None):
         "TODO:"
 if __name__ == '__main__':
     k = twitter_platform()
