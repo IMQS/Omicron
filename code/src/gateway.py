@@ -37,7 +37,7 @@ class gateway(object):
                 platform_objects.append(available_platforms[current_platform])
         return platform_objects
                 
-    def execute_requests(self, platforms=None, search_tags=None, gps_center=None, radius=None, search_region=None):
+    def execute_requests(self, platforms=None, search_tags=None, gps_center=None, radius=None, selected_properties=None, search_region=None):
         '''
             Cycles through each variable in the platform list and executes a search with the
             given keywords on each platform.
@@ -61,7 +61,7 @@ class gateway(object):
             for social_plat in is_valid:
                 social_plat.authenticate()
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
-                return_data[social_plat.get_platform_name()] = social_plat.strip_data(data)
+                return_data[social_plat.get_platform_name()] = social_plat.strip_data(data, selected_properties)
         return return_data
     
     def GET(self):
@@ -89,7 +89,6 @@ class gateway(object):
             return "One or more platforms were unavailable."
         else :
             for social_plat in is_valid:
-                social_plat.authenticate()
                 social_plat.authenticate()
                 data = social_plat.request_center_radius(str(user_data.search_tags).split(' '), (float(str(user_data.search_tags).split(' ')[0]),float(str(user_data.search_tags).split(' ')[1])), float(user_data.raduis))
                 return_data[social_plat.get_platform_name()] = data

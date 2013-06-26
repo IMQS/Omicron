@@ -11,6 +11,7 @@ def plot(coords):
 	@type coords: List of 2-tuples of floats
 	@rtype: Void
 	'''
+	import matplotlib.pyplot as plt
 	x_coords = []
 	y_coords = []
 	for point in coords:

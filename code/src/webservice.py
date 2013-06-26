@@ -8,7 +8,7 @@ import sys, os
 sys.path.append('/var/www/webpy-app/')
 import web
 import json
-import gateway
+from gateway import gateway
 
 class request_handler(object):
     def GET(self):
@@ -28,11 +28,28 @@ class request_handler(object):
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
             if location_type has the value "radius" then location must be in the following format "longitude latitude <radius>km" 
             @type location: String
-            @TODO: Figure out how the parameters is going to be handled.
+            @todo: Figure out what to return.
+            
         '''
-        user_data = web.input()
-        platforms = user_data.platforms
-        return user_data
+        data = web.input()
+        platforms = data["platforms"].lstrip('u').split("#")
+        tags = data["tags"].lstrip('u').split("_")
+        function = data["function"]
+        location_type = data["location_type"] # For future use
+        location = data["location"].lstrip('u').split("#")
+        gatewayO = gateway()
+        if (function == "heat_map"):
+            import map_plot as mp
+            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            total_coords = []
+            for coords in query_data:
+                total_coords = total_coords + coords
+            heat_map = {}
+            heat_map['Heat_map'] = mp.heatmap([-90, 90, -180, 180], total_coords)
+            return heat_map
+        else :
+            return "The function that was specified was not found."
+        return query_data
     
     def POST(self):
         '''
@@ -40,16 +57,31 @@ class request_handler(object):
             
             @param self: a Instance of the current object.
             @type self: request_handler
-            @param query: It holds the relevant data needed to perform the request. 
-            @rtype query: JSON Object with the following fields; platforms, preset, tags, function, location.
-            @TODO: figure out how the parameters are going to be handled.
+            @param query: It holds the relevant data needed to perform the request. It has the following fields; platforms, preset, tags, function, location_type and location.
+            @rtype query: JSON Object
+            @todo: Figure out what to return.
         '''
-        data = web.data()
-        
-        return data
+        data = web.input()
+        platforms = data["platforms"].lstrip('u').split("#")
+        tags = data["tags"].lstrip('u').split("_")
+        function = data["function"]
+        location_type = data["location_type"] # For future use
+        location = data["location"].lstrip('u').split("#")
+        gatewayO = gateway()
+        if (function == "heat_map"):
+            import map_plot as mp
+            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            total_coords = []
+            for coords in query_data:
+                total_coords = total_coords + coords
+            heat_map = {}
+            heat_map['Heat_map'] = mp.heatmap([-90, 90, -180, 180], total_coords)
+            return heat_map
+        else :
+            return "The function that was specified was not found."
+        return query_data
         
 urls = ("/request_handler","request_handler")
-
 app = web.application(urls, globals())
 application = app.wsgifunc()
 if __name__ == "__main__":
