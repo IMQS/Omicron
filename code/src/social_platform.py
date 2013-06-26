@@ -11,7 +11,7 @@ import StringIO
 import ast
 import urllib2
 import json
-import dateutil
+
 class social_platform(object):
     '''
         Basic structure that is needed to communicate with a social API
@@ -293,23 +293,24 @@ class twitter_platform(social_platform):
         if(input_data == None):
             print "Result_set undefined"
             return None
-        set = input_data['statuses']
+        search_set = input_data['statuses']
         result_set = {}
         
         if('post' in selected_properties):
-            for tweet in set:
+            for tweet in search_set:
                 if(tweet['text'] != None):
                     result_set.update({'posts':tweet['text']})
 
         if('location' in selected_properties):
-            for tweet in set:
+            for tweet in search_set:
                 if(tweet['geo'] != None):
                     result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
+            
         
-        set = input_data['search_metadata']
+        search_set = input_data['search_metadata']
         if('tags' in selected_properties):
-            if(set['query']):
-                result_set.update({'tags':set['query']})
+            if(search_set['query']):
+                result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
         return result_set
     
 class instagram_platform(social_platform):
@@ -320,5 +321,5 @@ class instagram_platform(social_platform):
 if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
-    set = k.get_data(tag_list=["#snow", "#winter"])
-    print k.strip_data(set, ['tags', 'location', 'post'])
+    search_set = k.get_data(["#snow"])
+    print k.strip_data(search_set, ['tags', 'location', 'post'])
