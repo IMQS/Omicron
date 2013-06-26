@@ -108,14 +108,14 @@ class social_platform(object):
             @TODO describe what it does.
         '''
         raise NotImplemented
-    def strip_data(self, data=None, selected_properties=None):
+    def strip_data(self, input_data=None, selected_properties=None):
         '''
             Strips the given raw data so that only the selected properties remain.
             
-            @param data: Raw data that needs to be  
-            @type data: JSON Object
+            @param input_data: Raw data that needs to be  
+            @type input_data: JSON Object
             @param selected_properties: List of properties that should be kept after stripping.
-            @type selected_properties: List of Strings
+            @type selected_properties: List of strings - either 'tags', 'location' or 'post'.
             @return: The stripped data.
             @rtype: JSON Object 
         '''
@@ -135,37 +135,37 @@ class twitter_platform(social_platform):
             @rtype: String
         '''
         return "twitter"    
-    def request_center_radius(self, criteria=None, center=None, radius=None):
+    def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         ''' Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
             and the following error message will be returned "query not suitable".
             
             @param self: Pointer to the current object.
             @type self: social_platform  
-            @param criteria: a List of key words.
-            @type criteria: List 
-            @param center: It is a tuple that consists of longitude and latitude.
-            @type center: Tuple of floats
-            @param radius: Is the distance from the center that will be covered by the search.
+            @param search_tags: a List of key words.
+            @type search_tags: List 
+            @param gps_center: It is a tuple that consists of longitude and latitude.
+            @type gps_center: Tuple of floats
+            @param radius: Is the distance from the gps_center that will be covered by the search.
             @type radius: float 
         '''
         
-        if(criteria == None):
+        if(search_tags == None):
             print "Tag_list is empty"
             return None
-        if(len(criteria) == 0):
+        if(len(search_tags) == 0):
             print "Tag_list is empty"
             return None
         if(self.access_token == None):
             print "Please Request Authorization from Twitter"
             return None
         tags = ""
-        for i in criteria:
+        for i in search_tags:
             tags = tags + " " + i
         tags = tags.strip()
         tags = {"q":tags, "count":100}
         
-        if(center != None and len(center) == 2 and radius != None):
-            tags['geocode'] = str(center[0]) + " " + str(center[1]) + " " + str(radius) + "km"
+        if(gps_center != None and len(gps_center) == 2 and radius != None):
+            tags['geocode'] = str(gps_center[0]) + " " + str(gps_center[1]) + " " + str(radius) + "km"
         
         
         params = urllib.urlencode(tags)
@@ -182,7 +182,7 @@ class twitter_platform(social_platform):
         conn.close()
         result_set = json.loads(result_set)
         return result_set
-    def request_region(self, criteria=None, area=None):
+    def request_region(self, search_tags=None, search_region=None):
         return "TODO:"
     def authenticate(self):
         '''
@@ -274,29 +274,15 @@ class twitter_platform(social_platform):
         conn.close()
         result_set = json.loads(result_set)
         return result_set
-    def extract_location(self, result_set=None):
-        '''Returns a list of geo-spatial coordinate tuples 
-        @param result_set: A JSON object from the L{get_data()} method containing a Tweets
-        @type result_set: A JSON object
-        '''
-        if(result_set == None):
-            print "Result_set undefined"
-            return None
-        set = result_set['statuses']
-        geo_set = []
-        for tweet in set:
-            if(tweet['geo'] != None):
-                geo_set.append(tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]]))
-        return geo_set
-    
+  
     def strip_data(self, input_data=None, selected_properties=None):
         '''
         Strips the given raw data so that only the selected properties remain.
             
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
-            @param selected_properties: List of properties that should be kept after stripping. "tags", "location" and "post" are the only items that can be contained in this list.
-            @type selected_properties: List of Strings
+            @param selected_properties: List of properties that should be kept after stripping.
+            @type selected_properties: List of strings - either 'tags', 'location' or 'post'.
             @return: The stripped data.
             @rtype: JSON Object 
         '''
@@ -335,7 +321,4 @@ if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
     set = k.get_data(tag_list=["#snow", "#winter"])
-    #set = '{  "statuses": [    {      "metadata": {        "result_type": "recent",        "iso_language_code": "en"     },      "created_at": "Wed Jun 26 08:24:12 +0000 2013",      "id": 349805281556963300,      "id_str": "349805281556963331",      "text": "Snowflakes falling in a Winter Forest - beautiful scene! #redgage #photography http://t.co/3GokY5dsJU",      "source": "<a href="http://www.socialoomph.com" rel="nofollow">SocialOomph</a>",      "truncated": false,      "in_reply_to_status_id": null,      "in_reply_to_status_id_str": null,      "in_reply_to_user_id": null,      "in_reply_to_user_id_str": null,      "in_reply_to_screen_name": null,      "user": {        "id": 1275525872,        "id_str": "1275525872",        "name": "Photosphere",        "screen_name": "Fotosphere1",        "location": "",        "description": "I tweet all things photography. Enchant yourself with beautiful photos of landscapes, flowers and animals.",        "url": null,        "entities": {          "description": {            "urls": []          }        },        "protected": false,        "followers_count": 685,        "friends_count": 683,        "listed_count": 5,        "created_at": "Sun Mar 17 17:22:47 +0000 2013",        "favourites_count": 0,        "utc_offset": -18000,        "time_zone": "Eastern Time (US & Canada)",        "geo_enabled": false,        "verified": false,        "statuses_count": 18562,        "lang": "en",        "contributors_enabled": false,        "is_translator": false,        "profile_background_color": "022330",        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme15/bg.png",        "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme15/bg.png",        "profile_background_tile": false,        "profile_image_url": "http://a0.twimg.com/profile_images/3462135783/64f1742a594adb2f6c714283b6dfa51a_normal.jpeg",        "profile_image_url_https": "https://si0.twimg.com/profile_images/3462135783/64f1742a594adb2f6c714283b6dfa51a_normal.jpeg",        "profile_link_color": "0084B4",        "profile_sidebar_border_color": "A8C7F7",        "profile_sidebar_fill_color": "C0DFEC",        "profile_text_color": "333333",        "profile_use_background_image": true,       "default_profile": false,        "default_profile_image": false,        "following": false,        "follow_request_sent": false,        "notifications": false      },      "geo": {        "type": "Point",        "coordinates": [          47.07557527,           12.75137313        ]      },,      "coordinates": null,      "place": null,      "contributors": null,      "retweet_count": 0,      "favorite_count": 0,      "entities": {        "hashtags": [          {            "text": "redgage",            "indices": [              57,              65            ]          },          {            "text": "photography",            "indices": [              66,              78            ]          }        ],        "symbols": [],        "urls": [          {            "url": "http://t.co/3GokY5dsJU",            "expanded_url": "http://dld.bz/bzeek",            "display_url": "dld.bz/bzeek",            "indices": [              79,              101            ]          }        ],        "user_mentions": []      },      "favorited": false,      "retweeted": false,      "possibly_sensitive": false,      "lang": "en"    }  ],  "search_metadata": {    "completed_in": 0.008,    "max_id": 349805281556963300,    "max_id_str": "349805281556963331",    "next_results": "?max_id=349805281556963330&q=snow%20winter&count=1&include_entities=1",    "query": "snow+winter",    "refresh_url": "?since_id=349805281556963331&q=snow%20winter&include_entities=1",    "count": 1,    "since_id": 0,    "since_id_str": "0"  }}'
     print k.strip_data(set, ['tags', 'location', 'post'])
-    print ""
-    #k.strip_data(set, ['tags', 'location', 'post'])
