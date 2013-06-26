@@ -87,18 +87,15 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">String</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_geographical" class="summary-sig-name">request_geographical</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">center</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">radius</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Queries the underlining social API with the search area defined by a 
-      circle.</td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#get_platform_name" class="summary-sig-name">get_platform_name</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Returns the current platforms name.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_geographical">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.get_platform_name">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -112,13 +109,34 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_area" class="summary-sig-name">request_area</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">area</span>=<span class="summary-sig-default">None</span>)</span><br />
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_center_radius" class="summary-sig-name">request_center_radius</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">gps_center</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">radius</span>=<span class="summary-sig-default">None</span>)</span><br />
       Queries the underlining social API with the search area defined by a 
-      geographical area e.g.</td>
+      circle.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_area">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_center_radius">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_region" class="summary-sig-name">request_region</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">search_region</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Queries the underlining social API with the search search_region 
+      defined by a geographical search_region e.g.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_region">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -187,7 +205,8 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="authenticate_headers"></a><span class="summary-sig-name">authenticate_headers</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a name="authenticate_headers"></a><span class="summary-sig-name">authenticate_headers</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      @TODO describe what it does.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>
             
@@ -199,13 +218,17 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_data"></a><span class="summary-sig-name">get_data</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#strip_data" class="summary-sig-name">strip_data</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">selected_properties</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Strips the given raw data so that only the selected properties 
+      remain.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.get_data">source&nbsp;code</a></span>
+            <span class="codelink"><a href="social_platform-pysrc.html#social_platform.strip_data">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -276,20 +299,41 @@ object --+
   </td>
 </tr>
 </table>
-<a name="request_geographical"></a>
+<a name="get_platform_name"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_geographical</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">center</span>=<span class="sig-default">None</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_platform_name</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.get_platform_name">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: String</dt>
+        <dd>Returns the current platforms name.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="request_center_radius"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_center_radius</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">search_tags</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">gps_center</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">radius</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_geographical">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_center_radius">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -301,41 +345,41 @@ object --+
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>criteria</code></strong> (List) - a List of key words.</li>
-        <li><strong class="pname"><code>center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
-        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the center that will be covered by the 
+        <li><strong class="pname"><code>search_tags</code></strong> (List) - a List of key words.</li>
+        <li><strong class="pname"><code>gps_center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
+        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the gps_center that will be covered by the 
           search.</li>
     </ul></dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="request_area"></a>
+<a name="request_region"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_area</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">area</span>=<span class="sig-default">None</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">request_region</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">search_tags</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">search_region</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_area">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_region">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Queries the underlining social API with the search area defined by a 
-  geographical area e.g. Cape Town. If any of the parameter are none then 
-  the query gets rejected and the following error message will be returned 
-  &quot;query not suitable&quot;.</p>
+  <p>Queries the underlining social API with the search search_region 
+  defined by a geographical search_region e.g. Cape Town. If any of the 
+  parameter are none then the query gets rejected and the following error 
+  message will be returned &quot;query not suitable&quot;.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>criteria</code></strong> (List) - a List of key words.</li>
-        <li><strong class="pname"><code>area</code></strong> (String) - Name of the area. Will be in the following format (country state 
-          city)</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (List) - a List of key words.</li>
+        <li><strong class="pname"><code>search_region</code></strong> (String) - Name of the search_region. Will be in the following format 
+          (country state city)</li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -402,6 +446,38 @@ object --+
           method</li>
     </ul></dd>
   </dl>
+<div class="fields">      <p><strong>To Do:</strong>
+        add return and rtype
+      </p>
+</div></td></tr></table>
+</div>
+<a name="strip_data"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip_data</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">selected_properties</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.strip_data">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Strips the given raw data so that only the selected properties 
+  remain.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> (JSON Object) - Raw data that needs to be</li>
+        <li><strong class="pname"><code>selected_properties</code></strong> (List of Strings) - List of properties that should be kept after stripping.</li>
+    </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>The stripped data.</dd>
+  </dl>
 </td></tr></table>
 </div>
 <br />
@@ -428,7 +504,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jun 24 13:30:10 2013
+    Generated by Epydoc 3.0.1 on Wed Jun 26 12:49:32 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

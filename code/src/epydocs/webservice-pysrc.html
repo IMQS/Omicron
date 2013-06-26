@@ -56,17 +56,59 @@
 <a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
 <a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Created on 19 Jun 2013</tt> </tt>
 <a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">@author: evilclam</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">@author: S. Schreiber</tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
 <a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt> </tt>
 <a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'/var/www/webpy-app/'</tt><tt class="py-op">)</tt> </tt>
 <a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">web</tt> </tt>
 <a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module Gateway=Gateway-module.html"><a title="Gateway" class="py-name" href="#" onclick="return doclink('link-0', 'Gateway', 'link-0');">Gateway</a></tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable webservice.urls=webservice-module.html#urls"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-1', 'urls', 'link-1');">urls</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"/gateway"</tt><tt class="py-op">,</tt><tt class="py-string">"Gateway.gateway"</tt><tt class="py-op">)</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable webservice.app=webservice-module.html#app"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-2', 'app', 'link-2');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Variable webservice.application=webservice-module.html#application"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-3', 'application', 'link-3');">application</a></tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-4', 'urls', 'link-1');">urls</a></tt><tt class="py-op">,</tt> <tt class="py-name">globals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt id="link-5" class="py-name"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-5', 'application', 'link-3');">application</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-6', 'app', 'link-2');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">wsgifunc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">gateway</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="request_handler"></a><div id="request_handler-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="request_handler-toggle" onclick="return toggle('request_handler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="webservice.request_handler-class.html">request_handler</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="request_handler-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="request_handler-expanded"><a name="request_handler.GET"></a><div id="request_handler.GET-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="request_handler.GET-toggle" onclick="return toggle('request_handler.GET');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="webservice.request_handler-class.html#GET">GET</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="request_handler.GET-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="request_handler.GET-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">            Handles GET requests received from users.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: Pointer to the current request_handler instance.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: request_handler</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">            @param platforms: List of hash(#) separated values that indicate which social media to use. </tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">            @type platforms: String </tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">            @param tags: List of hash(#) separated values that is used for the search criteria.</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">            @type tags: String</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">            @param function: Which function to apply after the data has been collected.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">            @type function: String</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">            @param location_type: Either area or radius.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">            @type location_type: String</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">            @param location: If location_type has the value "area" then location must be in the following format "country state city" else \</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">            if location_type has the value "radius" then location must be in the following format "longitude latitude &lt;radius&gt;km" </tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">            @type location: String</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">            @TODO: Figure out how the parameters is going to be handled.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">user_data</tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt class="py-name">input</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">platforms</tt> <tt class="py-op">=</tt> <tt class="py-name">user_data</tt><tt class="py-op">.</tt><tt class="py-name">platforms</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">user_data</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">     </tt>
+<a name="request_handler.POST"></a><div id="request_handler.POST-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="request_handler.POST-toggle" onclick="return toggle('request_handler.POST');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="webservice.request_handler-class.html#POST">POST</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="request_handler.POST-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="request_handler.POST-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">            Handles POST requests received from users.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: a Instance of the current object.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: request_handler</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">            @param query: It holds the relevant data needed to perform the request. </tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">            @rtype query: JSON Object with the following fields; platforms, preset, tags, function, location.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">            @TODO: figure out how the parameters are going to be handled.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt class="py-name">data</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">         </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">data</tt> </tt>
+</div></div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">         </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable webservice.urls=webservice-module.html#urls"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-0', 'urls', 'link-0');">urls</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"/request_handler"</tt><tt class="py-op">,</tt><tt class="py-string">"request_handler"</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable webservice.app=webservice-module.html#app"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-1', 'app', 'link-1');">app</a></tt> <tt class="py-op">=</tt> <tt class="py-name">web</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable webservice.application=webservice-module.html#application"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-2', 'application', 'link-2');">application</a></tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="webservice.urls" class="py-name" href="#" onclick="return doclink('link-3', 'urls', 'link-0');">urls</a></tt><tt class="py-op">,</tt> <tt class="py-name">globals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt id="link-4" class="py-name"><a title="webservice.application" class="py-name" href="#" onclick="return doclink('link-4', 'application', 'link-2');">application</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-5', 'app', 'link-1');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">wsgifunc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt id="link-6" class="py-name"><a title="webservice.app" class="py-name" href="#" onclick="return doclink('link-6', 'app', 'link-1');">app</a></tt><tt class="py-op">.</tt><tt class="py-name">run</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -96,7 +138,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jun 24 13:30:10 2013
+    Generated by Epydoc 3.0.1 on Wed Jun 26 12:49:32 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
