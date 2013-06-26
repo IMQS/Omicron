@@ -30,6 +30,7 @@ class request_handler(object):
             @rtype query: JSON Object with the following fields; platforms, preset, tags, function, location.
             @TODO: figure out how the parameters are going to be handled.
         '''
+        data = web.data()
         
         
 urls = ("/request_handler","request_handler")
