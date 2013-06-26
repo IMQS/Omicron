@@ -11,6 +11,9 @@ import json
 from gateway import gateway
 
 class request_handler(object):
+    '''
+        Handles all incoming GET and POST requests
+    '''
     def GET(self):
         '''
             Handles GET requests received from users.
@@ -41,11 +44,16 @@ class request_handler(object):
         if (function == "heat_map"):
             import map_plot as mp
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            print query_data
             total_coords = []
-            for coords in query_data:
-                total_coords = total_coords + coords
+            for platform in platforms:
+                for coords in query_data[platform]:
+                    print coords
+                    print total_coords
+                    total_coords = total_coords + coords
             heat_map = {}
-            heat_map['Heat_map'] = mp.heatmap([-90, 90, -180, 180], total_coords)
+            #@TODO: FIX the bounding box big problem
+            heat_map['Heat_map'] = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
             return heat_map
         else :
             return "The function that was specified was not found."
@@ -71,18 +79,29 @@ class request_handler(object):
         if (function == "heat_map"):
             import map_plot as mp
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            print query_data
             total_coords = []
-            for coords in query_data:
-                total_coords = total_coords + coords
+            for platform in platforms:
+                for coords in query_data[platform]:
+                    print coords
+                    print total_coords
+                    total_coords = total_coords + coords
             heat_map = {}
-            heat_map['Heat_map'] = mp.heatmap([-90, 90, -180, 180], total_coords)
+            #@TODO: FIX the bounding box big problem
+            heat_map['Heat_map'] = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
             return heat_map
         else :
             return "The function that was specified was not found."
         return query_data
-        
+
+#:Groups the URL's and their corresponding actions.
 urls = ("/request_handler","request_handler")
+
+#:Creates a Application to delegate requests based on path.
 app = web.application(urls, globals())
+
+#:Creates the application function that is needed for the swgi mod to work. 
 application = app.wsgifunc()
+
 if __name__ == "__main__":
     app.run()
