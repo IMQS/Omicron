@@ -15,11 +15,25 @@ class request_handler(object):
         '''
             Handles GET requests received from users.
             
-            @param self:
-            @type self: request_handler 
+            @param self: Pointer to the current request_handler instance.
+            @type self: request_handler
+            @param platforms: List of hash(#) separated values that indicate which social media to use. 
+            @type platforms: String 
+            @param tags: List of hash(#) separated values that is used for the search criteria.
+            @type tags: String
+            @param function: Which function to apply after the data has been collected.
+            @type function: String
+            @param location_type: Either area or radius.
+            @type location_type: String
+            @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
+            if location_type has the value "radius" then location must be in the following format "longitude latitude <radius>km" 
+            @type location: String
             @TODO: Figure out how the parameters is going to be handled.
         '''
-         
+        user_data = web.input()
+        platforms = user_data.platforms
+        return user_data
+    
     def POST(self):
         '''
             Handles POST requests received from users.
@@ -32,6 +46,7 @@ class request_handler(object):
         '''
         data = web.data()
         
+        return data
         
 urls = ("/request_handler","request_handler")
 
