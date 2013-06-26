@@ -98,13 +98,13 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">String</span>
+      <span class="summary-type">String.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#get_platform_name" class="summary-sig-name">get_platform_name</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns:
-      Returns the current platforms name.</td>
+      Returns the name of the social platform of the object it is applied 
+      to.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.get_platform_name">source&nbsp;code</a></span>
             
@@ -121,8 +121,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#request_center_radius" class="summary-sig-name">request_center_radius</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">center</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">gps_center</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">radius</span>=<span class="summary-sig-default">None</span>)</span><br />
       Queries the underlining social API with the search area defined by a 
       circle.</td>
@@ -142,10 +142,10 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#request_region" class="summary-sig-name">request_region</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">criteria</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">area</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Queries the underlining social API with the search search_region 
-      defined by a geographical search_region e.g.</td>
+        <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">search_region</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Queries the underlining social API using a search area defined by a 
+      region.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.request_region">source&nbsp;code</a></span>
             
@@ -212,30 +212,12 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#extract_location" class="summary-sig-name">extract_location</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">result_set</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Returns a list of geo-spatial coordinate tuples</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.extract_location">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#strip_data" class="summary-sig-name">strip_data</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">input_data</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">selected_properties</span>=<span class="summary-sig-default">None</span>)</span><br />
       Strips the given raw data so that only the selected properties 
       remain.</td>
@@ -352,10 +334,11 @@
     </td>
   </tr></table>
   
-  
+  <p>Returns the name of the social platform of the object it is applied 
+  to.</p>
   <dl class="fields">
-    <dt>Returns: String</dt>
-        <dd>Returns the current platforms name.</dd>
+    <dt>Returns: String.</dt>
+        <dd>Returns the current platform's name.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#get_platform_name">social_platform.get_platform_name</a>
     </dt>
@@ -370,8 +353,8 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">request_center_radius</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">center</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">search_tags</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">gps_center</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">radius</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
@@ -387,9 +370,9 @@
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>criteria</code></strong> (List) - a List of key words.</li>
-        <li><strong class="pname"><code>center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
-        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the center that will be covered by the 
+        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of key words.</li>
+        <li><strong class="pname"><code>gps_center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
+        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the gps_center that will be covered by the 
           search.</li>
     </ul></dd>
     <dt>Overrides:
@@ -406,25 +389,25 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">request_region</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">criteria</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">area</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">search_tags</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">search_region</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.request_region">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Queries the underlining social API with the search search_region 
-  defined by a geographical search_region e.g. Cape Town. If any of the 
-  parameter are none then the query gets rejected and the following error 
-  message will be returned &quot;query not suitable&quot;.</p>
+  <p>Queries the underlining social API using a search area defined by a 
+  region. If any of the parameters are not included then the query is 
+  rejected and the &quot;some parameters of query are missing&quot; will be
+  returned.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> - a List of key words.</li>
-        <li><strong class="pname"><code>search_region</code></strong> - Name of the search_region. Will be in the following format 
-          (country state city)</li>
+        <li><strong class="pname"><code>search_tags</code></strong> - A list of words to search for.</li>
+        <li><strong class="pname"><code>search_region</code></strong> - Name of the search_region - in the following format &lt;country 
+          state city&gt;.</li>
     </ul></dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#request_region">social_platform.request_region</a>
@@ -525,32 +508,6 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="extract_location"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">extract_location</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">result_set</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.extract_location">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Returns a list of geo-spatial coordinate tuples</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>result_set</code></strong> (A JSON object) - A JSON object from the <a 
-          href="social_platform.twitter_platform-class.html#get_data" 
-          class="link">get_data()</a> method containing a Tweets</li>
-    </ul></dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="strip_data"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -559,7 +516,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">strip_data</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">input_data</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">selected_properties</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
@@ -572,10 +529,8 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>data</code></strong> (JSON Object) - Raw data that needs to be</li>
-        <li><strong class="pname"><code>selected_properties</code></strong> (List of Strings) - List of properties that should be kept after stripping. 
-          &quot;tags&quot;, &quot;location&quot; and &quot;post&quot; are 
-          the only items that can be contained in this list.</li>
+        <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
+        <li><strong class="pname"><code>selected_properties</code></strong> (List of strings - either 'tags', 'location' or 'post'.) - List of properties that should be kept after stripping.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The stripped data.</dd>
@@ -609,7 +564,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 26 12:49:32 2013
+    Generated by Epydoc 3.0.1 on Wed Jun 26 16:28:42 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

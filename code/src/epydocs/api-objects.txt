@@ -49,7 +49,6 @@ social_platform.twitter_platform.request_region	social_platform.twitter_platform
 social_platform.social_platform.test_connection	social_platform.social_platform-class.html#test_connection
 social_platform.twitter_platform.get_platform_name	social_platform.twitter_platform-class.html#get_platform_name
 social_platform.twitter_platform.strip_data	social_platform.twitter_platform-class.html#strip_data
-social_platform.twitter_platform.extract_location	social_platform.twitter_platform-class.html#extract_location
 webservice.request_handler	webservice.request_handler-class.html
 webservice.request_handler.GET	webservice.request_handler-class.html#GET
 webservice.request_handler.POST	webservice.request_handler-class.html#POST

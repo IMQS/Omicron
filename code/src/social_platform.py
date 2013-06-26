@@ -14,44 +14,49 @@ import json
 
 class social_platform(object):
     '''
-        Basic structure that is needed to communicate with a social API
+        Underlying data type which is extended by each social platform to \
+        communicate with the social network's API
     ''' 
     def get_platform_name(self):
         '''
-            @return: Returns the current platforms name.
-            @rtype: String
+            Returns the name of the social platform of the object it is applied to.
+        
+            @return: Returns the current platform's name.
+            @rtype: String.
         '''
         raise NotImplemented
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         '''
-            Queries the underlining social API with the search area defined by a circle. If any of the parameter are none then the query gets rejected 
-            and the following error message will be returned "query not suitable".
+            Queries the underlining social API using a search area defined by a circle. 
+            If any of the parameters are not included then the query is rejected 
+            and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: social_platform  
-            @param search_tags: a List of key words.
-            @type search_tags: List 
-            @param gps_center: It is a tuple that consists of longitude and latitude.
-            @type gps_center: Tuple of floats
-            @param radius: Is the distance from the gps_center that will be covered by the search.
-            @type radius: float 
+            @type self: L{social_platform}.
+            @param search_tags: A list of words to search for.
+            @type search_tags: List.
+            @param gps_center: A tuple consisting of longitude and latitude GPS coordinates.
+            @type gps_center: A tuple of floats.
+            @param radius: The radius from the L{gps_center} that forms the circular region to be searched.
+            @type radius: Float.
         '''
         raise NotImplementedError
     def request_region(self, search_tags=None, search_region=None):
         '''
-            Queries the underlining social API with the search search_region defined by a geographical search_region e.g. Cape Town. If any of the parameter are none then the query gets rejected 
-            and the following error message will be returned "query not suitable".
+            Queries the underlining social API using a search area defined by a region. 
+            If any of the parameters are not included then the query is rejected 
+            and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: social_platform  
-            @param search_tags: a List of key words.
-            @type search_tags: List 
-            @param search_region: Name of the search_region. Will be in the following format (country state city)
-            @type search_region: String 
+            @type self: L{social_platform}.  
+            @param search_tags: A list of words to search for.
+            @type search_tags: List. 
+            @param search_region: Name of the search_region - in the following format <country state city>.
+            @type search_region: String.
         '''
         raise NotImplementedError
     def authenticate(self):
-        ''' 
+        '''
             Authenticates the Application "TeamOmicron" for read-only access to the social media platform. Uses the self.consumer_key and self.consumer_secret
             initialize in the social media platform object. Encodes the consumer_key and consumer_secret by encoding to URL encode (RFC 1783), concatinates the two encoded values
             separated by a colon and encodes the concatinated string in base64 binary to text. Uses the base64 encode string and added to the header of the 
@@ -63,6 +68,7 @@ class social_platform(object):
             Not all Exceptions have been caught  !
             @param self: Pointer to the current object.
             @type self: social_platform
+            TODO JAVONNE fix this please!!!
         '''
         raise NotImplemented
     def test_connection(self):
@@ -131,8 +137,10 @@ class twitter_platform(social_platform):
         self.access_token = None
     def get_platform_name(self):
         '''
-            @return: Returns the current platforms name.
-            @rtype: String
+            Returns the name of the social platform of the object it is applied to.
+            
+            @return: Returns the current platform's name.
+            @rtype: String.
         '''
         return "twitter"    
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
@@ -141,7 +149,7 @@ class twitter_platform(social_platform):
             
             @param self: Pointer to the current object.
             @type self: social_platform  
-            @param search_tags: a List of key words.
+            @param search_tags: A list of key words.
             @type search_tags: List 
             @param gps_center: It is a tuple that consists of longitude and latitude.
             @type gps_center: Tuple of floats
