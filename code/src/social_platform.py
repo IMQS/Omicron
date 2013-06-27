@@ -328,7 +328,7 @@ class twitter_platform(social_platform):
         
         #return result_set
            
-       """ search_set = input_data['search_metadata']
+        """ search_set = input_data['search_metadata']
         if('tags' in selected_properties):
             if(input_data['search_metadata']):
                 result_set.update({'tags':search_set['query'].replace('%23', '#').replace('+', ' ').split(' ')})         
