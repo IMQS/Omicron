@@ -45,12 +45,9 @@ class request_handler(object):
         if (function == "heat_map"):
             import map_plot as mp
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-            print query_data
             total_coords = []
             for platform in platforms:
                 for coords in query_data[platform]:
-                    print coords
-                    print total_coords
                     total_coords = total_coords + coords
             heat_map = {}
             #@TODO: FIX the bounding box big problem
@@ -81,7 +78,6 @@ class request_handler(object):
         if (function == "heat_map"):
             import map_plot as mp
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-            print query_data
             total_coords = []
             for platform in platforms:
                 for coords in query_data[platform]:
