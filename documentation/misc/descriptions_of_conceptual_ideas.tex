@@ -1,0 +1,47 @@
+\documentclass{article}
+\title{Description of conceptual parts of program}
+\author{M. Rozenkrantz}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Gateway}
+\subsection{Introduction}
+The Gateway handles communication between the APIs of social networks and the Request Handler.
+\subsection{Input}
+\begin{itemize}
+\item{The Gateway can receive requests from the user (browser), via the Request Handler.}
+\item{It can also receive external data from the social network's APIs.}
+\end{itemize}
+\subsection{Output}
+\begin{itemize}
+\item{It outputs stripped data, in many formats, to the Request Handler. These formats include lists of GPS coordinates, lists of actual posts made and which tags were searched for, amongst others.}
+\end{itemize}
+
+\section{Request Handler}
+\subsection{Introduction}
+The Request Handler receives and decodes requests made by the user (browser) and instructs the Gateway, database and processing functions so that the requested information can be returned, again via the Request Handler, to the user {browser}.
+\subsection{Input}
+\begin{itemize}
+\item{The Request Handler receives requests from the user (browser).}
+\item{It receives stripped data from the Gateway,}
+\item{as well as information (such as snapshot histories) from the database.}
+\end{itemize}
+\subsection{Output}
+\begin{itemize}
+\item{The Request Handler sends information (such as snapshots), for storage, to the database.}
+\item{It sends the results of a query to the user (browser)}
+\item{Lastly, it sends instructions (on what to return) to the Gateway.}
+\end{itemize}
+
+\section{Rendering of images}
+\subsection{Where?}
+The heatmap images and images of the Earth will be rendered by the server, and simply passed on to the user (browser) and database.
+\subsection{Why?}
+The user-end may not have sufficient computational power to render the images fast enough. 
+
+It is also done this way to minimise strain on the connections -- rendered images will not have to be sent back and forth from the user to the server. If the user-end has to render images and they must be stored, the path of the data will be: server to user to server and then to the database. And if the data must be retrieved from storage and compiled into animations, the path of the data will be: database to server to user to server (for animation compilation) and then back to user). With this implementation we only have these paths: database to server to user (if stored images are retrieved from storage and compiled into animations) or server to user and database (if images are created and stored).
+
+
+\end{document}
