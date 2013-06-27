@@ -57,39 +57,44 @@ class social_platform(object):
         raise NotImplementedError
     def authenticate(self):
         '''
-            Authenticates the Application "TeamOmicron" for read-only access to the social media platform. Uses the self.consumer_key and self.consumer_secret
-            initialize in the social media platform object. Encodes the consumer_key and consumer_secret by encoding to URL encode (RFC 1783), concatinates the two encoded values
-            separated by a colon and encodes the concatinated string in base64 binary to text. Uses the base64 encode string and added to the header of the 
-            HTTPS request as "'Authorization': 'Basic %s' %EncodedString" with parameters to the request "'grant_type':'client_credentials'".
-            A HTTPS POST is made on port 443 with the Headers and Parameters to the websites Authentication api, then a getresponse() call is made by the
-            HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.
-            
-            saves access_token in the object, also returns access_token
-            Not all Exceptions have been caught  !
+            Authenticates the social platform using token based Oauth authentication and saves the authentication token in self.access_token.
+
             @param self: Pointer to the current object.
-            @type self: social_platform
-            TODO JAVONNE fix this please!!!
+            @type self: social_platform.
+            @return: True, if the authentication process completed successfully.
+            @rtype: Boolean.
+            @return: False, if the authentication process failed. Fails under the following conditions, Connection error, http error code, error if decrypted data doesn't have the correct values. 
+            access token in dictionary doesnt exist.
+            @rtype: Boolean.
         '''
         raise NotImplemented
     def test_connection(self):
         ''' Pings a server to test if it is able to communicate to the network before making any calls to its ReST API
+            @return: True, if the social platform is able to connect to its online API.
+            @rtype: bool
+            @return: False, if the social platform is unable to connect to its online API
+            @rtype: bool
         '''
         print "Testing Connection"
         try:
             urllib2.urlopen(self.TestConnectionString, timeout=1)
         except urllib2.URLError:
-            print "Exception Caught : connection to twitter timed out"
+            print "Exception Caught : connection to "+self.get_platform_name()+" timed out"
             return False
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
         '''
-        Decrypts response from a ReST call\
+        Decrypts response from a reST call.
         
-        @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted
-        @type encrypted_data: String
-        @param headers: The header response from the server, containing the encryption method
-        @type headers: Dictionary
-        @TODO: add return and rtype
+        @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted.
+        @type encrypted_data: String.
+        @param headers: The header response from the server, containing the encryption method.
+        @type headers: Dictionary.
+        
+        @return None: if one or more missing parameters or Unknown decryption method used on the server.
+        @rtype: None.
+        @return: Decrypted data.
+        @rtype: String.
         '''
         if (encrypted_data == None):
             print "No encrypted data"
@@ -107,11 +112,13 @@ class social_platform(object):
             buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))  # decoding of the data
             decrypted_data = buffer_data.read()
         else:
-            print str(encryption_type) + " : Unknown decryption method"
+            print "Unknown decryption method : "+str(encryption_type) 
         return decrypted_data 
     def authenticate_headers(self):
-        '''
-            @TODO describe what it does.
+        ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
+            Note : authenticate() method must first be called 
+            @return: a dictionary with the basic header information of an http request.
+            @rtype: Dictionary
         '''
         raise NotImplemented
     def strip_data(self, input_data=None, selected_properties=None):
@@ -129,11 +136,13 @@ class social_platform(object):
     
 class twitter_platform(social_platform):
     def __init__(self):
+        '''Constructor defines the consumer_key, consumer_secret, HttpsConnection string, the Test connection url, the httpsOauthstring and the access_token
+        '''
         self.consumer_key = "JqsyRIEqze8MtUXvZ6PtVw"
         self.consumer_secret = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
-        self.HttpsConnectionString = "api.twitter.com:443"
-        self.TestConnectionString = "http://twitter.com"
-        self.HttpsOAuthString = "/oauth2/token"
+        self.https_connection_string = "api.twitter.com:443"
+        self.test_connection_string = "http://twitter.com"
+        self.https_oauth_string = "/oauth2/token"
         self.access_token = None
     def get_platform_name(self):
         '''
@@ -177,7 +186,7 @@ class twitter_platform(social_platform):
         
         
         params = urllib.urlencode(tags)
-        conn = httplib.HTTPSConnection(self.HttpsConnectionString)
+        conn = httplib.HTTPSConnection(self.https_connection_string)
         head = self.authenticate_headers()
         conn.request("GET", "/1.1/search/tweets.json?" + params, "", head)
         response = conn.getresponse()
@@ -210,79 +219,47 @@ class twitter_platform(social_platform):
         urllib2.quote(self.consumer_secret)  # URL encoding
         if(self.test_connection() == False):
             print "Connection Error"
-            return None
+            return False
         encoded = base64.b64encode(str(self.consumer_key) + ":" + str(self.consumer_secret))  # base64 encoding to twitter standards
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Basic %s" % encoded, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'}  # declear headers
         params = urllib.urlencode({'grant_type':'client_credentials'})  # declear parameters aka body of html
-        conn = httplib.HTTPSConnection(self.HttpsConnectionString)  # host api in httpsconnection
+        conn = httplib.HTTPSConnection(self.https_connection_string)  # host api in httpsconnection
         # conn.set_debuglevel(1)
         print "Requesting"
-        conn.request("POST", self.HttpsOAuthString, params, headers)
+        conn.request("POST", self.https_oauth_string, params, headers)
         print "Request Completed"
         response = conn.getresponse()
         if(str(response.status) != "200"):
             print "Error http request failed status" + str(response.status) + " Reason: " + str(response.reason)
-            return None
+            return False
         encrypted_data = response.read()        
         decrypted_data = self.decrypt_response(encrypted_data, response.getheaders())  # html object of decoded data
-        decrypted_data = ast.literal_eval(decrypted_data)
+        try:
+            decrypted_data = ast.literal_eval(decrypted_data)
+        except SyntaxError:
+            print "Error in converting decrypted data to dictionary "
+            return False
         access_token = None  # convert to dictionary
         try:
             access_token = decrypted_data["access_token"]
         except TypeError:
             print "Access Token not assigned by social media"
-            return None
+            return False
         except KeyError:
             print "Access Token not assigned by social media"
-            return None
+            return False
         
         self.access_token = access_token
-        return access_token
+        return True
     def authenticate_headers(self):
-        ''' Returns headers with Authorzation of the application in the header. Uses self.access_token defined in use of authenticate().  
-            authenticate() method must first be called 
+        ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
+            Note : authenticate() method must first be called 
+            @return: a dictionary with the basic header information of an http request.
+            @rtype: Dictionary
         '''
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
         return headers
-    def get_data(self, tag_list=None):
-        ''' Returns a JSON object containing all the Tweets from Twitter with the tags from the tag_list
-            note: if its hash tags it works on an 'AND' basis, word basis its on an 'OR' 
-            @param self: Pointer to the current object
-            @type self: twitter_platform
-            @param tag_list: a list of tags that the user would like to search for either words or hash tags
-            @type tag_list: Iterable object of strings 
-        '''
-        if(tag_list == None):
-            print "Tag_list is empty"
-            return None
-        if(len(tag_list) == 0):
-            print "Tag_list is empty"
-            return None
-        if(self.access_token == None):
-            print "Please Request Authorization from Twitter"
-            return None
-        tags = ""
-        for i in tag_list:
-            tags = tags + " " + i
-        tags = tags.strip()
-        tags = {"q":tags, "count":100}
-        
-        '''TODO: search by location '''
-        params = urllib.urlencode(tags)
-        conn = httplib.HTTPSConnection(self.HttpsConnectionString)
-        head = self.authenticate_headers()
-        conn.request("GET", "/1.1/search/tweets.json?" + params, "", head)
-        response = conn.getresponse()
-        if(response.status != 200):
-            print "Error Failed to get Twitter data"
-            return None
-        result_set = response.read()
- 
-        result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
-        conn.close()
-        result_set = json.loads(result_set)
-        return result_set
-  
+
     def strip_data(self, input_data=None, selected_properties=None):
         '''
         Strips the given raw data so that only the selected properties remain.
