@@ -84,7 +84,7 @@ class social_platform(object):
         '''
         print "Testing Connection"
         try:
-            urllib2.urlopen(self.TestConnectionString, timeout=1)
+            urllib2.urlopen(self.test_connection_string, timeout=1)
         except urllib2.URLError:
             print "Exception Caught : connection to "+self.get_platform_name()+" timed out"
             return False
@@ -312,7 +312,7 @@ class twitter_platform(social_platform):
         if('post' in selected_properties):
             for tweet in search_set:
                 if(tweet['text'] != None):
-                    result_set.update({'posts':tweet['text']})
+                    result_set['posts'] = result_set.update({'posts':tweet['text']})
 
         if('location' in selected_properties):
             for tweet in search_set:
@@ -320,10 +320,25 @@ class twitter_platform(social_platform):
                     result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
             
         
-        search_set = input_data['search_metadata']
-        if('tags' in selected_properties):
-            if(search_set['query']):
-                result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
+        #search_set = input_data['search_metadata']
+        #if('tags' in selected_properties):
+        #    if(search_set['query']):
+        #        result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
+                search_set = input_data['statuses']
+#         if('tags' in selected_properties):
+#             for instapost in search_set:
+               # if(instapost['search_metadata'] != None):
+               #    result_set.update({'tags':instapost['query']}) 
+        #newset = ''
+        #s = result_set['tags'].split(' ')
+        #3for element in s:
+        #    if ('#' in element):
+        #        newset = newset+element
+        #reset = newset.split('#')
+        #reset.pop(0)
+        #result_set['tags'] = reset.pop(0)        
+                
+                
         return result_set
     
 class instagram_platform(social_platform):
@@ -331,8 +346,59 @@ class instagram_platform(social_platform):
         "TODO:"     
     def request_region(self, criteria=None, area=None):
         "TODO:"
+        
+    def strip_data(self, input_data=None, selected_properties=None):
+        '''
+        Strips the given raw data so that only the selected properties remain.
+            
+            @param input_data: Raw data that needs to be  
+            @type input_data: JSON Object
+            @param selected_properties: List of properties that should be kept after stripping.
+            @type selected_properties: List of strings - either 'tags', 'location' or 'post'.
+            @return: The stripped data.
+            @rtype: JSON Object 
+        '''
+        if(selected_properties == None):
+            print "There are no properties to strip the data by"
+            return None
+        
+        if(input_data == None):
+            print "Result_set undefined"
+            return None
+        search_set = input_data['data']
+        result_set = {}
+        
+        if('post' in selected_properties):
+            for instapost in search_set:
+                if(instapost['link'] != None):
+                    result_set.update({'posts':{'link': instapost['link'], 'caption' : instapost['caption']['text']}})
+    
+        if('location' in selected_properties):
+            for instapost in search_set:
+                if(instapost['location'] != None):
+                    result_set.update({'location':tuple([instapost['location']['latitude'], instapost['location']['longitude']])})
+            
+        if('tags' in selected_properties):
+            for instapost in search_set:
+                if(instapost['caption'] != None):
+                    result_set.update({'tags':instapost['text']}) 
+        newset = ''
+        s = result_set['tags'].split(' ')
+        for element in s:
+            if ('#' in element):
+                newset = newset+element
+        reset = newset.split('#')
+        reset.pop(0)
+        result_set['tags'] = reset.pop(0)
+        
+        return result_set 
+    
 if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
-    search_set = k.get_data(["#snow"])
+    search_set = k.request_center_radius(["#snow"])
     print k.strip_data(search_set, ['tags', 'location', 'post'])
+
+    
+    
+    
