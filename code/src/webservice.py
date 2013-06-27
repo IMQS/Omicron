@@ -120,22 +120,23 @@ class request_handler(object):
 
 class redirect_handler:
     '''
-        Handles all incoming GET and POST requests
+        For all redirects from social media logins
     '''
     OK = {'success':'True'}
     ERROR = {'success':'False'}
     def GET(self):
+        '''    @todo: Needs to redirect to the login to social platform page where it should be waiting for a 'code' \
+               which twitter/instagram has sent to  this page as a parameter. Needs to redirect with this code to original page 
+        '''
         inputs =  web.input()
-        print inputs
-
-        return inputs
-    def POST(self):
-        inputs =  web.input()
-        print inputs
-        return inputs
+        code = inputs['code']
+        #web.Redirect()
+        return "Redirecting"
+    
+    
 #:Groups the URL's and their corresponding actions.
 urls = ("/request_handler", "request_handler",
-        "/redirect", "redirect")
+        "/redirect", "redirect_handler")
 
 #:Creates a Application to delegate requests based on path.
 app = web.application(urls, globals())
