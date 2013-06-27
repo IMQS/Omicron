@@ -35,7 +35,7 @@ class social_platform(object):
             
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            @param search_tags: A list of words to search for.
+            @param search_tags: A list of tags to search for.
             @type search_tags: List
             @param gps_center: A tuple consisting of longitude and latitude GPS coordinates.
             @type gps_center: A tuple of floats
@@ -54,7 +54,7 @@ class social_platform(object):
             
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            @param search_tags: A list of words to search for.
+            @param search_tags: A list of tags to search for.
             @type search_tags: List
             @param search_region: Name of the search_region - in the following format <country state city>.
             @type search_region: String
@@ -68,10 +68,8 @@ class social_platform(object):
             Authenticates the social platform using token based Oauth authentication and saves the authentication token in self.access_token.
 
             @param self: Pointer to the current object.
-            @type self: social_platform
-            @return: True, if the authentication process completed successfully.
-            @rtype: Boolean
-            @return: False, if the authentication process failed. Fails under the following conditions, Connection error, http error code, error if decrypted data doesn't have the correct values. 
+            @type self: L{social_platform}
+            @return: True, if the authentication process completed successfully. False, if the authentication process failed. Fails under the following conditions, Connection error, http error code, error if decrypted data doesn't have the correct values. 
             access token in dictionary doesnt exist.
             @rtype: Boolean
         '''
@@ -81,10 +79,7 @@ class social_platform(object):
         
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            
-            @return: True, if the social platform is able to connect to its online API.
-            @rtype: Boolean
-            @return: False, if the social platform is unable to connect to its online API.
+            @return: True, if the social platform is able to connect to its online API. False, if the social platform is unable to connect to its online API.
             @rtype: Boolean
         '''
         print "Testing Connection"
@@ -104,10 +99,7 @@ class social_platform(object):
         @type encrypted_data: String
         @param headers: The header response from the server, containing the encryption method.
         @type headers: Dictionary
-        
-        @return None: if one or more missing parameters or Unknown decryption method used on the server.
-        @rtype: None
-        @return: Decrypted data.
+        @return None: if one or more missing parameters or Unknown decryption method used on the server else it returns the Decrypted data.
         @rtype: String
         '''
         if (encrypted_data == None):
@@ -286,11 +278,11 @@ class twitter_platform(social_platform):
         self.access_token = access_token
         return True
     def authenticate_headers(self):
-        ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
-            Note : authenticate() method must first be called
+        ''' Returns an authorised header for a reST call. Uses self.access_token initialised in L{authenticate()}.  
+            Note : L{authenticate()} method must first be called
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            @return: a dictionary with the basic header information of an http request.
+            @return: A dictionary with the basic header information of an http request.
             @rtype: Dictionary
         '''
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
@@ -302,8 +294,8 @@ class twitter_platform(social_platform):
             
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
-            @param selected_properties: List of properties that should be kept after stripping.
-            @type selected_properties: List of strings - either 'tags', 'location' or 'post'.
+            @param selected_properties: List of properties that should be kept after stripping. Has to be one or more of the following 'tags', 'location' or 'post'.
+            @type selected_properties: List
             @return: The stripped data.
             @rtype: JSON Object 
         '''
