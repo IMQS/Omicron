@@ -62,7 +62,7 @@ def heatmap(bounds, coords):
 	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
 	@type bounds: List of 4 ints
 	@param coords: The X, Y coordinates of points.
-	@type coords: List of 2-tuples of floats@return:  A heatmap represented by a pixel matrix.
+	@type coords: List of 2-tuples of floats.
 	@return: A pixel matrix heatmap for the given points.
 	@rtype: Rectangular numpy matrix of floats
 	'''
@@ -133,45 +133,41 @@ def show_3D_heatmap(heatmap):
 	mlab.show()
 	print "Done."
 
-def save_heatmap(heatmap):
+def save_heatmap(heatmap, path, colour):
 	'''
-	Saves a heatmap to file, in a subfolder named "heatmaps" with the naming convention "heatmap_###" where ### is a 3-digit number that is 1 larger than the largest number already present.
+	Saves a heatmap to the specified path, in colour if colour is True, or in greyscale if colour is False.
 	@param heatmap: A pixel matrix heatmap.
 	@type heatmap: Rectangular numpy matrix of floats
+	@param path: The file path to save the file into.
+	@type path: String
+	@param colour: Whether or not the heatmap should be saved in colour.
+	@type colour: Boolean
 	@rtype: Void
 	'''
-	import numpy as np
-	from scipy import misc
-	from os import listdir
-	from matplotlib.pyplot import cm
-		
-	print "Saving to disk..."
-	
-	cmap = cm.ScalarMappable()
-	cmap.set_cmap('hot')
-	cmap.set_clim(0, heatmap.max())
-	heatmap_color = []
 	heatmap = heatmap[::-1]
+	if colour:
+		import numpy as np
+		from scipy import misc
+		from matplotlib.pyplot import cm
+		
+		print "Saving colour heatmap to "+path+"..."
 	
-	for r in xrange(len(heatmap)):
-		heatmap_color.append([])
-		for c in xrange(len(heatmap[r])):
-			heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
+		cmap = cm.ScalarMappable()
+		cmap.set_cmap('hot')
+		cmap.set_clim(0, heatmap.max())
+		heatmap_color = []
+		
+		for r in xrange(len(heatmap)):
+			heatmap_color.append([])
+			for c in xrange(len(heatmap[r])):
+				heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
 			
-	maxi = 0
-	flist = listdir('./../src/heatmaps')
-	for item in flist:
-		if item.startswith('heatmap_') and not (item.startswith('heatmap_color_')):
-			num = int(item.__getslice__(8, len(item)-4))
-			if num > maxi:
-				maxi = num
-	num = str(maxi+1)
-	while len(num) < 3:
-		num = '0'+num
-	misc.imsave('./../src/heatmaps/heatmap_'+num+'.png', heatmap)
-	misc.imsave('./../src/heatmaps/heatmap_color_'+num+'.png', heatmap_color)
-	
-	print "Done."
+		misc.imsave(path, heatmap_color)
+		print "Done."
+	else:
+		print "Saving greyscale heatmap to "+path+"..."
+		misc.imsave(path, heatmap)
+		print "Done."
 
 def heat_dist(point, x, y):
 	'''
@@ -217,6 +213,52 @@ def plot_gauss(var, lim):
 			print num, gauss(var, num)
 			coords.append((num, gauss(var, num)))
 	plot(coords)
+
+def heatmap_tile(level, x, y, coords):
+	'''
+	Creates a 256x256 heatmap tile for the specified zoom level and location for the given coordinates. Variance is adjusted according to level.
+	@param level: The zoom level of the tile, between 0 and 21.
+	@type level: int
+	@param x: The X coordinate of the tile.
+	@type x: int
+	@param y: The Y coordinate of the tile.
+	@type y: int
+	@param coords: The X, Y coordinates of points.
+	@type coords: List of 2-tuples of floats
+	@return: A pixel matrix heatmap for the given points.
+	@rtype: Rectangular numpy matrix of floats
+	'''
+	import numpy as np
+	from math import sqrt
+	
+	n = len(coords)
+	print n, "points provided."
+	
+	heatmap = np.array([[0.]*256]*256)
+	
+	var = 1 / (2**level)
+	print "Zoom level of "+str(level)+" gives a variance estimate of "+str(var)+"."
+	
+	lim = 3 * sqrt(var) # limit of meaningful influence is 3 standard deviations.
+	print "Limit of meaningful influence is "+str(lim)+" from the tile."
+	
+#	dim = 
+	
+	# All point coordinates need to be rescaled to the zoom level (divide by 2^level), then filtered to eleminate all points further than 3 standard deviations away from the boundaries of the bounds of the tile.
+	for point in coords:
+		point = [point[0]/2**level, point[1]/2**level]
+#		if 
+	
+	
+#	for point in coords:
+#		print "Processing:",str(point)
+#		for i in xrange(256):
+#			for j in xrange(256):
+#				heatmap[i][j] += gauss(var,
+#				heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
+				# the +.5 is to account for pixel center
+	
+	return heatmap
 
 if __name__ == "__main__":
 #	plot_random(20, 100)
