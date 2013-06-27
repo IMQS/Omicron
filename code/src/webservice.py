@@ -25,14 +25,14 @@ class request_handler(object):
             @type self: request_handler
             @param platforms: List of hash(#) separated values that indicate which social media to use. 
             @type platforms: String 
-            @param tags: List of hash(#) separated values that is used for the search criteria.
+            @param tags: List of Underscore(_) separated values that is used for the search tags.
             @type tags: String
-            @param function: Which function to apply after the data has been collected.
+            @param function: Which processing function to apply after the data has been collected.
             @type function: String
             @param location_type: Either area or radius.
             @type location_type: String
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
-            if location_type has the value "radius" then location must be in the following format "longitude latitude <radius>km" 
+            if location_type has the value "radius" then location must be in the following format "longitude#latitude#<radius>" 
             @type location: String
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: JSON Object
@@ -76,14 +76,14 @@ class request_handler(object):
             @type self: request_handler
             @param platforms: List of hash(#) separated values that indicate which social media to use. 
             @type platforms: String 
-            @param tags: List of hash(#) separated values that is used for the search criteria.
+            @param tags: List of Underscore(_) separated values that is used for the search tags.
             @type tags: String
-            @param function: Which function to apply after the data has been collected.
+            @param function: Which processing function to apply after the data has been collected.
             @type function: String
             @param location_type: Either area or radius.
             @type location_type: String
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
-            if location_type has the value "radius" then location must be in the following format "longitude latitude <radius>km" 
+            if location_type has the value "radius" then location must be in the following format "longitude#latitude#<radius>" 
             @type location: String
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: JSON Object
