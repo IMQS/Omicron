@@ -1,7 +1,7 @@
 '''
 Created on 19 Jun 2013
 
-@author: S. Schreiber, J. J. Martin
+@author: S. Schreiber, J. J. Martin, M. Rozenkrantz
 '''
 import urllib
 import base64
@@ -197,7 +197,8 @@ class twitter_platform(social_platform):
         for i in search_tags:
             tags = tags + " " + i
         tags = tags.strip()
-        tags = {"q":tags, "count":100}
+        """TODO change count back to 100"""
+        tags = {"q":tags, "count":10}
         
         if(gps_center != None and len(gps_center) == 2 and radius != None):
             tags['geocode'] = str(gps_center[0]) + " " + str(gps_center[1]) + " " + str(radius) + "km"
@@ -320,26 +321,43 @@ class twitter_platform(social_platform):
                     result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
             
         
-        #search_set = input_data['search_metadata']
-        #if('tags' in selected_properties):
-        #    if(search_set['query']):
-        #        result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
-                search_set = input_data['statuses']
-#         if('tags' in selected_properties):
-#             for instapost in search_set:
-               # if(instapost['search_metadata'] != None):
-               #    result_set.update({'tags':instapost['query']}) 
-        #newset = ''
-        #s = result_set['tags'].split(' ')
-        #3for element in s:
-        #    if ('#' in element):
-        #        newset = newset+element
-        #reset = newset.split('#')
-        #reset.pop(0)
-        #result_set['tags'] = reset.pop(0)        
-                
-                
+        search_set = input_data['search_metadata']
+        if('tags' in selected_properties):
+            if(search_set['query']):
+                result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
+        
+        #return result_set
+           
+       """ search_set = input_data['search_metadata']
+        if('tags' in selected_properties):
+            if(input_data['search_metadata']):
+                result_set.update({'tags':search_set['query'].replace('%23', '#').replace('+', ' ').split(' ')})         
+        
+        newset = ''
+        for element in result_set['tags']:
+                newset = newset+element 
+        reset = newset.split('#') 
+        print reset"""
+        #for i in len(reset):
+        #        result_set['tags'][i] = reset[i]
+        
         return result_set
+"""        search_set = input_data['search_metadata']
+        if('tags' in selected_properties):
+            for instapost in search_set:
+
+                result_set.update({'tags':search_set['query']}) 
+        newset = ''
+        s = result_set['tags'].split(' ')
+        for element in s:
+            if ('#' in element):
+                newset = newset+element
+        reset = newset.split('#')
+        
+        result_set['tags'] = reset # = reset.pop(0)        
+                
+        print reset """
+        
     
 class instagram_platform(social_platform):
     def request_center_radius(self, criteria=None, center=None, radius=None):
@@ -396,8 +414,8 @@ class instagram_platform(social_platform):
 if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
-    search_set = k.request_center_radius(["#snow"])
-    print k.strip_data(search_set, ['tags', 'location', 'post'])
+    search_set = k.request_center_radius(["#snow #winter"])
+    print k.strip_data(search_set, ['tags'])
 
     
     
