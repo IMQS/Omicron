@@ -23,7 +23,7 @@ class request_handler(object):
             
             @param self: Pointer to the current request_handler instance.
             @type self: request_handler
-            @param platforms: List of hash(#) separated values that indicate which social media to use. 
+            @param platforms: List of underscore(_) separated values that indicate which social media to use. 
             @type platforms: String 
             @param tags: List of Underscore(_) separated values that is used for the search tags.
             @type tags: String
@@ -32,7 +32,7 @@ class request_handler(object):
             @param location_type: Either area or radius.
             @type location_type: String
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
-            if location_type has the value "radius" then location must be in the following format "longitude#latitude#<radius>" 
+            if location_type has the value "radius" then location must be in the following format "longitude_latitude_<radius>" 
             @type location: String
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: JSON Object
@@ -40,12 +40,12 @@ class request_handler(object):
         '''
         return_data_and_status = {}
         raw_data = web.input()
-        platforms = raw_data["platforms"].lstrip('u').split("#")
+        platforms = raw_data["platforms"].lstrip('u').split("_")
         tags = raw_data["tags"].lstrip('u').split("_")
         function = raw_data["function"]
         # For future use
         location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("#")
+        location = raw_data["location"].lstrip('u').split("_")
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
@@ -118,6 +118,21 @@ class request_handler(object):
             return_data_and_status["message"] = msg
         return return_data_and_status
 
+class redirect_handler:
+    '''
+        Handles all incoming GET and POST requests
+    '''
+    OK = {'success':'True'}
+    ERROR = {'success':'False'}
+    def GET(self):
+        inputs =  web.input()
+        print inputs
+
+        return inputs
+    def POST(self):
+        inputs =  web.input()
+        print inputs
+        return inputs
 #:Groups the URL's and their corresponding actions.
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect")
