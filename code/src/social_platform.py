@@ -20,9 +20,11 @@ class social_platform(object):
     def get_platform_name(self):
         '''
             Returns the name of the social platform of the object it is applied to.
-        
+ 
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}       
             @return: Returns the current platform's name.
-            @rtype: String.
+            @rtype: String
         '''
         raise NotImplemented
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
@@ -32,13 +34,16 @@ class social_platform(object):
             and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: L{social_platform}.
+            @type self: L{social_platform}
             @param search_tags: A list of words to search for.
-            @type search_tags: List.
+            @type search_tags: List
             @param gps_center: A tuple consisting of longitude and latitude GPS coordinates.
-            @type gps_center: A tuple of floats.
+            @type gps_center: A tuple of floats
             @param radius: The radius from the L{gps_center} that forms the circular region to be searched.
-            @type radius: Float.
+            @type radius: Float
+            
+            @return: result_set a JSON Object containing the resulting data from the request to the API
+            @rtype: JSON Object
         '''
         raise NotImplementedError
     def request_region(self, search_tags=None, search_region=None):
@@ -48,11 +53,14 @@ class social_platform(object):
             and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: L{social_platform}.  
+            @type self: L{social_platform}
             @param search_tags: A list of words to search for.
-            @type search_tags: List. 
+            @type search_tags: List
             @param search_region: Name of the search_region - in the following format <country state city>.
-            @type search_region: String.
+            @type search_region: String
+            
+            @return: result_set a JSON Object containing the resulting data from the request to the API
+            @rtype: JSON Object
         '''
         raise NotImplementedError
     def authenticate(self):
@@ -60,20 +68,24 @@ class social_platform(object):
             Authenticates the social platform using token based Oauth authentication and saves the authentication token in self.access_token.
 
             @param self: Pointer to the current object.
-            @type self: social_platform.
+            @type self: social_platform
             @return: True, if the authentication process completed successfully.
-            @rtype: Boolean.
+            @rtype: Boolean
             @return: False, if the authentication process failed. Fails under the following conditions, Connection error, http error code, error if decrypted data doesn't have the correct values. 
             access token in dictionary doesnt exist.
-            @rtype: Boolean.
+            @rtype: Boolean
         '''
         raise NotImplemented
     def test_connection(self):
         ''' Pings a server to test if it is able to communicate to the network before making any calls to its ReST API
+        
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
+            
             @return: True, if the social platform is able to connect to its online API.
-            @rtype: bool
-            @return: False, if the social platform is unable to connect to its online API
-            @rtype: bool
+            @rtype: Boolean
+            @return: False, if the social platform is unable to connect to its online API.
+            @rtype: Boolean
         '''
         print "Testing Connection"
         try:
@@ -86,15 +98,17 @@ class social_platform(object):
         '''
         Decrypts response from a reST call.
         
+        @param self: Pointer to the current object.
+        @type self: L{social_platform}
         @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted.
-        @type encrypted_data: String.
+        @type encrypted_data: String
         @param headers: The header response from the server, containing the encryption method.
-        @type headers: Dictionary.
+        @type headers: Dictionary
         
         @return None: if one or more missing parameters or Unknown decryption method used on the server.
-        @rtype: None.
+        @rtype: None
         @return: Decrypted data.
-        @rtype: String.
+        @rtype: String
         '''
         if (encrypted_data == None):
             print "No encrypted data"
@@ -117,6 +131,8 @@ class social_platform(object):
     def authenticate_headers(self):
         ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
             Note : authenticate() method must first be called 
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
             @return: a dictionary with the basic header information of an http request.
             @rtype: Dictionary
         '''
@@ -125,18 +141,24 @@ class social_platform(object):
         '''
             Strips the given raw data so that only the selected properties remain.
             
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
-            @param selected_properties: List of properties that should be kept after stripping.
-            @type selected_properties: List of strings - either 'tags', 'location' or 'post'.
+            @param selected_properties: List of strings - either 'tags', 'location' or 'post'.
+            @type selected_properties: List
             @return: The stripped data.
             @rtype: JSON Object 
         '''
         raise NotImplemented
     
 class twitter_platform(social_platform):
+    ''' Class for connecting to the Twitter API
+    '''
     def __init__(self):
-        '''Constructor defines the consumer_key, consumer_secret, HttpsConnection string, the Test connection url, the httpsOauthstring and the access_token
+        '''Constructor defines the consumer_key, consumer_secret, HttpsConnection string, the Test connection URL, the httpsOauthstring and the access_token
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
         '''
         self.consumer_key = "JqsyRIEqze8MtUXvZ6PtVw"
         self.consumer_secret = "1UW0zoEC5WlLh1TS7EajRbe3W6dD5O4CQ6Jr9gmv4"
@@ -147,7 +169,8 @@ class twitter_platform(social_platform):
     def get_platform_name(self):
         '''
             Returns the name of the social platform of the object it is applied to.
-            
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}            
             @return: Returns the current platform's name.
             @rtype: String.
         '''
@@ -164,6 +187,9 @@ class twitter_platform(social_platform):
             @type gps_center: Tuple of floats
             @param radius: Is the distance from the gps_center that will be covered by the search.
             @type radius: float 
+            
+            @return: result_set a JSON Object containing the resulting data from the request to the API
+            @rtype: JSON Object
         '''
         
         if(search_tags == None):
@@ -200,6 +226,14 @@ class twitter_platform(social_platform):
         result_set = json.loads(result_set)
         return result_set
     def request_region(self, search_tags=None, search_region=None):
+        '''
+            @todo: Request tweets from a region
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
+            
+            @return: result_set a JSON Object containing the resulting data from the request to the API
+            @rtype: JSON Object
+        '''
         return "TODO:"
     def authenticate(self):
         '''
@@ -253,7 +287,9 @@ class twitter_platform(social_platform):
         return True
     def authenticate_headers(self):
         ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
-            Note : authenticate() method must first be called 
+            Note : authenticate() method must first be called
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}
             @return: a dictionary with the basic header information of an http request.
             @rtype: Dictionary
         '''
