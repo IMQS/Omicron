@@ -86,7 +86,9 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+      Constructor defines the consumer_key, consumer_secret, 
+      HttpsConnection string, the Test connection url, the httpsOauthstring
+      and the access_token</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.__init__">source&nbsp;code</a></span>
             
@@ -157,7 +159,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Boolean.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -175,34 +177,14 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Dictionary</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns headers with Authorzation of the application in the header.</td>
+      Returns an authorised headers for a reST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate_headers">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#get_data" class="summary-sig-name">get_data</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">tag_list</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Returns a JSON object containing all the Tweets from Twitter with the
-      tags from the tag_list note: if its hash tags it works on an 'AND' 
-      basis, word basis its on an 'OR'</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.get_data">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -311,11 +293,12 @@
     </td>
   </tr></table>
   
-  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <p>Constructor defines the consumer_key, consumer_secret, HttpsConnection
+  string, the Test connection url, the httpsOauthstring and the 
+  access_token</p>
   <dl class="fields">
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -450,6 +433,8 @@
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
     </ul></dd>
+    <dt>Returns: Boolean.</dt>
+        <dd>True, if the authentication process completed successfully.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#authenticate">social_platform.authenticate</a>
     </dt>
@@ -470,41 +455,18 @@
     </td>
   </tr></table>
   
-  <p>Returns headers with Authorzation of the application in the header. 
-  Uses self.access_token defined in use of authenticate(). authenticate() 
-  method must first be called</p>
+  <p>Returns an authorised headers for a reST call. Uses self.access_token 
+  initialised in <a 
+  href="social_platform.twitter_platform-class.html#authenticate" 
+  class="link">authenticate()</a>. Note : authenticate() method must first 
+  be called</p>
   <dl class="fields">
+    <dt>Returns: Dictionary</dt>
+        <dd>a dictionary with the basic header information of an http 
+          request.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#authenticate_headers">social_platform.authenticate_headers</a>
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="get_data"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_data</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">tag_list</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.get_data">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Returns a JSON object containing all the Tweets from Twitter with the 
-  tags from the tag_list note: if its hash tags it works on an 'AND' basis,
-  word basis its on an 'OR'</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (twitter_platform) - Pointer to the current object</li>
-        <li><strong class="pname"><code>tag_list</code></strong> (Iterable object of strings) - a list of tags that the user would like to search for either 
-          words or hash tags</li>
-    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -564,7 +526,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 26 16:28:42 2013
+    Generated by Epydoc 3.0.1 on Thu Jun 27 10:51:53 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

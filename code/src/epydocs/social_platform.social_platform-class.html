@@ -147,13 +147,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Boolean.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate" class="summary-sig-name">authenticate</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Authenticates the Application &quot;TeamOmicron&quot; for read-only 
-      access to the social media platform.</td>
+      Authenticates the social platform using token based Oauth 
+      authentication and saves the authentication token in 
+      self.access_token.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate">source&nbsp;code</a></span>
             
@@ -165,11 +166,11 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">bool</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="test_connection"></a><span class="summary-sig-name">test_connection</span>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#test_connection" class="summary-sig-name">test_connection</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Pings a server to test if it is able to communicate to the network 
       before making any calls to its ReST API</td>
           <td align="right" valign="top">
@@ -183,14 +184,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">None.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#decrypt_response" class="summary-sig-name">decrypt_response</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">encrypted_data</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">headers</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Decrypts response from a ReST call</td>
+      Decrypts response from a reST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.decrypt_response">source&nbsp;code</a></span>
             
@@ -202,12 +203,12 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">Dictionary</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="authenticate_headers"></a><span class="summary-sig-name">authenticate_headers</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      @TODO describe what it does.</td>
+          <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns an authorised headers for a reST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>
             
@@ -402,26 +403,39 @@ object --+
     </td>
   </tr></table>
   
-  <p>Authenticates the Application &quot;TeamOmicron&quot; for read-only 
-  access to the social media platform. Uses the self.consumer_key and 
-  self.consumer_secret initialize in the social media platform object. 
-  Encodes the consumer_key and consumer_secret by encoding to URL encode 
-  (RFC 1783), concatinates the two encoded values separated by a colon and 
-  encodes the concatinated string in base64 binary to text. Uses the base64
-  encode string and added to the header of the HTTPS request as 
-  &quot;'Authorization': 'Basic %s' %EncodedString&quot; with parameters to
-  the request &quot;'grant_type':'client_credentials'&quot;. A HTTPS POST 
-  is made on port 443 with the Headers and Parameters to the websites 
-  Authentication api, then a getresponse() call is made by the HTTPS 
-  connection,read and then decrypted using gzip. With the resulting data a 
-  string which is casted into a dictionary for easy access.</p>
-  <p>saves access_token in the object, also returns access_token Not all 
-  Exceptions have been caught  !</p>
+  <p>Authenticates the social platform using token based Oauth 
+  authentication and saves the authentication token in 
+  self.access_token.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (social_platform TODO JAVONNE fix this please!!!) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>self</code></strong> (social_platform.) - Pointer to the current object.</li>
     </ul></dd>
+    <dt>Returns: Boolean.</dt>
+        <dd>True, if the authentication process completed successfully.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="test_connection"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">test_connection</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.test_connection">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Pings a server to test if it is able to communicate to the network 
+  before making any calls to its ReST API</p>
+  <dl class="fields">
+    <dt>Returns: bool</dt>
+        <dd>True, if the social platform is able to connect to its online 
+          API.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -441,19 +455,44 @@ object --+
     </td>
   </tr></table>
   
-  <p>Decrypts response from a ReST call</p>
+  <p>Decrypts response from a reST call.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>encrypted_data</code></strong> (String) - A encrypted response from a ReST call that needs to be decrypted</li>
-        <li><strong class="pname"><code>headers</code></strong> (Dictionary) - The header response from the server, containing the encryption 
-          method</li>
+        <li><strong class="pname"><code>encrypted_data</code></strong> (String.) - A encrypted response from a ReST call that needs to be decrypted.</li>
+        <li><strong class="pname"><code>headers</code></strong> (Dictionary.) - The header response from the server, containing the encryption 
+          method.</li>
     </ul></dd>
+    <dt>Returns: None.</dt>
+        <dd>Decrypted data.</dd>
   </dl>
-<div class="fields">      <p><strong>To Do:</strong>
-        add return and rtype
-      </p>
-</div></td></tr></table>
+</td></tr></table>
+</div>
+<a name="authenticate_headers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate_headers</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns an authorised headers for a reST call. Uses self.access_token 
+  initialised in <a 
+  href="social_platform.social_platform-class.html#authenticate" 
+  class="link">authenticate()</a>. Note : authenticate() method must first 
+  be called</p>
+  <dl class="fields">
+    <dt>Returns: Dictionary</dt>
+        <dd>a dictionary with the basic header information of an http 
+          request.</dd>
+  </dl>
+</td></tr></table>
 </div>
 <a name="strip_data"></a>
 <div>
@@ -508,7 +547,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 26 16:28:42 2013
+    Generated by Epydoc 3.0.1 on Thu Jun 27 10:51:53 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
