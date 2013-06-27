@@ -38,7 +38,8 @@ class request_handler(object):
         platforms = data["platforms"].lstrip('u').split("#")
         tags = data["tags"].lstrip('u').split("_")
         function = data["function"]
-        location_type = data["location_type"] # For future use
+        # For future use
+        location_type = data["location_type"]
         location = data["location"].lstrip('u').split("#")
         gatewayO = gateway()
         if (function == "heat_map"):
@@ -73,7 +74,8 @@ class request_handler(object):
         platforms = data["platforms"].lstrip('u').split("#")
         tags = data["tags"].lstrip('u').split("_")
         function = data["function"]
-        location_type = data["location_type"] # For future use
+        # For future use
+        location_type = data["location_type"]
         location = data["location"].lstrip('u').split("#")
         gatewayO = gateway()
         if (function == "heat_map"):
