@@ -16,7 +16,7 @@ class request_handler(object):
         Handles all incoming GET and POST requests
     '''
     OK = {'success':'True'}
-    ERROR = {'succes':'False'}
+    ERROR = {'success':'False'}
     def GET(self):
         '''
             Handles GET requests received from users.
@@ -119,7 +119,8 @@ class request_handler(object):
         return return_data_and_status
 
 #:Groups the URL's and their corresponding actions.
-urls = ("/request_handler","request_handler")
+urls = ("/request_handler", "request_handler",
+        "/redirect", "redirect")
 
 #:Creates a Application to delegate requests based on path.
 app = web.application(urls, globals())
