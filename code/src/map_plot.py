@@ -133,7 +133,7 @@ def show_3D_heatmap(heatmap):
 	mlab.show()
 	print "Done."
 
-def save_heatmap(heatmap, path, colour):
+def save_heatmap(heatmap, path='./heatmaps/image.png', colour=False):
 	'''
 	Saves a heatmap to the specified path, in colour if colour is True, or in greyscale if colour is False.
 	@param heatmap: A pixel matrix heatmap.
@@ -144,10 +144,10 @@ def save_heatmap(heatmap, path, colour):
 	@type colour: Boolean
 	@rtype: Void
 	'''
+	from scipy import misc	
 	heatmap = heatmap[::-1]
 	if colour:
 		import numpy as np
-		from scipy import misc
 		from matplotlib.pyplot import cm
 		
 		print "Saving colour heatmap to "+path+"..."
@@ -228,6 +228,7 @@ def heatmap_tile(level, x, y, coords):
 	@return: A pixel matrix heatmap for the given points.
 	@rtype: Rectangular numpy matrix of floats
 	'''
+	raise NotImplemented
 	import numpy as np
 	from math import sqrt
 	
@@ -268,6 +269,7 @@ if __name__ == "__main__":
 	coords = random_coords(10, bounds)
 	heatmap = heatmap(bounds, coords)
 	save_heatmap(heatmap)
+	save_heatmap(heatmap, colour=True)
 	show_heatmap(heatmap, bounds)
 #	show_3D_heatmap(heatmap)
 
