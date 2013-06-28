@@ -11,7 +11,7 @@ import StringIO
 import ast
 import urllib2
 import json
-from instagram.client import InstagramAPI
+from instagram.client import InstagramAPI #downloadable via instagrams dev site
 
 class social_platform(object):
     '''
