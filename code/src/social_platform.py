@@ -29,7 +29,7 @@ class social_platform(object):
             @return: Returns the current platform's name.
             @rtype: String
         '''
-        raise NotImplemented
+        raise NotImplementedError
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         '''
             Queries the underlining social API using a search area defined by a circle. \
@@ -78,7 +78,7 @@ class social_platform(object):
             access token in dictionary doesnt exist.
             @rtype: Boolean
         '''
-        raise NotImplemented
+        raise NotImplementedError
     def test_connection(self):
         ''' Pings a server to test if it is able to communicate to the network before making any calls \
         to it's reST API
@@ -95,6 +95,7 @@ class social_platform(object):
         except urllib2.URLError:
             print "Exception Caught : connection to "+self.get_platform_name()+" timed out"
             return False
+
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
         '''
@@ -117,6 +118,7 @@ class social_platform(object):
             return None
         buffer_data = None
         decrypted_data = None
+        encryption_type = None
         for i in headers:
             if(i[0] == "content-encoding"):
                 encryption_type = i[1]
@@ -125,7 +127,7 @@ class social_platform(object):
             buffer_data = gzip.GzipFile('', 'rb', 9, StringIO.StringIO(encrypted_data))  # decoding of the data
             decrypted_data = buffer_data.read()
         else:
-            print "Unknown decryption method : "+str(encryption_type) 
+            print "Unknown encryption method : "+str(encryption_type) 
         return decrypted_data 
     def authenticate_headers(self):
         ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
@@ -135,7 +137,7 @@ class social_platform(object):
             @return: a dictionary with the basic header information of an http request.
             @rtype: Dictionary
         '''
-        raise NotImplemented
+        raise NotImplementedError
     def strip_data(self, input_data=None, selected_properties=None):
         '''
             Strips the given raw data so that only the selected properties remain.
@@ -149,7 +151,7 @@ class social_platform(object):
             @return: The stripped data.
             @rtype: JSON Object 
         '''
-        raise NotImplemented
+        raise NotImplementedError
     
 class twitter_platform(social_platform):
     ''' Class for connecting to the Twitter API
@@ -400,10 +402,10 @@ class instagram_platform(social_platform):
         return "instagram"    
     def request_center_radius(self, criteria=None, center=None, radius=None):
         "TODO:"     
-        raise NotImplemented
+        raise NotImplementedError
     def request_region(self, criteria=None, area=None):
         "TODO:"
-        raise NotImplemented        
+        raise NotImplementedError        
     def authenticate(self,code=None):
         ''' Instagram authentication, must be called twice to authenticate completely, first call of authentication takes no parameters and requests \
             authentication to the instagram server by being redirected to the instagram site requesting a code.
@@ -425,7 +427,7 @@ class instagram_platform(social_platform):
             
         
     def authenticate_headers(self):
-        raise NotImplemented    
+        raise NotImplementedError    
     
     def strip_data(self, input_data=None, selected_properties=None):
         '''
