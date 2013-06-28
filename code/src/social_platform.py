@@ -11,16 +11,18 @@ import StringIO
 import ast
 import urllib2
 import json
-from instagram.client import InstagramAPI
+from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
+
+
 
 class social_platform(object):
     '''
         Underlying data type which is extended by each social platform to \
-        communicate with the social network's API
+        communicate with that social network's API
     ''' 
     def get_platform_name(self):
         '''
-            Returns the name of the social platform of the object it is applied to.
+            Returns the name (type) of the social platform object it is applied to.
  
             @param self: Pointer to the current object.
             @type self: L{social_platform}       
@@ -30,8 +32,8 @@ class social_platform(object):
         raise NotImplemented
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         '''
-            Queries the underlining social API using a search area defined by a circle. 
-            If any of the parameters are not included then the query is rejected 
+            Queries the underlining social API using a search area defined by a circle. \
+            If any of the parameters are not included then the query is rejected \
             and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.

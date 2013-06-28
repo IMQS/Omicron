@@ -67,7 +67,7 @@ object --+
 
 <hr />
 <p>Underlying data type which is extended by each social platform to
-  communicate with the social network's API</p>
+  communicate with that social network's API</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -88,12 +88,12 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">String.</span>
+      <span class="summary-type">String</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#get_platform_name" class="summary-sig-name">get_platform_name</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns the name of the social platform of the object it is applied 
+      Returns the name (type) of the social platform object it is applied 
       to.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.get_platform_name">source&nbsp;code</a></span>
@@ -106,7 +106,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -127,7 +127,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -147,7 +147,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Boolean.</span>
+      <span class="summary-type">Boolean</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -166,7 +166,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bool</span>
+      <span class="summary-type">Boolean</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -184,7 +184,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">None.</span>
+      <span class="summary-type">String</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -315,10 +315,15 @@ object --+
     </td>
   </tr></table>
   
-  <p>Returns the name of the social platform of the object it is applied 
+  <p>Returns the name (type) of the social platform object it is applied 
   to.</p>
   <dl class="fields">
-    <dt>Returns: String.</dt>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
+    <dt>Returns: String</dt>
         <dd>Returns the current platform's name.</dd>
   </dl>
 </td></tr></table>
@@ -341,19 +346,22 @@ object --+
   </tr></table>
   
   <p>Queries the underlining social API using a search area defined by a 
-  circle. If any of the parameters are not included then the query is 
-  rejected and the &quot;some parameters of query are missing&quot; will be
-  returned.</p>
+  circle. / If any of the parameters are not included then the query is 
+  rejected / and the &quot;some parameters of query are missing&quot; will 
+  be returned.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
-          class="link">social_platform</a>.) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List.) - A list of words to search for.</li>
-        <li><strong class="pname"><code>gps_center</code></strong> (A tuple of floats.) - A tuple consisting of longitude and latitude GPS coordinates.</li>
-        <li><strong class="pname"><code>radius</code></strong> (Float.) - The radius from the <code class="link">gps_center</code> that 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>gps_center</code></strong> (A tuple of floats) - A tuple consisting of longitude and latitude GPS coordinates.</li>
+        <li><strong class="pname"><code>radius</code></strong> (Float) - The radius from the <code class="link">gps_center</code> that 
           forms the circular region to be searched.</li>
     </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>result_set a JSON Object containing the resulting data from the 
+          request to the API</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -381,11 +389,14 @@ object --+
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
-          class="link">social_platform</a>.) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List.) - A list of words to search for.</li>
-        <li><strong class="pname"><code>search_region</code></strong> (String.) - Name of the search_region - in the following format &lt;country 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>search_region</code></strong> (String) - Name of the search_region - in the following format &lt;country 
           state city&gt;.</li>
     </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>result_set a JSON Object containing the resulting data from the 
+          request to the API</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -409,10 +420,15 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (social_platform.) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Boolean.</dt>
-        <dd>True, if the authentication process completed successfully.</dd>
+    <dt>Returns: Boolean</dt>
+        <dd>True, if the authentication process completed successfully. 
+          False, if the authentication process failed. Fails under the 
+          following conditions, Connection error, http error code, error if
+          decrypted data doesn't have the correct values. access token in 
+          dictionary doesnt exist.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -433,9 +449,15 @@ object --+
   <p>Pings a server to test if it is able to communicate to the network 
   before making any calls to its ReST API</p>
   <dl class="fields">
-    <dt>Returns: bool</dt>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
+    <dt>Returns: Boolean</dt>
         <dd>True, if the social platform is able to connect to its online 
-          API.</dd>
+          API. False, if the social platform is unable to connect to its 
+          online API.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -459,12 +481,13 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>encrypted_data</code></strong> (String.) - A encrypted response from a ReST call that needs to be decrypted.</li>
-        <li><strong class="pname"><code>headers</code></strong> (Dictionary.) - The header response from the server, containing the encryption 
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>encrypted_data</code></strong> (String) - A encrypted response from a ReST call that needs to be decrypted.</li>
+        <li><strong class="pname"><code>headers</code></strong> (Dictionary) - The header response from the server, containing the encryption 
           method.</li>
     </ul></dd>
-    <dt>Returns: None.</dt>
-        <dd>Decrypted data.</dd>
+    <dt>Returns: String</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -484,10 +507,15 @@ object --+
   
   <p>Returns an authorised headers for a reST call. Uses self.access_token 
   initialised in <a 
-  href="social_platform.social_platform-class.html#authenticate" 
+  href="social_platform.instagram_platform-class.html#authenticate" 
   class="link">authenticate()</a>. Note : authenticate() method must first 
   be called</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
     <dt>Returns: Dictionary</dt>
         <dd>a dictionary with the basic header information of an http 
           request.</dd>
@@ -515,8 +543,10 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
         <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
-        <li><strong class="pname"><code>selected_properties</code></strong> (List of strings - either 'tags', 'location' or 'post'.) - List of properties that should be kept after stripping.</li>
+        <li><strong class="pname"><code>selected_properties</code></strong> (List) - List of strings - either 'tags', 'location' or 'post'.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The stripped data.</dd>
@@ -547,7 +577,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Jun 27 10:51:53 2013
+    Generated by Epydoc 3.0.1 on Fri Jun 28 09:18:55 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

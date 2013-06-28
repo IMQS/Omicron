@@ -190,11 +190,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#save_heatmap" class="summary-sig-name">save_heatmap</a>(<span class="summary-sig-arg">heatmap</span>)</span><br />
-      Saves a heatmap to file, in a subfolder named &quot;heatmaps&quot; 
-      with the naming convention &quot;heatmap_###&quot; where ### is a 
-      3-digit number that is 1 larger than the largest number already 
-      present.</td>
+          <td><span class="summary-sig"><a href="map_plot-module.html#save_heatmap" class="summary-sig-name">save_heatmap</a>(<span class="summary-sig-arg">heatmap</span>,
+        <span class="summary-sig-arg">path</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">./heatmaps/image.png</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">colour</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Saves a heatmap to the specified path, in colour if colour is True, 
+      or in greyscale if colour is False.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="map_plot-pysrc.html#save_heatmap">source&nbsp;code</a></span>
             
@@ -254,6 +254,27 @@
       Plots a Gaussian distribution.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="map_plot-pysrc.html#plot_gauss">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Rectangular numpy matrix of floats</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="map_plot-module.html#heatmap_tile" class="summary-sig-name">heatmap_tile</a>(<span class="summary-sig-arg">level</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>,
+        <span class="summary-sig-arg">coords</span>)</span><br />
+      Creates a 256x256 heatmap tile for the specified zoom level and 
+      location for the given coordinates.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="map_plot-pysrc.html#heatmap_tile">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -410,8 +431,7 @@
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
           [left, right, bottom, top].</li>
-        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats@return:  A heatmap represented by a 
-          pixel matrix.) - The X, Y coordinates of points.</li>
+        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats.) - The X, Y coordinates of points.</li>
     </ul></dd>
     <dt>Returns: Rectangular numpy matrix of floats</dt>
         <dd>A pixel matrix heatmap for the given points.</dd>
@@ -476,20 +496,23 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">save_heatmap</span>(<span class="sig-arg">heatmap</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">save_heatmap</span>(<span class="sig-arg">heatmap</span>,
+        <span class="sig-arg">path</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">./heatmaps/image.png</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">colour</span>=<span class="sig-default">False</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="map_plot-pysrc.html#save_heatmap">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Saves a heatmap to file, in a subfolder named &quot;heatmaps&quot; 
-  with the naming convention &quot;heatmap_###&quot; where ### is a 3-digit
-  number that is 1 larger than the largest number already present.</p>
+  <p>Saves a heatmap to the specified path, in colour if colour is True, or
+  in greyscale if colour is False.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>heatmap</code></strong> (Rectangular numpy matrix of floats) - A pixel matrix heatmap.</li>
+        <li><strong class="pname"><code>path</code></strong> (String) - The file path to save the file into.</li>
+        <li><strong class="pname"><code>colour</code></strong> (Boolean) - Whether or not the heatmap should be saved in colour.</li>
     </ul></dd>
     <dt>Returns: Void</dt>
   </dl>
@@ -581,6 +604,39 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="heatmap_tile"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">heatmap_tile</span>(<span class="sig-arg">level</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>,
+        <span class="sig-arg">coords</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="map_plot-pysrc.html#heatmap_tile">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates a 256x256 heatmap tile for the specified zoom level and 
+  location for the given coordinates. Variance is adjusted according to 
+  level.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>level</code></strong> (int) - The zoom level of the tile, between 0 and 21.</li>
+        <li><strong class="pname"><code>x</code></strong> (int) - The X coordinate of the tile.</li>
+        <li><strong class="pname"><code>y</code></strong> (int) - The Y coordinate of the tile.</li>
+        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats) - The X, Y coordinates of points.</li>
+    </ul></dd>
+    <dt>Returns: Rectangular numpy matrix of floats</dt>
+        <dd>A pixel matrix heatmap for the given points.</dd>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -605,7 +661,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Jun 27 10:51:53 2013
+    Generated by Epydoc 3.0.1 on Fri Jun 28 09:18:55 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

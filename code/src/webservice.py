@@ -133,6 +133,7 @@ class redirect_handler:
         #web.Redirect()
         return "Redirecting"
     
+
 class index:
     '''This class is for testing the authentication
     '''
@@ -171,16 +172,16 @@ class index:
     def POST(self):
         raise NotImplemented
 
-#:Groups the URL's and their corresponding actions.
+
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
-        "/","index")
+        "/","index")#:Groups the URL's and their corresponding actions.
 
-#:Creates a Application to delegate requests based on path.
-app = web.application(urls, globals())
+app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
-#:Creates the application function that is needed for the swgi mod to work. 
-application = app.wsgifunc()
+
+application = app.wsgifunc() #:Creates the application function that is needed for the swgi mod to work.
+
 
 if __name__ == "__main__":
     app.run()
