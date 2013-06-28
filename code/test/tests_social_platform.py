@@ -26,7 +26,7 @@ class test_class_social_platform(unittest.TestCase):
         pass
     def test_twitter_get_data(self):
         self.twitterObject.authenticate()
-        self.assertNotEqual(self.twitterObject.get_data(tag_list=["#snow","#winter"]),None)
+        self.assertNotEqual(self.twitterObject.request_center_radius(["#food"], tuple([-33,18]), 10),None)
     def testName(self):
         pass
 
