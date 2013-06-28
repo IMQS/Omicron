@@ -134,15 +134,16 @@ class redirect_handler:
         return "Redirecting"
     
     
-#:Groups the URL's and their corresponding actions.
+
 urls = ("/request_handler", "request_handler",
-        "/redirect", "redirect_handler")
+        "/redirect", "redirect_handler") #:Groups the URL's and their corresponding actions.
 
-#:Creates a Application to delegate requests based on path.
-app = web.application(urls, globals())
 
-#:Creates the application function that is needed for the swgi mod to work. 
-application = app.wsgifunc()
+app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
+
+
+application = app.wsgifunc() #:Creates the application function that is needed for the swgi mod to work.
+
 
 if __name__ == "__main__":
     app.run()

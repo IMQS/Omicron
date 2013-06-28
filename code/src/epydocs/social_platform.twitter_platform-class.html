@@ -62,6 +62,8 @@
 </pre>
 
 <hr />
+<p>Class for connecting to the Twitter API</p>
+
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -87,7 +89,7 @@
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Constructor defines the consumer_key, consumer_secret, 
-      HttpsConnection string, the Test connection url, the httpsOauthstring
+      HttpsConnection string, the Test connection URL, the httpsOauthstring
       and the access_token</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.__init__">source&nbsp;code</a></span>
@@ -118,7 +120,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -139,15 +141,16 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">JSON Object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#request_region" class="summary-sig-name">request_region</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">search_region</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Queries the underlining social API using a search area defined by a 
-      region.</td>
+      Returns:
+      result_set a JSON Object containing the resulting data from the 
+      request to the API</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.request_region">source&nbsp;code</a></span>
             
@@ -159,7 +162,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Boolean.</span>
+      <span class="summary-type">Boolean</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -182,7 +185,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns an authorised headers for a reST call.</td>
+      Returns an authorised header for a reST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate_headers">source&nbsp;code</a></span>
             
@@ -294,9 +297,14 @@
   </tr></table>
   
   <p>Constructor defines the consumer_key, consumer_secret, HttpsConnection
-  string, the Test connection url, the httpsOauthstring and the 
+  string, the Test connection URL, the httpsOauthstring and the 
   access_token</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
     </dt>
@@ -320,6 +328,11 @@
   <p>Returns the name of the social platform of the object it is applied 
   to.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
     <dt>Returns: String.</dt>
         <dd>Returns the current platform's name.</dd>
     <dt>Overrides:
@@ -358,6 +371,9 @@
         <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance from the gps_center that will be covered by the 
           search.</li>
     </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>result_set a JSON Object containing the resulting data from the 
+          request to the API</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#request_center_radius">social_platform.request_center_radius</a>
     </dt>
@@ -387,17 +403,20 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> - A list of words to search for.</li>
-        <li><strong class="pname"><code>search_region</code></strong> - Name of the search_region - in the following format &lt;country 
-          state city&gt;.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>result_set a JSON Object containing the resulting data from the 
+          request to the API</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#request_region">social_platform.request_region</a>
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
-</td></tr></table>
+<div class="fields">      <p><strong>To Do:</strong>
+        Request tweets from a region
+      </p>
+</div></td></tr></table>
 </div>
 <a name="authenticate"></a>
 <div>
@@ -433,8 +452,12 @@
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Boolean.</dt>
-        <dd>True, if the authentication process completed successfully.</dd>
+    <dt>Returns: Boolean</dt>
+        <dd>True, if the authentication process completed successfully. 
+          False, if the authentication process failed. Fails under the 
+          following conditions, Connection error, http error code, error if
+          decrypted data doesn't have the correct values. access token in 
+          dictionary doesnt exist.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#authenticate">social_platform.authenticate</a>
     </dt>
@@ -455,14 +478,20 @@
     </td>
   </tr></table>
   
-  <p>Returns an authorised headers for a reST call. Uses self.access_token 
+  <p>Returns an authorised header for a reST call. Uses self.access_token 
   initialised in <a 
   href="social_platform.twitter_platform-class.html#authenticate" 
-  class="link">authenticate()</a>. Note : authenticate() method must first 
-  be called</p>
+  class="link">authenticate()</a>. Note : <a 
+  href="social_platform.twitter_platform-class.html#authenticate" 
+  class="link">authenticate()</a> method must first be called</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+    </ul></dd>
     <dt>Returns: Dictionary</dt>
-        <dd>a dictionary with the basic header information of an http 
+        <dd>A dictionary with the basic header information of an http 
           request.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#authenticate_headers">social_platform.authenticate_headers</a>
@@ -492,7 +521,8 @@
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
-        <li><strong class="pname"><code>selected_properties</code></strong> (List of strings - either 'tags', 'location' or 'post'.) - List of properties that should be kept after stripping.</li>
+        <li><strong class="pname"><code>selected_properties</code></strong> (List) - List of properties that should be kept after stripping. Has to be
+          one or more of the following 'tags', 'location' or 'post'.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The stripped data.</dd>
@@ -526,7 +556,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Jun 27 10:51:53 2013
+    Generated by Epydoc 3.0.1 on Fri Jun 28 09:18:55 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
