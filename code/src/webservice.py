@@ -133,11 +133,49 @@ class redirect_handler:
         #web.Redirect()
         return "Redirecting"
     
-    
+
+class index:
+    '''This class is for testing the authentication
+    '''
+    def __init__(self):
+        self.gateway = gateway()
+
+    def GET(self):
+        
+        inputs = web.input()
+        code = None
+        try:
+            code = inputs['code']
+        except KeyError:
+            print "No code given, Phase 1 authentication"
+        if(code == None):
+            platform = inputs['platform']
+            authenticate = inputs['authentication']
+            print platform
+            print authenticate
+            if(authenticate == 'true'):
+                print platform
+                if(platform == 'instagram'):
+                    smlist = self.gateway._available_social_media(['instagram'])
+                    if(len(smlist) == 1):
+                        raise web.seeother(smlist[0].authenticate(code=None))
+                    return False
+                elif(platform == 'twitter'):
+                    return True
+        else:
+            smlist = self.gateway._available_social_media(['instagram'])
+            if(len(smlist) == 1):
+                smlist[0].authenticate(code=code)
+                return "authenticated"
+        return "5"
+            
+    def POST(self):
+        raise NotImplemented
+
 
 urls = ("/request_handler", "request_handler",
-        "/redirect", "redirect_handler") #:Groups the URL's and their corresponding actions.
-
+        "/redirect", "redirect_handler",
+        "/","index")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 

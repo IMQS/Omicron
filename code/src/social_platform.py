@@ -385,7 +385,7 @@ class instagram_platform(social_platform):
         
         self.access_token = None
         
-        self.redirect = "http://www.superfluous.imqs.co.za/Omicron/redirect"
+        self.redirect = "http://0.0.0.0/redirect"
         self.api = InstagramAPI(client_id=self.client_id, client_secret=self.client_secret, redirect_uri=self.redirect)
         self.redirect = self.api.get_authorize_login_url(scope = "")
         
