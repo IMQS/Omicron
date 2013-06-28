@@ -1,7 +1,7 @@
 '''
 Created on 28 Jun 2013
 
-@author: Shaun Schreiber
+@author: S. Schreiber
 '''
 import unittest
 import database
