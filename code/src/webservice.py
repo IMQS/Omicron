@@ -130,44 +130,46 @@ class redirect_handler:
         '''
         inputs =  web.input()
         code = inputs['code']
+        platform = inputs['platform']
         #web.Redirect()
+        raise web.seeother("/authorise"+"?"+"platform="+platform+"&"+"code="+code)
         return "Redirecting"
     
 
-class index:
-    '''This class is for testing the authentication
+class authorisation:
+    '''@todo: This class is for testing the authentication must be changed to something else.
     '''
     def __init__(self):
         self.gateway = gateway()
 
     def GET(self):
-        
+        ''' Used in the 2 phase authorization
+        '''
         inputs = web.input()
         code = None
+        platform = inputs['platform']
         try:
             code = inputs['code']
         except KeyError:
             print "No code given, Phase 1 authentication"
         if(code == None):
-            platform = inputs['platform']
+
             authenticate = inputs['authentication']
             print platform
             print authenticate
             if(authenticate == 'true'):
                 print platform
-                if(platform == 'instagram'):
-                    smlist = self.gateway._available_social_media(['instagram'])
-                    if(len(smlist) == 1):
-                        raise web.seeother(smlist[0].authenticate(code=None))
+                if(platform != None ):
+                    self.smlist = self.gateway._available_social_media([platform])
+                    if(len(self.smlist) == 1):
+                        raise web.seeother(self.smlist[0].authenticate(code=None))
                     return False
-                elif(platform == 'twitter'):
-                    return True
         else:
-            smlist = self.gateway._available_social_media(['instagram'])
+            smlist = self.gateway._available_social_media([platform])
             if(len(smlist) == 1):
                 smlist[0].authenticate(code=code)
-                return "authenticated"
-        return "5"
+                return smlist[0].access_token
+        return "Authorisation failed please Re-authorise"
             
     def POST(self):
         raise NotImplemented
@@ -175,7 +177,7 @@ class index:
 
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
-        "/","index")#:Groups the URL's and their corresponding actions.
+        "/authorise","authorisation")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
