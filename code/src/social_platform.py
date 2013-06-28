@@ -34,7 +34,7 @@ class social_platform(object):
         '''
             Queries the underlining social API using a search area defined by a circle. \
             If any of the parameters are not included then the query is rejected \
-            and the "some parameters of query are missing" will be returned.
+            and "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -51,8 +51,8 @@ class social_platform(object):
         raise NotImplementedError
     def request_region(self, search_tags=None, search_region=None):
         '''
-            Queries the underlining social API using a search area defined by a region. 
-            If any of the parameters are not included then the query is rejected 
+            Queries the underlining social API using a search area defined by a region. \
+            If any of the parameters are not included then the query is rejected \
             and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
@@ -72,17 +72,21 @@ class social_platform(object):
 
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            @return: True, if the authentication process completed successfully. False, if the authentication process failed. Fails under the following conditions, Connection error, http error code, error if decrypted data doesn't have the correct values. 
+            @return: True, if the authentication process completed successfully. \
+            False, if the authentication process failed. Fails under the following conditions, \
+            Connection error, http error code, error if decrypted data doesn't have the correct values. 
             access token in dictionary doesnt exist.
             @rtype: Boolean
         '''
         raise NotImplemented
     def test_connection(self):
-        ''' Pings a server to test if it is able to communicate to the network before making any calls to its ReST API
+        ''' Pings a server to test if it is able to communicate to the network before making any calls \
+        to it's reST API
         
             @param self: Pointer to the current object.
             @type self: L{social_platform}
-            @return: True, if the social platform is able to connect to its online API. False, if the social platform is unable to connect to its online API.
+            @return: True, if the social platform is able to connect to its online API. \
+            False, if the social platform is unable to connect to its online API.
             @rtype: Boolean
         '''
         print "Testing Connection"
@@ -98,7 +102,7 @@ class social_platform(object):
         
         @param self: Pointer to the current object.
         @type self: L{social_platform}
-        @param encrypted_data: A encrypted response from a ReST call that needs to be decrypted.
+        @param encrypted_data: A encrypted response from a reST call that needs to be decrypted.
         @type encrypted_data: String
         @param headers: The header response from the server, containing the encryption method.
         @type headers: Dictionary
@@ -222,14 +226,19 @@ class twitter_platform(social_platform):
         result_set = json.loads(result_set)
         return result_set
     def request_region(self, search_tags=None, search_region=None):
-        '''
-            @todo: Request tweets from a region
+        ''' Queries the underlining social API using a search area defined by a region. \
+            If any of the parameters are not included then the query is rejected \
+            and the "some parameters of query are missing" will be returned.
+            F
             @param self: Pointer to the current object.
             @type self: L{social_platform}
+            @param search_tags: A list of tags to search for.
+            @type search_tags: List
+            @param search_region: Name of the search_region - in the following format <country state city>.
+            @type search_region: String
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
-            @rtype: JSON Object
-        '''
+            @rtype: JSON Object'''
         return "TODO:"
     def authenticate(self):
         '''
@@ -241,7 +250,7 @@ class twitter_platform(social_platform):
             HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.
             
             saves access_token in the object, also returns access_token
-            Not all Exceptions have been caught  !
+            TODO: Not all Exceptions have been caught  !
             @param self: Pointer to the current object.
             @type self: social_platform
         '''
