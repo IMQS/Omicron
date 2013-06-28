@@ -81,20 +81,7 @@ class gateway(object):
             @return: The raw data that was fetched from the social media API's.
             @rtype: GeoJSON array 
         '''
-        user_data = web.input()
-        is_valid = self._available_social_media(str(user_data.platforms).split(' '))
-        return_data = {}
-        if is_valid == None:
-            "TODO: change that it returns a JSONobject"
-            return "One or more platforms were unavailable."
-        else :
-            for social_plat in is_valid:
-                social_plat.authenticate()
-                data = social_plat.request_center_radius(str(user_data.search_tags).split(' '), (float(str(user_data.search_tags).split(' ')[0]),float(str(user_data.search_tags).split(' ')[1])), float(user_data.raduis))
-                return_data[social_plat.get_platform_name()] = data
-                
-                
-        return "Selected platforms : " + str(user_data.platforms) + " , search_tags: " +  str(user_data.search_tags)
+        return "Not in use."
     
     def POST(self):
         '''
@@ -110,7 +97,7 @@ class gateway(object):
             @return: The raw data that was fetched from the social media API's.
             @rtype: GeoJSON array 
         '''
-        
+        return "Not in use."
 if __name__ == "__main__":
     obj = gateway()
     print obj.execute_requests(['twitter'], ['#snow' ,'#winter'], [(56.7, 86.4)], 5000)
