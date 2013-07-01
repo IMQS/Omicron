@@ -115,8 +115,7 @@ class test_class_social_platform(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             self.twitterObject.get_platform_name()
     def test_twitter_strip_data(self):
-        with self.assertRaises(NotImplementedError):
-            self.twitterObject.get_platform_name()
+        pass
 
 
 

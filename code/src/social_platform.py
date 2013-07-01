@@ -206,8 +206,7 @@ class twitter_platform(social_platform):
         for i in search_tags:
             tags = tags + " " + i
         tags = tags.strip()
-        """TODO change count back to 100"""
-        tags = {"q":tags, "count":10}
+        tags = {"q":tags, "count":100}
         
         if(gps_center != None and len(gps_center) == 2 and radius != None):
             tags['geocode'] = str(gps_center[0]) + " " + str(gps_center[1]) + " " + str(radius) + "km"
@@ -240,7 +239,7 @@ class twitter_platform(social_platform):
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object'''
-        return "TODO:"
+        raise NotImplementedError
     def authenticate(self):
         '''
             Authenticates the Application "TeamOmicron" for read-only access to the social media platform. Uses the self.consumer_key and self.consumer_secret
@@ -454,7 +453,8 @@ class instagram_platform(social_platform):
 if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
-    search_set = k.request_center_radius(["#snow #winter"])
+    search_set = k.request_center_radius(['#coffee'])
+    print search_set
     print k.strip_data(search_set, ['tags', 'location', 'post'])
 
     
