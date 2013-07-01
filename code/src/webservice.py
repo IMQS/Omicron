@@ -34,6 +34,8 @@ class request_handler(object):
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
             if location_type has the value "radius" then location must be in the following format "longitude_latitude_<radius>" 
             @type location: String
+            @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
+            @type directory: String
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: JSON Object
             
@@ -46,6 +48,7 @@ class request_handler(object):
         # For future use
         location_type = raw_data["location_type"]
         location = raw_data["location"].lstrip('u').split("_")
+        l_x_y = str(raw_data["directory"]).split("/")[1:]
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
@@ -56,7 +59,7 @@ class request_handler(object):
             try:
                 #@TODO: FIX the bounding box big problem
                 heat_map = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
-                mp.save_heatmap(heat_map)
+                mp.save_heatmap(heat_map,"./heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png")
                 return_data_and_status = self.OK
             except:
                 msg = "The heatmap could not be generated or stored"
@@ -85,6 +88,8 @@ class request_handler(object):
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
             if location_type has the value "radius" then location must be in the following format "longitude#latitude#<radius>" 
             @type location: String
+            @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
+            @type directory: String
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: JSON Object
         '''
@@ -96,6 +101,7 @@ class request_handler(object):
         # For future use
         location_type = raw_data["location_type"]
         location = raw_data["location"].lstrip('u').split("#")
+        l_x_y = str(raw_data["directory"]).split("/")[1:]
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
@@ -106,7 +112,7 @@ class request_handler(object):
             try:
                 #@TODO: FIX the bounding box big problem
                 heat_map = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
-                mp.save_heatmap(heat_map)
+                mp.save_heatmap(heat_map,"./heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png")
                 return_data_and_status = self.OK
             except:
                 msg = "The heatmap could not be generated or stored"

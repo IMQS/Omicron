@@ -40,6 +40,10 @@ class database_handler(object):
             @type query: L{string}
             @param social_data: JSON Object that contains the social platforms and the relevant social data associated with them.
             @type social_data: JSON Object
+            @param database_name: The name of the database.
+            @type database_name: string
+            @param collection_name: The name of the collection you want to access.
+            @type collection_name: string
             @raise AttributeError: If a parameter is missing or None.
             @raise Exception("Connection failure"): Unable to connect to Database.
         '''
@@ -68,6 +72,10 @@ class database_handler(object):
             @type query: L{string}
             @return: The data that meet the criteria of the search parameters.
             @rtype: JSON Object
+            @param database_name: The name of the database.
+            @type database_name: string
+            @param collection_name: The name of the collection you want to access.
+            @type collection_name: string
             @raise AttributeError: If a parameter is missing or None.
             @raise Exception("Connection failure"): Unable to connect to Database.
         '''
