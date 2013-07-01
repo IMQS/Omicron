@@ -222,7 +222,6 @@ class twitter_platform(social_platform):
             print "Error Failed to get Twitter data"
             return None
         result_set = response.read()
- 
         result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
         conn.close()
         result_set = json.loads(result_set)
@@ -314,8 +313,6 @@ class twitter_platform(social_platform):
             @return: The stripped data.
             @rtype: JSON Object 
         '''
-        
-        
         if(selected_properties == None):
             print "There are no properties to strip the data by"
             return None
@@ -326,30 +323,53 @@ class twitter_platform(social_platform):
         search_set = input_data['statuses']
         result_set = {}
         
-        if ('post' in selected_properties):
-            result_set.update({'posts': ''})
+        if('post' in selected_properties):
             for tweet in search_set:
-                print "tweet"
-                if((tweet['text'] != None) and (tweet['geo'] != None)):
-                    print "posts"
-                    result_set['posts'] =  result_set['posts'] +'(' + tweet['text'] + '), '
-            result_set['posts'] = '[' + result_set['posts'] + ']'
-        
+                if(tweet['text'] != None):
+                    result_set['posts'] = result_set.update({'posts':tweet['text']})
+
         if('location' in selected_properties):
-            result_set.update({'location': ''})
             for tweet in search_set:
                 if(tweet['geo'] != None):
-                    result_set['location'] =  result_set['location'] + '(' + tweet['geo']['coordinates'][0].__str__() + ', ' + tweet['geo']['coordinates'][1].__str__() +  '), '
-                    #result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
-            result_set['location'] = '[' + result_set['location'] + ']'
+                    result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
+            
         
         search_set = input_data['search_metadata']
-        if ('tags' in selected_properties):
-            result_set.update({'tags': ''})
+        if('tags' in selected_properties):
             if(search_set['query']):
                 result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
-                #result_set['tags'] = '{' + result_set['tags'] + '}'
-        return result_set  
+        
+        #return result_set
+           
+        """ search_set = input_data['search_metadata']
+        if('tags' in selected_properties):
+            if(input_data['search_metadata']):
+                result_set.update({'tags':search_set['query'].replace('%23', '#').replace('+', ' ').split(' ')})         
+        
+        newset = ''
+        for element in result_set['tags']:
+                newset = newset+element 
+        reset = newset.split('#') 
+        print reset"""
+        #for i in len(reset):
+        #        result_set['tags'][i] = reset[i]
+        
+        return result_set
+"""        search_set = input_data['search_metadata']
+        if('tags' in selected_properties):
+            for instapost in search_set:
+
+                result_set.update({'tags':search_set['query']}) 
+        newset = ''
+        s = result_set['tags'].split(' ')
+        for element in s:
+            if ('#' in element):
+                newset = newset+element
+        reset = newset.split('#')
+        
+        result_set['tags'] = reset # = reset.pop(0)        
+                
+        print reset """
         
     
 class instagram_platform(social_platform):
