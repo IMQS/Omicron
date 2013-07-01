@@ -40,13 +40,14 @@ class test_class_social_platform(unittest.TestCase):
             self.socialObject.get_platform_name()
 
     def test_decrypt_response(self):
-#       test1 = "Hello this is a basic string"
-#        test2 = "#%&@(#&$*&*@@(! crazy string"
-#        compress1 = test1.encode('zlib')
-#        compress2 = test2.encode('zlib')
-#        headers = {"content-encoding":"gzip"}
-#        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress1, headers=headers),test1)
-#        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress2, headers=headers),test2)
+        test1 = "Hello this is a basic string"
+        test2 = "#%&@(#&$*&*@@(! crazy string"
+        compress1 = test1.encode('zlib')
+        compress2 = test2.encode('zlib')
+
+        headers = [tuple(["content-encoding","gzip"])]
+        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress1, headers=headers),test1)
+        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress2, headers=headers),test2)
         pass
     def test_authenticate_headers(self):
         with self.assertRaises(NotImplementedError):
