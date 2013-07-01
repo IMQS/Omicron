@@ -271,6 +271,6 @@ if __name__ == "__main__":
 	save_heatmap(heatmap)
 	save_heatmap(heatmap, colour=True)
 	show_heatmap(heatmap, bounds)
-#	show_3D_heatmap(heatmap)
+	show_3D_heatmap(heatmap)
 
 
