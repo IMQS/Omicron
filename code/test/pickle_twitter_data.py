@@ -7,11 +7,13 @@ Created on 01 Jul 2013
 '''
 import social_platform as sp
 import pickle
+hashtag = '#coffee'
+
 
 if __name__ == '__main__':
     twitterObject = sp.twitter_platform()
     twitterObject.authenticate()
     #: Search for 50 posts which have 'coffee' tagged.
-    data = twitterObject.request_center_radius(search_tags = ['#coffee'])
+    data = twitterObject.request_center_radius(search_tags = [hashtag])
     pickle.dump( data, open( "tweets.p", "wb" ) )
     print 'Data has been pickled to \'tweets.p\''
