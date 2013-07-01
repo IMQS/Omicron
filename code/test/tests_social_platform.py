@@ -6,6 +6,7 @@ Created on 21 Jun 2013
 import unittest
 import gzip
 import social_platform as sp
+import StringIO
 class test_class_social_platform(unittest.TestCase):
 
 
@@ -42,12 +43,23 @@ class test_class_social_platform(unittest.TestCase):
     def test_decrypt_response(self):
         test1 = "Hello this is a basic string"
         test2 = "#%&@(#&$*&*@@(! crazy string"
-        compress1 = test1.encode('zlib')
-        compress2 = test2.encode('zlib')
-
-        #headers = [tuple(["content-encoding","gzip"])]
-        #self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress1, headers=headers),test1)
-        #self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress2, headers=headers),test2)
+        out = StringIO.StringIO()
+        f = gzip.GzipFile(fileobj=out, mode='w')
+        f.write(test1)
+        f.close()
+        compress1 = out.getvalue()
+        
+        out = StringIO.StringIO()
+        f = gzip.GzipFile(fileobj=out, mode='w')
+        f.write(test2)
+        f.close()
+        compress2 = out.getvalue()
+        
+        
+        
+        headers = [tuple(["content-encoding","gzip"])]
+        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress1, headers=headers),test1)
+        self.assertEqual(self.socialObject.decrypt_response(encrypted_data=compress2, headers=headers),test2)
         pass
     def test_authenticate_headers(self):
         with self.assertRaises(NotImplementedError):
