@@ -328,9 +328,7 @@ class twitter_platform(social_platform):
         if ('post' in selected_properties):
             result_set.update({'posts': ''})
             for tweet in search_set:
-                print "tweet"
                 if((tweet['text'] != None) and (tweet['geo'] != None)):
-                    print "posts"
                     result_set['posts'] =  result_set['posts'] +'(' + tweet['text'] + '), '
             result_set['posts'] = '[' + result_set['posts'] + ']'
         
