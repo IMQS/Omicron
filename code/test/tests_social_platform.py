@@ -67,9 +67,6 @@ class test_class_social_platform(unittest.TestCase):
     def test_authenticate_headers(self):
         with self.assertRaises(NotImplementedError):
             self.socialObject.authenticate_headers()
-    def test_strip_data(self):
-        with self.assertRaises(NotImplementedError):
-            self.socialObject.strip_data(None, None)
             
     def test_twitter_get_platform_name(self):
         self.assertEqual(self.twitterObject.get_platform_name(),'twitter')
@@ -101,12 +98,15 @@ class test_class_social_platform(unittest.TestCase):
         pass
     def test_twitter_authenticate_headers(self):
         expected ={ "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.twitterObject.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
-        self.assertDictEqual(expected, self.twitterObject.authenticate_headers(),"twitter headers")
+        self.assertDictEqual(expected, self.twitterObject.authenticate_headers(),"twitter headers failed")
                                
     def test_twitter_request_center_radius(self):
-        pass
-        #self.twitterObject.request_center_radius(search_tags=["#snow"], gps_center=None, radius=None)
-        #self.twitterObject.request_center_radius(search_tags=["#snow"], gps_center=tuple([]), radius=None)        
+        self.assertEquals(self.twitterObject.authenticate(),True)
+        searchtags = ["#snow"]
+        result_set = self.twitterObject.request_center_radius(search_tags=searchtags, gps_center=None, radius=None)
+        self.assertIsNotNone(result_set, "")
+        self.assertIn('statuses', result_set, "Couldn't find statuses in json")
+        self.assertIn('search_metadata', result_set, "Couldn't find search_metadata in json")     
       
     def test_twitter_request_region(self):
         with self.assertRaises(NotImplementedError):

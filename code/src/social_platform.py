@@ -209,7 +209,7 @@ class twitter_platform(social_platform):
         tags = {"q":tags, "count":100}
         
         if(gps_center != None and len(gps_center) == 2 and radius != None):
-            tags['geocode'] = str(gps_center[0]) + " " + str(gps_center[1]) + " " + str(radius) + "km"
+            tags['geocode'] = str(gps_center[0]) + "," + str(gps_center[1]) + "," + str(radius) + "km"
         
         
         params = urllib.urlencode(tags)
