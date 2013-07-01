@@ -16,10 +16,10 @@ class test_gateway(unittest.TestCase):
         '''
         current_test_obj = gateway.gateway()
         platform_obj = current_test_obj._available_social_media(["twitter"])
-        assert "twitter" == platform_obj[0]
+        assert "twitter" == platform_obj[0].get_platform_name()
         
         platform_obj = current_test_obj._available_social_media(["instagram"])
-        assert "instagram" == platform_obj[0]
+        assert "instagram" == platform_obj[0].get_platform_name()
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
