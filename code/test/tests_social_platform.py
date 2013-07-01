@@ -7,13 +7,15 @@ import unittest
 import gzip
 import social_platform as sp
 import StringIO
+import pickle_twitter_data as pick
+import pickle
+
 
 k = sp.twitter_platform()
 k.test_connection()
 k.authenticate()
 
 class test_class_social_platform(unittest.TestCase):
-
 
     def setUp(self):
         ''' Tests constructors of social media objects '''
@@ -22,10 +24,8 @@ class test_class_social_platform(unittest.TestCase):
         self.instagramObject = sp.twitter_platform()
         pass
 
-
     def tearDown(self):
         pass
-
     def test_get_platform_name(self):
         with self.assertRaises(NotImplementedError):
             self.socialObject.get_platform_name()
@@ -67,11 +67,6 @@ class test_class_social_platform(unittest.TestCase):
     def test_authenticate_headers(self):
         with self.assertRaises(NotImplementedError):
             self.socialObject.authenticate_headers()
-    def test_strip_data(self):
-        with self.assertRaises(NotImplementedError):
-            self.socialObject.strip_data(None, None)
-
-
             
     def test_twitter_get_platform_name(self):
         self.assertEqual(self.twitterObject.get_platform_name(),'twitter')
@@ -116,14 +111,18 @@ class test_class_social_platform(unittest.TestCase):
     def test_twitter_request_region(self):
         with self.assertRaises(NotImplementedError):
             self.twitterObject.request_region('search_tags', 'search_region')
+   
     def test_twitter_strip_data(self):
+        data = pickle.load( open( "tweets.p", "rb" ) )
+        tags_data = self.twitterObject.strip_data(data, ['tags'])
+        location_data = self.twitterObject.strip_data(data, ['location']) 
+        post_data = self.twitterObject.strip_data(data, ['post']) 
+        self.assertIn('location', location_data, 'There is no location data in Twitter data ')
+        self.assertIn('posts', post_data, 'There are no posts corresponding to geo-coordinates in the Twitter data')
+        self.assertNotIn('posts', location_data, 'There are posts when only location should be contained')
+        self.assertIn(pick.hashtag, tags_data['tags'] ,'Incorrect tag returned from Twitter data')
+        self.assertIn(pick.hashtag, post_data['posts'], 'Incorrect posts returned.')
         pass
-
-
-
-
-
-          
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
