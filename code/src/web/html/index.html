@@ -7,7 +7,7 @@
 <!-- Search box and autocomplete  -->
 <body>
 	Omicrom Heat map Generator
-	<form name="SearchForm" action="searchfoam.html" method="get">
+	<form name="SearchForm" action="main.html" method="get">
 	<datalist id="AutoCompleteList">
 		<option value="Internet Explorer">
 		<option value="Firefox">
@@ -16,7 +16,7 @@
 		<option value="Safari">
 	</datalist>
 		<fieldset>
-			Search : <input type="search" name="tags_list" list="AutoCompleteList">
+			Search : <input type="search" name="tags_list" autofocus="true" list="AutoCompleteList">
 			Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
 			Instagram:<input type="radio" name="Platform" value="instagram">
 			All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
