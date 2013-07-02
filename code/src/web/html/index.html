@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<!-- Search box and autocomplete  -->
+<body>
+	Omicrom Heat map Generator
+	<form name="SearchForm" action="searchfoam.html" method="get">
+	<datalist id="AutoCompleteList">
+		<option value="Internet Explorer">
+		<option value="Firefox">
+		<option value="Chrome">
+		<option value="Opera">
+		<option value="Safari">
+	</datalist>
+		<fieldset>
+			Search : <input type="search" name="tags_list" list="AutoCompleteList">
+			Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
+			Instagram:<input type="radio" name="Platform" value="instagram">
+			All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
+			<input type="submit" name="Submit_Search">
+		</fieldset>
+	</form>
+</body>
+</html>
