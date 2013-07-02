@@ -219,6 +219,10 @@ class twitter_platform(social_platform):
         response = conn.getresponse()
         if(response.status != 200):
             print "Error Failed to get Twitter data"
+            if(response.status == 401):
+                print "http 401 error invalid or expired bearer token please re-authenticate "
+            elif(response.status == 403):
+                print "http 403 error Your credentials do not allow access to this resource"
             return None
         result_set = response.read()
         result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
@@ -453,7 +457,7 @@ class instagram_platform(social_platform):
 if __name__ == '__main__':
     k = twitter_platform()
     k.authenticate()
-    search_set = k.request_center_radius(['#coffee'])
+    search_set = k.request_center_radius(search_tags=['#coffee'], gps_center=[44.98210345,-93.23552656], radius=50)
     print search_set
     print k.strip_data(search_set, ['tags', 'location', 'post'])
 
