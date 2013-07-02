@@ -2,7 +2,20 @@
 Created on 18 June 2013
 
 @author: M. Arzul
+
+     ____   ____    ___        _    ____    ___   _______
+    |    \ |    \  / _ \      | |  /    |  / __\ |__   __|
+    | ()_/ | () / | | | |  _  | | | _()_/ | /       | |
+    | |    | |\ \ | |_| | | |_/ | | \__   | \___    | |
+    |_|    |_| \_\ \___/   \___/   \____|  \___/    |_|
+     ______   _____   _   ______   ____    ___    ___    _
+    / __   / /     \ \ \ \   ___| |    \  / _ \  |   \  | |
+   / /  / / / /| |\ \ \ \ \ \     | () / | | | | | |\ \ | |
+  / /__/ / / / | | \ \ \ \ \ \___ | |\ \ | |_| | | | \ \| |
+ /______/ /_/  |_|  \_\ \_\ \___/ |_| \_\ \___/  |_|  \___|
+ 
 '''
+
 
 def plot(coords):
 	'''
@@ -56,119 +69,6 @@ def random_coords(num, bounds):
 		points.append((x, y))
 	return points
 
-def heatmap(bounds, coords):
-	'''
-	Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density. If the area of the bounds is zero, None is returned.
-	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
-	@type bounds: List of 4 ints
-	@param coords: The X, Y coordinates of points.
-	@type coords: List of 2-tuples of floats.
-	@return: A pixel matrix heatmap for the given points.
-	@rtype: Rectangular numpy matrix of floats
-	'''
-	import numpy as np
-	
-	rdim = bounds[1] - bounds[0]
-	cdim = bounds[3] - bounds[2]
-	
-	if cdim*rdim == 0:
-		print "AREA OF BOUNDS IS ZERO: NO HEATMAP RETURNED"
-		return None
-	
-	n = len(coords)
-	print n, "points provided."
-	
-	heatmap = np.array([[0.]*rdim]*cdim)
-	
-	print "For bounds "+str(bounds)+", extent is "+str(rdim)+" by "+str(cdim)+" and area is "+str(rdim*cdim)+"."
-	
-	p_dens = float(n)/(rdim*cdim)
-	var = 1 / (8*p_dens)
-	print "Point density of "+str(p_dens)+" gives a variance estimate of "+str(var)+"."
-	
-	for point in coords:
-		print "Processing:",str(point)
-		for i in xrange(cdim):
-			for j in xrange(rdim):
-				heatmap[i][j] += gauss(var,
-				heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
-				# the +.5 is to account for pixel center
-	
-	return heatmap
-
-def show_heatmap(heatmap, bounds):
-	'''
-	Displays a heatmap within certain bounds using matplotlib.pyplot.
-	@param heatmap: A pixel matrix heatmap.
-	@type heatmap: Rectangular numpy matrix of floats
-	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
-	@type bounds: List of 4 ints
-	@rtype: Void
-	'''
-	import numpy as np
-	import matplotlib.pyplot as plt
-	
-	print "Displaying heat map..."
-	plt.xlim(bounds[0], bounds[1])
-	plt.ylim(bounds[2], bounds[3])
-	plt.imshow(heatmap, cmap='hot', origin='lower', extent=bounds)
-	plt.show()
-	print "Done."
-
-def show_3D_heatmap(heatmap):
-	'''
-	Displays a heatmap in 3D using MayaVi.
-	@param heatmap: A pixel matrix heatmap.
-	@type heatmap: Rectangular numpy matrix of floats
-	@rtype: Void
-	'''
-	print "Loading 3D modules..."
-	import numpy as np
-	from mayavi import mlab
-	print "Done."
-	print "Displaying 3D heatmap..."
-	rescale = heatmap * 255. / heatmap.max()
-	rescale = rescale[::-1]
-	mlab.surf(rescale, colormap='hot', vmin=0, vmax=255)
-	mlab.show()
-	print "Done."
-
-def save_heatmap(heatmap, path='./heatmaps/image.png', colour=False):
-	'''
-	Saves a heatmap to the specified path, in colour if colour is True, or in greyscale if colour is False.
-	@param heatmap: A pixel matrix heatmap.
-	@type heatmap: Rectangular numpy matrix of floats
-	@param path: The file path to save the file into.
-	@type path: String
-	@param colour: Whether or not the heatmap should be saved in colour.
-	@type colour: Boolean
-	@rtype: Void
-	'''
-	from scipy import misc	
-	heatmap = heatmap[::-1]
-	if colour:
-		import numpy as np
-		from matplotlib.pyplot import cm
-		
-		print "Saving colour heatmap to "+path+"..."
-	
-		cmap = cm.ScalarMappable()
-		cmap.set_cmap('hot')
-		cmap.set_clim(0, heatmap.max())
-		heatmap_color = []
-		
-		for r in xrange(len(heatmap)):
-			heatmap_color.append([])
-			for c in xrange(len(heatmap[r])):
-				heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
-			
-		misc.imsave(path, heatmap_color)
-		print "Done."
-	else:
-		print "Saving greyscale heatmap to "+path+"..."
-		misc.imsave(path, heatmap)
-		print "Done."
-
 def heat_dist(point, x, y):
 	'''
 	Returns the Euclidean distance between a point and a pixel on an image.
@@ -214,7 +114,62 @@ def plot_gauss(var, lim):
 			coords.append((num, gauss(var, num)))
 	plot(coords)
 
-def heatmap_tile(level, x, y, coords):
+def heatmap(bounds, coords):
+	'''
+	Creates a heatmap within the specified bounds for the given coordinates. Variance is adjusted according to point density. If the area of the bounds is zero, None is returned.
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@param coords: The X, Y coordinates of points.
+	@type coords: List of 2-tuples of floats.
+	@return: A pixel matrix heatmap for the given points.
+	@rtype: Rectangular numpy matrix of floats
+	'''
+	import numpy as np
+	from time import time
+	from math import sqrt
+	
+	rdim = bounds[1] - bounds[0]
+	cdim = bounds[3] - bounds[2]
+	
+	if cdim*rdim == 0:
+		print "AREA OF BOUNDS IS ZERO: NO HEATMAP RETURNED"
+		return None
+	
+	n = len(coords)
+	print n, "points provided."
+	
+	heatmap = np.array([[0.]*rdim]*cdim)
+	
+	print "For bounds "+str(bounds)+", extent is "+str(rdim)+" by "+str(cdim)+" and area is "+str(rdim*cdim)+"."
+	
+	p_dens = float(n)/(rdim*cdim)
+	var = 1 / (8*p_dens)
+	print "Point density of "+str(p_dens)+" gives a variance estimate of "+str(var)+"."
+	
+	three_stdev = int(3*sqrt(var))
+	print "Distance cutoff for influence is "+str(three_stdev)+"."
+	
+	g = []
+	diag_dist = int(sqrt(cdim*cdim+rdim*rdim))
+	for i in xrange(three_stdev):
+		g.append(gauss(var, i))
+	while len(g) < diag_dist:
+		g.append(0)
+	
+	print "Starting raster generation..."
+	s = time()
+	for i in xrange(cdim):
+		for j in xrange(rdim):
+			for point in coords:
+				heatmap[i][j] += g[int(heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))]
+				#gauss(var, heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
+				# the +.5 is to account for pixel center
+	e = time()
+	print "Done."
+	print "Time: "+str(e-s)+" which per point is an average of: "+str((e-s)/n)
+	return heatmap
+
+def heatmap_tile(level=0, x=0, y=0, coords=[]):
 	'''
 	Creates a 256x256 heatmap tile for the specified zoom level and location for the given coordinates. Variance is adjusted according to level.
 	@param level: The zoom level of the tile, between 0 and 21.
@@ -228,49 +183,132 @@ def heatmap_tile(level, x, y, coords):
 	@return: A pixel matrix heatmap for the given points.
 	@rtype: Rectangular numpy matrix of floats
 	'''
-	raise NotImplemented
+	
+	raise NotImplementedError("Method not finished, please do not use yet.")
+	
 	import numpy as np
+	from time import time
 	from math import sqrt
+	import globalmaptiles
+	
+	world = globalmaptiles.GlobalMercator()
+	bounds = world.TileBounds(x, y, level)
 	
 	n = len(coords)
 	print n, "points provided."
 	
 	heatmap = np.array([[0.]*256]*256)
 	
-	var = 1 / (2**level)
-	print "Zoom level of "+str(level)+" gives a variance estimate of "+str(var)+"."
+	p_dens = float(n)/(65536)
+	var = 1 / (8*p_dens)
+	print "Point density of "+str(p_dens)+" gives a variance estimate of "+str(var)+"."
 	
-	lim = 3 * sqrt(var) # limit of meaningful influence is 3 standard deviations.
-	print "Limit of meaningful influence is "+str(lim)+" from the tile."
+	three_stdev = int(3*sqrt(var))
+	print "Distance cutoff for influence is "+str(three_stdev)+"."
 	
-#	dim = 
+	g = []
+	for i in xrange(three_stdev): 
+		g.append(gauss(var, i))
+	while len(g) < 362: # int(sqrt(256*256*2)) = 362 # diagonal length of tile
+		g.append(0)
 	
-	# All point coordinates need to be rescaled to the zoom level (divide by 2^level), then filtered to eleminate all points further than 3 standard deviations away from the boundaries of the bounds of the tile.
-	for point in coords:
-		point = [point[0]/2**level, point[1]/2**level]
-#		if 
-	
-	
-#	for point in coords:
-#		print "Processing:",str(point)
-#		for i in xrange(256):
-#			for j in xrange(256):
-#				heatmap[i][j] += gauss(var,
-#				heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
+	print "Starting raster generation..."
+	s = time()
+	for i in xrange(256):
+		for j in xrange(256):
+			for point in coords:
+				heatmap[i][j] += g[int(heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))]
+				#gauss(var, heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
 				# the +.5 is to account for pixel center
-	
+	e = time()
+	print "Done."
+	print "Time: "+str(e-s)+" which per point is an average of: "+str((e-s)/n)
 	return heatmap
+
+def show_heatmap(heatmap, bounds):
+	'''
+	Displays a heatmap within certain bounds using matplotlib.pyplot.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
+	@type bounds: List of 4 ints
+	@rtype: Void
+	'''
+	import numpy as np
+	import matplotlib.pyplot as plt
+	
+	print "Displaying heat map..."
+	plt.xlim(bounds[0], bounds[1])
+	plt.ylim(bounds[2], bounds[3])
+	plt.imshow(heatmap, cmap='hot', origin='lower', extent=bounds)
+	plt.show()
+	print "Done."
+
+def show_3D_heatmap(heatmap):
+	'''
+	Displays a heatmap in 3D using MayaVi.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@rtype: Void
+	'''
+	print "Loading 3D modules..."
+	import numpy as np
+	from mayavi import mlab
+	print "Done."
+	print "Displaying 3D heatmap..."
+	rescale = heatmap * 255. / heatmap.max()
+	rescale = rescale[::-1]
+	mlab.surf(rescale, colormap='hot', vmin=0, vmax=255)
+	mlab.show()
+	print "Done."
+
+def save_heatmap(heatmap, path='./image.png', colour=False):
+	'''
+	Saves a heatmap to the specified path, in colour if colour is True, or in greyscale if colour is False.
+	@param heatmap: A pixel matrix heatmap.
+	@type heatmap: Rectangular numpy matrix of floats
+	@param path: The file path to save the file into.
+	@type path: String
+	@param colour: Whether or not the heatmap should be saved in colour.
+	@type colour: Boolean
+	@rtype: Void
+	'''
+	from scipy import misc	
+	heatmap = heatmap[::-1]
+	if colour:
+		import numpy as np
+		from matplotlib.pyplot import cm
+		
+		print "Saving colour heatmap to "+path+"..."
+	
+		cmap = cm.ScalarMappable()
+		cmap.set_cmap('hot')
+		cmap.set_clim(0, heatmap.max())
+		heatmap_color = []
+		
+		for r in xrange(len(heatmap)):
+			heatmap_color.append([])
+			for c in xrange(len(heatmap[r])):
+				heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
+			
+		misc.imsave(path, heatmap_color)
+		print "Done."
+	else:
+		print "Saving greyscale heatmap to "+path+"..."
+		misc.imsave(path, heatmap)
+		print "Done."
+
 
 if __name__ == "__main__":
 #	plot_random(20, 100)
 #	plot_gauss(1, 3)
 #	coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]]
-	bounds = [-50,50,-50,50]
-	coords = random_coords(10, bounds)
+	bounds = [0,256,0,256]
+	coords = random_coords(20, bounds)
 	heatmap = heatmap(bounds, coords)
-	save_heatmap(heatmap)
-	save_heatmap(heatmap, colour=True)
+#	save_heatmap(heatmap)
+#	save_heatmap(heatmap, colour=True)
 	show_heatmap(heatmap, bounds)
-	show_3D_heatmap(heatmap)
+#	show_3D_heatmap(heatmap)
 
 
