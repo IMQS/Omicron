@@ -98,6 +98,7 @@ class gateway(object):
             @rtype: GeoJSON array 
         '''
         return "Not in use."
+    
 if __name__ == "__main__":
     obj = gateway()
     print obj.execute_requests(['twitter'], ['#snow' ,'#winter'], [(56.7, 86.4)], 5000)

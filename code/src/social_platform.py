@@ -186,7 +186,7 @@ class twitter_platform(social_platform):
             @type search_tags: List 
             @param gps_center: It is a tuple that consists of longitude and latitude.
             @type gps_center: Tuple of floats
-            @param radius: Is the distance from the gps_center that will be covered by the search.
+            @param radius: Is the distance (in km) from the gps_center that will be covered by the search.
             @type radius: float 
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
@@ -340,7 +340,6 @@ class twitter_platform(social_platform):
             for tweet in search_set:
                 if(tweet['geo'] != None):
                     result_set['location'] =  result_set['location'] + '(' + tweet['geo']['coordinates'][0].__str__() + ', ' + tweet['geo']['coordinates'][1].__str__() +  '), '
-                    #result_set.update({'location':tuple([tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]])})
             result_set['location'] = '[' + result_set['location'] + ']'
         
         search_set = input_data['search_metadata']
@@ -348,7 +347,6 @@ class twitter_platform(social_platform):
             result_set.update({'tags': ''})
             if(search_set['query']):
                 result_set.update({'tags':search_set['query'].replace('%23', '#').split('+')}) 
-                #result_set['tags'] = '{' + result_set['tags'] + '}'
         return result_set     
         
     

@@ -94,7 +94,6 @@ class database_handler(object):
                 query_result = collection.find({"query":query, "time":{"$gt":time_start}})
             else:   
                 query_result = collection.find({"query":query, "time":{"$gt":time_start, "$lt":time_end}})
-            collection.find()
         else:
             raise Exception("Connection failure")
         return query_result

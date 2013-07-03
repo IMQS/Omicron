@@ -11,6 +11,8 @@ import json
 import map_plot as mp
 from gateway import gateway
 
+render = web.template.render('./src/web/html')
+
 class request_handler(object):
     '''
         Handles all incoming GET and POST requests
@@ -141,7 +143,6 @@ class redirect_handler:
         raise web.seeother("/authorise"+"?"+"platform="+platform+"&"+"code="+code)
         return "Redirecting"
     
-
 class authorisation:
     '''@todo: This class is for testing the authentication must be changed to something else.
     '''
@@ -180,10 +181,23 @@ class authorisation:
     def POST(self):
         raise NotImplemented
 
+class index(object):
+    def GET(self):
+        return render.index()
+    def POST(self):
+        return {'success':'false','msg':'POST call not supported'}
 
+class main(object):
+    def GET(self):
+        return render.main()
+    def POST(self):
+        return {'success':'false','msg':'POST call not supported'}
+    
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
-        "/authorise","authorisation")#:Groups the URL's and their corresponding actions.
+        "/authorise","authorisation",
+        "/index","index",
+        "/main","main")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
