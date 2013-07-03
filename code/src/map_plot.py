@@ -45,7 +45,6 @@ def plot_random(num, bounds):
 	@type bounds: List of 4 ints
 	@rtype: Void
 	'''
-	from random import random as r
 	points = random_coords(num, bounds)
 	plot(points)
 
@@ -63,7 +62,7 @@ def random_coords(num, bounds):
 	points = []
 	xdim = bounds[1] - bounds[0]
 	ydim = bounds[3] - bounds[2]
-	for i in xrange(num):
+	for _ in xrange(num):
 		x = r()*xdim + bounds[0]
 		y = r()*ydim + bounds[2]
 		points.append((x, y))
@@ -90,7 +89,8 @@ def gauss(var, x):
 	@param var: The variance to use for this curve.
 	@type var: Float
 	@param x: The distance from the point.
-	@type x: Float
+	@type x: Floatimport numpy as np
+        
 	@return: The value of the given curve at x.
 	@rtype: Float
 	'''
@@ -153,7 +153,7 @@ def heatmap(bounds, coords):
 	diag_dist = int(sqrt(cdim*cdim+rdim*rdim))
 	for i in xrange(three_stdev):
 		g.append(gauss(var, i))
-	while len(g) < diag_dist:
+	while len(g) <= diag_dist:
 		g.append(0)
 	
 	print "Starting raster generation..."
@@ -209,7 +209,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
 	g = []
 	for i in xrange(three_stdev): 
 		g.append(gauss(var, i))
-	while len(g) < 362: # int(sqrt(256*256*2)) = 362 # diagonal length of tile
+	while len(g) <= 362: # int(sqrt(256*256*2)) = 362 # diagonal length of tile
 		g.append(0)
 	
 	print "Starting raster generation..."
@@ -234,7 +234,6 @@ def show_heatmap(heatmap, bounds):
 	@type bounds: List of 4 ints
 	@rtype: Void
 	'''
-	import numpy as np
 	import matplotlib.pyplot as plt
 	
 	print "Displaying heat map..."
@@ -252,7 +251,6 @@ def show_3D_heatmap(heatmap):
 	@rtype: Void
 	'''
 	print "Loading 3D modules..."
-	import numpy as np
 	from mayavi import mlab
 	print "Done."
 	print "Displaying 3D heatmap..."
@@ -276,7 +274,6 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
 	from scipy import misc	
 	heatmap = heatmap[::-1]
 	if colour:
-		import numpy as np
 		from matplotlib.pyplot import cm
 		
 		print "Saving colour heatmap to "+path+"..."
