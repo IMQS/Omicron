@@ -5,13 +5,15 @@ Created on 19 Jun 2013
 @author: S. Schreiber
 '''
 import sys, os
-sys.path.append('/var/www/webpy-app/')
+sys.path.append('/var/lib/jenkins/workspace/Omicron/code/src/')
 import web
 import json
 import map_plot as mp
-from gateway import gateway
-
-render = web.template.render('./src/web/html')
+from gateway import gateway 
+import tempfile
+os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
+import matplotlib
+render = web.template.render('/var/lib/jenkins/workspace/Omicron/code/src/web/html')
 
 class request_handler(object):
     '''
@@ -60,17 +62,10 @@ class request_handler(object):
             for platform in platforms:
                 total_coords = total_coords + query_data['twitter']['location']
             try:
-                cType = {
-            "png":"images/png",
-            "jpg":"images/jpeg",
-            "gif":"images/gif",
-            "ico":"images/x-icon"            }
-
                 #@TODO: FIX the bounding box big problem
                 heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
-                mp.save_heatmap(heat_map, path="./src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
-                web.header("Content-Type", "images/png")
-                return_data_and_status = "<img src="+ "'./src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png'"+">"
+                mp.save_heatmap(heat_map, path="/var/lib/jenkins/workspace/Omicron/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
+                return_data_and_status = self.OK
             except:
                 msg = "The heatmap could not be generated or stored"
                 return_data_and_status = self.ERROR
