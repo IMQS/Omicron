@@ -298,6 +298,10 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         misc.imsave(path, heatmap)
         print "Done."
 
+def heatmap_to_image(heatmap):
+    import Image
+    im = Image.fromarray(heatmap)
+    return im
 
 if __name__ == "__main__":
 #     plot_random(20, 100)
