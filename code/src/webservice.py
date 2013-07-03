@@ -5,7 +5,7 @@ Created on 19 Jun 2013
 @author: S. Schreiber
 '''
 import sys, os
-sys.path.append('~/Omicron2/code/src/')
+sys.path.append('/home/omicron/Omicron2/code/src/')
 import web
 import json
 import map_plot as mp
@@ -13,7 +13,7 @@ from gateway import gateway
 import tempfile
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
-render = web.template.render('~/Omicron2/code/src/web/html')
+render = web.template.render('/home/omicron/Omicron2/code/src/web/html')
 
 class request_handler(object):
     '''
@@ -64,7 +64,7 @@ class request_handler(object):
             try:
                 #@TODO: FIX the bounding box big problem
                 heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
-                mp.save_heatmap(heat_map, path="~/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
+                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
                 return_data_and_status = self.OK
             except:
                 msg = "The heatmap could not be generated or stored"
