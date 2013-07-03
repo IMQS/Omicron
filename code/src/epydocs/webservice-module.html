@@ -91,6 +91,27 @@
       For all redirects from social media logins
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice.authorisation-class.html" class="summary-name">authorisation</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice.index-class.html" class="summary-name">index</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice.main-class.html" class="summary-name">main</a>
+    </td>
+  </tr>
 </table>
 <!-- ==================== VARIABLES ==================== -->
 <a name="section-Variables"></a>
@@ -113,7 +134,22 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="webservice-module.html#urls" class="summary-name">urls</a> = <code title="&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;redirect_handler&quot;">&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;re<code class="variable-ellipsis">...</code></code><br />
+        <a name="render"></a><span class="summary-name">render</span> = <code title="web.template.render('./src/web/html')">web.template.render('./src/web/html')</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice-module.html#urls" class="summary-name">urls</a> = <code title="('/request_handler',
+ 'request_handler',
+ '/redirect',
+ 'redirect_handler',
+ '/authorise',
+ 'authorisation',
+ '/index.*',
+ 'index',
+..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">/request_handler</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">request_handler</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">/redirect</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">r</code><code class="variable-ellipsis">...</code></code><br />
       Groups the URL's and their corresponding actions.
     </td>
   </tr>
@@ -129,9 +165,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="application"></a><span class="summary-name">application</span> = <code title="app.wsgifunc()">app.wsgifunc()</code><br />
-      Creates the application function that is needed for the swgi mod to 
-      work.
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code>
     </td>
   </tr>
 </table>
@@ -165,7 +199,15 @@
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;redirect_handler&quot;
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">/request_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">request_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">/redirect</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">redirect_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">/authorise</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">authorisation</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">/index.*</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">index</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -195,7 +237,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jun 28 09:42:31 2013
+    Generated by Epydoc 3.0.1 on Wed Jul  3 10:24:18 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
