@@ -2,20 +2,22 @@
 
 <html>
 	<head>
-		<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!--	CSS for leaflet for ordered pictures and js for leaflet
+				See leafletjs.com/Tutorial for a tutorial on leaflet  -->
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
+		<script type="text/javascript" src="../javascript/leafletembed.js"></script>
 		<title>Map View</title>
 	</head>
 	<body>
-		Map
-		<div style="width:500px; height:500px" name="mapHolder"></div>
-		<script type='text/javascript'>
-			var map = new L.Map('mapHolder', {center: new L.LatLng(51.51, -0.11), zoom: 9});
-      		var googleLayer = new L.Google('ROADMAP');
-      		map.addLayer(googleLayer);
-    	</script>
-    	<button name="back_button" onclick="window.location='./index.html';">
+		Maps
+		<div id="mapHolder"></div>
+			<script type='text/javascript'>
+				initmap()
+	    	</script>
+    	<button id="back_button" onclick="window.location='./index.html';">
     		Button
     	</button>
 	</body>
