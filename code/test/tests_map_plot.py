@@ -61,25 +61,12 @@ class HeatMapTest(unittest.TestCase):
 	
 	def test_heatmap_one_point(self):
 		"""Tests if the heatmap function correctly evaluates at a pixel exactly on top of it."""
-		from math import sqrt
 		import sys, os
 		actualstdout = sys.stdout
 		sys.stdout = open(os.devnull,'w')
 		hm = map_plot.heatmap([0,1,0,1],[(.5,.5)])
 		sys.stdout = actualstdout
 		self.assertEqual(hm[0][0],map_plot.gauss(.125,0))
-	
-	def test_heatmap_two_points(self):
-		"""Tests if the heatmap function correctly overlays two Gaussian surfaces."""
-		from math import sqrt
-		import sys, os
-		actualstdout = sys.stdout
-		sys.stdout = open(os.devnull,'w')
-		hm = map_plot.heatmap([0,2,0,2],[(0,0),(1,1)])
-		sys.stdout = actualstdout
-		self.assertEqual(int(hm[0][0]*1e16)/1.e16,
-			int(map_plot.gauss(.25,sqrt(.5))*2*1e16)/1.e16)
-	
 
 if __name__ == '__main__':
 	unittest.main()
