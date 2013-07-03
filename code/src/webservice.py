@@ -196,8 +196,8 @@ class main(object):
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
         "/authorise","authorisation",
-        "/index","index",
-        "/main","main")#:Groups the URL's and their corresponding actions.
+        "/index.*","index",
+        "/main.*","main")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
