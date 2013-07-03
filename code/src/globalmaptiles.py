@@ -32,7 +32,9 @@
 ###############################################################################
 
 """
-globalmaptiles.py
+Created on 3 Jul 2008 (external module)
+
+@author: Klokan Petr Pridal
 
 Global Map Tiles as defined in Tile Map Service (TMS) Profiles
 ==============================================================
