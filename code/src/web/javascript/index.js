@@ -1,4 +1,4 @@
-/*	don't actually need js for index
+/*	 
 	storage of authentication code for this session only !!
  */
 
