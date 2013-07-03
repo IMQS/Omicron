@@ -61,15 +61,15 @@ class request_handler(object):
             total_coords = []
             for platform in platforms:
                 total_coords = total_coords + query_data['twitter']['location']
-            try:
+            #try:
                 #@TODO: FIX the bounding box big problem
-                heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
-                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
-                return_data_and_status = self.OK
-            except:
-                msg = "The heatmap could not be generated or stored"
-                return_data_and_status = self.ERROR
-                return_data_and_status["message"] = msg
+            heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
+            mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
+            return_data_and_status = self.OK
+            #except:
+            #    msg = "The heatmap could not be generated or stored"
+            #    return_data_and_status = self.ERROR
+            #    return_data_and_status["message"] = msg
         else :
             msg = "The function that was specified was not found."
             return_data_and_status = self.ERROR
