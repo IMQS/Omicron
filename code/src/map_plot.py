@@ -81,7 +81,7 @@ def heat_dist(point, x, y):
     @rtype: Float
     '''
     from math import sqrt
-    return sqrt((point[0] - x+.5) ** 2 + (point[1] - y+.5) ** 2)
+    return sqrt((point[0] - x-.5) ** 2 + (point[1] - y-.5) ** 2)
     # the +.5 is to account for pixel center
 
 def gauss(var, x):
@@ -192,7 +192,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel
     import globalmaptiles as gmt
     
     world = gmt.GlobalMercator()
-    bounds = world.TileBounds(x, y, level) # ( minx, miny, maxx, maxy )
+#    bounds = world.TileBounds(x, y, level) # ( minx, miny, maxx, maxy )
     
     n = len(coords)
     print n, "points provided."
