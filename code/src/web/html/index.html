@@ -10,11 +10,11 @@
 	Omicrom Heat map Generator
 	<form name="SearchForm" action="main.html" method="get">
 	<datalist id="AutoCompleteList">
-		<option value="Internet Explorer">
-		<option value="Firefox">
-		<option value="Chrome">
-		<option value="Opera">
-		<option value="Safari">
+		<option value="#water">
+		<option value="#pipeburst">
+		<option value="#imqs">
+		<option value="#food">
+		<option value="#snow">
 	</datalist>
 		<fieldset>
 			Search : <input type="search" name="tags_list" autofocus="true" list="AutoCompleteList">
@@ -24,9 +24,13 @@
 			<input type="submit" name="Submit_Search">
 		</fieldset>
 	</form>
-	<p id=result>This isn't working</p>
+	<div id="result">This isn't working</div>
 	<script>
-		
+		store_codes()	
 	</script>
+	<button id="RESTCall" onclick="httprequest()">
+    		This is a restcall
+	</button>
+
 </body>
 </html>
