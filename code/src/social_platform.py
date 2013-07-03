@@ -336,11 +336,12 @@ class twitter_platform(social_platform):
             result_set['posts'] = '[' + result_set['posts'] + ']'
         
         if('location' in selected_properties):
-            result_set.update({'location': ''})
+            result_set.update({'location': []})
+            lists =[]
             for tweet in search_set:
                 if(tweet['geo'] != None):
-                    result_set['location'] =  result_set['location'] + '(' + tweet['geo']['coordinates'][0].__str__() + ', ' + tweet['geo']['coordinates'][1].__str__() +  '), '
-            result_set['location'] = '[' + result_set['location'] + ']'
+                    result_set['location'].append((tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]))
+            
         
         search_set = input_data['search_metadata']
         if ('tags' in selected_properties):

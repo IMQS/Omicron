@@ -48,21 +48,29 @@ class request_handler(object):
         tags = raw_data["tags"].lstrip('u').split("_")
         function = raw_data["function"]
         # For future use
-        location_type = raw_data["location_type"]
+        #location_type = raw_data["location_type"]
         location = raw_data["location"].lstrip('u').split("_")
         l_x_y = str(raw_data["directory"]).split("/")[1:]
+        print os.listdir(".")
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            print type(query_data['twitter']['location'])
             total_coords = []
             for platform in platforms:
-                for coords in query_data[platform]:
-                    total_coords = total_coords + coords
+                total_coords = total_coords + query_data['twitter']['location']
             try:
+                cType = {
+            "png":"images/png",
+            "jpg":"images/jpeg",
+            "gif":"images/gif",
+            "ico":"images/x-icon"            }
+
                 #@TODO: FIX the bounding box big problem
-                heat_map = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
-                mp.save_heatmap(heat_map,"./heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png")
-                return_data_and_status = self.OK
+                heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
+                mp.save_heatmap(heat_map, path="./src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
+                web.header("Content-Type", "images/png")
+                return_data_and_status = "<img src="+ "'./src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png'"+">"
             except:
                 msg = "The heatmap could not be generated or stored"
                 return_data_and_status = self.ERROR
