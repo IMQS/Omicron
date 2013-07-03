@@ -239,7 +239,7 @@ class GlobalMercator(object):
 		bounds = self.TileBounds( tx, ty, zoom)
 		minLat, minLon = self.MetersToLatLon(bounds[0], bounds[1])
 		maxLat, maxLon = self.MetersToLatLon(bounds[2], bounds[3])
-		 
+		
 		return ( minLat, minLon, maxLat, maxLon )
 		
 	def Resolution(self, zoom ):
@@ -349,7 +349,7 @@ class GlobalGeodetic(object):
 		)
 
 if __name__ == "__main__":
-	import sys, os
+	import sys
 		
 	def Usage(s = ""):
 		print "Usage: globalmaptiles.py [-profile 'mercator'|'geodetic'] zoomlevel lat lon [latmax lonmax]"
