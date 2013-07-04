@@ -16,7 +16,6 @@ function httpRequest(url, callback) // How can I use this callback?
 		if (request.status != 200) {
 			return;
 		}
-		alert(request.responseText);
 		callback(request.responseText)
 
 	}
@@ -100,5 +99,5 @@ function check_authentication() {
  * @returns false: If the token is expired.
  */
 function validate_access_token() {
-	return false;
+	return true;
 }
