@@ -17,7 +17,14 @@
 		<div id="mapHolder"></div>
 			<script type='text/javascript'>
 				initmap();
-				document.getElementById("access").innerHTML(sessionStorage.twitter_authentication_code);
+				if (typeof (Storage) !== "undefined") {
+					if (!sessionStorage.twitter_authentication_code) {
+						alert("no access token");
+					} else {
+						alert("There is an access token");
+						document.getElementById("access").innerHTML(sessionStorage.twitter_authentication_code);						
+					}
+				}
 	    	</script>
 	    	<noscript>Browser Not Supported</noscript>
     	<button id="back_button" onclick="window.location.href='http://superfluous.imqs.co.za/omicron/index.html'">
