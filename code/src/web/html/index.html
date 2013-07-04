@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="/web/javascript/index.js"></script>
+		<script type="text/javascript" src="../javascript/index.js"></script>
 		<title>Home</title>
 	</head>
 <!-- Search box and autocomplete  -->
@@ -13,12 +13,17 @@
 	For debugging the web storage ?>
 		<div id="result">This isn't working</div>
 		<script>
-			OnRun();
+			request_Authentication();
+			function hello(){
+				alert("start");
+				request_Authentication();
+				alert("end");
+			}
 		</script>
 		<noscript>
 			Browser Not Supported
 		</noscript>
-		<form name="SearchForm" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
+		<form name="SearchForm" onSubmit="hello();" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
 		<datalist id="AutoCompleteList">
 			<option value="#water">
 			<option value="#pipeburst">
@@ -31,7 +36,7 @@
 				Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
 				Instagram:<input type="radio" name="Platform" value="instagram">
 				All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
-				<input type="submit" onclick="hello(h);" name="Submit_Search">
+				<input type="submit" name="Submit_Search">
 			</fieldset>
 		</form>
 	
