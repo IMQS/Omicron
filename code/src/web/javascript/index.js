@@ -16,7 +16,7 @@ function request_Authentication() {
 		alert("The request succeeded!\n\nThe response representation was:\n\n"+ client.responseText)
 	else
 		alert("The request did not succeed!\n\nThe response status was: "+ client.status + " " + client.statusText + ".");
-	store_codes(access_token)
+	store_codes(access_token);
 }
 /**
  * Used to store access token in the web storage only stores twitter access token 
@@ -44,11 +44,12 @@ function store_codes(twitter_access_token,override) {
  * First thing to run on the index page to check its authentication for the search engine
  */
 function OnRun(){
-	var check = check_authentication()
+	var check = check_authentication();
 	if(check == false) {
-		return "Unsupported Browser"
+		return "Unsupported Browser";
 	} else if(check == true) {
 		//Authenticated and ready
+		document.getElementById("result").innerHTML = "Authenticated and ready";
 	}
 	
 }
@@ -72,7 +73,7 @@ function check_authentication(){
 		}
 	} else {
 		alert("Can't store Access_tokens due to browser support");
-		return false
+		return false;
 	}
 }
 /**
@@ -81,5 +82,5 @@ function check_authentication(){
  * @returns false: If the token is expired. 
  */
 function validate_access_token(){
-	return false
+	return false;
 }

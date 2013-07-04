@@ -6,35 +6,35 @@
 		<title>Home</title>
 	</head>
 <!-- Search box and autocomplete  -->
-<body>
-	<script>
-		OnRun()
-	</script>
-	Omicrom Heat map Generator
-	<?php must use php comments in side body 
+	<body>
+
+		Omicrom Heat map Generator
+		<?php must use php comments in side body 
 	For debugging the web storage ?>
-	<div id="result">This isn't working</div>
-
-	<form name="SearchForm" action="http://www.superfluous.imqs.co.za/Omicron/main.html" method="get">
-	<datalist id="AutoCompleteList">
-		<option value="#water">
-		<option value="#pipeburst">
-		<option value="#imqs">
-		<option value="#food">
-		<option value="#snow">
-	</datalist>
-		<fieldset>
-			Search : <input type="search" name="tags_list" autofocus="true" list="AutoCompleteList">
-			Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
-			Instagram:<input type="radio" name="Platform" value="instagram">
-			All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
-			<input type="submit" onclick="hello(h);" name="Submit_Search">
-		</fieldset>
-	</form>
-
-	<button id="RESTCall" onclick="httprequest();">
-    		This is a restcall
-	</button>
-
-</body>
+		<div id="result">This isn't working</div>
+		<script>
+			OnRun();
+		</script>
+		<form name="SearchForm" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
+		<datalist id="AutoCompleteList">
+			<option value="#water">
+			<option value="#pipeburst">
+			<option value="#imqs">
+			<option value="#food">
+			<option value="#snow">
+		</datalist>
+			<fieldset>
+				Search : <input type="search" name="tags_list" autofocus="true" list="AutoCompleteList">
+				Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
+				Instagram:<input type="radio" name="Platform" value="instagram">
+				All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
+				<input type="submit" onclick="hello(h);" name="Submit_Search">
+			</fieldset>
+		</form>
+	
+		<button id="RESTCall" onclick="httprequest();">
+	    		This is a restcall
+		</button>
+	
+	</body>
 </html>
