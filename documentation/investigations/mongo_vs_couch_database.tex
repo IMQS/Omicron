@@ -1,7 +1,5 @@
 \documentclass{article}
 
-\usepackage[hidelinks]{hyperref}
-
 \title{Research of possible Databases}
 \author{M. Arzul}
 \date{26 June 2013}
@@ -21,7 +19,7 @@ Since the sets of coordinates are of unknown and variable length and do not need
 
 \section{MongoDB or CouchDB?}
 
-If one looks at a developer's view comparison of NoSQL databases\footnote{Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison, Krist\'{o}f Kov\'{acs} (\url{http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis})}, among the popular choices that seem relevant are MongoDB 2.2 and CouchDB 1.2. Both are document-oriented\footnote{\url{http://blog.nahurst.com/visual-guide-to-nosql-systems}} but give precedence to different aspects of the CAP theorem (of consistency, availability and partitioning, choose two). Both support partitioning (obviously), but Mongo supports consistency whereas Couch supports availability. Also, Mongo has geospatial indexing, which could be useful. Couch has very thorough version control, which will be unnecessary since our database will essentially be a warehouse.
+If one looks at a developer's view comparison of NoSQL databases\footnote{Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison, Krist\'{o}f Kov\'{acs} (http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis)}, among the popular choices that seem relevant are MongoDB 2.2 and CouchDB 1.2. Both are document-oriented\footnote{http://blog.nahurst.com/visual-guide-to-nosql-systems} but give precedence to different aspects of the CAP theorem (of consistency, availability and partitioning, choose two). Both support partitioning (obviously), but Mongo supports consistency whereas Couch supports availability. Also, Mongo has geospatial indexing, which could be useful. Couch has very thorough version control, which will be unnecessary since our database will essentially be a warehouse.
 
 \section{Conclusion}
 
@@ -31,18 +29,18 @@ MongoDB has all the features we will need, and even some we can experiment with 
 
 To install MongoDB on the server (or for use with a localhost database):
 
-\noindent\url{http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/}
+\noindent http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
 \noindent To install PyMongo driver:
 
-\noindent\url{http://api.mongodb.org/python/current/installation.html}
+\noindent http://api.mongodb.org/python/current/installation.html
 
 \noindent For a basic PyMongo tutorial:
 
-\noindent\url{http://api.mongodb.org/python/current/tutorial.html}
+\noindent http://api.mongodb.org/python/current/tutorial.html
 
 \noindent For PyMongo API:
 
-\noindent\url{http://api.mongodb.org/python/current/}
+\noindent http://api.mongodb.org/python/current/
 
 \end{document}
