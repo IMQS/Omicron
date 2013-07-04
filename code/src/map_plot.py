@@ -183,7 +183,7 @@ def heatmap(bounds, coords):
     print "Time: " + str(e - s) + " which per point is an average of: " + str((e - s) / n)
     return heatmap
 
-def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel center
+def heatmap_tile(level=0, x=0, y=0, coords=[]):
     '''
     Creates a 256x256 heatmap tile for the specified zoom level and location for the given coordinates. Variance is fixed according to tile size.
     @param level: The zoom level of the tile, between 0 and 21.
@@ -198,8 +198,6 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel
     @rtype: Rectangular numpy matrix of floats
     '''
     
-    #raise NotImplementedError("Method not finished, please do not use yet.")
-    
     import numpy as np
     from time import time
     import globalmaptiles as gmt
@@ -207,12 +205,14 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel
     world = gmt.GlobalMercator()
     bounds = world.TileBounds(x, y, level) # ( minx, miny, maxx, maxy )
     
+    heatmap = np.array([[0.] * 256] * 256)
+    
     var = 362
-    three_stdev = 57 # int(3 * sqrt(var))
+    three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
     
     if len(coords) == 0:
-        print "No points provided. Returned None."
-        return None
+        print "No points provided. Returned blank."
+        return heatmap
     print len(coords), "points provided."
     coords_pix = []
     for point in coords:
@@ -223,8 +223,8 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel
     n = len(coords)
     print "Trimmed to "+str(n)+" points."
     if n == 0:
-        print "No points close enough to tile. Returned None."
-        return None
+        print "No points close enough to tile. Returned blank."
+        return heatmap
     
     print "Creating Gauss curve..."
     g = []
@@ -235,15 +235,11 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):# the +.5 is to account for pixel
     print "Done."
     
     print "Starting raster generation..."
-    heatmap = np.array([[0.] * 256] * 256)
     s = time()
     for i in xrange(256):
         for j in xrange(256):
             for point_pix in coords_pix:
-                # Convert all points: GPS > Projected > pixel
                 heatmap[i][j] += g[int(heat_dist(point_pix, j, i))]
-                # gauss(var, heat_dist(point,j+bounds[0]+.5,i+bounds[2]+.5))
-                # the +.5 is to account for pixel center
     e = time()
     print "Done."
     print "Time: " + str(e - s)
@@ -321,7 +317,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         print "Done."
 
 if __name__ == "__main__":
-#     coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Smiley face on [0-100) Euclidean square
+    #     coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Smiley face on [0-100) Euclidean square
     
     # XXX CAUTION! the random point generator makes tuples which matplotlib can interpret as (X, Y)
     # which makes sense on a Euclidean plane, but LAT/LON is in the reverse order!!!
@@ -332,12 +328,10 @@ if __name__ == "__main__":
     bounds_lim = [-85, 85, -180, 180]
     bounds_disp = [0, 256, 0, 256]
     coords = random_coords(10, bounds_lim)
-#    heatmap = heatmap(bounds, coords)
+    #    heatmap = heatmap(bounds, coords)
     tile = heatmap_tile(0,0,0,coords)
-#     save_heatmap(heatmap)
-#     save_heatmap(heatmap, colour=True)
+    #    save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
-#    save_heatmap(tile, colour = True, path = "./special.png")
-#     show_3D_heatmap(heatmap)
+    #    show_3D_heatmap(heatmap)
 
 
