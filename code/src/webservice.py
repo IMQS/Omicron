@@ -150,15 +150,16 @@ class redirect_handler:
 class authorisation:
     '''@todo: This class is for testing the authentication must be changed to something else.
     '''
-    def __init__(self):
-        self.gateway = gateway()
+
 
     def GET(self):
         ''' Used in the 2 phase authorization
         '''
+        return "Works!"
         inputs = web.input()
         code = None
         platform = inputs['platform']
+        gateway = gateway()
         try:
             code = inputs['code']
         except KeyError:
