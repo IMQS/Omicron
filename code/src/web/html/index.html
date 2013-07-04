@@ -13,15 +13,40 @@
 	For debugging the web storage ?>
 		<div id="result">This isn't working</div>
 		<script>
-			request_Authentication();
-			function hello(){
-				alert("start");
-				request_Authentication();
-				alert("end");
-			}
+		
+		function getText(url, callback) // How can I use this callback?
+		{
+		    var request = new XMLHttpRequest();
+		    request.onreadystatechange = function()
+		    {
+		        if (request.readyState != 4 )
+		        {
+		        	alert("waiting state");
+		            return; // Another callback here
+				    
+		        } if(request.status != 200){
+		        	alert("Status not okay");
+		        	alert(request.status);
+		        	alert(request.responseText())
+		        	return;
+		        }
+		        
+		        alert("done");
+		       
+		    }
+		    request.open("POST", url);
+		    request.send();
+		    
+		}
+
+		function mycallback(data) {
+		   alert(data);
+		}
+		getText("http://superfluous.imqs.co.za/omicron/authorise",mycallback);
+		alert("completed");
 		</script>
 		<noscript>
-			Browser Not Supported
+			alert("Browser Not Supported")
 		</noscript>
 		<form name="SearchForm" onSubmit="hello();" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
 		<datalist id="AutoCompleteList">

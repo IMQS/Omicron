@@ -2,22 +2,25 @@
 	storage of authentication code for this session only !!
  */
 
+
+
 /**
  * REST call to get an Authentication for Twitter returns access token
  */
 function request_Authentication() {
+
 	var url = "http://superfluous.imqs.co.za/omicron/authorise";
 	var representationOfDesiredState = "";
 	var client = new XMLHttpRequest();
 	client.open("GET", url, true);
 	client.setRequestHeader("Content-Type", "text/plain");
-	alert("sssssssssss1");
 	client.send(null);
-	alert("sssssssssss2");
+	alert("after Authentication");
 	if (client.status == 200)
 		alert("The request succeeded!\n\nThe response representation was:\n\n"+ client.responseText);
 	else
 		alert("The request did not succeed!\n\nThe response status was: "+ client.status + " " + client.statusText + ".");
+	alert("okay")
 	//store_codes(access_token);
 }
 /**
@@ -46,7 +49,10 @@ function store_codes(twitter_access_token,override) {
  * First thing to run on the index page to check its authentication for the search engine
  */
 function OnRun(){
+	getText('http://dev.twitter.com/v1.1/oauth2/token', mycallback);
+	
 	var check = check_authentication();
+	alert("Checked");
 	if(check == false) {
 		return "Unsupported Browser";
 	} else if(check == true) {
@@ -62,11 +68,14 @@ function OnRun(){
 function check_authentication(){
 	if (typeof (Storage) !== "undefined") {
 		if (!sessionStorage.twitter_authentication_code) {
-			request_authentication();
+
+			request_Authentication();
+			alert("REQUESTING1 done");
 			return true;
 		} else {
 			var access = sessionStorage.twitter_authentication_code;
 			if(validate_access_token() == false) {
+				alert("REQUESTING2");
 				request_authentication();
 				return true;
 			} else {
