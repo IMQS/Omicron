@@ -53,17 +53,15 @@ class request_handler(object):
         #location_type = raw_data["location_type"]
         location = raw_data["location"].lstrip('u').split("_")
         l_x_y = str(raw_data["directory"]).split("/")[1:]
-        print os.listdir(".")
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-            print type(query_data['twitter']['location'])
             total_coords = []
             for platform in platforms:
                 total_coords = total_coords + query_data[platform]['location']
             try:
                 web.header("Content-Type", "png") # Set the Header
-                path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png"
+                path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2]
                 heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
                 mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
                 return_data_and_status = open(path,"rb").read()
@@ -101,25 +99,25 @@ class request_handler(object):
         '''
         return_data_and_status = {}
         raw_data = web.input()
-        platforms = raw_data["platforms"].lstrip('u').split("#")
+        platforms = raw_data["platforms"].lstrip('u').split("_")
         tags = raw_data["tags"].lstrip('u').split("_")
         function = raw_data["function"]
         # For future use
-        location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("#")
+        #location_type = raw_data["location_type"]
+        location = raw_data["location"].lstrip('u').split("_")
         l_x_y = str(raw_data["directory"]).split("/")[1:]
         gatewayO = gateway()
         if (function == "heat_map"):
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
             total_coords = []
             for platform in platforms:
-                for coords in query_data[platform]:
-                    total_coords = total_coords + coords
+                total_coords = total_coords + query_data[platform]['location']
             try:
-                #@TODO: FIX the bounding box big problem
-                heat_map = mp.heatmap([float(location[0])-5, float(location[0])+5, float(location[1])-5, float(location[1])+5], total_coords)
-                mp.save_heatmap(heat_map,"./heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png")
-                return_data_and_status = self.OK
+                web.header("Content-Type", "png") # Set the Header
+                path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2]
+                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
+                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
+                return_data_and_status = open(path,"rb").read()
             except:
                 msg = "The heatmap could not be generated or stored"
                 return_data_and_status = self.ERROR
