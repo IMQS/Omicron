@@ -83,6 +83,7 @@ function check_authentication() {
 				httpRequest('http://superfluous.imqs.co.za/omicron/authorise', store_codes,true);
 				return true;
 			} else {
+				document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code + " is the previous code";
 				return true;
 			}
 		}
