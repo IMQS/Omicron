@@ -21,10 +21,12 @@
 		    {
 		        if (request.readyState != 4 )
 		        {
+		        	alert(request.readyState +" ready state " + request.status);
 		            return; // Another callback here
 				    
 		        } if(request.status != 200){
-					alert(request.status);
+		        	alert(request.readyState +" ready state " + request.status+" status");
+		        	alert(request.status);
 		        	return;
 		        }
 	        	alert(request.responseText());
