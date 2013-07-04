@@ -43,7 +43,7 @@ function store_codes(twitter_access_token, override) {
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
-			document.getElementById("result").innerHTML = "New Auth code stored";
+			document.getElementById("result").innerHTML = "New Auth code stored" + twitter_access_token;
 		} else {
 			document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
 					+ " is the previous code";
@@ -63,9 +63,6 @@ function OnRun() {
 	alert("Checked");
 	if (check == false) {
 		return "Unsupported Browser";
-	} else if (check == true) {
-		// Authenticated and ready
-		document.getElementById("result").innerHTML = "Authenticated and ready";
 	}
 
 }
