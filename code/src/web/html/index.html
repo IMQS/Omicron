@@ -24,13 +24,16 @@
 		        	alert(request.readyState +" ready state " + request.status);
 		            return; // Another callback here
 				    
-		        } if(request.status != 200){
+		        }
+		        alert("MID section");
+		        if(request.status != 200){
 		        	alert(request.readyState +" ready state " + request.status+" status");
 		        	alert(request.status);
 		        	return;
 		        }
-	        	alert(request.responseText());
 		        alert("done");
+	        	alert(request.responseText());
+
 		    }
 		    request.open("GET", url);
 		    request.send();
