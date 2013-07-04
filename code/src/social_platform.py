@@ -367,7 +367,7 @@ class instagram_platform(social_platform):
         
         self.redirect = "http://0.0.0.0:8080/redirect?platform=instagram"
         self.api = InstagramAPI(client_id=self.client_id, client_secret=self.client_secret, redirect_uri=self.redirect)
-        self.redirect = self.api.get_authorize_login_url(scope = "")
+#       self.redirect = self.api.get_authorize_login_url(scope = "")
         
     def get_platform_name(self):
         '''
