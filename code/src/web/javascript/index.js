@@ -44,6 +44,7 @@ function store_codes(twitter_access_token,override) {
  * First thing to run on the index page to check its authentication for the search engine
  */
 function OnRun(){
+	alert("Java script is working");
 	var check = check_authentication();
 	if(check == false) {
 		return "Unsupported Browser";
