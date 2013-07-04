@@ -22,9 +22,12 @@
 		        if (request.readyState == 4 && request.status == 200)
 		        {
 			        var res = request.responseText();
+			        alert("Success");
 			        alert(res);
 		            return res; // Another callback here
-		        } 
+		        } else {
+		        	return;
+		        }
 		    }
 		    request.open("GET", url);
 		    request.send();
