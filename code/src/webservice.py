@@ -60,19 +60,12 @@ class request_handler(object):
             print type(query_data['twitter']['location'])
             total_coords = []
             for platform in platforms:
-                total_coords = total_coords + query_data['twitter']['location']
+                total_coords = total_coords + query_data[platform]['location']
             try:
-                cType = {
-            "png":"images/png",
-            "jpg":"images/jpeg",
-            "gif":"images/gif",
-            "ico":"images/x-icon"            }
-
-       
                 web.header("Content-Type", "png") # Set the Header
                 path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png"
-                heat_map = mp.heatmap_tile(0, 0, 0, total_coords)
-                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2] + ".png", colour=True)
+                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
+                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
                 return_data_and_status = open(path,"rb").read()
             except:
                 msg = "The heatmap could not be generated or stored"
