@@ -121,6 +121,7 @@ class request_handler(object):
                 return_data_and_status = open(path,"rb").read()
             except:
                 msg = "The heatmap could not be generated or stored"
+                msg = int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0])
                 return_data_and_status = self.ERROR
                 return_data_and_status["message"] = msg
         else :
