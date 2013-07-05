@@ -11,6 +11,7 @@ import json
 import map_plot as mp
 from gateway import gateway 
 import tempfile
+import social_platform as sp
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
 render = web.template.render('/home/omicron/Omicron2/code/src/web/html')
@@ -153,7 +154,11 @@ class authorisation:
     def GET(self):
         ''' Used in the 2 phase authorization
         '''
-        return "Works!"
+        twitterobject = sp.twitter_platform()
+        if(twitterobject.authenticate()):
+            return twitterobject.access_token
+        
+        return "Authentication failed"
         inputs = web.input()
         code = None
         platform = inputs['platform']
