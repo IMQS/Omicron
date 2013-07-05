@@ -66,9 +66,9 @@ class request_handler(object):
                 heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
                 mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
                 return_data_and_status = open(path,"rb").read()
-            except:
+            except Exception:
                 msg = "The heatmap could not be generated or stored"
-                msg = int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0])
+                msg = Exception.message
                 return_data_and_status = self.ERROR
                 return_data_and_status["message"] = msg
         else :
