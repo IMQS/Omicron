@@ -5,7 +5,7 @@ function initmap() {
 	// set up the map
 	var map = L.map('mapHolder').setView([51.505, -0.09], 0);
 	
-	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	L.tileLayer('http://superfluous.imqs.co.za/omicron/request_handler?function=heat_map&platforms=twitter&tags=%23fire&location_type=radius&location=33_50_500&directory=/{z}/{x}/{y}.png', {
 		/*'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'*/
 	    maxZoom: 18
 	}).addTo(map);
