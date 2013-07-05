@@ -195,12 +195,33 @@ class main(object):
         return render.main()
     def POST(self):
         return {'success':'false','msg':'POST call not supported'}
+
+class request_search_id(object):
+    '''
+        Returns the search id needed to find and return the correct results from the database. 
+    '''
+    def GET(self):
+        '''
+            Rest call that returns the search id needed to search, find and return data.
+            
+            @param self: Current instance of the L{request_search_id} object.
+            @type self: L{request_search_id}
+            @param query: Formated string that contains the follow parameters platforms, location, function, 
+            @type query: L{str}
+            @return id: The search id. 
+            @rtype: L{str}
+        '''
+    def POST(self):
+        '''
+        
+        '''
     
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
-        "/authorise","authorisation",
-        "/index.*","index",
-        "/main.*","main")#:Groups the URL's and their corresponding actions.
+        "/authorise", "authorisation",
+        "/index.*", "index",
+        "/main.*", "main",
+        "/request_token", "request_search_token")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
