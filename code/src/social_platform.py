@@ -95,7 +95,9 @@ class social_platform(object):
         except urllib2.URLError:
             print "Exception Caught : connection to "+self.get_platform_name()+" timed out"
             return False
-
+        except Exception:
+            print "Error testing for connection"
+            return False
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
         '''
