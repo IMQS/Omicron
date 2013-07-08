@@ -229,7 +229,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     coords_tile = []
     for point in coords:
         point_proj = world.LatLonToMeters(point[0],point[1])
-        if (True):#bounds[0]-limx <= point_proj[0] <= bounds[2]+limx) & (bounds[1]-limy <= point_proj[1] <= bounds[3]+limy):
+        if (bounds[0]-limx <= point_proj[0] <= bounds[2]+limx) & (bounds[1]-limy <= point_proj[1] <= bounds[3]+limy):
             coords_proj.append(point_proj)
             point_pyra = world.MetersToPixels(point_proj[0], point_proj[1], level)
             coords_pyra.append(point_pyra)
@@ -357,7 +357,7 @@ if __name__ == "__main__":
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 1, x = 1, y = 1, coords=center)
+    tile = heatmap_tile(level = 1, x = 0, y = 0, coords=center)
     #save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
     #show_3D_heatmap(heatmap)
