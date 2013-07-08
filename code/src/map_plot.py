@@ -217,7 +217,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     var = 362
     three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
     
-    tileTop = 256 * (2**level - y)
+    tileTop = 256 * y
     tileLeft = 256 * x    
     
     if len(coords) == 0:
@@ -229,11 +229,11 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     coords_tile = []
     for point in coords:
         point_proj = world.LatLonToMeters(point[0],point[1])
-        if (bounds[0]-limx <= point_proj[0] <= bounds[2]+limx) & (bounds[1]-limy <= point_proj[1] <= bounds[3]+limy):
+        if (bounds[0]-limx <= point_proj[0] <= bounds[2]+limx) and (bounds[1]-limy <= point_proj[1] <= bounds[3]+limy):
             coords_proj.append(point_proj)
             point_pyra = world.MetersToPixels(point_proj[0], point_proj[1], level)
             coords_pyra.append(point_pyra)
-            coords_tile.append((point_pyra[0]-tileLeft,tileTop-point_pyra[1]))
+            coords_tile.append((point_pyra[0]-tileLeft, point_pyra[1]-tileTop))
     n = len(coords_proj)
     print "\tTrimmed to "+str(n)+" points."
     if n == 0:
@@ -243,7 +243,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     print "\t\t"+str(coords)
     print "\t\tProjected points:"
     print "\t\t"+str(coords_proj)
-    print "\t\tPixel points: (on pyramid, not tile)"
+    print "\t\tPyramid points:"
     print "\t\t"+str(coords_pyra)
     print "\t\tTile points:"
     print "\t\t"+str(coords_tile)
@@ -252,7 +252,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     g = []
     for i in xrange(three_stdev): 
         g.append(gauss(var, float(i)))
-    while len(g) <= 512:  # int(sqrt(256*256*2)) = 362 # diagonal length of tile
+    while len(g) <= 543:  # int(sqrt((256*1.5)**2)*2) = 543 # diagonal length of one and a half tiles
         g.append(0)
     print "\tDone."
     
@@ -266,8 +266,8 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     print "\tDone."
     print "\tTime: " + str(e - s)
     print "\tAverage time per point: " + str((e - s) / n)
-    print "Returning tile."
     heatmap = heatmap[::-1]
+    print "Returning tile."
     return heatmap
 
 def show_heatmap(heatmap, bounds):
@@ -325,7 +325,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
     
         cmap = cm.ScalarMappable()
         cmap.set_cmap('hot')
-        cmap.set_clim(0, heatmap.max())
+        cmap.set_clim(0, 5)
         heatmap_color = []
         
         for r in xrange(len(heatmap)):
@@ -350,16 +350,18 @@ if __name__ == "__main__":
     #sine = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Sine curve on [0-100) Euclidean square
     #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
     stellenbosch = [[-33.9200, 18.8600]]
-    center = [[20,10]]
-    middle = [[45,45],[-45,45],[45,-45],[-45,-45]]
+    center = [[0,0]]
+    square = [[45,45],[-45,45],[45,-45],[-45,-45]]
+    dummy = [[45,45],[-45,45],[0,-45],[0,-45],[0,-45]]
     
     bounds_lim = [-85, 85, -180, 180]
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 1, x = 0, y = 0, coords=center)
+    tile = heatmap_tile(level = 3, x = 5, y = 2, coords=dummy)
     #save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
+    #save_heatmap(tile, path="./yes.png", colour=True)
     #show_3D_heatmap(heatmap)
 
 
