@@ -23,7 +23,7 @@ function initmap() {
 function process_input() {
 	var str = window.location.search;
 	var objURL = {};
-
+	alert(str);
 	str.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function($0, $1, $2,
 			$3) {
 		objURL[$1] = $3;
@@ -32,6 +32,6 @@ function process_input() {
 }
 function OnRun() {
 	var input = process_input();
-	alert(input);
+	alert(input["tags_list"]);
 	initmap();
 }

@@ -92,9 +92,6 @@ class social_platform(object):
         print "Testing Connection"
         try:
             urllib2.urlopen(self.test_connection_string, timeout=1)
-        except urllib2.URLError:
-            print "Exception Caught : connection to "+self.get_platform_name()+" timed out"
-            return False
         except Exception:
             print "Error testing for connection"
             return False
@@ -456,12 +453,12 @@ class instagram_platform(social_platform):
         return result_set 
     
 if __name__ == '__main__':
-    k = twitter_platform()
-    k.authenticate()
-    search_set = k.request_center_radius(search_tags=['#coffee'], gps_center=[44.98210345,-93.23552656], radius=50)
-    print search_set
-    print k.strip_data(search_set, ['tags', 'location', 'post'])
-
+    k = social_platform()
+#    k.authenticate()
+#    search_set = k.request_center_radius(search_tags=['#coffee'], gps_center=[44.98210345,-93.23552656], radius=50)
+#    print search_set
+#    print k.strip_data(search_set, ['tags', 'location', 'post'])
+    k.test_connection()
     
     
     
