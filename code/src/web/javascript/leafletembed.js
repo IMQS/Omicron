@@ -10,7 +10,7 @@ function initmap() {
 
 	var heatmap = L
 			.tileLayer(
-					'http://superfluous.imqs.co.za/omicron/request_handler?function=heat_map&platforms=twitter&tags=%23food&location_type=radius&location=33_50_50000&directory=/{z}/{x}/{y}',
+					'http://superfluous.imqs.co.za/omicron/request_handler?function=heat_map&platforms=twitter&tags=%23food&location_type=radius&location=33_50_50000&directory=/{z}/{x}/{y}.png',
 					{
 
 						maxZoom : 18
