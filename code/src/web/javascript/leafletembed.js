@@ -20,8 +20,8 @@ function initmap() {
 	}).addTo(map);
 
 }
-function process_input() {
-	var str = window.location.search;
+function get_input() {
+	var str = decodeURIComponent(window.location.search);
 	var objURL = {};
 	alert(str);
 	str.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function($0, $1, $2,
@@ -30,8 +30,14 @@ function process_input() {
 	});
 	return objURL;
 }
+function process_input(input) {
+	
+}
+
 function OnRun() {
-	var input = process_input();
-	alert(input["tags_list"]);
+	var input = get_input();
+	process_input(input);
+	
+	
 	initmap();
 }

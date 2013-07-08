@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="/web/javascript/index.js"></script>
+		<script type="text/javascript" src="../javascript/index.js"></script>
 		<title>Home</title>
 	</head>
 <!-- Search box and autocomplete  -->
@@ -31,6 +31,26 @@
 				Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
 				Instagram:<input type="radio" name="Platform" value="instagram">
 				All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
+				function: 
+				<select id="function">
+					<option>
+						Heat Map
+					</option>
+					<option>
+						Point Map
+					</option>
+				</select>
+				Longitude 	:<input type="number"  id="longitude">
+				Latitude	:<input type="number" id="latitude">
+				<select>
+					<option>
+						Area
+					</option>
+					<option>
+						Radius
+					</option>
+				</select>
+				:<input type="text" placeholder="in KM/area name" id="location_type_details" name="radius">
 				<input type="submit" name="Submit_Search">
 			</fieldset>
 		</form>

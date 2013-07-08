@@ -1,7 +1,21 @@
 /*	 
 	storage of authentication code for this session only !!
  */
-
+function OnSubmit(){
+	var search = document.findElementById("tags_list");
+	alert(search.value);
+	var lat= document.findElementById();
+	alert(lat.value);
+	var long= document.findElementById();
+	alert(long.value);
+	var Function= document.findElementById();
+	alert(Function.value);
+	var platform= document.findElementById();
+	alert(platform.value);
+	var locationtype= document.findElementById();
+	alert(locationtype.value);
+	return true;
+}
 /**
  * REST call to get an Authentication for Twitter returns access token
  */
