@@ -200,7 +200,7 @@ class main(object):
     def GET(self):
         return render.main()
     def POST(self):
-        return {'success':'false','msg':'POST call not supported'}
+        return render.main()
 
 class request_search_id(object):
     '''
