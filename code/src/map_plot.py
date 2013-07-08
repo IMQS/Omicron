@@ -202,48 +202,72 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     from time import time
     import globalmaptiles as gmt
     
+    print "Requesting tile ("+str(x)+", "+str(y)+") for level "+str(level)+"..."
+    
     world = gmt.GlobalMercator()
     bounds = world.TileBounds(x, y, level) # ( minx, miny, maxx, maxy )
+    
+    limx = (bounds[2]-bounds[0]) / 4
+    limy = (bounds[3]-bounds[1]) / 4
+    
+    print "\tBounds of tile: "+str(bounds)
     
     heatmap = np.array([[0.] * 256] * 256)
     
     var = 362
     three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
     
+    tileTop = 256 * (2**level - y)
+    tileLeft = 256 * x    
+    
     if len(coords) == 0:
         print "No points provided. Returned blank."
         return heatmap
-    print len(coords), "points provided."
-    coords_pix = []
+    print "\t"+str(len(coords)), "points provided."
+    coords_proj = []
+    coords_pyra = []
+    coords_tile = []
     for point in coords:
         point_proj = world.LatLonToMeters(point[0],point[1])
-        point_pix = world.MetersToPixels(point_proj[0], point_proj[1], level)
-        if (bounds[0]-three_stdev < point_pix[0] < bounds[2]+three_stdev) & (bounds[1]-three_stdev < point_pix[1] < bounds[3]+three_stdev):
-            coords_pix.append(point_pix)
-    n = len(coords)
-    print "Trimmed to "+str(n)+" points."
+        if (True):#bounds[0]-limx <= point_proj[0] <= bounds[2]+limx) & (bounds[1]-limy <= point_proj[1] <= bounds[3]+limy):
+            coords_proj.append(point_proj)
+            point_pyra = world.MetersToPixels(point_proj[0], point_proj[1], level)
+            coords_pyra.append(point_pyra)
+            coords_tile.append((point_pyra[0]-tileLeft,tileTop-point_pyra[1]))
+    n = len(coords_proj)
+    print "\tTrimmed to "+str(n)+" points."
     if n == 0:
         print "No points close enough to tile. Returned blank."
         return heatmap
+    print "\t\tLAT/LON points:"
+    print "\t\t"+str(coords)
+    print "\t\tProjected points:"
+    print "\t\t"+str(coords_proj)
+    print "\t\tPixel points: (on pyramid, not tile)"
+    print "\t\t"+str(coords_pyra)
+    print "\t\tTile points:"
+    print "\t\t"+str(coords_tile)
     
-    print "Creating Gauss curve..."
+    print "\tCreating Gauss curve..."
     g = []
     for i in xrange(three_stdev): 
         g.append(gauss(var, float(i)))
-    while len(g) <= 362:  # int(sqrt(256*256*2)) = 362 # diagonal length of tile
+    while len(g) <= 512:  # int(sqrt(256*256*2)) = 362 # diagonal length of tile
         g.append(0)
-    print "Done."
+    print "\tDone."
     
-    print "Starting raster generation..."
+    print "\tStarting raster generation..."
     s = time()
     for i in xrange(256):
         for j in xrange(256):
-            for point_pix in coords_pix:
-                heatmap[i][j] += g[int(heat_dist(point_pix, j, i))]
+            for point_tile in coords_tile:
+                heatmap[i][j] += g[int(heat_dist(point_tile, j, i))]
     e = time()
-    print "Done."
-    print "Time: " + str(e - s)
-    print "Average time per point: " + str((e - s) / n)
+    print "\tDone."
+    print "\tTime: " + str(e - s)
+    print "\tAverage time per point: " + str((e - s) / n)
+    print "Returning tile."
+    heatmap = heatmap[::-1]
     return heatmap
 
 def show_heatmap(heatmap, bounds):
@@ -317,21 +341,25 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         print "Done."
 
 if __name__ == "__main__":
-    #     coords = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Smiley face on [0-100) Euclidean square
-    
     # XXX CAUTION! the random point generator makes tuples which matplotlib can interpret as (X, Y)
     # which makes sense on a Euclidean plane, but LAT/LON is in the reverse order!!!
     # Therefore, specify bounds as follows:
     #    > [minx, maxx, miny, maxy] when working in X, Y
     #    > [miny, maxy, minx, maxx] when working in LAT/LON
     
+    #sine = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Sine curve on [0-100) Euclidean square
+    #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
+    stellenbosch = [[-33.9200, 18.8600]]
+    center = [[20,10]]
+    middle = [[45,45],[-45,45],[45,-45],[-45,-45]]
+    
     bounds_lim = [-85, 85, -180, 180]
     bounds_disp = [0, 256, 0, 256]
-    coords = random_coords(10, bounds_lim)
-    #    heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(0,0,0,coords)
-    #    save_heatmap(tile, colour = True, path = "./special.png")
+    #coords = random_coords(10, bounds_lim)
+    #heatmap = heatmap(bounds, coords)
+    tile = heatmap_tile(level = 1, x = 1, y = 1, coords=center)
+    #save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
-    #    show_3D_heatmap(heatmap)
+    #show_3D_heatmap(heatmap)
 
 
