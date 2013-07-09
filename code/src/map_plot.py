@@ -261,7 +261,7 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     for i in xrange(256):
         for j in xrange(256):
             for point_tile in coords_tile:
-                heatmap[i][j] += g[int(heat_dist(point_tile, j, i))]
+                heatmap[255-i][j] += g[int(heat_dist(point_tile, j, i))]
     e = time()
     print "\tDone."
     print "\tTime: " + str(e - s)
@@ -277,7 +277,7 @@ def show_heatmap(heatmap, bounds):
     @type heatmap: Rectangular numpy matrix of floats
     @param bounds: The bounding coordinates of the points to generate, in the form [left, right, bottom, top].
     @type bounds: List of 4 ints
-    @rtype: Void
+    @rtype: Void2
     '''
     import matplotlib.pyplot as plt
     
@@ -331,7 +331,8 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         for r in xrange(len(heatmap)):
             heatmap_color.append([])
             for c in xrange(len(heatmap[r])):
-                heatmap_color[r].append(cmap.to_rgba(heatmap[r][c]))
+                col = cmap.to_rgba(heatmap[r][c])
+                heatmap_color[r].append(col[0],col[1],col[2],.5)
             
         misc.imsave(path, heatmap_color)
         print "Done."
@@ -353,12 +354,14 @@ if __name__ == "__main__":
     center = [[0,0]]
     square = [[45,45],[-45,45],[45,-45],[-45,-45]]
     dummy = [[45,45],[-45,45],[0,-45],[0,-45],[0,-45]]
+    technopark = [[-33.964807, 18.8372767]]
+    madagascar = [[-20,47]]
     
     bounds_lim = [-85, 85, -180, 180]
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 3, x = 5, y = 2, coords=dummy)
+    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=technopark)
     #save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
     #save_heatmap(tile, path="./yes.png", colour=True)
