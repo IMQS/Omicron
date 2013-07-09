@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="../javascript/index.js"></script>
+		<script type="text/javascript" src="/web/javascript/index.js"></script>
 		<title>Home</title>
 	</head>
 <!-- Search box and autocomplete  -->
@@ -18,7 +18,7 @@
 		<noscript>
 			alert("Browser Not Supported")
 		</noscript>
-		<form name="SearchForm" onSubmit="hello();" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
+		<form name="SearchForm" id="form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
 		<datalist id="AutoCompleteList">
 			<option value="#water">
 			<option value="#pipeburst">
@@ -27,10 +27,9 @@
 			<option value="#snow">
 		</datalist>
 			<fieldset>
-				Search : <input type="search" name="tags_list" autofocus="true" list="AutoCompleteList">
-				Twitter:<input type="radio" name="Platform" checked="true" value="twitter">
-				Instagram:<input type="radio" name="Platform" value="instagram">
-				All Platforms:<input type="radio" name="Platform" value="twitter_instagram">
+				Search : <input type="search" id="tags" autofocus="true" list="AutoCompleteList">
+				Twitter:<input type="checkbox" name="platform" checked="true" value="twitter">
+				Instagram:<input type="checkbox" name="platform" value="instagram">
 				function: 
 				<select id="function">
 					<option>
@@ -40,9 +39,9 @@
 						Point Map
 					</option>
 				</select>
-				Longitude 	:<input type="number"  id="longitude">
-				Latitude	:<input type="number" id="latitude">
-				<select>
+				Longitude 	:<input type="text"  id="longitude">
+				Latitude	:<input type="text" id="latitude">
+				<select id="location_type_details">
 					<option>
 						Area
 					</option>
@@ -50,7 +49,15 @@
 						Radius
 					</option>
 				</select>
-				:<input type="text" placeholder="in KM/area name" id="location_type_details" name="radius">
+				
+				<input type="hidden" name="tags">
+				<input type="hidden" name="platforms">
+				<input type="hidden" name="location">
+				<input type="hidden" name="location_type">
+				<input type="hidden" name="function">
+				
+				:<input type="text" placeholder="in KM/area name" id="radius_area">
+							
 				<input type="submit" name="Submit_Search">
 			</fieldset>
 		</form>
