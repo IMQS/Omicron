@@ -332,7 +332,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
             heatmap_color.append([])
             for c in xrange(len(heatmap[r])):
                 col = cmap.to_rgba(heatmap[r][c])
-                heatmap_color[r].append(col[0],col[1],col[2],.5)
+                heatmap_color[r].append((col[0],col[1],col[2],.5))
             
         misc.imsave(path, heatmap_color)
         print "Done."
