@@ -30,7 +30,6 @@ function process_input(input) {
 	
 }
 function OnRun() {
-	alert("Hello");
 	var input = get_input();
 	process_input(input);
 	initmap();

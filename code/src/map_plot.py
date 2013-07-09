@@ -322,7 +322,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         
         print "Saving colour heatmap to " + path + "..."
         
-        print "\tColourising..."
+        print "\tMapping to colour scale..."
         cmap = cm.ScalarMappable()
         cmap.set_cmap('hot')
         cmap.set_clim(0, 5)
@@ -331,8 +331,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         for r in xrange(len(heatmap)):
             heatmap_color.append([])
             for c in xrange(len(heatmap[r])):
-                col = cmap.to_rgba(heatmap[r][c])
-                heatmap_color[r].append((col[0],col[1],col[2],.5))
+                heatmap_color[r].append(cmap.to_rgba(heatmap[r][c], alpha=0.5, bytes=True))
         print "\tDone."
         misc.imsave(path, heatmap_color)
         print "Done."
@@ -363,9 +362,10 @@ if __name__ == "__main__":
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 1, x = 1, y = 1, coords=stellenbosch)
+    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch)
     #save_heatmap(tile, colour = True, path = "./special.png")
-    show_heatmap(tile, bounds_disp)
+    #show_heatmap(tile, bounds_disp)
+    save_heatmap(tile, path="/home/marzul/0_0_0.png", colour=True)
     #save_heatmap(tile, path="./yes.png", colour=True)
     #show_3D_heatmap(heatmap)
 

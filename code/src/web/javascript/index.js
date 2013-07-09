@@ -48,7 +48,7 @@ function OnSubmit() {
 	//sets the location type and area or GPS coordinates
 	console.log("locationtype element");
 	console.log(locationtype.value);
-	if(locationtype.value =="Area"){
+	if(locationtype.value =="Region"){
 		location_type.value = "area"
 		if (area_radius.value == "" || area_radius.value == null){
 			console.log("area not specified also not implemented");
@@ -57,7 +57,7 @@ function OnSubmit() {
 			location.value = area_radius.value
 		}
 		
-	} else if(locationtype.value == "Radius") {
+	} else if(locationtype.value == "Circle") {
 		
 		location_type.value = "radius"; 
 
@@ -142,6 +142,8 @@ function OnSubmit() {
 }
 /**
  * REST call to get an Authentication for Twitter returns access token
+ * @param url: URL for the REST call, String
+ * @param callback: Function pointer to execute after the REST call has completed
  */
 function httpRequest(url, callback) // How can I use this callback?
 {
@@ -199,12 +201,16 @@ function OnRun() {
 	/* alert("Checked"); */
 	if (check == false) {
 		return "Unsupported Browser";
+	} else {
+		console.log("Authenticated and Ready to request");
+		
 	}
 
 }
 /**
+ * Checks authentication, if there is a valid access token available
  * @returns true: If it attempts to get a new code, or find an old valid code
- * @returns False: if the browser can't support web storage
+ * @returns false: if the browser can't support web storage
  */
 function check_authentication() {
 	if (typeof (Storage) !== "undefined") {
@@ -224,8 +230,7 @@ function check_authentication() {
 						store_codes, true);
 				return true;
 			} else {
-				document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
-						+ " is the previous code";
+				document.getElementById("result").innerHTML =  "Using previous Authentication code";
 				return true;
 			}
 		}

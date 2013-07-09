@@ -15,7 +15,6 @@
 	For debugging the web storage ?>
 		<div id="result">Not authenticated</div>
 		<script>
-			alert("Hello");
 			OnRun();
 		</script>
 		<noscript>
@@ -25,7 +24,7 @@
 			<fieldset>
 			<ul>
                 <li>
-			    <label for="tags">Search</label><input type="search" id="tags" autofocus="true"></li>
+			    <label for="tags">Search<input type="search" id="tags" autofocus="true"></label></li>
 				<li><label for="twitter_box">Twitter
 				<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter"></label>
 				<label for="instagram_box">Instagram
@@ -43,10 +42,10 @@
 			
                 <li><select id="location_type_details">
 					<option>
-						Area<!-- TODO Change to "Search by Region" -->
+						Circle<!-- TODO Change to "Search using Radius (Circle)"  -->
 					</option>
 					<option>
-						Radius<!-- TODO Change to "Search using Radius (Circle)"  -->
+						Region<!-- TODO Change to "Search by Region" -->
 					</option>
 				</select></li>
                 <li><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:25em;"></li>
@@ -69,7 +68,7 @@
 		</form>
 		
 		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-		<label for="predef1">Predefined Tag</label>
+		<label for="predef1">Predefined Search</label>
 			<input type="submit" id="predef1" value="#imqs #pipeburst">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
@@ -77,7 +76,5 @@
 			<input type="hidden" name="platforms" value="twitter">
 			<input type="hidden" name="function" value="heat_map">
 		</form>
-
-	
 	</body>
 </html>
