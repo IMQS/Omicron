@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="/web/javascript/index.js"></script>
+		<script type="text/javascript" src="../javascript/index.js"></script>
 		<title>Home</title>
 	</head>
 <!-- Search box and autocomplete  -->
@@ -11,25 +11,21 @@
 		Omicrom Heat map Generator
 		<?php must use php comments in side body 
 	For debugging the web storage ?>
-		<div id="result">This isn't working</div>
+		<div id="result">Not authenticated</div>
 		<script>
 			OnRun();
 		</script>
 		<noscript>
 			alert("Browser Not Supported")
 		</noscript>
-		<form name="SearchForm" id="form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
-		<datalist id="AutoCompleteList">
-			<option value="#water">
-			<option value="#pipeburst">
-			<option value="#imqs">
-			<option value="#food">
-			<option value="#snow">
-		</datalist>
+		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
 			<fieldset>
-				Search : <input type="search" id="tags" autofocus="true" list="AutoCompleteList">
-				Twitter:<input type="checkbox" name="platform" checked="true" value="twitter">
-				Instagram:<input type="checkbox" name="platform" value="instagram">
+			<label for="tags">Search</label>
+				<input type="search" id="tags" autofocus="true">
+				<label for="twitter_box">Twitter</label>
+				<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter">
+				<label for="instagram_box">Instagram</label>
+				<input type="checkbox" id="instagram_box" name="platform" value="instagram">
 				function: 
 				<select id="function">
 					<option>
@@ -39,8 +35,10 @@
 						Point Map
 					</option>
 				</select>
-				Longitude 	:<input type="text"  id="longitude">
-				Latitude	:<input type="text" id="latitude">
+				<label for="longitude">longitude</label>
+				<input type="text"  id="longitude">
+				<label for="latitude">latitude</label>
+				<input type="text" id="latitude">
 				<select id="location_type_details">
 					<option>
 						Area
@@ -56,10 +54,21 @@
 				<input type="hidden" name="location_type">
 				<input type="hidden" name="function">
 				
-				:<input type="text" placeholder="in KM/area name" id="radius_area">
+				<label for="radius_area">Radius in kilometers or area name</label>
+				<input type="text" placeholder="in KM/area name" id="radius_area">
 							
 				<input type="submit" name="Submit_Search">
 			</fieldset>
+		</form>
+		
+		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
+		<label for="predef1">Predefined Search</label>
+			<input type="submit" id="predef1" value="#imqs #pipeburst">
+			<input type="hidden" name="tags" value="#imqs_#pipeburst">
+			<input type="hidden" name="location" value="-33.96_18.83_2000">
+			<input type="hidden" name="location_type" value="radius">
+			<input type="hidden" name="platforms" value="twitter">
+			<input type="hidden" name="function" value="heat_map">
 		</form>
 	
 		<button id="RESTCall" onclick="httprequest();">

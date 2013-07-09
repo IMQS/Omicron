@@ -3,7 +3,8 @@
  */
 /**
  * This checks the fields have been filled in before filling in the hidden fields with the data to format it correctly for the REST call
- * 
+ * @returns true: if all the correct fields have been submitted
+ * @returns false: any one of the required fields have not been entered
  */
 function OnSubmit() {
 	//parameters to submit
@@ -206,7 +207,7 @@ function OnRun() {
 
 }
 /**
- * 
+ * @returns true: If it attempts to get a new code, or find an old valid code
  * @returns False: if the browser can't support web storage
  */
 function check_authentication() {
@@ -241,7 +242,7 @@ function check_authentication() {
  * Validates access token TODO validate the access_token somehow, no method with
  * the twitter api to tell if access token is expired without doing a manuel
  * request and get rejected
- * 
+ * @returns true: If its a valid token.
  * @returns false: If the token is expired.
  */
 function validate_access_token() {
