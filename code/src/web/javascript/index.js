@@ -133,9 +133,6 @@ function OnSubmit() {
 		return false;
 	}
 
-	
-	
-	
 	platforms.value = checkedplatform;
 /*	var form = document.getElementById("form");
 	form.action = "http://superfluous.imqs.co.za/omicron/main.html"+parameters;
@@ -174,8 +171,7 @@ function httpRequest(url, callback) // How can I use this callback?
  *            previous tokens
  */
 function store_codes(twitter_access_token, override) {
-	document.getElementById("result").innerHTML = "Sorry.";
-	alert(twitter_access_token);
+	document.getElementById("result").innerHTML = "Getting Twitter Codes";
 	if (typeof (Storage) !== "undefined") {
 		if (override) {
 			sessionStorage.twitter_authentication_code = twitter_access_token;
@@ -183,14 +179,14 @@ function store_codes(twitter_access_token, override) {
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
-			document.getElementById("result").innerHTML = "New Auth code stored"
-					+ twitter_access_token;
+			document.getElementById("result").innerHTML = "New Auth code stored";
 		} else {
 			document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
 					+ " is the previous code";
 		}
 	} else {
 		document.getElementById("result").innerHTML = "Cant store things";
+		sessionStorage.twitter_authentication_code = "Disabled"
 	}
 }
 /**
@@ -235,6 +231,7 @@ function check_authentication() {
 		}
 	} else {
 		alert("Can't store Access_tokens due to browser support");
+		sessionStorage.twitter_authentication_code = "Disabled"
 		return false;
 	}
 }

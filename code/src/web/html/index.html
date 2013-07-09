@@ -2,10 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<script type="text/javascript" src="/web/javascript/index.js"></script>
 		<meta name="author" content="Team Omicron">
-		<script type="text/javascript" src="../javascript/index.js"></script>
 		<title>Search Page</title>
-        <link rel="stylesheet" type="text/css" media="all" href="../css/default.css">
+        <link rel="stylesheet" type="text/css" media="all" href="/web/css/default.css">
 	</head>
 <!-- Search box and autocomplete  -->
 	<body>
@@ -15,6 +15,7 @@
 	For debugging the web storage ?>
 		<div id="result">Not authenticated</div>
 		<script>
+			alert("Hello");
 			OnRun();
 		</script>
 		<noscript>
@@ -68,7 +69,7 @@
 		</form>
 		
 		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-		<label for="predef1">Predefined Search</label>
+		<label for="predef1">Predefined Tag</label>
 			<input type="submit" id="predef1" value="#imqs #pipeburst">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">

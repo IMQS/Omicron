@@ -198,11 +198,13 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     @rtype: Rectangular numpy matrix of floats
     '''
     
+    
     import numpy as np
     from time import time
     import globalmaptiles as gmt
     
     print "Requesting tile ("+str(x)+", "+str(y)+") for level "+str(level)+"..."
+    y = 2** level - y -1
     
     world = gmt.GlobalMercator()
     bounds = world.TileBounds(x, y, level) # ( minx, miny, maxx, maxy )
@@ -213,9 +215,6 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     print "\tBounds of tile: "+str(bounds)
     
     heatmap = np.array([[0.] * 256] * 256)
-    
-    var = 362
-    three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
     
     tileTop = 256 * y
     tileLeft = 256 * x    
@@ -250,8 +249,8 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     
     print "\tCreating Gauss curve..."
     g = []
-    for i in xrange(three_stdev): 
-        g.append(gauss(var, float(i)))
+    for i in xrange(57): # three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
+        g.append(gauss(362, float(i)))
     while len(g) <= 543:  # int(sqrt((256*1.5)**2)*2) = 543 # diagonal length of one and a half tiles
         g.append(0)
     print "\tDone."
@@ -322,7 +321,8 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         from matplotlib.pyplot import cm
         
         print "Saving colour heatmap to " + path + "..."
-    
+        
+        print "\tColourising..."
         cmap = cm.ScalarMappable()
         cmap.set_cmap('hot')
         cmap.set_clim(0, 5)
@@ -333,7 +333,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
             for c in xrange(len(heatmap[r])):
                 col = cmap.to_rgba(heatmap[r][c])
                 heatmap_color[r].append((col[0],col[1],col[2],.5))
-            
+        print "\tDone."
         misc.imsave(path, heatmap_color)
         print "Done."
     else:
@@ -356,12 +356,14 @@ if __name__ == "__main__":
     dummy = [[45,45],[-45,45],[0,-45],[0,-45],[0,-45]]
     technopark = [[-33.964807, 18.8372767]]
     madagascar = [[-20,47]]
+    south_pole = [[-85,30]]
+    north_pole = [[85,30]]
     
     bounds_lim = [-85, 85, -180, 180]
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=technopark)
+    tile = heatmap_tile(level = 1, x = 1, y = 1, coords=stellenbosch)
     #save_heatmap(tile, colour = True, path = "./special.png")
     show_heatmap(tile, bounds_disp)
     #save_heatmap(tile, path="./yes.png", colour=True)
