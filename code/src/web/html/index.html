@@ -2,13 +2,20 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+<<<<<<< HEAD
 		<script type="text/javascript" src="/web/javascript/index.js"></script>
 		<title>Home</title>
+=======
+		<meta name="author" content="Team Omicron">
+		<script type="text/javascript" src="../javascript/index.js"></script>
+		<title>Search Page</title>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/default.css">
+>>>>>>> branch 'master' of https://github.com/IMQS/Omicron.git
 	</head>
 <!-- Search box and autocomplete  -->
 	<body>
 
-		Omicrom Heat map Generator
+		<h1>Omicrom Heat map Generator</h1>
 		<?php must use php comments in side body 
 	For debugging the web storage ?>
 		<div id="result">Not authenticated</div>
@@ -20,13 +27,14 @@
 		</noscript>
 		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
 			<fieldset>
-			<label for="tags">Search</label>
-				<input type="search" id="tags" autofocus="true">
-				<label for="twitter_box">Twitter</label>
-				<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter">
-				<label for="instagram_box">Instagram</label>
-				<input type="checkbox" id="instagram_box" name="platform" value="instagram">
-				function: 
+			<ul>
+                <li>
+			    <label for="tags">Search</label><input type="search" id="tags" autofocus="true"></li>
+				<li><label for="twitter_box">Twitter
+				<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter"></label>
+				<label for="instagram_box">Instagram
+				<input type="checkbox" id="instagram_box" name="platform" value="instagram"></label></li>
+				<li>Generate: 
 				<select id="function">
 					<option>
 						Heat Map
@@ -35,28 +43,31 @@
 						Point Map
 					</option>
 				</select>
-				<label for="longitude">longitude</label>
-				<input type="text"  id="longitude">
-				<label for="latitude">latitude</label>
-				<input type="text" id="latitude">
-				<select id="location_type_details">
+				</li>
+			
+                <li><select id="location_type_details">
 					<option>
-						Area
+						Area<!-- TODO Change to "Search by Region" -->
 					</option>
 					<option>
-						Radius
+						Radius<!-- TODO Change to "Search using Radius (Circle)"  -->
 					</option>
-				</select>
+				</select></li>
+                <li><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:25em;"></li>
+				<li><p<label for="longitude">Longitude
+				<input type="text"  id="longitude"></label></p>
+				<p<label for="latitude">Latitude</label>
+				<input type="text" id="latitude"></p></li>
+
 				
 				<input type="hidden" name="tags">
 				<input type="hidden" name="platforms">
 				<input type="hidden" name="location">
 				<input type="hidden" name="location_type">
 				<input type="hidden" name="function">
+
 				
-				<label for="radius_area">Radius in kilometers or area name</label>
-				<input type="text" placeholder="in KM/area name" id="radius_area">
-							
+			</ul>
 				<input type="submit" name="Submit_Search">
 			</fieldset>
 		</form>
