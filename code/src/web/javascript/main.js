@@ -56,12 +56,10 @@ function database_request(callback,request_params,callback_params) // How can I 
 		var search_id = request.responseText
 		console.log(search_id);
 		callback(callback_params,boolean);
-		boolean = true;
+//		boolean = true;
 		console.log("checking");
-		if(request.readyState == 4){
-			console.log("ready state 4");
-		}if(request.status==200){
-			console.log("status is 200");
+		if(request.readyState == 4 && request.status==200){
+			console.log("ready");
 		}
 
 	}
