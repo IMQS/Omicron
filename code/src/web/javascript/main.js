@@ -49,7 +49,8 @@ function database_request(callback,request_params,callback_params) // How can I 
 			return;
 		}
 		console.log("Pushing call back");
-		callback(input+"&"+request.responseText);
+		console.log(request.responseText['user_id']);
+		callback(callback_params);
 
 	}
 	console.log("Opening port");
