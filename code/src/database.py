@@ -6,6 +6,7 @@ Created on 27 Jun 2013
 import pymongo
 from pymongo import MongoClient
 import datetime
+from bson.objectid import ObjectId
 
 class database_handler(object):
     '''
@@ -100,3 +101,61 @@ class database_handler(object):
         else:
             raise Exception("Connection failure")
         return query_result
+    
+    def get_social_data_by_id(self, id = None, database_name = "omicron", collection_name = None):
+        '''
+            Finds all the entries from time_start to time_end inclusive that has the same query value as the parameter query.
+            Note That time_start and time_end can both take a value "'all'". The "'all'" value instructs the search to have no upper or lower bounds or both.
+            
+            @param self: Pointer to the current object.
+            @type self: L{database_handler}
+            @return: The data that meet the criteria of the search parameters.
+            @rtype: JSON Object
+            @param database_name: The name of the database.
+            @type database_name: string
+            @param collection_name: The name of the collection you want to access.
+            @type collection_name: string
+            @raise AttributeError: If a parameter is missing or None.
+            @raise Exception("Connection failure"): Unable to connect to Database.
+        '''
+        query_result = None
+        if id == None or database_name == None or collection_name == None:
+            raise AttributeError
+       
+        if (self.client.alive()):
+            database =  self.client[database_name]
+            collection = database[collection_name]
+            query_result = collection.find_one({"_id":ObjectId(id)})
+        else:
+            raise Exception("Connection failure")
+        return query_result
+    def store_social_data_by_id(self, id = None, social_data = None, database_name = "omicron", collection_name = None):
+        '''
+            Adds the social data to a specified Mongo database.
+            
+            @param self: Pointer to the current object.
+            @type self: L{database_handler}
+            @param time: The time when the request for the social data was made.  
+            @type time: L{datetime.datetime} 
+            @param query: The parameters used for the search in the same format as a GET command.
+            @type query: L{string}
+            @param social_data: JSON Object that contains the social platforms and the relevant social data associated with them.
+            @type social_data: JSON Object
+            @param database_name: The name of the database.
+            @type database_name: string
+            @param collection_name: The name of the collection you want to access.
+            @type collection_name: string
+            @return: The unique id that identifies the search in the database
+            @rtype: L{str}
+            @raise AttributeError: If a parameter is missing or None.
+            @raise Exception("Connection failure"): Unable to connect to Database.
+        '''
+        if (id == None or social_data == None or database_name == None or collection_name == None):
+            raise AttributeError
+        
+        if (self.client.alive()):
+            database =  self.client[database_name]
+            collection = database[collection_name]
+            query_result = collection.update({"_id":ObjectId(id)},{"$set":{'data':social_data}}) 
+        else:
+            raise Exception("Connection failure")

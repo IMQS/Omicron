@@ -5,7 +5,7 @@ function initmap(input,bool,search_id) {
 //	alert(input)
 //	input = '?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000'
 	// set up the map
-	if(bool = true){
+	if(bool == true){
 		console.log("Returning already setup");
 		return;
 	}
@@ -72,7 +72,9 @@ function database_request(callback,request_params,callback_params) // How can I 
 	request.open("GET", "http://superfluous.imqs.co.za/omicron/request_search_id"+request_params);
 	request.send();
 }
-
+/**
+ * 
+ */
 function OnRun() {
 	var input = window.location.search;
 //	alert("Starting");
