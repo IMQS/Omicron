@@ -49,8 +49,8 @@ function database_request(callback,request_params,callback_params) // How can I 
 			return;
 		}
 		console.log("Pushing call back");
-		var jsonobject = JSON.stringify(request.responseText)
-		console.log(jsonobject.user_id);
+		var jsonObject = request.responseText
+		console.log(jsonObject.user_id);
 		callback(callback_params);
 
 	}
