@@ -38,6 +38,6 @@ function process_input(input) {
 */
 
 function OnRun() {
-	var input = decodeURIComponent(window.location.search);
+	var input = window.location.search;
 	initmap(input);
 }
