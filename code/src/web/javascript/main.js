@@ -72,7 +72,9 @@ function database_request(callback,request_params,callback_params) // How can I 
 	request.open("GET", "http://superfluous.imqs.co.za/omicron/request_search_id"+request_params);
 	request.send();
 }
-
+/**
+ * 
+ */
 function OnRun() {
 	var input = window.location.search;
 //	alert("Starting");
