@@ -16,7 +16,7 @@ function initmap(input,bool,search_id) {
 	}).addTo(map);
 	var heatmap = L
 			.tileLayer(
-					'http://superfluous.imqs.co.za/omicron/request_handler'+input+'&directory=/{z}/{x}/{y}.png',
+					'http://superfluous.imqs.co.za/omicron/request_handler'+input+'&user_id='+search_id+'&directory=/{z}/{x}/{y}.png',
 					{
 						maxZoom : 18
 					});
