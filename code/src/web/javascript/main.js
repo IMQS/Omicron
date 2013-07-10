@@ -37,7 +37,31 @@ function process_input(input) {
 }
 */
 
+function database_request(callback,request_params,callback_params) // How can I use this callback?
+{
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+		if (request.readyState != 4) {
+			return; // Another callback here
+
+		}
+		if (request.status != 200) {
+			return;
+		}
+		console.log("Pushing call back");
+		callback(input+"&"+request.responseText);
+
+	}
+	console.log("Opening port");
+//	request.setRequestHeader("Content-length", 1);
+	request.open("GET", "http://superfluous.imqs.co.za/Omicron/request_search_id"+request_params);
+	request.send();
+}
+
 function OnRun() {
 	var input = window.location.search;
-	initmap(input);
+//	alert("Starting");
+//	var input = "?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000" 
+	database_request(initmap,input,input);
+	console.log("Completed ");
 }
