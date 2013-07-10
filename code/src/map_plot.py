@@ -120,13 +120,19 @@ def plot_gauss(var, lim):
     @param lim: Upper limit of plot (lower is 0).
     @type lim: Float
     @rtype: Void
-    '''
-    coords = []
-    for i in range(lim):
-        for j in range(10):
+     coords = []
+    for i in xrange(lim):
+        for j in xrange(10):
             num = i + j / 10.
             print num, gauss(var, num)
             coords.append((num, gauss(var, num)))
+    plot(coords)
+            
+    '''
+    
+    list = [i+j/10. for i in range(lim) for j in range(10) ]
+    coords = map(list, gauss(var, list))
+   
     plot(coords)
 
 def heatmap(bounds, coords):
@@ -365,7 +371,7 @@ if __name__ == "__main__":
     tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch)
     #save_heatmap(tile, colour = True, path = "./special.png")
     #show_heatmap(tile, bounds_disp)
-    save_heatmap(tile, path="/home/marzul/0_0_0.png", colour=True)
+    save_heatmap(tile, path="/home/meloder/0_0_0.png", colour=True)
     #save_heatmap(tile, path="./yes.png", colour=True)
     #show_3D_heatmap(heatmap)
 
