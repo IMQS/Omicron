@@ -54,7 +54,7 @@ function database_request(callback,request_params,callback_params) // How can I 
 	}
 	console.log("Opening port");
 //	request.setRequestHeader("Content-length", 1);
-	request.open("GET", "http://superfluous.imqs.co.za/Omicron/request_search_id"+request_params);
+	request.open("GET", "http://superfluous.imqs.co.za/omicron/request_search_id"+request_params);
 	request.send();
 }
 
