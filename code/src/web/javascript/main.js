@@ -2,8 +2,8 @@
  * 
  */
 function initmap(input) {
-	
-//	input = '?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000'
+	alert(input)
+	input = '?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000'
 	// set up the map
 	var map = L.map('mapHolder').setView([ 51.505, -0.09 ], 0);
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
