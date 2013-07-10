@@ -44,6 +44,8 @@ class database_handler(object):
             @type database_name: string
             @param collection_name: The name of the collection you want to access.
             @type collection_name: string
+            @return: The unique id that identifies the search in the database
+            @rtype: L{str}
             @raise AttributeError: If a parameter is missing or None.
             @raise Exception("Connection failure"): Unable to connect to Database.
         '''
@@ -53,13 +55,14 @@ class database_handler(object):
         if (self.client.alive()):
             database =  self.client[database_name]
             collection = database[collection_name]
-            collection.insert({"time":time, "query":query, "data":social_data})
+            user_id = collection.insert({"time":time, "query":query, "data":social_data})
+            return user_id
         else:
             raise Exception("Connection failure")
         
     def get_social_data(self, time_start = None, time_end = None, query = None, database_name = "omicron", collection_name = None):
         '''
-            Finds all the entries from time_start to time_end exclusive that has the same query value as the parameter query.
+            Finds all the entries from time_start to time_end inclusive that has the same query value as the parameter query.
             Note That time_start and time_end can both take a value "'all'". The "'all'" value instructs the search to have no upper or lower bounds or both.
             
             @param self: Pointer to the current object.
@@ -89,11 +92,11 @@ class database_handler(object):
             if (time_start == 'all' and time_end == 'all'):
                 query_result = collection.find({"query":query})
             elif(time_start == 'all'):
-                query_result = collection.find({"query":query, "time":{"$lt":time_end}}) 
+                query_result = collection.find({"query":query, "time":{"$lte":time_end}}) 
             elif(time_end == 'all'):
-                query_result = collection.find({"query":query, "time":{"$gt":time_start}})
+                query_result = collection.find({"query":query, "time":{"$gte":time_start}})
             else:   
-                query_result = collection.find({"query":query, "time":{"$gt":time_start, "$lt":time_end}})
+                query_result = collection.find({"query":query, "time":{"$gte":time_start, "$lte":time_end}})
         else:
             raise Exception("Connection failure")
         return query_result
