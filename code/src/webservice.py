@@ -12,9 +12,12 @@ import map_plot as mp
 from gateway import gateway 
 import tempfile
 import social_platform as sp
+from database import database_handler as db_handler 
+import datetime
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
-import matplotlib
-render = web.template.render('/home/omicron/Omicron2/code/src/web/html')
+
+
+render = web.template.render('/home/omicron/Omicron2/code/src/web/html')#: Sets the directory for the html files.
 
 class request_handler(object):
     '''
@@ -206,6 +209,8 @@ class request_search_id(object):
     '''
         Returns the search id needed to find and return the correct results from the database. 
     '''
+    OK = {'success':'True'}
+    ERROR = {'success':'False'}
     def GET(self):
         '''
             Rest call that returns the search id needed to search, find and return data.
@@ -217,6 +222,15 @@ class request_search_id(object):
             @return id: The search id. 
             @rtype: L{str}
         '''
+        return_data_and_status = self.OK
+        raw_data = web.input()
+        db = db_handler(IP="superfluous.imqs.co.za")
+        user_query = raw_data['query']
+        user_time = datetime.datetime.now()
+        user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', 'request_information')
+        return_data_and_status['user_id'] = user_id
+        return return_data_and_status
+        
     def POST(self):
         '''
         
@@ -227,7 +241,7 @@ urls = ("/request_handler", "request_handler",
         "/authorise", "authorisation",
         "/index.*", "index",
         "/main.*", "main",
-        "/request_token", "request_search_token")#:Groups the URL's and their corresponding actions.
+        "/request_search_id", "request_search_id")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
