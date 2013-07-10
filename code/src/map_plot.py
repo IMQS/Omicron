@@ -1,5 +1,5 @@
 '''
-Created on 18 June 2013
+Created on 18 Jun 2013
 
 @author: M. Arzul
 
@@ -96,7 +96,7 @@ def heat_dist(point, x, y):
     '''
     from math import sqrt
     return sqrt((point[0] - x-.5) ** 2 + (point[1] - y-.5) ** 2)
-    # the +.5 is to account for pixel center
+    # the -.5 is to account for pixel center
 
 def gauss(var, x):
     '''
