@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="/web/javascript/index.js"></script>
+		<script type="text/javascript" src="../javascript/index.js"></script>
 		<meta name="author" content="Team Omicron">
 		<title>Search Page</title>
 		<link rel="shortcut icon" href="/favicon.ico">
-        <link rel="stylesheet" type="text/css" media="all" href="/web/css/default.css">
+        <link rel="stylesheet" type="text/css" media="all" href="../css/default.css">
 	</head>
 <!-- Search box and autocomplete  -->
 	<body>
@@ -67,24 +67,26 @@
 				<input type="submit" name="Submit_Search">
 			</fieldset>
 		</form>
-		
-		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-		<label>Predefined Searches:</label>
+		<label>Predefined Searches:<br></label>
+		<form name="search" id="Custom_Search_Form1" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
 			<input type="submit" id="predef1" value="Pipebursts">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
 			<input type="hidden" name="platforms" value="twitter">
 			<input type="hidden" name="function" value="heat_map">
+		</form>
 			
-			
+		<form name="search" id="Custom_Search_Form2" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">			
 			<input type="submit" id="predef2" value="Black Outs">
 			<input type="hidden" name="tags" value="#imqs_#nolights">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
 			<input type="hidden" name="platforms" value="twitter">
 			<input type="hidden" name="function" value="heat_map">
-			
+		</form>
+		
+		<form name="search" id="Custom_Search_Form3" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
 			<input type="submit" id="predef3" value="Fires">
 			<input type="hidden" name="tags" value="#imqs_#fire">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
