@@ -14,6 +14,7 @@ import tempfile
 import social_platform as sp
 from database import database_handler as db_handler 
 import datetime
+import urllib
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 
 
@@ -226,6 +227,7 @@ class request_search_id(object):
         raw_data = web.input()
         db = db_handler(IP="superfluous.imqs.co.za")
         user_query = raw_data['query']
+        user_query = urllib.unquote(user_query).decode("utf8")
         user_time = datetime.datetime.now()
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
         return_data_and_status['user_id'] = user_id
@@ -233,9 +235,23 @@ class request_search_id(object):
         
     def POST(self):
         '''
-        
+            Rest call that returns the search id needed to search, find and return data.
+            
+            @param self: Current instance of the L{request_search_id} object.
+            @type self: L{request_search_id}
+            @param query: Formated string that contains the follow parameters platforms, location, function, 
+            @type query: L{str}
+            @return id: The search id. 
+            @rtype: L{str}
         '''
-    
+        return_data_and_status = self.OK
+        raw_data = web.input()
+        db = db_handler(IP="superfluous.imqs.co.za")
+        user_query = raw_data['query']
+        user_time = datetime.datetime.now()
+        user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
+        return_data_and_status['user_id'] = user_id
+        return return_data_and_status
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
         "/authorise", "authorisation",
