@@ -65,6 +65,6 @@ function OnRun() {
 	var input = window.location.search;
 //	alert("Starting");
 //	var input = "?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000" 
-	database_request(initmap,input,input);
+	//database_request(initmap,input,input);
 	console.log("Completed ");
 }
