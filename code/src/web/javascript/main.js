@@ -1,13 +1,10 @@
 /**
  * 
  */
-function initmap(input,bool) {
+function initmap(input,search_id) {
 //	alert(input)
 //	input = '?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000'
 	// set up the map
-	if(bool == true){
-		return;
-	}
 	var map = L.map('mapHolder').setView([ 51.505, -0.09 ], 0);
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		/* 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' */
@@ -52,14 +49,15 @@ function database_request(callback,request_params,callback_params) // How can I 
 		if (request.status != 200) {
 			return;
 		}
-		console.log("Pushing call back");
+
 		var search_id = request.responseText
 		console.log(search_id);
-		callback(callback_params,boolean);
+
 //		boolean = true;
 		console.log("checking");
 		if(request.readyState == 4 && request.status==200){
-			console.log("ready");
+			console.log("Pushing call back");
+			callback(callback_params,search_id);
 		}
 
 	}
