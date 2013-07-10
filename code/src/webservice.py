@@ -223,14 +223,13 @@ class request_search_id(object):
             @return id: The search id. 
             @rtype: L{str}
         '''
-        return_data_and_status = self.OK
         raw_data = web.input()
         db = db_handler(IP="superfluous.imqs.co.za")
         user_query = raw_data['query']
         user_query = urllib.unquote(user_query).decode("utf8")
         user_time = datetime.datetime.now()
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
-        return_data_and_status['user_id'] = user_id
+        return_data_and_status = str(user_id)
         return return_data_and_status
         
     def POST(self):
@@ -244,13 +243,12 @@ class request_search_id(object):
             @return id: The search id. 
             @rtype: L{str}
         '''
-        return_data_and_status = self.OK
         raw_data = web.input()
         db = db_handler(IP="superfluous.imqs.co.za")
         user_query = raw_data['query']
         user_time = datetime.datetime.now()
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
-        return_data_and_status['user_id'] = user_id
+        return_data_and_status = str(user_id)
         return return_data_and_status
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
