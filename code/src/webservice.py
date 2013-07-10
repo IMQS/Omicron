@@ -26,6 +26,78 @@ class request_handler(object):
     '''
     OK = {'success':'True'}
     ERROR = {'success':'False'}
+    root="/home/omicron/Omicron2/code/src/"
+    def GET_with_user_id(self, raw_data):
+        '''
+        '''
+        return_data_and_status = {}
+        platforms = raw_data["platforms"].lstrip('u').split("_")
+        tags = raw_data["tags"].lstrip('u').split("_")
+        function = raw_data["function"]
+        location_type = raw_data["location_type"]
+        location = raw_data["location"].lstrip('u').split("_")
+        l_x_y = str(raw_data["directory"]).split("/")[1:]
+        user_id = raw_data['user_id']
+        gatewayO = gateway()
+        db = db_handler(IP="superfluous.imqs.co.za")
+        if (function == "heat_map"):
+            query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
+            if query_data == '':
+                query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+                db.store_social_data_by_id(id=user_id, social_data=query_data, database_name='omicron', collection_name='request_information')
+            total_coords = []
+            for platform in platforms:
+                total_coords = total_coords + query_data[platform]['location']
+            try:
+                web.header("Content-Type", "png") # Set the Header
+                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
+                mp.save_heatmap(heat_map, path=self.root+"heatmaps/"+user_id+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
+                return_data_and_status = open(self.root+"heatmaps/"+user_id+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2],"rb").read()
+            except Exception:
+                msg = "The heatmap could not be generated or stored"
+                msg = Exception.message
+                return_data_and_status = self.ERROR
+                return_data_and_status["message"] = msg
+        else :
+            msg = "The function that was specified was not found."
+            return_data_and_status = self.ERROR
+            return_data_and_status["message"] = msg
+        return return_data_and_status
+        
+    def GET_without_user_id(self, raw_data):
+        '''
+        '''
+        return_data_and_status = {}
+        platforms = raw_data["platforms"].lstrip('u').split("_")
+        tags = raw_data["tags"].lstrip('u').split("_")
+        function = raw_data["function"]
+        location_type = raw_data["location_type"]
+        location = raw_data["location"].lstrip('u').split("_")
+        l_x_y = str(raw_data["directory"]).split("/")[1:]
+        gatewayO = gateway()
+        if (function == "heat_map"):
+            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            total_coords = []
+            for platform in platforms:
+                total_coords = total_coords + query_data[platform]['location']
+            try:
+                web.header("Content-Type", "png") # Set the Header
+                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
+                mp.save_heatmap(heat_map, path=self.root+"heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
+                return_data_and_status = open(self.root+"heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2],"rb").read()
+            except Exception:
+                msg = "The heatmap could not be generated or stored"
+                msg = Exception.message
+                return_data_and_status = self.ERROR
+                return_data_and_status["message"] = msg
+        else :
+            msg = "The function that was specified was not found."
+            return_data_and_status = self.ERROR
+            return_data_and_status["message"] = msg
+        return return_data_and_status
+        
+    
+    
     def GET(self):
         '''
             Handles GET requests received from users.
@@ -51,34 +123,10 @@ class request_handler(object):
         '''
         return_data_and_status = {}
         raw_data = web.input()
-        platforms = raw_data["platforms"].lstrip('u').split("_")
-        tags = raw_data["tags"].lstrip('u').split("_")
-        function = raw_data["function"]
-        # For future use
-        #location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("_")
-        l_x_y = str(raw_data["directory"]).split("/")[1:]
-        gatewayO = gateway()
-        if (function == "heat_map"):
-            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-            total_coords = []
-            for platform in platforms:
-                total_coords = total_coords + query_data[platform]['location']
-            try:
-                web.header("Content-Type", "png") # Set the Header
-                path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2]
-                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
-                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
-                return_data_and_status = open(path,"rb").read()
-            except Exception:
-                msg = "The heatmap could not be generated or stored"
-                msg = Exception.message
-                return_data_and_status = self.ERROR
-                return_data_and_status["message"] = msg
-        else :
-            msg = "The function that was specified was not found."
-            return_data_and_status = self.ERROR
-            return_data_and_status["message"] = msg
+        if raw_data.__contains__('user_id'):
+            return_data_and_status = self.GET_with_user_id(raw_data)
+        else:
+            return_data_and_status = self.GET_without_user_id(raw_data)
         return return_data_and_status
     
     def POST(self):
@@ -250,6 +298,7 @@ class request_search_id(object):
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
         return_data_and_status = str(user_id)
         return return_data_and_status
+    
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
         "/authorise", "authorisation",
