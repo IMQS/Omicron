@@ -263,14 +263,15 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     
     print "\tStarting raster generation..."
     s = time()
-    for point_tile in coords_tile:
-        heatmap[point_tile[1],point_tile[0]] += 1000.
-    from scipy import ndimage
-    heatmap = ndimage.gaussian_filter(heatmap, sigma=10)
+    for i in xrange(256):
+        for j in xrange(256):
+            for point_tile in coords_tile:
+                heatmap[255-i][j] += g[int(heat_dist(point_tile, j, i))]
     e = time()
     print "\tDone."
     print "\tTime: " + str(e - s)
     print "\tAverage time per point: " + str((e - s) / n)
+    heatmap = heatmap[::-1]
     print "Returning tile."
     return heatmap
 
@@ -363,6 +364,10 @@ if __name__ == "__main__":
     #    > [minx, maxx, miny, maxy] when working in X, Y
     #    > [miny, maxy, minx, maxx] when working in LAT/LON
     
+    #bounds_lim = [-85, 85, -180, 180]
+    #bounds_disp = [0, 256, 0, 256]
+    
+    #coords = random_coords(10, bounds_lim)
     #sine = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Sine curve on [0-100) Euclidean square
     #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
     stellenbosch = [[-33.9200, 18.8600]]
@@ -372,18 +377,12 @@ if __name__ == "__main__":
     #technopark = [[-33.964807, 18.8372767]]
     #madagascar = [[-20,47]]
     #south_pole = [[-85,30]]
-    #north_pole = [[85,30]]
+    #north_pole = [[85,30]]#heatmap = heatmap(bounds, coords)
     
-    bounds_lim = [-85, 85, -180, 180]
-    bounds_disp = [0, 256, 0, 256]
-    #coords = random_coords(10, bounds_lim)
-    #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch*2)
-    #save_heatmap(tile, colour = True, path = "./special.png")
+    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch*5)
     #show_heatmap(tile, bounds_disp)
-    save_heatmap(tile, path="/home/marzul/0_0_0.png", colour=True)
-    #save_heatmap(tile, path="./yes.png", colour=True)
     #show_3D_heatmap(heatmap)
+    save_heatmap(tile, path="/home/marzul/0_0_0.png", colour=True)
     e = time()
     print "total time: "+str(e-s)
 
