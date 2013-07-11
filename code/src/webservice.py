@@ -45,6 +45,9 @@ class request_handler(object):
             if str(query_data['data']) == '':
                 query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
                 db.store_social_data_by_id(id=user_id, social_data=query_data, database_name='omicron', collection_name='request_information')
+                temp = {}
+                temp['data'] = query_data
+                query_data = temp
             total_coords = []
             for platform in platforms:
                 total_coords = total_coords + query_data['data'][str(platform)]['location']
