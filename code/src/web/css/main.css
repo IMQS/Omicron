@@ -7,7 +7,7 @@ height: 101%;
 font-family: "Trebuchet MS", Arial, Tahoma, sans-serif; 
 font-weight:300;
 color:#7c7c7c;
-background: url('../css/css images/url2.jpeg'), url('./css/css images/project_omicron.png');
+background: url('/web/css/css images/url2.jpeg');
 background-position: left top, left top;
 background-repeat: repeat, repeat;
 padding-top: 10px; 
