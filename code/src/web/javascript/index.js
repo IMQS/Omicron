@@ -212,7 +212,7 @@ function EnableButtons(){
 		for(var j = 0 ; j < forms[i].length;j++){
 			if(forms[i][j].type=="submit"){
 				console.log(forms[i][j].value)
-				forms[i][j].disabled = "true";
+				forms[i][j].disabled = true;
 			}
 		}
 	}
