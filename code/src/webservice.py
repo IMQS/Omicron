@@ -42,12 +42,12 @@ class request_handler(object):
         db = db_handler(IP="superfluous.imqs.co.za")
         if (function == "heat_map"):
             query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
-            if query_data == '':
+            if str(query_data['data']) == '':
                 query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
                 db.store_social_data_by_id(id=user_id, social_data=query_data, database_name='omicron', collection_name='request_information')
             total_coords = []
             for platform in platforms:
-                total_coords = total_coords + query_data[platform]['location']
+                total_coords = total_coords + query_data['data'][str(platform)]['location']
             try:
                 web.header("Content-Type", "png") # Set the Header
                 heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)

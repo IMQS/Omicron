@@ -61,8 +61,6 @@ class gateway(object):
             for social_plat in is_valid:
                 social_plat.authenticate()
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
-                print type(social_plat.strip_data(data, selected_properties))
-                print type(social_plat.strip_data(data, selected_properties)['location'])
                 return_data[social_plat.get_platform_name()] = social_plat.strip_data(data, selected_properties)
         return return_data
     
