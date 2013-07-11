@@ -30,6 +30,10 @@ class request_handler(object):
     def GET_with_user_id(self, raw_data):
         '''
         '''
+        oauthtoken = urllib.unquote(raw_data['authcodes']).split("_");
+        
+        return oauthtoken;
+    
         return_data_and_status = {}
         platforms = raw_data["platforms"].lstrip('u').split("_")
         tags = raw_data["tags"].lstrip('u').split("_")

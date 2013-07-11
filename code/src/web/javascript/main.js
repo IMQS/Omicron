@@ -92,6 +92,7 @@ function OnRun() {
 		alert("This is a problem")
 	}
 	
-	database_request(initmap,input+"&twitteroauth="+twitter,input);
+	database_request(initmap,input+"&authcodes="+twitter,input);
+	console.log(input+"&authcodes="+twitter);
 	console.log("Completed ");
 }
