@@ -160,8 +160,10 @@ function httpRequest(url, callback) // How can I use this callback?
 		if(request.readyState == 4 && request.status==200){
 			var response = request.responseText
 			if(response !='Error'){
+				console.log("Pushing call back - store_codes");
 				callback(response)
 			} else {
+				console.log("Error response from rest call can't push call back");
 				document.getElementById("result").innerHTML("Error during authentication please refresh the page")
 			}
 		}

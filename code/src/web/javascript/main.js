@@ -79,6 +79,19 @@ function OnRun() {
 	var input = window.location.search;
 //	alert("Starting");
 //	var input = "?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000" 
-	database_request(initmap,input,input);
+	var twitter = "Disabled";
+	if (typeof (Storage) !== "undefined") {
+		if (sessionStorage.twitter_authentication_code) {
+			twitter = sessionStorage.twitter_authentication_code;
+		}
+	} else {
+		document.getElementById("result").innerHTML = "Storage Failed";
+	}
+	
+	if(twitter=="Disabled"){
+		alert("This is a problem")
+	}
+	
+	database_request(initmap,input+"&twitteroauth="+twitter,input);
 	console.log("Completed ");
 }
