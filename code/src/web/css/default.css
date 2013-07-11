@@ -1,17 +1,17 @@
 @CHARSET "UTF-8";
-#mapHolder { height:500px; width:500px;}
 body { 
 height: 101%; 
 
 font-family: "Trebuchet MS", Arial, Tahoma, sans-serif; 
 font-weight:300;
 color:#7c7c7c;
-background: #fff url('../css/css images/url2.jpeg') 0px 0px repeat; 
-background-size: 100% cover; 
-background-repeat:no-repeat;
+background: url('../css/css images/url2.jpeg');
+background-position: left top, left top;
+background-repeat: repeat, repeat;
 padding-top: 10px; 
 line-height:1.7em;
 }
+
 .screen {
 background-repeat:no-repeat;
 background-attachment:fixed;
