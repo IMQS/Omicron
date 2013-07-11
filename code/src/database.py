@@ -7,6 +7,7 @@ import pymongo
 from pymongo import MongoClient
 import datetime
 from bson.objectid import ObjectId
+import time as Time
 
 class database_handler(object):
     '''
@@ -54,10 +55,15 @@ class database_handler(object):
             raise AttributeError
         
         if (self.client.alive()):
-            database =  self.client[database_name]
-            collection = database[collection_name]
-            user_id = collection.insert({"time":time, "query":query, "data":social_data})
-            return user_id
+            for _ in range(60):
+                try:
+                    database = self.client[database_name]
+                    collection = database[collection_name]
+                    user_id = collection.insert({"time":time, "query":query, "data":social_data})
+                    return user_id
+                except Exception, e:
+                    print "waring",e
+                    Time.sleep(0.4)
         else:
             raise Exception("Connection failure")
         
@@ -88,19 +94,26 @@ class database_handler(object):
             raise AttributeError
         
         if (self.client.alive()):
-            database =  self.client[database_name]
-            collection = database[collection_name]
-            if (time_start == 'all' and time_end == 'all'):
-                query_result = collection.find({"query":query})
-            elif(time_start == 'all'):
-                query_result = collection.find({"query":query, "time":{"$lte":time_end}}) 
-            elif(time_end == 'all'):
-                query_result = collection.find({"query":query, "time":{"$gte":time_start}})
-            else:   
-                query_result = collection.find({"query":query, "time":{"$gte":time_start, "$lte":time_end}})
+            for _ in range(60):
+                try:
+                    database =  self.client[database_name]
+                    collection = database[collection_name]
+                    if (time_start == 'all' and time_end == 'all'):
+                        query_result = collection.find({"query":query})
+                    elif(time_start == 'all'):
+                        query_result = collection.find({"query":query, "time":{"$lte":time_end}}) 
+                    elif(time_end == 'all'):
+                        query_result = collection.find({"query":query, "time":{"$gte":time_start}})
+                    else:   
+                        query_result = collection.find({"query":query, "time":{"$gte":time_start, "$lte":time_end}})
+                except Exception, e:
+                    print "waring",e
+                    Time.sleep(0.4)
+                return query_result
+                    
         else:
             raise Exception("Connection failure")
-        return query_result
+        
     
     def get_social_data_by_id(self, id = None, database_name = "omicron", collection_name = None):
         '''
@@ -123,9 +136,14 @@ class database_handler(object):
             raise AttributeError
        
         if (self.client.alive()):
-            database =  self.client[database_name]
-            collection = database[collection_name]
-            query_result = collection.find_one({"_id":ObjectId(id)})
+            for _ in range(60):
+                try:
+                    database =  self.client[database_name]
+                    collection = database[collection_name]
+                    query_result = collection.find_one({"_id":ObjectId(id)})
+                except Exception, e:
+                    print "waring",e
+                    Time.sleep(0.4)
         else:
             raise Exception("Connection failure")
         return query_result
@@ -154,8 +172,14 @@ class database_handler(object):
             raise AttributeError
         
         if (self.client.alive()):
-            database =  self.client[database_name]
-            collection = database[collection_name]
-            query_result = collection.update({"_id":ObjectId(id)},{"$set":{'data':social_data}}) 
+            for _ in range(60):
+                try:
+                    database =  self.client[database_name]
+                    collection = database[collection_name]
+                    query_result = collection.update({"_id":ObjectId(id)},{"$set":{'data':social_data}})
+                except Exception, e:
+                    print "waring",e
+                    Time.sleep(0.4)
+                return query_result
         else:
             raise Exception("Connection failure")
