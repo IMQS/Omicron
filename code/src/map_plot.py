@@ -220,14 +220,13 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     
     print "\tBounds of tile: "+str(bounds)
     
-    heatmap = np.array([[0.] * 256] * 256)
-    
     tileTop = 256 * y
     tileLeft = 256 * x    
     
     if len(coords) == 0:
         print "No points provided. Returned blank."
-        return heatmap
+        return np.array([[0.] * 256] * 256)
+    
     print "\t"+str(len(coords)), "points provided."
     coords_proj = []
     coords_pyra = []
@@ -243,7 +242,8 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     print "\tTrimmed to "+str(n)+" points."
     if n == 0:
         print "No points close enough to tile. Returned blank."
-        return heatmap
+        return np.array([[0.] * 256] * 256)
+    
     print "\t\tLAT/LON points:"
     print "\t\t"+str(coords)
     print "\t\tProjected points:"
@@ -253,25 +253,32 @@ def heatmap_tile(level=0, x=0, y=0, coords=[]):
     print "\t\tTile points:"
     print "\t\t"+str(coords_tile)
     
-    print "\tCreating Gauss curve..."
-    g = []
-    for i in xrange(57): # three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
-        g.append(gauss(362, float(i)))
-    while len(g) <= 543:  # int(sqrt((256*1.5)**2)*2) = 543 # diagonal length of one and a half tiles
-        g.append(0)
-    print "\tDone."
+    #print "\tCreating Gauss curve..."
+    #g = []
+    #for i in xrange(57): # three_stdev = 57 # int(3 * sqrt(var)) hardcoded for efficiency
+    #    g.append(gauss(362, float(i)))
+    #while len(g) <= 543:  # int(sqrt((256*1.5)**2)*2) = 543 # diagonal length of one and a half tiles
+    #    g.append(0)
+    #print "\tDone."
     
     print "\tStarting raster generation..."
     s = time()
-    for i in xrange(256):
-        for j in xrange(256):
-            for point_tile in coords_tile:
-                heatmap[255-i][j] += g[int(heat_dist(point_tile, j, i))]
+    heatmap = np.array([[0.] * 512] * 512)
+    from scipy import ndimage
+    for point_tile in coords_tile:
+        heatmap[point_tile[1]+128,point_tile[0]+128] += 1000.
+    heatmap = ndimage.gaussian_filter(heatmap, sigma=15)
+    heatmap = heatmap[128:384,128:384]
+    #for i in xrange(256):
+    #    for j in xrange(256):
+    #        for point_tile in coords_tile:
+    #            heatmap[255-i][j] += g[int(heat_dist(point_tile, j, i))]
+    
     e = time()
     print "\tDone."
     print "\tTime: " + str(e - s)
     print "\tAverage time per point: " + str((e - s) / n)
-    heatmap = heatmap[::-1]
+    #heatmap = heatmap[::-1]
     print "Returning tile."
     return heatmap
 
@@ -361,28 +368,26 @@ if __name__ == "__main__":
     # XXX CAUTION! the random point generator makes tuples which matplotlib can interpret as (X, Y)
     # which makes sense on a Euclidean plane, but LAT/LON is in the reverse order!!!
     # Therefore, specify bounds as follows:
-    #    > [minx, maxx, miny, maxy] when working in X, Y
-    #    > [miny, maxy, minx, maxx] when working in LAT/LON
+    #    > [minx, maxx, miny, maxy] (l,r,b,t) when working in X, Y
+    #    > [miny, maxy, minx, maxx] (s,n,w,e) when working in LAT/LON
     
-    #bounds_lim = [-85, 85, -180, 180]
-    #bounds_disp = [0, 256, 0, 256]
+    bounds_lim = [-85, 85, -180, 180]
+    bounds_disp = [0, 256, 0, 256]
     
-    #coords = random_coords(10, bounds_lim)
-    #sine = [[20,50],[25,65],[30,75],[35,90],[50,50],[65,10],[80,50]] # Sine curve on [0-100) Euclidean square
+    ten_random = random_coords(10, bounds_lim)
     #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
     stellenbosch = [[-33.9200, 18.8600]]
     #center = [[0,0]]
     #square = [[45,45],[-45,45],[45,-45],[-45,-45]]
-    #dummy = [[45,45],[-45,45],[0,-45],[0,-45],[0,-45]]
     #technopark = [[-33.964807, 18.8372767]]
     #madagascar = [[-20,47]]
     #south_pole = [[-85,30]]
-    #north_pole = [[85,30]]#heatmap = heatmap(bounds, coords)
+    #north_pole = [[85,30]]
     
-    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch*5)
+    tile = heatmap_tile(level = 2, x = 1, y = 2, coords=stellenbosch*5)
     #show_heatmap(tile, bounds_disp)
     #show_3D_heatmap(heatmap)
-    save_heatmap(tile, path="/home/marzul/0_0_0.png", colour=True)
+    save_heatmap(tile, path="/home/marzul/test.png", colour=True)
     e = time()
     print "total time: "+str(e-s)
 
