@@ -321,8 +321,10 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
     @type colour: Boolean
     @rtype: Void
     '''
-    from scipy import misc    
+    from scipy import misc  
+    import numpy as np  
     from time import time
+    import Image
     heatmap = heatmap[::-1]
     if colour:
         from matplotlib.pyplot import cm
@@ -330,15 +332,12 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         print "Saving colour heatmap to " + path + "..."
         
         print "\tMapping to colour scale..."
-        cmap = cm.ScalarMappable()
-        cmap.set_cmap('hot')
-        cmap.set_clim(0, 5)
-        heatmap_color = []
-        
         s = time()
+        print "\t\tRescaling..."
+        heatmap = heatmap / 5.
+        print"\t\tDone."
         
-        heatmap_color = [[cmap.to_rgba(r, alpha=0.5, bytes=True) for r in c] for c in heatmap]
-        
+        heatmap_color = Image.fromarray(np.uint8(cm.hot(heatmap, alpha=0.5, bytes=True)))
         e = time()
         
         print "\tTime to convert to colour: " + str(e - s)
@@ -377,10 +376,10 @@ if __name__ == "__main__":
     bounds_disp = [0, 256, 0, 256]
     #coords = random_coords(10, bounds_lim)
     #heatmap = heatmap(bounds, coords)
-    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=stellenbosch)
+    tile = heatmap_tile(level = 1, x = 1, y = 1, coords=stellenbosch)
     #save_heatmap(tile, colour = True, path = "./special.png")
     #show_heatmap(tile, bounds_disp)
-    save_heatmap(tile, path="/home/meloder/0_0_0.png", colour=True)
+    save_heatmap(tile, path="/home/marzul/1_1_1.png", colour=True)
     #save_heatmap(tile, path="./yes.png", colour=True)
     #show_3D_heatmap(heatmap)
 
