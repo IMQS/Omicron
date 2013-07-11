@@ -209,9 +209,10 @@ function OnRun() {
 function EnableButtons(){
 	var forms = document.getElementsByTagName("form");
 	for(var i = 0;i<forms.length;i++){
-		for(var j = 0 ; j forms[i].length;j++){
-			var l = forms[i][j]
-			console.log(l)
+		for(var j = 0 ; j < forms[i].length;j++){
+			if(forms[i][j]=="submit"){
+				console.log(forms[i][j])	
+			}
 		}
 	}
 }
