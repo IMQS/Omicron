@@ -130,8 +130,8 @@ def plot_gauss(var, lim):
             
     '''
     
-    list = [i+j/10. for i in range(lim) for j in range(10) ]
-    coords = map(list, gauss(var, list))
+    g = [i+j/10. for i in range(lim) for j in range(10) ]
+    coords = map(g, gauss(var, g))
    
     plot(coords)
 
