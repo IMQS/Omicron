@@ -14,7 +14,7 @@
 		<h1>Omicron Social Network Analyser</h1>
 		<?php must use php comments in side body 
 	For debugging the web storage ?>
-		<div id="result">Not authenticated</div>
+		<div id="result">Authenticating User for this session</div>
 		<script>
 			OnRun();
 		</script>
@@ -58,12 +58,12 @@
 
 				
 			</ul>
-				<input type="submit" name="Submit_Search">
+				<input type="submit" disabled="true" name="Submit_Search">
 			</fieldset>
 		</form>
 		<label>Predefined Searches:<br></label>
 		<form name="search" id="Custom_Search_Form1" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef1" value="Pipebursts">
+			<input type="submit" disabled="true" id="predef1" value="Pipebursts">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -72,7 +72,7 @@
 		</form>
 			
 		<form name="search" id="Custom_Search_Form2" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">			
-			<input type="submit" id="predef2" value="Black Outs">
+			<input type="submit" disabled="true" id="predef2" value="Black Outs">
 			<input type="hidden" name="tags" value="#imqs_#nolights">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -81,7 +81,7 @@
 		</form>
 		
 		<form name="search" id="Custom_Search_Form3" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef3" value="Fires">
+			<input type="submit" disabled="true" id="predef3" value="Fires">
 			<input type="hidden" name="tags" value="#imqs_#fire">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">

@@ -173,7 +173,7 @@ function httpRequest(url, callback) // How can I use this callback?
  *            previous tokens
  */
 function store_codes(twitter_access_token, override) {
-	document.getElementById("result").innerHTML = "Getting Twitter Codes";
+	document.getElementById("result").innerHTML = "Attempting to Authorise";
 	if (typeof (Storage) !== "undefined") {
 		if (override) {
 			sessionStorage.twitter_authentication_code = twitter_access_token;
@@ -181,13 +181,13 @@ function store_codes(twitter_access_token, override) {
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
-			document.getElementById("result").innerHTML = "New Auth code stored";
+			document.getElementById("result").innerHTML = "Successfully Authorised";
 		} else {
 			document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
 					+ " is the previous code";
 		}
 	} else {
-		document.getElementById("result").innerHTML = "Cant store things";
+		document.getElementById("result").innerHTML = "Authentication failed";
 		sessionStorage.twitter_authentication_code = "Disabled"
 	}
 }
@@ -230,7 +230,7 @@ function check_authentication() {
 						store_codes, true);
 				return true;
 			} else {
-				document.getElementById("result").innerHTML =  "Using previous Authentication code";
+				document.getElementById("result").innerHTML =  "Authenticated, previous code";
 				return true;
 			}
 		}
