@@ -329,19 +329,26 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         
         print "Saving colour heatmap to " + path + "..."
         
-        #print "\tMapping to colour scale..."
-        #cmap = cm.ScalarMappable()
-        #cmap.set_cmap('hot')
-        #cmap.set_clim(0, 5)
-        #heatmap_color = []
+        print "\tMapping to colour scale..."
+        cmap = cm.ScalarMappable()
+        cmap.set_cmap('hot')
+        cmap.set_clim(0, 5)
+        heatmap_color = []
         
+        s = time()
+        
+        heatmap_color = [[cmap.to_rgba(r, alpha=0.5, bytes=True) for r in c] for c in heatmap]
+        
+        e = time()
+        
+        print "\tTime to convert to colour: " + str(e - s)
         #for r in xrange(len(heatmap)):
         #    heatmap_color.append([])
         #    for c in xrange(len(heatmap[r])):
         #        heatmap_color[r].append(cmap.to_rgba(heatmap[r][c], alpha=0.5, bytes=True))
         #print "\tDone."
-        #misc.imsave(path, heatmap_color)
-        misc.imsave(path, heatmap)
+        misc.imsave(path, heatmap_color)
+        #misc.imsave(path, heatmap)
         print "Done."
     else:
         print "Saving greyscale heatmap to " + path + "..."
