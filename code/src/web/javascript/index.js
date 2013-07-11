@@ -250,6 +250,7 @@ function check_authentication() {
 				return true;
 			} else {
 				document.getElementById("result").innerHTML =  "Authenticated, previous code";
+				EnableButtons();
 				return true;
 			}
 		}
