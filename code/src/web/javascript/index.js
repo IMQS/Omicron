@@ -156,8 +156,17 @@ function httpRequest(url, callback) // How can I use this callback?
 		if (request.status != 200) {
 			return;
 		}
-		callback(request.responseText)
 
+		if(request.readyState == 4 && request.status==200){
+			var response = request.responseText
+			if(response !='Error'){
+				console.log("Pushing call back - store_codes");
+				callback(response)
+			} else {
+				console.log("Error response from rest call can't push call back");
+				document.getElementById("result").innerHTML("Error during authentication please refresh the page")
+			}
+		}
 	}
 	request.open("GET", url);
 	request.send();
@@ -177,17 +186,20 @@ function store_codes(twitter_access_token, override) {
 	if (typeof (Storage) !== "undefined") {
 		if (override) {
 			sessionStorage.twitter_authentication_code = twitter_access_token;
+			document.getElementById("result").innerHTML = "Successfully Authorised old codes cleared";
+			EnableButtons();
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
 			document.getElementById("result").innerHTML = "Successfully Authorised";
+			EnableButtons();
 		} else {
 			document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
 					+ " is the previous code";
+			EnableButtons();
 		}
 	} else {
-		document.getElementById("result").innerHTML = "Authentication failed";
-		sessionStorage.twitter_authentication_code = "Disabled"
+		document.getElementById("result").innerHTML = "Storage Failed";
 	}
 }
 /**
@@ -201,17 +213,18 @@ function OnRun() {
 	if (check == false) {
 		return "Unsupported Browser";
 	} else {
-		console.log("Authenticated and Ready to request");
-		EnableButtons();
+		//console.log("Authenticated and Ready to request");
 	}
 
 }
 function EnableButtons(){
 	var forms = document.getElementsByTagName("form");
 	for(var i = 0;i<forms.length;i++){
-		for(var j = 0 ; j forms[i].lenght;j++){
-			var l = forms[i][j]
-			console.log(l)
+		for(var j = 0 ; j < forms[i].length;j++){
+			if(forms[i][j].type=="submit"){
+				console.log(forms[i][j].value)
+				forms[i][j].disabled = false;
+			}
 		}
 	}
 }
@@ -239,6 +252,7 @@ function check_authentication() {
 				return true;
 			} else {
 				document.getElementById("result").innerHTML =  "Authenticated, previous code";
+				EnableButtons();
 				return true;
 			}
 		}

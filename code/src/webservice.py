@@ -199,7 +199,7 @@ class authorisation:
         if(twitterobject.authenticate()):
             return twitterobject.access_token
         
-        return "Authentication failed"
+        return "Error"
         inputs = web.input()
         code = None
         platform = inputs['platform']

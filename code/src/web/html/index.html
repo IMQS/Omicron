@@ -15,12 +15,6 @@
 		<?php must use php comments in side body 
 	For debugging the web storage ?>
 		<div id="result">Authenticating User for this session</div>
-		<script>
-			OnRun();
-		</script>
-		<noscript>
-			alert("Browser Not Supported")
-		</noscript>
 		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
 			<fieldset>
 			<ul>
@@ -88,5 +82,11 @@
 			<input type="hidden" name="platforms" value="twitter">
 			<input type="hidden" name="function" value="heat_map">
 		</form>
+		<script>
+			OnRun();
+		</script>
+		<noscript>
+			alert("Browser Not Supported")
+		</noscript>
 	</body>
 </html>
