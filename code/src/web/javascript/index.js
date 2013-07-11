@@ -156,8 +156,15 @@ function httpRequest(url, callback) // How can I use this callback?
 		if (request.status != 200) {
 			return;
 		}
-		callback(request.responseText)
 
+		if(request.readyState == 4 && request.status==200){
+			var response = request.responseText
+			if(response !='Error'){
+				callback(response)
+			} else {
+				document.getElementById("result").innerHTML("Error during authentication please refresh the page")
+			}
+		}
 	}
 	request.open("GET", url);
 	request.send();
@@ -177,17 +184,20 @@ function store_codes(twitter_access_token, override) {
 	if (typeof (Storage) !== "undefined") {
 		if (override) {
 			sessionStorage.twitter_authentication_code = twitter_access_token;
+			document.getElementById("result").innerHTML = "Successfully Authorised old codes cleared";
+			EnableButtons();
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
 			document.getElementById("result").innerHTML = "Successfully Authorised";
+			EnableButtons();
 		} else {
 			document.getElementById("result").innerHTML = sessionStorage.twitter_authentication_code
 					+ " is the previous code";
+			EnableButtons();
 		}
 	} else {
-		document.getElementById("result").innerHTML = "Authentication failed";
-		sessionStorage.twitter_authentication_code = "Disabled"
+		document.getElementById("result").innerHTML = "Storage Failed";
 	}
 }
 /**
@@ -201,8 +211,7 @@ function OnRun() {
 	if (check == false) {
 		return "Unsupported Browser";
 	} else {
-		console.log("Authenticated and Ready to request");
-		EnableButtons();
+		//console.log("Authenticated and Ready to request");
 	}
 
 }
