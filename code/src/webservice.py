@@ -29,6 +29,8 @@ class request_handler(object):
     root="/home/omicron/Omicron2/code/src/"
     def GET_with_user_id(self, raw_data):
         '''
+            Handles GET requests received from users with user_id.
+            L{request_handler.GET}
         '''
         oauthtoken = urllib.unquote(raw_data['authcodes']).split("_");
         
@@ -73,6 +75,8 @@ class request_handler(object):
         
     def GET_without_user_id(self, raw_data):
         '''
+            Handles GET requests received from users without user_id.
+            L{request_handler.GET}
         '''
         return_data_and_status = {}
         platforms = raw_data["platforms"].lstrip('u').split("_")
@@ -103,11 +107,10 @@ class request_handler(object):
             return_data_and_status["message"] = msg
         return return_data_and_status
         
-    
-    
     def GET(self):
         '''
-            Handles GET requests received from users.
+            Handles GET call made from the user. Interprets the parameters, gathers the data, run the specified function, if directory is set returns the correct image else returns the level zero tile.
+            Note all these parameters gets received via a GET call, web.py handles it. 
             
             @param self: Pointer to the current request_handler instance.
             @type self: request_handler
@@ -124,8 +127,10 @@ class request_handler(object):
             @type location: String
             @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
             @type directory: String
+            @param user_id: The id that will be used to search the for the search data in the mongo database.
+            @type user_id: String 
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
-            @rtype: JSON Object
+            @rtype: inconsistent
             
         '''
         return_data_and_status = {}
@@ -138,11 +143,12 @@ class request_handler(object):
     
     def POST(self):
         '''
-            Handles POST requests received from users.
+            Handles POST call made from the user. Interprets the parameters, gathers the data, run the specified function, if directory is set returns the correct image else returns the level zero tile.
+            Note all these parameters gets received via a POST call, web.py handles it. 
             
             @param self: Pointer to the current request_handler instance.
             @type self: request_handler
-            @param platforms: List of hash(#) separated values that indicate which social media to use. 
+            @param platforms: List of underscore(_) separated values that indicate which social media to use. 
             @type platforms: String 
             @param tags: List of Underscore(_) separated values that is used for the search tags.
             @type tags: String
@@ -151,42 +157,21 @@ class request_handler(object):
             @param location_type: Either area or radius.
             @type location_type: String
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
-            if location_type has the value "radius" then location must be in the following format "longitude#latitude#<radius>" 
+            if location_type has the value "radius" then location must be in the following format "longitude_latitude_<radius>" 
             @type location: String
             @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
             @type directory: String
+            @param user_id: The id that will be used to search the for the search data in the mongo database.
+            @type user_id: String 
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
-            @rtype: JSON Object
+            @rtype: inconsistent
         '''
         return_data_and_status = {}
         raw_data = web.input()
-        platforms = raw_data["platforms"].lstrip('u').split("_")
-        tags = raw_data["tags"].lstrip('u').split("_")
-        function = raw_data["function"]
-        # For future use
-        #location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("_")
-        l_x_y = str(raw_data["directory"]).split("/")[1:]
-        gatewayO = gateway()
-        if (function == "heat_map"):
-            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-            total_coords = []
-            for platform in platforms:
-                total_coords = total_coords + query_data[platform]['location']
-            try:
-                web.header("Content-Type", "png") # Set the Header
-                path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2]
-                heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
-                mp.save_heatmap(heat_map, path="/home/omicron/Omicron2/code/src/heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2], colour=True)
-                return_data_and_status = open(path,"rb").read()
-            except:
-                msg = "The heatmap could not be generated or stored"
-                return_data_and_status = self.ERROR
-                return_data_and_status["message"] = msg
-        else :
-            msg = "The function that was specified was not found."
-            return_data_and_status = self.ERROR
-            return_data_and_status["message"] = msg
+        if raw_data.__contains__('user_id'):
+            return_data_and_status = self.GET_with_user_id(raw_data)
+        else:
+            return_data_and_status = self.GET_without_user_id(raw_data)
         return return_data_and_status
 
 class redirect_handler:
