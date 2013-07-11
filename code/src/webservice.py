@@ -39,7 +39,7 @@ class request_handler(object):
         l_x_y = str(raw_data["directory"]).split("/")[1:]
         user_id = raw_data['user_id']
         gatewayO = gateway()
-        db = db_handler(IP="superfluous.imqs.co.za")
+        db = db_handler()
         if (function == "heat_map"):
             query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
             if str(query_data['data']) == '':
