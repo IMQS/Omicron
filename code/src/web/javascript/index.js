@@ -210,8 +210,8 @@ function EnableButtons(){
 	var forms = document.getElementsByTagName("form");
 	for(var i = 0;i<forms.length;i++){
 		for(var j = 0 ; j < forms[i].length;j++){
-			if(forms[i][j]=="submit"){
-				console.log(forms[i][j])	
+			if(forms[i][j].type=="submit"){
+				console.log(forms[i][j].value)	
 			}
 		}
 	}
