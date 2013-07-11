@@ -177,7 +177,6 @@ function store_codes(twitter_access_token, override) {
 	if (typeof (Storage) !== "undefined") {
 		if (override) {
 			sessionStorage.twitter_authentication_code = twitter_access_token;
-
 		} else if (!sessionStorage.twitter_authentication_code) {
 			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
@@ -203,9 +202,18 @@ function OnRun() {
 		return "Unsupported Browser";
 	} else {
 		console.log("Authenticated and Ready to request");
-		
+		EnableButtons();
 	}
 
+}
+function EnableButtons(){
+	var forms = document.getElementsByTagName("form");
+	for(var i = 0;i<forms.length;i++){
+		for(var j = 0 ; j forms[i].lenght;j++){
+			var l = forms[i][j]
+			console.log(l)
+		}
+	}
 }
 /**
  * Checks authentication, if there is a valid access token available
