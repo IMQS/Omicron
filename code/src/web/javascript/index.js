@@ -48,7 +48,7 @@ function OnSubmit() {
 	//sets the location type and area or GPS coordinates
 	console.log("locationtype element");
 	console.log(locationtype.value);
-	if(locationtype.value =="Region"){
+	if(locationtype.value =="Search by Region"){
 		location_type.value = "area"
 		if (area_radius.value == "" || area_radius.value == null){
 			console.log("area not specified also not implemented");
@@ -57,7 +57,7 @@ function OnSubmit() {
 			location.value = area_radius.value
 		}
 		
-	} else if(locationtype.value == "Circle") {
+	} else if(locationtype.value == "Search using Radius (A circle)") {
 		
 		location_type.value = "radius"; 
 
