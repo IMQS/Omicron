@@ -37,7 +37,7 @@ class gateway(object):
                 platform_objects.append(available_platforms[current_platform])
         return platform_objects
                 
-    def execute_requests(self, platforms=None, search_tags=None, gps_center=None, radius=None, selected_properties=None, search_region=None):
+    def execute_requests(self, platforms=None, search_tags=None, gps_center=None, radius=None, selected_properties=None, search_region=None,auth_codes=None):
         '''
             Cycles through each variable in the platform list and executes a search with the
             given keywords on each platform.
@@ -48,6 +48,8 @@ class gateway(object):
             @type platforms: List of strings.
             @param search_tags: List of key words (tags) that will be used in the search.
             @type search_tags: List of strings.
+            @param authcodes: A dictionary of authorisation codes.
+            @type auth_codes: dictionary.
             @return: The raw data that from the social media APIs.
             @rtype: GeoJSON Array.
         '''
@@ -59,7 +61,13 @@ class gateway(object):
             return "One or more platforms were unavailable."
         else :
             for social_plat in is_valid:
-                social_plat.authenticate()
+                if(auth_codes==None ):
+                    social_plat.authenticate()
+                elif(not auth_codes.__contains__(social_plat.get_platform_name)):
+                    social_plat.authenticate()                    
+                else:
+                    social_plat.access_token = auth_codes[social_plat.get_platform_name]
+                    
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
                 return_data[social_plat.get_platform_name()] = social_plat.strip_data(data, selected_properties)
         return return_data

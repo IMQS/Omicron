@@ -33,26 +33,28 @@ class request_handler(object):
             L{request_handler.GET}
         '''
         return_data_and_status = {}
-        platforms = raw_data["platforms"].lstrip('u').split("_")
-        tags = raw_data["tags"].lstrip('u').split("_")
-        function = raw_data["function"]
-        location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("_")
+        
         l_x_y = str(raw_data["directory"]).split("/")[1:]
         user_id = raw_data['user_id']
-        gatewayO = gateway()
+        
         db = db_handler()
+        
+        query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
+        db.close_database()
+        
+        function = query_data['query']['function']
+        
         if (function == "heat_map"):
-            query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
             if str(query_data['data']) == '':
-                query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
-                db.store_social_data_by_id(id=user_id, social_data=query_data, database_name='omicron', collection_name='request_information')
-                temp = {}
-                temp['data'] = query_data
-                query_data = temp
+                gateway0 = gateway()
+                query_data['data'] = gateway0.execute_requests( query_data['query']['platforms'], query_data['query']['tags'],
+                                                                 (float(query_data['query']['location'][0]),float(query_data['query']['location'][1])), radius=float(query_data['query']['location'][2])
+                                                                 , selected_properties=['location'], search_region=None, auth_codes=None)
+                db.store_social_data_by_id(id=user_id, social_data=query_data['data'],collection_name="request_information")
             total_coords = []
-            for platform in platforms:
-                total_coords = total_coords + query_data['data'][str(platform)]['location']
+            for platform in query_data['query']['platforms']:
+                for location in platform :
+                    total_coords = total_coords + location
             try:
                 web.header("Content-Type", "png") # Set the Header
                 heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)

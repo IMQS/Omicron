@@ -36,6 +36,16 @@ class database_handler(object):
             except Exception, e:
                 print "warning", e
                 Time.sleep(0.1)
+    def close_database(self):
+        ''' Tries to close the database, 2 know exceptions ,instance of the database failed to be created,failed to close the database 
+            @return: True ,if it is successful otherwise False.
+        '''
+        try:
+            self.client.close();
+            return True
+        except Exception, e:
+            print "database failed to close"
+            return False
             
     def store_social_data(self, time = None, query = None, social_data = None, database_name = "omicron", collection_name = None):
         '''

@@ -82,17 +82,17 @@ function OnRun() {
 	var twitter = "Disabled";
 	if (typeof (Storage) !== "undefined") {
 		if (sessionStorage.twitter_authentication_code) {
-			twitter = sessionStorage.twitter_authentication_code;
+			twitter = "{'twitter':'" +sessionStorage.twitter_authentication_code+"'}";
 		}
 	} else {
 		document.getElementById("result").innerHTML = "Storage Failed";
 	}
 	
 	if(twitter=="Disabled"){
-		alert("This is a problem")
+		alert("Please go to the main page to get authenticated ")
 	}
-	
-	database_request(initmap,input+"&authcodes="+twitter,input);
+	twitter = encodeURIComponent(twitter)
+	database_request(initmap,input+"&auth_codes="+twitter,input);
 	console.log(input+"&authcodes="+twitter);
 	console.log("Completed ");
 }
