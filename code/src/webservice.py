@@ -284,8 +284,7 @@ class request_search_id(object):
             query_data = gatewayO.execute_requests(platforms=platforms, search_tags=tags, selected_properties=['location'], search_region=location[0], auth_codes=auth_codes_ )
         elif (location_type == 'radius'): 
             query_data = gatewayO.execute_requests(platforms=platforms, search_tags=tags, gps_center=(float(location[0]),float(location[1])),radius=float(location[2]),selected_properties=['location'], auth_codes=auth_codes_)
-        else:
-            return self.ERROR
+
         user_id = db.store_social_data(time=user_time, query=user_query, social_data=query_data, database_name='omicron', collection_name='request_information')
         return_data_and_status = str(user_id)
         return return_data_and_status
