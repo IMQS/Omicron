@@ -9,20 +9,6 @@ class HeatMapTest(unittest.TestCase):
 	def tearDown(self):
 		pass
 	
-	########## Gauss tests ##########
-	
-	def test_gauss_zero(self):
-		"""Tests if the Gauss function has value 1 at 0."""
-		self.assertEqual(map_plot.gauss(1, 0), 1)
-	
-	def test_gauss_large(self):
-		"""Tests if the Gauss function returns 0 for an extremely large value."""
-		self.assertEqual(map_plot.gauss(1, 100), 0) 
-	
-	def test_gauss_value(self):
-		"""Tests if the Gauss functions returns a correct value."""
-		self.assertEqual(int(map_plot.gauss(100,10)*1e16)/1.e16,0.3678794411714423)
-
 	########## Random coordinate tests ##########
 	
 	def test_random_zero(self):
@@ -47,26 +33,6 @@ class HeatMapTest(unittest.TestCase):
 		for i in xrange(len(c)):
 			for j in xrange(i+1, len(c)):
 				self.assertNotEqual(c[i],c[j])
-	
-	########## Heatmap tests ##########
-	
-	def test_heatmap_zero_area(self):
-		"""Tests if the heatmap function returns None when the area of the bounds is zero."""
-		import sys, os
-		actualstdout = sys.stdout
-		sys.stdout = open(os.devnull,'w')
-		hm = map_plot.heatmap([0,0,0,0],[(0,0)])
-		sys.stdout = actualstdout
-		self.assertIsNone(hm)
-	
-	def test_heatmap_one_point(self):
-		"""Tests if the heatmap function correctly evaluates at a pixel exactly on top of it."""
-		import sys, os
-		actualstdout = sys.stdout
-		sys.stdout = open(os.devnull,'w')
-		hm = map_plot.heatmap([0,1,0,1],[(.5,.5)])
-		sys.stdout = actualstdout
-		self.assertEqual(hm[0][0],map_plot.gauss(.125,0))
 
 if __name__ == '__main__':
 	unittest.main()

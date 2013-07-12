@@ -20,6 +20,9 @@ class social_platform(object):
         Underlying data type which is extended by each social platform to \
         communicate with that social network's API
     ''' 
+    def __init__(self):
+        self.access_token = None
+        
     def get_platform_name(self):
         '''
             Returns the name (type) of the social platform object it is applied to.

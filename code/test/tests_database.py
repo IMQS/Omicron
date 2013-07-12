@@ -30,7 +30,14 @@ class test_database(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
-            
+    def test_close1(self):
+        try:
+            conn = database.database_handler()
+            conn.close_database()
+            self.assertTrue(True)            
+        except Exception,e:
+            print "failed"
+            self.assertTrue(False)
     def test_insert(self):
         '''
             Initializations the connection with parameters superfluous.imqs.co.za and port 27017, adds a basic structure.
