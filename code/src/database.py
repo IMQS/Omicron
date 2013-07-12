@@ -27,9 +27,16 @@ class database_handler(object):
             @rtype: L{database_handler}
         '''
         self.ip = IP
-        self.port = port  
-        self.client = MongoClient(IP, port)
-    
+        self.port = port
+        #TODO: comment why there is a for
+        for _ in range(6):
+            try:
+                self.client = MongoClient(IP, port)
+                break
+            except Exception, e:
+                print "warning", e
+                Time.sleep(0.1)
+            
     def store_social_data(self, time = None, query = None, social_data = None, database_name = "omicron", collection_name = None):
         '''
             Adds the social data to a specified Mongo database.
@@ -63,7 +70,7 @@ class database_handler(object):
                     return user_id
                 except Exception, e:
                     print "waring",e
-                    Time.sleep(0.4)
+                    Time.sleep(0.1)
         else:
             raise Exception("Connection failure")
         
@@ -108,7 +115,7 @@ class database_handler(object):
                         query_result = collection.find({"query":query, "time":{"$gte":time_start, "$lte":time_end}})
                 except Exception, e:
                     print "waring",e
-                    Time.sleep(0.4)
+                    Time.sleep(0.1)
                 return query_result
                     
         else:
@@ -143,7 +150,7 @@ class database_handler(object):
                     query_result = collection.find_one({"_id":ObjectId(id)})
                 except Exception, e:
                     print "waring",e
-                    Time.sleep(0.4)
+                    Time.sleep(0.1)
         else:
             raise Exception("Connection failure")
         return query_result
@@ -179,7 +186,7 @@ class database_handler(object):
                     query_result = collection.update({"_id":ObjectId(id)},{"$set":{'data':social_data}})
                 except Exception, e:
                     print "waring",e
-                    Time.sleep(0.4)
+                    Time.sleep(0.1)
                 return query_result
         else:
             raise Exception("Connection failure")
