@@ -6,6 +6,7 @@ Created on 18 Jun 2013
 import social_platform
 import json
 import web
+import urllib
 
 class gateway(object):
     '''
@@ -66,7 +67,7 @@ class gateway(object):
                 elif(not auth_codes.__contains__(social_plat.get_platform_name)):
                     social_plat.authenticate()                    
                 else:
-                    social_plat.access_token = auth_codes[social_plat.get_platform_name]
+                    social_plat.access_token = urllib.quote(auth_codes[social_plat.get_platform_name])
                     
                 data = social_plat.request_center_radius(search_tags, gps_center, radius)
                 return_data[social_plat.get_platform_name()] = social_plat.strip_data(data, selected_properties)
