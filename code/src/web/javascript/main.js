@@ -90,6 +90,8 @@ function OnRun() {
 	if(twitter=="Disabled"){
 		alert("Please go to the main page to get authenticated ")
 	}
+	var loader = document.getElementsByTagName("img");
+	loader.style = "display:none";
 	twitter = encodeURIComponent(twitter)
 	database_request(initmap,input+"&auth_codes="+twitter,input);
 	console.log(input+"&authcodes="+twitter);
