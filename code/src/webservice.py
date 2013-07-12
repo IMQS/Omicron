@@ -263,16 +263,23 @@ class request_search_id(object):
         raw_data = web.input()
         db = db_handler()
         user_time = datetime.datetime.now()
-        platforms = raw_data["platforms"].lstrip('u').split("_")
-        tags = raw_data["tags"].lstrip('u').split("_")
-        function = raw_data["function"]
-        location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("_")
-        auth_codes_ =  urllib.unquote(raw_data['auth_codes']).decode('utf8')
-        auth_codes_ = ast.literal_eval(auth_codes_)
+        location_type = None
+        
+        if (raw_data.__contains__("location") and raw_data.__contains__("platforms") and raw_data.__contains__("tags") and raw_data.__contains__("function") and raw_data.__contains__("location_type")):
+            platforms = raw_data["platforms"].lstrip('u').split("_")
+            tags = raw_data["tags"].lstrip('u').split("_")
+            function = raw_data["function"]
+            location_type = raw_data["location_type"]
+            location = raw_data["location"].lstrip('u').split("_")
+            user_query = {'platforms':platforms, 'function':function, 'tags':tags, 'location_type':location_type, 'location':location}
+            
+        if (raw_data.__contains__('auth_codes')):    
+            auth_codes_ =  urllib.unquote(raw_data['auth_codes']).decode('utf8')
+            auth_codes_ = ast.literal_eval(auth_codes_)
+            user_query['auth_codes'] = auth_codes_
        
-        user_query = {'platforms':platforms, 'function':function, 'tags':tags, 'location_type':location_type, 'location':location}
         gatewayO = gateway()
+        
         if (location_type == 'area'):
             query_data = gatewayO.execute_requests(platforms=platforms, search_tags=tags, selected_properties=['location'], search_region=location[0], auth_codes=auth_codes_ )
         elif (location_type == 'radius'): 
