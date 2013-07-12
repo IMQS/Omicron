@@ -15,5 +15,5 @@ if __name__ == '__main__':
     twitterObject.authenticate()
     #: Search for 50 posts which have 'coffee' tagged.
     data = twitterObject.request_center_radius(search_tags = [hashtag])
-    pickle.dump( data, open( "tweets.p", "wb" ) )
+    pickle.dump( data, open( "../../tools/tweets.p", "wb" ) )
     print 'Data has been pickled to \'tweets.p\''
