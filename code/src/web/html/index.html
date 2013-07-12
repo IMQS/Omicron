@@ -14,50 +14,61 @@
 		<h1>Omicron Social Network Analyser</h1>
 		<?php must use php comments in side body 
 	For debugging the web storage ?>
-		<div id="result">Authenticating User for this session</div>
+		<div id="result">Not authenticated yet. Please wait.</div>
+		<script>
+			OnRun();
+		</script>
+		<noscript>
+			alert("Browser Not Supported")
+		</noscript>
 		<form name="search" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
-			<fieldset>
-			<ul>
-                <li>
-			    <label for="tags">Search</label><input type="search" id="tags" autofocus="true"></li>
-				<li><label for="twitter_box">Twitter
-				<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter"></label>
-				<label for="instagram_box">Instagram
-				<input type="checkbox" id="instagram_box" name="platform" value="instagram"></label></li>
-				<li>Generate: 
-				<select id="function">
-					<option>
-						Heat Map
-					</option>
-				</select>
-				</li>
 			
-                <li><select id="location_type_details">
-					<option>
-						Circle<!-- TODO Change to "Search using Radius (Circle)"  -->
-					</option>
-				</select></li>
-                <li><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:25em;"></li>
-				<li><p<label for="longitude">Longitude
-				<input type="text"  id="longitude"></label></p>
-				<p<label for="latitude">Latitude</label>
-				<input type="text" id="latitude"></p></li>
-
-				
-				<input type="hidden" name="tags">
-				<input type="hidden" name="platforms">
-				<input type="hidden" name="location">
-				<input type="hidden" name="location_type">
-				<input type="hidden" name="function">
-
-				
-			</ul>
-				<input type="submit" disabled="true" name="Submit_Search">
-			</fieldset>
+		    <p><label for="tags">Search</label><input type="search" id="tags" autofocus="true"></p>
+			<p><label for="twitter_box">Twitter
+			<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter"></label>
+			<label for="instagram_box">Instagram
+			<input type="checkbox" id="instagram_box" name="platform" value="instagram"></label></p>
+			<p>Generate: 
+			<select id="function">
+				<option>
+					Heat Map
+				</option>
+				<option>
+					Point Map
+				</option>
+			</select></p>
+			
+			<p>
+		    <select id="location_type_details">
+				<option>
+					Search using Radius (A circle)
+				</option>
+				<option>
+					Search by Region
+				</option>
+			</select></p>
+		    
+		    <p><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:25em;">
+			<label for="longitude">Longitude
+			<input type="text"  id="longitude"></label>
+			<label for="latitude">Latitude</label>
+			<input type="text" id="latitude"></p>
+		
+			
+			<input type="hidden" name="tags">
+			<input type="hidden" name="platforms">
+			<input type="hidden" name="location">
+			<input type="hidden" name="location_type">
+			<input type="hidden" name="function">
+		
+			
+		
+			<input type="submit" name="Submit_Search">
+			
 		</form>
 		<label>Predefined Searches:<br></label>
 		<form name="search" id="Custom_Search_Form1" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" disabled="true" id="predef1" value="Pipebursts">
+			<input type="submit" id="predef1" value="Pipebursts">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -66,7 +77,7 @@
 		</form>
 			
 		<form name="search" id="Custom_Search_Form2" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">			
-			<input type="submit" disabled="true" id="predef2" value="Black Outs">
+			<input type="submit" id="predef2" value="Black Outs">
 			<input type="hidden" name="tags" value="#imqs_#nolights">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -75,18 +86,16 @@
 		</form>
 		
 		<form name="search" id="Custom_Search_Form3" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" disabled="true" id="predef3" value="Fires">
+			<input type="submit" id="predef3" value="Fires">
 			<input type="hidden" name="tags" value="#imqs_#fire">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
 			<input type="hidden" name="platforms" value="twitter">
 			<input type="hidden" name="function" value="heat_map">
 		</form>
-		<script>
-			OnRun();
-		</script>
-		<noscript>
-			alert("Browser Not Supported")
-		</noscript>
 	</body>
+	<footer>
+	<p>Proudly brought to you by <em>The Interns</em> at IMQS. <br><small>June - July 2013</small><br><img src="/web/css/css images/project_omicron.png" alt="Logo" height="125em" width="250em"/></p>
+	</footer>
 </html>
+
