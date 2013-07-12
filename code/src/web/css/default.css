@@ -13,7 +13,10 @@ background-repeat: repeat, repeat;
 padding-top: 10px; 
 line-height:1.7em;
 }
-
+::-webkit-input-placeholder {
+   text-align: center;
+ 
+}
 .screen {
 background-repeat:no-repeat;
 background-attachment:fixed;
