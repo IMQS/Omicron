@@ -15,6 +15,7 @@ import social_platform as sp
 from database import database_handler as db_handler 
 import datetime
 import urllib
+import ast
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 
 
@@ -262,11 +263,32 @@ class request_search_id(object):
             @rtype: L{str}
         '''
         raw_data = web.input()
-        db = db_handler(IP="superfluous.imqs.co.za")
-        user_query = raw_data['query']
-        user_query = urllib.unquote(user_query).decode("utf8")
+        db = db_handler()
         user_time = datetime.datetime.now()
-        user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
+        location_type = None
+        
+        if (raw_data.__contains__("location") and raw_data.__contains__("platforms") and raw_data.__contains__("tags") and raw_data.__contains__("function") and raw_data.__contains__("location_type")):
+            platforms = raw_data["platforms"].lstrip('u').split("_")
+            tags = raw_data["tags"].lstrip('u').split("_")
+            function = raw_data["function"]
+            location_type = raw_data["location_type"]
+            location = raw_data["location"].lstrip('u').split("_")
+            user_query = {'platforms':platforms, 'function':function, 'tags':tags, 'location_type':location_type, 'location':location}
+            
+        if (raw_data.__contains__('auth_codes')):    
+            auth_codes_ =  urllib.unquote(raw_data['auth_codes']).decode('utf8')
+            auth_codes_ = ast.literal_eval(auth_codes_)
+            user_query['auth_codes'] = auth_codes_
+       
+        gatewayO = gateway()
+        
+        if (location_type == 'area'):
+            query_data = gatewayO.execute_requests(platforms=platforms, search_tags=tags, selected_properties=['location'], search_region=location[0], auth_codes=auth_codes_ )
+        elif (location_type == 'radius'): 
+            query_data = gatewayO.execute_requests(platforms=platforms, search_tags=tags, gps_center=(float(location[0]),float(location[1])),radius=float(location[2]),selected_properties=['location'], auth_codes=auth_codes_)
+        else:
+            return self.ERROR
+        user_id = db.store_social_data(time=user_time, query=user_query, social_data=query_data, database_name='omicron', collection_name='request_information')
         return_data_and_status = str(user_id)
         return return_data_and_status
         
