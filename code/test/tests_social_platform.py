@@ -115,7 +115,7 @@ class test_class_social_platform(unittest.TestCase):
             self.twitterObject.request_region('search_tags', 'search_region')
    
     def test_twitter_strip_data(self):
-        data = pickle.load( open( "./test/tweets.p", "rb" ) )
+        data = pickle.load( open( "./test/tools/tweets.p", "rb" ) )
         tags_data = self.twitterObject.strip_data(data, ['tags'])
         location_data = self.twitterObject.strip_data(data, ['location']) 
         post_data = self.twitterObject.strip_data(data, ['post']) 
