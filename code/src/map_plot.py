@@ -361,6 +361,19 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         misc.imsave(path, heatmap)
         print "Done."
 
+def coords_to_geojson(coords):
+    '''
+    Converts a set of coordinate pairs to a GeoJSON object.
+    @param coords: An array of coordinate pairs.
+    @type coords: Array or 2-tuples or length-2 arrays.
+    @rtype: GeoJSON object
+    '''
+    import json
+    obj = {u'type':u'FeatureCollection', u'features':{u'type':u'Feature', u'geometry':[]}}
+    for point in coords:
+        obj[u'features'][u'geometry'].append({u'type':u'Point',u'coordinates':[str(point[0]),str(point[1])]})
+    return json.dumps(obj)
+
 if __name__ == "__main__":
     
     from time import time
@@ -372,11 +385,11 @@ if __name__ == "__main__":
     #    > [miny, maxy, minx, maxx] (s,n,w,e) when working in LAT/LON
     
     bounds_lim = [-85, 85, -180, 180]
-    bounds_disp = [0, 256, 0, 256]
+    #bounds_disp = [0, 256, 0, 256]
     
     ten_random = random_coords(10, bounds_lim)
     #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
-    stellenbosch = [[-33.9200, 18.8600]]
+    #stellenbosch = [[-33.9200, 18.8600]]
     #center = [[0,0]]
     #square = [[45,45],[-45,45],[45,-45],[-45,-45]]
     #technopark = [[-33.964807, 18.8372767]]
@@ -384,10 +397,11 @@ if __name__ == "__main__":
     #south_pole = [[-85,30]]
     #north_pole = [[85,30]]
     
-    tile = heatmap_tile(level = 2, x = 1, y = 2, coords=stellenbosch*5)
+    #tile = heatmap_tile(level = 2, x = 1, y = 2, coords=stellenbosch*5)
     #show_heatmap(tile, bounds_disp)
     #show_3D_heatmap(heatmap)
-    save_heatmap(tile, path="/home/marzul/test.png", colour=True)
+    #save_heatmap(tile, path="/home/marzul/test.png", colour=True)
+    print coords_to_geojson(ten_random)
     e = time()
     print "total time: "+str(e-s)
 
