@@ -21,12 +21,12 @@
 		<noscript>
 			alert("Browser Not Supported")
 		</noscript>
-		<form name="search" style="text-align: center;" id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
-			<p><label for="tags">Search</label><br><input type="search" id="tags" autofocus="true"></p>
-			<p><label for="twitter_box">Twitter
-			<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter"></label>
-			<label for="instagram_box">Instagram
-			<input type="checkbox" id="instagram_box" name="platform" value="instagram"></label></p>
+		<form name="search"  id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
+			<p>Search:<br><input type="search" id="tags" autofocus="true"></p>
+			<p>Twitter:
+			<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter">
+			Instagram:
+			<input type="checkbox" id="instagram_box" name="platform" value="instagram"></p>
 			<p>Generate: 
 			<select id="function">
 				<option>
@@ -47,10 +47,10 @@
 				</option>
 			</select></p>
 		    
-		    <p><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:25em;"><br></p>
-			<p><label for="longitude">Longitude<br>
-			<input type="text"  id="longitude"></label></p>
-			<p><label for="latitude">Latitude<br></label>
+                <p><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:16em"<br></p>
+			<p>Longitude:<br>
+			<input type="text"  id="longitude"></p>
+			<p>Latitude:<br>
 			<input type="text" id="latitude"></p>
 		
 			
@@ -62,12 +62,12 @@
 		
 			
 		
-			<input type="submit" name="Submit_Search">
+			<input type="submit" disabled=true name="Submit_Search" style="height:50px; width:100px; background-color:#dddddd">
 			
 		</form>
-		<label>Predefined Searches:<br></label>
+		Predefined Searches:<br>
 		<form name="search" style="text-align: center;" id="Custom_Search_Form1" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef1" value="Pipebursts">
+			<input type="submit" id="predef1" value="Pipebursts" disabled=true>
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -76,7 +76,7 @@
 		</form>
 			
 		<form name="search" style="text-align: center;" id="Custom_Search_Form2" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">			
-			<input type="submit" id="predef2" value="Black Outs">
+			<input type="submit" id="predef2" value="Black Outs "disabled=true>
 			<input type="hidden" name="tags" value="#imqs_#nolights">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -85,7 +85,7 @@
 		</form>
 		
 		<form name="search" style="text-align: center;" id="Custom_Search_Form3" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef3" value="Fires">
+			<input type="submit" id="predef3" value="Fires" disabled=true>
 			<input type="hidden" name="tags" value="#imqs_#fire">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -97,4 +97,3 @@
 	<p>Proudly brought to you by <em>The Interns</em> at IMQS. <br><small>June - July 2013</small><br><img src="/web/css/css images/project_omicron.png" alt="Logo" height="125em" width="250em"/></p>
 	</footer>
 </html>
-
