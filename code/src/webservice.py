@@ -341,7 +341,7 @@ urls = ("/request_handler", "request_handler",
         "/authorise", "twitter_app_only_authorisation",
         "/index.*", "index",
         "/main.*", "main",
-        "/request_search_id", "request_search_id"
+        "/request_search_id", "request_search_id",
         "/user_auth","user_authorisation")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
