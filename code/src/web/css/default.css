@@ -1,7 +1,9 @@
 @CHARSET "UTF-8";
 body { 
 height: 101%;
-text-align:center;
+margin-left: auto;
+margin-right: auto;
+width: 200em;
 font-family: "Trebuchet MS", Arial, Tahoma, sans-serif; 
 font-weight:300;
 color:#7c7c7c;
