@@ -54,8 +54,7 @@ class request_handler(object):
                 db.store_social_data_by_id(id=user_id, social_data=query_data['data'],collection_name="request_information")
             total_coords = []
             for platform in query_data['query']['platforms']:
-                for location in platform :
-                    total_coords = total_coords + location
+                total_coords = total_coords + query_data['data'][platform]['location']
             try:
                 web.header("Content-Type", "png") # Set the Header
                 heat_map = mp.heatmap_tile(int(l_x_y[0]), int(l_x_y[1]), int(str(l_x_y[2]).split(".")[0]), total_coords)
