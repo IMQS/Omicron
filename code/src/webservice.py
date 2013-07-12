@@ -266,7 +266,8 @@ class request_search_id(object):
         db = db_handler()
         user_time = datetime.datetime.now()
         location_type = None
-        
+        user_query = None
+        query_data = None
         if (raw_data.__contains__("location") and raw_data.__contains__("platforms") and raw_data.__contains__("tags") and raw_data.__contains__("function") and raw_data.__contains__("location_type")):
             platforms = raw_data["platforms"].lstrip('u').split("_")
             tags = raw_data["tags"].lstrip('u').split("_")
