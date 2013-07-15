@@ -77,7 +77,7 @@ function OnSubmit() {
 		console.log(area_radius.value);
 		if (area_radius.value == "" || area_radius.value == null)
 			return false;
-		location.value = long.value+"_"+lat.value+"_"+area_radius.value
+		location.value = lat.value+"_"+long.value+"_"+area_radius.value
 	}
 	
 	parameters = "";

@@ -174,7 +174,8 @@ class request_handler(object):
 
 class redirect_handler:
     '''
-        For all redirects from social media logins
+        For all redirects from social media logins for user authentication
+        @attention: Not Used in Project Omicron
     '''
     OK = {'success':'True'}
     ERROR = {'success':'False'}
@@ -183,35 +184,61 @@ class redirect_handler:
                which twitter/instagram has sent to  this page as a parameter. Needs to redirect with this code to original page 
         '''
         inputs =  web.input()
-        code = inputs['code']
-        platform = inputs['platform']
+        if(inputs.__contains__('code') and inputs.__contains__('platform')):
+            code = inputs['code']
+            platform = inputs['platform']
+            raise web.seeother("/user_auth"+"?"+"platform="+platform+"&"+"code="+code)
+            return "Authenticating"
+            
         #web.Redirect()
-        raise web.seeother("/authorise"+"?"+"platform="+platform+"&"+"code="+code)
-        return "Redirecting"
+        raise web.seeother("/index")
+        return "Redirecting to Home page"
+    def POST(self):
+        return "Not Implemented"
     
-class authorisation:
-    '''@todo: This class is for testing the authentication must be changed to something else.
+class twitter_app_only_authorisation:
     '''
-
-
+        Application only authorisation method for twitter
+        @return: access token used to authenticate with twitter as an application, if failure returns 'Error'
+        @rtype: String,
+    '''
     def GET(self):
-        ''' Used in the 2 phase authorization
+        ''' 
+            Application only authorisation method for twitter
+            @return: access token used to authenticate with twitter as an application, if failure returns 'Error'
+            @rtype: String,
         '''
         twitterobject = sp.twitter_platform()
         if(twitterobject.authenticate()):
             return twitterobject.access_token
-        
         return "Error"
+    def POST(self):
+        '''
+            Raises Not implemented exception
+            @attention: Not Implemented
+        '''
+        return "Not Implemented"
+
+class user_authorisation:
+    '''
+        Authenticates a user to use the social media sites as authenticated by their profile
+        @attention: Not Used in Project Omicron
+    '''
+    def GET(self):
+        '''
+            2 Phase authentication for the user 
+            @attention: Not implemented in Project Omicron
+        '''
         inputs = web.input()
         code = None
         platform = inputs['platform']
         gateway = gateway()
-        try:
+        code = None
+        if(input.__contains__('code')):
             code = inputs['code']
-        except KeyError:
+        else:
             print "No code given, Phase 1 authentication"
         if(code == None):
-
             authenticate = inputs['authentication']
             print platform
             print authenticate
@@ -228,9 +255,8 @@ class authorisation:
                 smlist[0].authenticate(code=code)
                 return smlist[0].access_token
         return "Authorisation failed please Re-authorise"
-            
     def POST(self):
-        raise NotImplemented
+        raise NotImplementedError
 
 class index(object):
     def GET(self):
@@ -312,11 +338,12 @@ class request_search_id(object):
     
 urls = ("/request_handler", "request_handler",
         "/redirect", "redirect_handler",
-        "/authorise", "authorisation",
+        "/authorise", "twitter_app_only_authorisation",
         "/index.*", "index",
         "/main.*", "main",
         "/request_search_id", "request_search_id", 
-        "/","index")#:Groups the URL's and their corresponding actions.
+        "/", "index",
+        "/user_auth","user_authorisation")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 

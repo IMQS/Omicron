@@ -262,9 +262,6 @@ class twitter_platform(social_platform):
         '''
         urllib2.quote(self.consumer_key)  # URL encoding
         urllib2.quote(self.consumer_secret)  # URL encoding
-        if(self.test_connection() == False):
-            print "Connection Error"
-            return False
         encoded = base64.b64encode(str(self.consumer_key) + ":" + str(self.consumer_secret))  # base64 encoding to twitter standards
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Basic %s" % encoded, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'}  # declear headers
         params = urllib.urlencode({'grant_type':'client_credentials'})  # declear parameters aka body of html

@@ -86,7 +86,8 @@ function OnRun() {
 	} else {
 		document.getElementById("result").innerHTML = "Storage Failed";
 	}
-	
+	var loader = document.getElementsByTagName("img");
+	loader.style = "display:none";
 	if(twitter=="Disabled"){
 		alert("Please go to the main page to get authenticated ")
 	}
