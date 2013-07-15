@@ -9,6 +9,8 @@ function initmap(input,bool,search_id) {
 		console.log("Returning already setup");
 		return;
 	}
+	var loader = document.getElementsByTagName("img");
+	loader[0].style = "display:none";
 	var map = L.map('mapHolder').setView([ 51.505, -0.09 ], 0);
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		/* 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' */
@@ -23,8 +25,7 @@ function initmap(input,bool,search_id) {
 	L.control.layers(null, {
 		"Heat map" : heatmap
 	}).addTo(map);
-	var loader = document.getElementsByTagName("img");
-	loader[0].style = "display:none";
+	
 
 }
 /*
