@@ -3,9 +3,7 @@ Created on 27 Jun 2013
 
 @author: S. Schreiber
 '''
-import pymongo
 from pymongo import MongoClient
-import datetime
 from bson.objectid import ObjectId
 import time as Time
 
@@ -28,7 +26,6 @@ class database_handler(object):
         '''
         self.ip = IP
         self.port = port
-        #TODO: comment why there is a for
         for _ in range(6):
             try:
                 self.client = MongoClient(IP, port)
@@ -37,13 +34,13 @@ class database_handler(object):
                 print "warning", e
                 Time.sleep(0.1)
     def close_database(self):
-        ''' Tries to close the database, 2 know exceptions ,instance of the database failed to be created,failed to close the database 
+        ''' Tries to close the database. 2 known exceptions: instance of the database fails to be created, fails to close the database 
             @return: True ,if it is successful otherwise False.
         '''
         try:
             self.client.close();
             return True
-        except Exception, e:
+        except Exception:
             print "database failed to close"
             return False
             
@@ -61,7 +58,7 @@ class database_handler(object):
             @type social_data: JSON Object
             @param database_name: The name of the database.
             @type database_name: string
-            @param collection_name: The name of the collection you want to access.
+            @param collection_name: The name of the collection to be accessed.
             @type collection_name: string
             @return: The unique id that identifies the search in the database
             @rtype: L{str}
@@ -87,7 +84,7 @@ class database_handler(object):
     def get_social_data(self, time_start = None, time_end = None, query = None, database_name = "omicron", collection_name = None):
         '''
             Finds all the entries from time_start to time_end inclusive that has the same query value as the parameter query.
-            Note That time_start and time_end can both take a value "'all'". The "'all'" value instructs the search to have no upper or lower bounds or both.
+            Note That time_start and time_end can both take a value "all". The "all" value instructs the search to have no upper or lower bounds or both.
             
             @param self: Pointer to the current object.
             @type self: L{database_handler}
@@ -124,7 +121,7 @@ class database_handler(object):
                     else:   
                         query_result = collection.find({"query":query, "time":{"$gte":time_start, "$lte":time_end}})
                 except Exception, e:
-                    print "waring",e
+                    print "warning",e
                     Time.sleep(0.1)
                 return query_result
                     
@@ -132,24 +129,26 @@ class database_handler(object):
             raise Exception("Connection failure")
         
     
-    def get_social_data_by_id(self, id = None, database_name = "omicron", collection_name = None):
+    def get_social_data_by_id(self, obj_id = None, database_name = "omicron", collection_name = None):
         '''
             Finds all the entries from time_start to time_end inclusive that has the same query value as the parameter query.
-            Note That time_start and time_end can both take a value "'all'". The "'all'" value instructs the search to have no upper or lower bounds or both.
+            Note That time_start and time_end can both take a value "all". The "all" value instructs the search to have no upper or lower bounds or both.
             
             @param self: Pointer to the current object.
             @type self: L{database_handler}
-            @return: The data that meet the criteria of the search parameters.
-            @rtype: JSON Object
+            @param obj_id: Object ID.
+            @type obj_id: L{str}
             @param database_name: The name of the database.
             @type database_name: L{str}
             @param collection_name: The name of the collection you want to access.
             @type collection_name: L{str}
+            @return: The data that meet the criteria of the search parameters.
+            @rtype: JSON Object
             @raise AttributeError
             @raise Exception("Connection failure")
         '''
         query_result = None
-        if id == None or database_name == None or collection_name == None:
+        if obj_id == None or database_name == None or collection_name == None:
             raise AttributeError
        
         if (self.client.alive()):
@@ -157,20 +156,21 @@ class database_handler(object):
                 try:
                     database =  self.client[database_name]
                     collection = database[collection_name]
-                    query_result = collection.find_one({"_id":ObjectId(id)})
+                    query_result = collection.find_one({"_id":ObjectId(obj_id)})
                 except Exception, e:
-                    print "waring",e
+                    print "warning",e
                     Time.sleep(0.1)
         else:
             raise Exception("Connection failure")
         return query_result
-    def store_social_data_by_id(self, id = None, social_data = None, database_name = "omicron", collection_name = None):
+    def store_social_data_by_id(self, obj_id = None, social_data = None, database_name = "omicron", collection_name = None):
         '''
             Adds the social data to a specified Mongo database.
             
             @param self: Pointer to the current object.
             @type self: L{database_handler}
-            TODO:Insert what ID is.
+            @param obj_id: Object ID.
+            @type obj_id: L{str}
             @param social_data: JSON Object that contains the social platforms and the relevant social data associated with them.
             @type social_data: JSON Object
             @param database_name: The name of the database.
@@ -182,7 +182,7 @@ class database_handler(object):
             @raise AttributeError
             @raise Exception("Connection failure")
         '''
-        if (id == None or social_data == None or database_name == None or collection_name == None):
+        if (obj_id == None or social_data == None or database_name == None or collection_name == None):
             raise AttributeError
         
         if (self.client.alive()):
@@ -190,9 +190,9 @@ class database_handler(object):
                 try:
                     database =  self.client[database_name]
                     collection = database[collection_name]
-                    query_result = collection.update({"_id":ObjectId(id)},{"$set":{'data':social_data}})
+                    query_result = collection.update({"_id":ObjectId(obj_id)},{"$set":{'data':social_data}})
                 except Exception, e:
-                    print "waring",e
+                    print "warning",e
                     Time.sleep(0.1)
                 return query_result
         else:

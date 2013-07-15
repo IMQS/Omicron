@@ -58,7 +58,7 @@ class gateway(object):
         is_valid = self._available_social_media(platforms)
         return_data = {}
         if is_valid == None:
-            "TODO: change that it returns a JSONobject"
+            "TODO: change that it returns a JSON object"
             return "One or more platforms were unavailable."
         else :
             for social_plat in is_valid:
@@ -75,7 +75,7 @@ class gateway(object):
     
     def GET(self):
         '''
-            Only for handling reST calls to the gateway.
+            Only for handling REST calls to the gateway.
             
             Cycles through each variable in the platform list and executes a search with the
             given keywords (tags) on each platform. Parameter platforms and search_tags are encoded into
@@ -94,7 +94,7 @@ class gateway(object):
     
     def POST(self):
         '''
-            This function is only for handling rest calls to /gateway.
+            This function is only for handling REST calls to /gateway.
             Cycles through each variable in the platform list and executes a search with the
             given keywords on each platform. Parameter platforms and search_tags are encoded into
             a JSON Object that will be received from a POST call.

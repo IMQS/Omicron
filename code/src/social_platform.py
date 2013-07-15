@@ -17,8 +17,7 @@ from instagram.client import InstagramAPI #downloadable at https://github.com/In
 
 class social_platform(object):
     '''
-        Underlying data type which is extended by each social platform to \
-        communicate with that social network's API
+        Underlying data type which is extended by each social platform to communicate with that social network's API
     ''' 
     def __init__(self):
         self.access_token = None
@@ -35,9 +34,7 @@ class social_platform(object):
         raise NotImplementedError
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
         '''
-            Queries the underlining social API using a search area defined by a circle. \
-            If any of the parameters are not included then the query is rejected \
-            and "some parameters of query are missing" will be returned.
+            Queries the underlining social API using a search area defined by a circle. If any of the parameters are not included then the query is rejected and "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -54,9 +51,7 @@ class social_platform(object):
         raise NotImplementedError
     def request_region(self, search_tags=None, search_region=None):
         '''
-            Queries the underlining social API using a search area defined by a region. \
-            If any of the parameters are not included then the query is rejected \
-            and the "some parameters of query are missing" will be returned.
+            Queries the underlying social API using a search area defined by a region. If any of the parameters are not included then the query is rejected and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -83,8 +78,7 @@ class social_platform(object):
         '''
         raise NotImplementedError
     def test_connection(self):
-        ''' Pings a server to test if it is able to communicate to the network before making any calls \
-        to it's reST API
+        ''' Pings a server to test if it is able to communicate to the network before making any calls to its REST API
         
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -101,11 +95,11 @@ class social_platform(object):
         return True
     def decrypt_response(self, encrypted_data=None, headers=None):
         '''
-        Decrypts response from a reST call.
+        Decrypts response from a REST call.
         
         @param self: Pointer to the current object.
         @type self: L{social_platform}
-        @param encrypted_data: A encrypted response from a reST call that needs to be decrypted.
+        @param encrypted_data: A encrypted response from a REST call that needs to be decrypted.
         @type encrypted_data: L{str}
         @param headers: The header response from the server, containing the encryption method.
         @type headers: Dictionary
@@ -132,7 +126,7 @@ class social_platform(object):
             print "Unknown encryption method : "+str(encryption_type) 
         return decrypted_data 
     def authenticate_headers(self):
-        ''' Returns an authorised headers for a reST call. Uses self.access_token initialised in L{authenticate()}.  
+        ''' Returns an authorised headers for a REST call. Uses self.access_token initialised in L{authenticate()}.  
             Note : authenticate() method must first be called 
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -294,7 +288,7 @@ class twitter_platform(social_platform):
         self.access_token = access_token
         return True
     def authenticate_headers(self):
-        ''' Returns an authorised header for a reST call. Uses self.access_token initialised in L{authenticate()}.  
+        ''' Returns an authorised header for a REST call. Uses self.access_token initialised in L{authenticate()}.  
             Note : L{authenticate()} method must first be called
             @param self: Pointer to the current object.
             @type self: L{social_platform}
@@ -336,7 +330,6 @@ class twitter_platform(social_platform):
         
         if('location' in selected_properties):
             result_set.update({'location': []})
-            lists =[]
             for tweet in search_set:
                 if(tweet['geo'] != None):
                     result_set['location'].append((tweet['geo']['coordinates'][0], tweet['geo']['coordinates'][1]))
