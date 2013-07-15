@@ -108,6 +108,25 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="database.database_handler-class.html#close_database" class="summary-sig-name">close_database</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Tries to close the database, 2 know exceptions ,instance of the 
+      database failed to be created,failed to close the database</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="database-pysrc.html#database_handler.close_database">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code> @raise AttributeError @raise 
+      Exception(&quot;Connection failure&quot;)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="database.database_handler-class.html#store_social_data" class="summary-sig-name">store_social_data</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">time</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">query</span>=<span class="summary-sig-default">None</span>,
@@ -136,10 +155,53 @@ object --+
         <span class="summary-sig-arg">query</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">database_name</span>=<span class="summary-sig-default">&quot;omicron&quot;</span>,
         <span class="summary-sig-arg">collection_name</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Finds all the entries from time_start to time_end exclusive that has 
+      Finds all the entries from time_start to time_end inclusive that has 
       the same query value as the parameter query.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="database-pysrc.html#database_handler.get_social_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">JSON Object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="database.database_handler-class.html#get_social_data_by_id" class="summary-sig-name">get_social_data_by_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">database_name</span>=<span class="summary-sig-default">&quot;omicron&quot;</span>,
+        <span class="summary-sig-arg">collection_name</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Finds all the entries from time_start to time_end inclusive that has 
+      the same query value as the parameter query.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="database-pysrc.html#database_handler.get_social_data_by_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">str</code> @raise AttributeError @raise 
+      Exception(&quot;Connection failure&quot;)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="database.database_handler-class.html#store_social_data_by_id" class="summary-sig-name">store_social_data_by_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">social_data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">database_name</span>=<span class="summary-sig-default">&quot;omicron&quot;</span>,
+        <span class="summary-sig-arg">collection_name</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Adds the social data to a specified Mongo database.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="database-pysrc.html#database_handler.store_social_data_by_id">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -246,6 +308,28 @@ object --+
   </dl>
 </td></tr></table>
 </div>
+<a name="close_database"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">close_database</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="database-pysrc.html#database_handler.close_database">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Tries to close the database, 2 know exceptions ,instance of the 
+  database failed to be created,failed to close the database</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>True ,if it is successful otherwise False.</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="store_social_data"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -279,10 +363,9 @@ object --+
         <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
         <li><strong class="pname"><code>collection_name</code></strong> (string) - The name of the collection you want to access.</li>
     </ul></dd>
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>AttributeError</strong></code> - If a parameter is missing or None.</li>
-    </ul></dd>
+    <dt>Returns: <code class="link">str</code> @raise AttributeError @raise 
+      Exception(&quot;Connection failure&quot;)</dt>
+        <dd>The unique id that identifies the search in the database</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -305,7 +388,7 @@ object --+
     </td>
   </tr></table>
   
-  <p>Finds all the entries from time_start to time_end exclusive that has 
+  <p>Finds all the entries from time_start to time_end inclusive that has 
   the same query value as the parameter query. Note That time_start and 
   time_end can both take a value &quot;'all'&quot;. The &quot;'all'&quot; 
   value instructs the search to have no upper or lower bounds or both.</p>
@@ -320,14 +403,84 @@ object --+
           formated the same as the parameters of a GET command including 
           the ?.</li>
         <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
-        <li><strong class="pname"><code>collection_name</code></strong> (string) - The name of the collection you want to access.</li>
+        <li><strong class="pname"><code>collection_name</code></strong> (string @raise AttributeError @raise Exception(&quot;Connection 
+          failure&quot;)) - The name of the collection you want to access.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The data that meet the criteria of the search parameters.</dd>
-    <dt>Raises:</dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_social_data_by_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_social_data_by_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">database_name</span>=<span class="sig-default">&quot;omicron&quot;</span>,
+        <span class="sig-arg">collection_name</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="database-pysrc.html#database_handler.get_social_data_by_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Finds all the entries from time_start to time_end inclusive that has 
+  the same query value as the parameter query. Note That time_start and 
+  time_end can both take a value &quot;'all'&quot;. The &quot;'all'&quot; 
+  value instructs the search to have no upper or lower bounds or both.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>AttributeError</strong></code> - If a parameter is missing or None.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
+          class="link">database_handler</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
+        <li><strong class="pname"><code>collection_name</code></strong> (string @raise AttributeError @raise Exception(&quot;Connection 
+          failure&quot;)) - The name of the collection you want to access.</li>
     </ul></dd>
+    <dt>Returns: JSON Object</dt>
+        <dd>The data that meet the criteria of the search parameters.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="store_social_data_by_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">store_social_data_by_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">social_data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">database_name</span>=<span class="sig-default">&quot;omicron&quot;</span>,
+        <span class="sig-arg">collection_name</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="database-pysrc.html#database_handler.store_social_data_by_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds the social data to a specified Mongo database.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
+          class="link">database_handler</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>time</code></strong> (<code class="link">datetime.datetime</code>) - The time when the request for the social data was made.</li>
+        <li><strong class="pname"><code>query</code></strong> (<code class="link">string</code>) - The parameters used for the search in the same format as a GET 
+          command.</li>
+        <li><strong class="pname"><code>social_data</code></strong> (JSON Object) - JSON Object that contains the social platforms and the relevant 
+          social data associated with them.</li>
+        <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
+        <li><strong class="pname"><code>collection_name</code></strong> (string) - The name of the collection you want to access.</li>
+    </ul></dd>
+    <dt>Returns: <code class="link">str</code> @raise AttributeError @raise 
+      Exception(&quot;Connection failure&quot;)</dt>
+        <dd>The unique id that identifies the search in the database</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -355,7 +508,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jul  3 15:51:29 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 09:29:06 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -54,7 +54,7 @@
 <h1 class="epydoc">Module map_plot</h1><p class="nomargin-top"><span class="codelink"><a href="map_plot-pysrc.html">source&nbsp;code</a></span></p>
 <pre class="literalblock">
 
-Created on 18 June 2013
+Created on 18 Jun 2013
 
 @author: M. Arzul
 
@@ -69,16 +69,16 @@ Created on 18 June 2013
   / /__/ / / / | | \ \ \ \ \ \___ | |\ \ | |_| | | | \ \| |
  /______/ /_/  |_|  \_\ \_\ \___/ |_| \_\ \___/  |_|  \___|
 
-A general-purpose plotter for scatter plots and heatmaps in any of the following coordinate systems:
+A general-purpose plotter for heatmaps in any of the following coordinate systems:
     &gt; Geographic
     &gt; Projected
     &gt; Pixel
 
-CAVEAT: the random point generator makes tuples which matplotlib can interpret as (X, Y)
-    which makes sense on a Euclidean plane, but LAT/LON is in the reverse order!!!
+CAVEAT: the random point generator makes tuples which matplotlib can interpret as (X, Y) which
+    makes sense on a Euclidean plane or projected system, but LAT/LON is in the reverse order!!!
     Therefore, specify bounds as follows:
-        &gt; [min_x, max_x, min_y, max_y] when working in (X, Y)
-        &gt; [min_lat, max_lat, min_lon, max_lon] when working in LAT/LON
+        &gt; [min_x, max_x, min_y, max_y] (l,r,b,t) when working in (X, Y)
+        &gt; [min_lat, max_lat, min_lon, max_lon] (s,n,w,e) when working in LAT/LON
 
 CAVEAT: An exported tile is scaled between zero and the maximum of the tile. This will
     result in a patchy appearance unless some function is found to determine a scale that
@@ -105,43 +105,6 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Void</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#plot" class="summary-sig-name">plot</a>(<span class="summary-sig-arg">coords</span>)</span><br />
-      Makes a simple scatter plot of given coordinates within a box that in
-      X and Y spans the floor and ceiling integers of the minima and maxima
-      respectively.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#plot">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Void</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#plot_random" class="summary-sig-name">plot_random</a>(<span class="summary-sig-arg">num</span>,
-        <span class="summary-sig-arg">bounds</span>)</span><br />
-      Plots random points.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#plot_random">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">List of 2-tuples of floats</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -151,82 +114,6 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
       Returns random points.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="map_plot-pysrc.html#random_coords">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Float</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#heat_dist" class="summary-sig-name">heat_dist</a>(<span class="summary-sig-arg">point</span>,
-        <span class="summary-sig-arg">x</span>,
-        <span class="summary-sig-arg">y</span>)</span><br />
-      Returns the Euclidean distance between a point and a pixel on an 
-      image.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#heat_dist">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Float</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#gauss" class="summary-sig-name">gauss</a>(<span class="summary-sig-arg">var</span>,
-        <span class="summary-sig-arg">x</span>)</span><br />
-      Returns the y value at x for a normal distribution with variance var 
-      in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#gauss">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Void</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#plot_gauss" class="summary-sig-name">plot_gauss</a>(<span class="summary-sig-arg">var</span>,
-        <span class="summary-sig-arg">lim</span>)</span><br />
-      Plots a Gaussian distribution.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#plot_gauss">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Rectangular numpy matrix of floats</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#heatmap" class="summary-sig-name">heatmap</a>(<span class="summary-sig-arg">bounds</span>,
-        <span class="summary-sig-arg">coords</span>)</span><br />
-      Creates a heatmap within the specified bounds for the given 
-      coordinates.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="map_plot-pysrc.html#heatmap">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -257,13 +144,12 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Void</span>
+      <span class="summary-type">Void2</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="map_plot-module.html#show_heatmap" class="summary-sig-name">show_heatmap</a>(<span class="summary-sig-arg">heatmap</span>,
-        <span class="summary-sig-arg">bounds</span>)</span><br />
-      Displays a heatmap within certain bounds using matplotlib.pyplot.</td>
+          <td><span class="summary-sig"><a href="map_plot-module.html#show_heatmap" class="summary-sig-name">show_heatmap</a>(<span class="summary-sig-arg">heatmap</span>)</span><br />
+      Displays a heatmap using matplotlib.pyplot.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="map_plot-pysrc.html#show_heatmap">source&nbsp;code</a></span>
             
@@ -303,6 +189,23 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
       or in greyscale if colour is False.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="map_plot-pysrc.html#save_heatmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">GeoJSON object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="map_plot-module.html#coords_to_geojson" class="summary-sig-name">coords_to_geojson</a>(<span class="summary-sig-arg">coords</span>)</span><br />
+      Converts a set of coordinate pairs to a GeoJSON object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="map_plot-pysrc.html#coords_to_geojson">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -354,59 +257,6 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
   </td>
 </tr>
 </table>
-<a name="plot"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot</span>(<span class="sig-arg">coords</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#plot">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Makes a simple scatter plot of given coordinates within a box that in 
-  X and Y spans the floor and ceiling integers of the minima and maxima 
-  respectively.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats) - The X, Y coordinates of points.</li>
-    </ul></dd>
-    <dt>Returns: Void</dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="plot_random"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_random</span>(<span class="sig-arg">num</span>,
-        <span class="sig-arg">bounds</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#plot_random">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Plots random points.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>num</code></strong> (Integer) - The number of points to generate.</li>
-        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
-          [left, right, bottom, top].</li>
-    </ul></dd>
-    <dt>Returns: Void</dt>
-  </dl>
-</td></tr></table>
-</div>
 <a name="random_coords"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -433,122 +283,6 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
     <dt>Returns: List of 2-tuples of floats</dt>
         <dd>List of 2-tuples of floats that represents a set of X, Y 
           coordinates.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="heat_dist"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">heat_dist</span>(<span class="sig-arg">point</span>,
-        <span class="sig-arg">x</span>,
-        <span class="sig-arg">y</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#heat_dist">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Returns the Euclidean distance between a point and a pixel on an 
-  image.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>point</code></strong> (2-tuple of floats.) - The point's coordinates.</li>
-        <li><strong class="pname"><code>x</code></strong> (Integer) - The x-coordinate of the pixel.</li>
-        <li><strong class="pname"><code>y</code></strong> (Integer) - The y-coordinate of the pixel.</li>
-    </ul></dd>
-    <dt>Returns: Float</dt>
-        <dd>The Euclidean distance between the point and the pixel.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="gauss"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">gauss</span>(<span class="sig-arg">var</span>,
-        <span class="sig-arg">x</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#gauss">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Returns the y value at x for a normal distribution with variance var 
-  in the form f(x) = e^(-(x^2)/(2s^2)) where s is the spread. Note: the 
-  center of the curve is 0 since no mean is defined, and the maximum value 
-  is always 1.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>var</code></strong> (Float) - The variance to use for this curve.</li>
-        <li><strong class="pname"><code>x</code></strong> (Floatimport numpy as np) - The distance from the point.</li>
-    </ul></dd>
-    <dt>Returns: Float</dt>
-        <dd>The value of the given curve at x.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="plot_gauss"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">plot_gauss</span>(<span class="sig-arg">var</span>,
-        <span class="sig-arg">lim</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#plot_gauss">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Plots a Gaussian distribution.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>var</code></strong> (Float) - Variance of the curve.</li>
-        <li><strong class="pname"><code>lim</code></strong> (Float) - Upper limit of plot (lower is 0).</li>
-    </ul></dd>
-    <dt>Returns: Void</dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="heatmap"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">heatmap</span>(<span class="sig-arg">bounds</span>,
-        <span class="sig-arg">coords</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="map_plot-pysrc.html#heatmap">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Creates a heatmap within the specified bounds for the given 
-  coordinates. Variance is adjusted according to point density. If the area
-  of the bounds is zero, None is returned.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
-          [left, right, bottom, top].</li>
-        <li><strong class="pname"><code>coords</code></strong> (List of 2-tuples of floats.) - The X, Y coordinates of points.</li>
-    </ul></dd>
-    <dt>Returns: Rectangular numpy matrix of floats</dt>
-        <dd>A pixel matrix heatmap for the given points.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -592,23 +326,20 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">show_heatmap</span>(<span class="sig-arg">heatmap</span>,
-        <span class="sig-arg">bounds</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">show_heatmap</span>(<span class="sig-arg">heatmap</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="map_plot-pysrc.html#show_heatmap">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Displays a heatmap within certain bounds using matplotlib.pyplot.</p>
+  <p>Displays a heatmap using matplotlib.pyplot.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>heatmap</code></strong> (Rectangular numpy matrix of floats) - A pixel matrix heatmap.</li>
-        <li><strong class="pname"><code>bounds</code></strong> (List of 4 ints) - The bounding coordinates of the points to generate, in the form 
-          [left, right, bottom, top].</li>
     </ul></dd>
-    <dt>Returns: Void</dt>
+    <dt>Returns: Void2</dt>
   </dl>
 </td></tr></table>
 </div>
@@ -665,6 +396,30 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
   </dl>
 </td></tr></table>
 </div>
+<a name="coords_to_geojson"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">coords_to_geojson</span>(<span class="sig-arg">coords</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="map_plot-pysrc.html#coords_to_geojson">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts a set of coordinate pairs to a GeoJSON object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>coords</code></strong> (Array of 2-tuples or length-2 arrays.) - An array of coordinate pairs.</li>
+    </ul></dd>
+    <dt>Returns: GeoJSON object</dt>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -689,7 +444,7 @@ CAVEAT: An exported tile is scaled between zero and the maximum of the tile. Thi
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jul  3 15:51:29 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 09:29:06 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -65,8 +65,8 @@ class database_handler(object):
             @type collection_name: string
             @return: The unique id that identifies the search in the database
             @rtype: L{str}
-            @raise AttributeError: If a parameter is missing or None.
-            @raise Exception("Connection failure"): Unable to connect to Database.
+            @raise AttributeError
+            @raise Exception("Connection failure")
         '''
         if (time == None or query == None or social_data == None or database_name == None or collection_name == None):
             raise AttributeError
@@ -103,8 +103,8 @@ class database_handler(object):
             @type database_name: string
             @param collection_name: The name of the collection you want to access.
             @type collection_name: string
-            @raise AttributeError: If a parameter is missing or None.
-            @raise Exception("Connection failure"): Unable to connect to Database.
+            @raise AttributeError
+            @raise Exception("Connection failure")
         '''
         query_result = None
         if time_start == None or time_end == None or query == None or database_name == None or collection_name == None:
@@ -145,8 +145,8 @@ class database_handler(object):
             @type database_name: string
             @param collection_name: The name of the collection you want to access.
             @type collection_name: string
-            @raise AttributeError: If a parameter is missing or None.
-            @raise Exception("Connection failure"): Unable to connect to Database.
+            @raise AttributeError
+            @raise Exception("Connection failure")
         '''
         query_result = None
         if id == None or database_name == None or collection_name == None:
@@ -170,10 +170,7 @@ class database_handler(object):
             
             @param self: Pointer to the current object.
             @type self: L{database_handler}
-            @param time: The time when the request for the social data was made.  
-            @type time: L{datetime.datetime} 
-            @param query: The parameters used for the search in the same format as a GET command.
-            @type query: L{string}
+            TODO:Insert what ID is.
             @param social_data: JSON Object that contains the social platforms and the relevant social data associated with them.
             @type social_data: JSON Object
             @param database_name: The name of the database.
@@ -182,8 +179,8 @@ class database_handler(object):
             @type collection_name: string
             @return: The unique id that identifies the search in the database
             @rtype: L{str}
-            @raise AttributeError: If a parameter is missing or None.
-            @raise Exception("Connection failure"): Unable to connect to Database.
+            @raise AttributeError
+            @raise Exception("Connection failure")
         '''
         if (id == None or social_data == None or database_name == None or collection_name == None):
             raise AttributeError
