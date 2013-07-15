@@ -295,7 +295,7 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
           class="link">database_handler</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>IP</code></strong> (String) - IP address of where the database is if it is local then leave it.</li>
+        <li><strong class="pname"><code>IP</code></strong> (<code class="link">str</code>) - IP address of where the database is if it is local then leave it.</li>
         <li><strong class="pname"><code>port</code></strong> (int) - Port number with min of 0 and max of 56635</li>
     </ul></dd>
     <dt>Returns: <a href="database.database_handler-class.html" 
@@ -356,7 +356,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
           class="link">database_handler</a>) - Pointer to the current object.</li>
         <li><strong class="pname"><code>time</code></strong> (<code class="link">datetime.datetime</code>) - The time when the request for the social data was made.</li>
-        <li><strong class="pname"><code>query</code></strong> (<code class="link">string</code>) - The parameters used for the search in the same format as a GET 
+        <li><strong class="pname"><code>query</code></strong> (<code class="link">str</code>) - The parameters used for the search in the same format as a GET 
           command.</li>
         <li><strong class="pname"><code>social_data</code></strong> (JSON Object) - JSON Object that contains the social platforms and the relevant 
           social data associated with them.</li>
@@ -397,9 +397,9 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
           class="link">database_handler</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>time_start</code></strong> (<code class="link">datetime.datetime</code>) - The time interval the search should start at.</li>
-        <li><strong class="pname"><code>time_end</code></strong> (<code class="link">datetime.datetime</code>) - The time interval the search should end at.</li>
-        <li><strong class="pname"><code>query</code></strong> (<code class="link">string</code>) - The parameters used for what to search. The string must be 
+        <li><strong class="pname"><code>time_start</code></strong> (datetime.datetime) - The time interval the search should start at.</li>
+        <li><strong class="pname"><code>time_end</code></strong> (datetime.datetime) - The time interval the search should end at.</li>
+        <li><strong class="pname"><code>query</code></strong> (string) - The parameters used for what to search. The string must be 
           formated the same as the parameters of a GET command including 
           the ?.</li>
         <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
@@ -437,9 +437,9 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="database.database_handler-class.html" 
           class="link">database_handler</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
-        <li><strong class="pname"><code>collection_name</code></strong> (string @raise AttributeError @raise Exception(&quot;Connection 
-          failure&quot;)) - The name of the collection you want to access.</li>
+        <li><strong class="pname"><code>database_name</code></strong> (<code class="link">str</code>) - The name of the database.</li>
+        <li><strong class="pname"><code>collection_name</code></strong> (<code class="link">str</code> @raise AttributeError @raise 
+          Exception(&quot;Connection failure&quot;)) - The name of the collection you want to access.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The data that meet the criteria of the search parameters.</dd>
@@ -472,8 +472,8 @@ object --+
           class="link">database_handler</a> TODO:Insert what ID is.) - Pointer to the current object.</li>
         <li><strong class="pname"><code>social_data</code></strong> (JSON Object) - JSON Object that contains the social platforms and the relevant 
           social data associated with them.</li>
-        <li><strong class="pname"><code>database_name</code></strong> (string) - The name of the database.</li>
-        <li><strong class="pname"><code>collection_name</code></strong> (string) - The name of the collection you want to access.</li>
+        <li><strong class="pname"><code>database_name</code></strong> (<code class="link">str</code>) - The name of the database.</li>
+        <li><strong class="pname"><code>collection_name</code></strong> (<code class="link">str</code>) - The name of the collection you want to access.</li>
     </ul></dd>
     <dt>Returns: <code class="link">str</code> @raise AttributeError @raise 
       Exception(&quot;Connection failure&quot;)</dt>
@@ -505,7 +505,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 09:38:05 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 09:43:29 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
