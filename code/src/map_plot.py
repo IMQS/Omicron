@@ -176,7 +176,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
     import Image
     heatmap = heatmap[::-1]
     if colour:
-        from matplotlib import colors
+        from matplotlib.pyplot import cm
         
         print "Saving colour heatmap to " + path + "..."
         
@@ -186,13 +186,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         heatmap = heatmap / 5.
         print"\t\tDone."
         
-        cols = [(0.0, 0.0, 0.0, 0.0),
-                (0.5, 0.0, 0.0, 0.5),
-                (1.0, 0.5, 0.0, 0.5),
-                (1.0, 1.0, 0.5, 0.5),
-                (1.0, 1.0, 1.0, 0.5)]
-        cmap_hot = colors.LinearSegmentedColormap.from_list(name='yes', colors=cols)
-        heatmap_color = Image.fromarray(np.uint8(cmap_hot(heatmap, bytes=True)))
+        heatmap_color = Image.fromarray(np.uint8(cm.hot(heatmap, alpha=0.5, bytes=True)))
         e = time()
         
         print "\tTime to convert to colour: " + str(e - s)
@@ -223,7 +217,7 @@ if __name__ == "__main__":
     
     bounds_geo = [-85, 85, -180, 180]
     
-    ten_random = random_coords(10, bounds_geo)
+    #ten_random = random_coords(10, bounds_geo)
     hundred_random = random_coords(100, bounds_geo)
     #smiley = [[25,45], [25,35], [35,25], [45,15], [55,15], [65,25], [75,35], [75,45], [35,75], [35,65], [65,65], [75,65]]
     #stellenbosch = [[-33.9200, 18.8600]]
@@ -232,11 +226,10 @@ if __name__ == "__main__":
     #technopark = [[-33.964807, 18.8372767]]
     #madagascar = [[-20,47]]
     
-    tile = heatmap_tile(level = 2, x = 1, y = 2, coords=hundred_random*5)
+    tile = heatmap_tile(level = 2, x = 1, y = 2, coords=hundred_random)
     #show_heatmap(tile)
     #show_3D_heatmap(tile)
     save_heatmap(tile, path="/home/marzul/test.png", colour=True)
-    
     #print coords_to_geojson(ten_random)
     e = time()
     print "total time: "+str(e-s)
