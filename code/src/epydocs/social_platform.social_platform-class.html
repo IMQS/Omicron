@@ -183,7 +183,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Boolean</span>
+      <span class="summary-type"><code class="link">bool</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -201,7 +201,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">String</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -220,7 +220,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Dictionary</span>
+      <span class="summary-type"><code class="link">dict</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -394,9 +394,9 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of tags to search for.</li>
         <li><strong class="pname"><code>gps_center</code></strong> (A tuple of floats) - A tuple consisting of longitude and latitude GPS coordinates.</li>
-        <li><strong class="pname"><code>radius</code></strong> (Float) - The radius from the <code class="link">gps_center</code> that 
+        <li><strong class="pname"><code>radius</code></strong> (<code class="link">float</code>) - The radius from the <code class="link">gps_center</code> that 
           forms the circular region to be searched.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -430,8 +430,8 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of tags to search for.</li>
-        <li><strong class="pname"><code>search_region</code></strong> (String) - Name of the search_region - in the following format &lt;country 
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>search_region</code></strong> (<code class="link">str</code>) - Name of the search_region - in the following format &lt;country 
           state city&gt;.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -494,7 +494,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Boolean</dt>
+    <dt>Returns: <code class="link">bool</code></dt>
         <dd>True, if the social platform is able to connect to its online 
           API.             False, if the social platform is unable to 
           connect to its online API.</dd>
@@ -523,11 +523,11 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>encrypted_data</code></strong> (String) - A encrypted response from a reST call that needs to be decrypted.</li>
+        <li><strong class="pname"><code>encrypted_data</code></strong> (<code class="link">str</code>) - A encrypted response from a reST call that needs to be decrypted.</li>
         <li><strong class="pname"><code>headers</code></strong> (Dictionary) - The header response from the server, containing the encryption 
           method.</li>
     </ul></dd>
-    <dt>Returns: String</dt>
+    <dt>Returns: <code class="link">str</code></dt>
   </dl>
 </td></tr></table>
 </div>
@@ -556,7 +556,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Dictionary</dt>
+    <dt>Returns: <code class="link">dict</code></dt>
         <dd>a dictionary with the basic header information of an http 
           request.</dd>
   </dl>
@@ -586,7 +586,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
         <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
-        <li><strong class="pname"><code>selected_properties</code></strong> (List) - List of strings - either 'tags', 'location' or 'post'.</li>
+        <li><strong class="pname"><code>selected_properties</code></strong> (<code class="link">list</code>) - List of strings - either 'tags', 'location' or 'post'.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
         <dd>The stripped data.</dd>
@@ -617,7 +617,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 09:38:05 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:23:00 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

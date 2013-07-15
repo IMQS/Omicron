@@ -54,7 +54,7 @@ class database_handler(object):
             @param self: Pointer to the current object.
             @type self: L{database_handler}
             @param time: The time when the request for the social data was made.  
-            @type time: L{datetime.datetime} 
+            @type time: datetime.datetime 
             @param query: The parameters used for the search in the same format as a GET command.
             @type query: L{str}
             @param social_data: JSON Object that contains the social platforms and the relevant social data associated with them.
