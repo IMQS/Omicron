@@ -23,6 +23,8 @@ function initmap(input,bool,search_id) {
 	L.control.layers(null, {
 		"Heat map" : heatmap
 	}).addTo(map);
+	var loader = document.getElementsByTagName("img");
+	loader[0].style = "display:none";
 
 }
 /*
@@ -86,8 +88,7 @@ function OnRun() {
 	} else {
 		document.getElementById("result").innerHTML = "Storage Failed";
 	}
-	var loader = document.getElementsByTagName("img");
-	loader.style = "display:none";
+
 	if(twitter=="Disabled"){
 		alert("Please go to the main page to get authenticated ")
 	}
