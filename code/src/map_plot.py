@@ -25,9 +25,6 @@ CAVEAT: the random point generator makes tuples which matplotlib can interpret a
         > [min_x, max_x, min_y, max_y] (l,r,b,t) when working in (X, Y)
         > [min_lat, max_lat, min_lon, max_lon] (s,n,w,e) when working in LAT/LON
 
-CAVEAT: An exported tile is scaled between zero and the maximum of the tile. This will
-    result in a patchy appearance unless some function is found to determine a scale that
-    will work for the entire tileset.
 '''
 
 def random_coords(num, bounds):
@@ -52,13 +49,13 @@ def random_coords(num, bounds):
 
 def heatmap_tile(level=0, x=0, y=0, coords=[]):
     '''
-    Creates a 256x256 heatmap tile for the specified zoom level and location for the given coordinates. Variance is fixed according to tile size.
+    Creates a 256x256 heatmap tile for the specified zoom level and location for the given coordinates.
     @param level: The zoom level of the tile, between 0 and 21.
-    @type level: int
+    @type level: Integer
     @param x: The X coordinate of the tile.
-    @type x: int
+    @type x: Integer
     @param y: The Y coordinate of the tile.
-    @type y: int
+    @type y: Integer
     @param coords: The X, Y coordinates of points.
     @type coords: List of 2-tuples of floats
     @return: A pixel matrix heatmap for the given points.
@@ -134,7 +131,7 @@ def show_heatmap(heatmap):
     Displays a heatmap using matplotlib.pyplot.
     @param heatmap: A pixel matrix heatmap.
     @type heatmap: Rectangular numpy matrix of floats
-    @rtype: Void2
+    @rtype: Void
     '''
     import matplotlib.pyplot as plt
     
