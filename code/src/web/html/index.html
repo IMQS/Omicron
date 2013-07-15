@@ -21,15 +21,17 @@
 			<p>Twitter:
 			<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter">
 			Instagram:
-			<input type="checkbox" id="instagram_box" name="platform" value="instagram"></p>
+			<input type="checkbox" id="instagram_box" disabled='true' name="platform" value="instagram"></p>
 			<p>Generate: 
 			<select id="function">
 				<option>
 					Heat Map
 				</option>
+				<!-- 
 				<option>
 					Point Map
 				</option>
+				 -->
 			</select></p>
 			
 			<p>
@@ -37,14 +39,17 @@
 				<option>
 					Search using Radius (A circle)
 				</option>
+				<!-- 
 				<option>
 					Search by Region
 				</option>
+				 -->
 			</select></p>
 		    
             <p><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:16em"></p>
-			<p><input type="text"  id="longitude" placeholder="Longitude"></p>
 			<p><input type="text" id="latitude" placeholder="Latitude" ></p>
+			<p><input type="text"  id="longitude" placeholder="Longitude"></p>
+
 		
 			
 			<input type="hidden" name="tags">
