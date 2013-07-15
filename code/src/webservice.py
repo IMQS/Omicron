@@ -40,7 +40,7 @@ class request_handler(object):
         
         db = db_handler()
         
-        query_data = db.get_social_data_by_id(id=user_id, database_name='omicron', collection_name='request_information')
+        query_data = db.get_social_data_by_id(obj_id=user_id, database_name='omicron', collection_name='request_information')
         db.close_database()
         
         function = query_data['query']['function']
@@ -51,7 +51,7 @@ class request_handler(object):
                 query_data['data'] = gateway0.execute_requests( query_data['query']['platforms'], query_data['query']['tags'],
                                                                  (float(query_data['query']['location'][0]),float(query_data['query']['location'][1])), radius=float(query_data['query']['location'][2])
                                                                  , selected_properties=['location'], search_region=None, auth_codes=None)
-                db.store_social_data_by_id(id=user_id, social_data=query_data['data'],collection_name="request_information")
+                db.store_social_data_by_id(obj_id=user_id, social_data=query_data['data'],collection_name="request_information")
             total_coords = []
             for platform in query_data['query']['platforms']:
                 total_coords = total_coords + query_data['data'][platform]['location']
