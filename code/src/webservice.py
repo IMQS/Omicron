@@ -83,9 +83,13 @@ class request_handler(object):
         location_type = raw_data["location_type"]
         location = raw_data["location"].lstrip('u').split("_")
         l_x_y = str(raw_data["directory"]).split("/")[1:]
+        auth_codes_ = None
+        if(raw_data.__contains('auth_codes')):
+            auth_codes_ = raw_data['auth_codes']
+            
         gatewayO = gateway()
         if (function == "heat_map"):
-            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'])
+            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'],auth_codes=auth_codes_)
             total_coords = []
             for platform in platforms:
                 total_coords = total_coords + query_data[platform]['location']
@@ -290,9 +294,10 @@ class request_search_id(object):
         raw_data = web.input()
         db = db_handler()
         user_time = datetime.datetime.now()
-        location_type = None
-        user_query = None
-        query_data = None
+        location_type = ''
+        user_query = ''
+        query_data = ''
+        auth_codes_ = ''
         if (raw_data.__contains__("location") and raw_data.__contains__("platforms") and raw_data.__contains__("tags") and raw_data.__contains__("function") and raw_data.__contains__("location_type")):
             platforms = raw_data["platforms"].lstrip('u').split("_")
             tags = raw_data["tags"].lstrip('u').split("_")

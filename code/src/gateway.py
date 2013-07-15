@@ -62,7 +62,7 @@ class gateway(object):
             return "One or more platforms were unavailable."
         else :
             for social_plat in is_valid:
-                if(auth_codes==None ):
+                if(auth_codes==None or auth_codes == '' ):
                     social_plat.authenticate()
                 elif(not auth_codes.__contains__(social_plat.get_platform_name)):
                     social_plat.authenticate()                    

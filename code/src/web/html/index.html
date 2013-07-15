@@ -17,7 +17,7 @@
 		<div id="result">Not authenticated yet. Please wait.</div>
 
 		<form name="search"  id="Custom_Search_Form" action="http://superfluous.imqs.co.za/omicron/main.html" onsubmit="return OnSubmit();" method="get">
-			<p>Search:<br><input type="search" id="tags" autofocus="true"></p>
+			<p><input type="search" id="tags" autofocus="true" placeholder="Enter search tags"></p>
 			<p>Twitter:
 			<input type="checkbox" id="twitter_box"name="platform" checked="true" value="twitter">
 			Instagram:
@@ -43,8 +43,8 @@
 			</select></p>
 		    
             <p><input type="text" placeholder="Enter region name or radius (in km)" id="radius_area"style="width:16em"></p>
-			<p><input type="text" id="latitude" placeholder="Latitude" ></p>
-			<p><input type="text"  id="longitude" placeholder="Longitude"></p>
+			<p><input type="text" id="latitude" placeholder="Enter latitude" ></p>
+			<p><input type="text"  id="longitude" placeholder="Enter longitude"></p>
 
 		
 			
@@ -56,12 +56,12 @@
 		
 			
 		
-			<input type="submit" disabled=true name="Submit_Search" style="height:2em; width:10em; background-color:#dddddd">
+			<input type="submit"  name="Submit_Search"disabled='true' style="height:2em; width:10em; background-color:#dddddd">
 			
 		</form>
 		Predefined Searches:<br>
 		<form name="search" style="text-align: center;" id="Custom_Search_Form1" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef1" value="Pipebursts" disabled=true style="background-color:#dddddd">
+			<input type="submit" id="predef1" disabled='true'value="Pipebursts"  style="background-color:#dddddd">
 			<input type="hidden" name="tags" value="#imqs_#pipeburst">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -70,7 +70,7 @@
 		</form>
 			
 		<form name="search" style="text-align: center;" id="Custom_Search_Form2" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">			
-			<input type="submit" id="predef2" value="Black Outs "disabled=true style="background-color:#dddddd">
+			<input type="submit" id="predef2" disabled='true'value="Black Outs " style="background-color:#dddddd">
 			<input type="hidden" name="tags" value="#imqs_#nolights">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
@@ -79,7 +79,7 @@
 		</form>
 		
 		<form name="search" style="text-align: center;" id="Custom_Search_Form3" action="http://superfluous.imqs.co.za/omicron/main.html" method="get">
-			<input type="submit" id="predef3" value="Fires" disabled=true style="background-color:#dddddd">
+			<input type="submit" id="predef3" disabled='true'value="Fires"  style="background-color:#dddddd">
 			<input type="hidden" name="tags" value="#imqs_#fire">
 			<input type="hidden" name="location" value="-33.96_18.83_2000">
 			<input type="hidden" name="location_type" value="radius">
