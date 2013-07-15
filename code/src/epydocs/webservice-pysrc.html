@@ -56,7 +56,7 @@
 <a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
 <a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">Created on 19 Jun 2013</tt> </tt>
 <a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@author: S. Schreiber</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@author: S. Schreiber, J. J. Martin</tt> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
 <a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt> </tt>
 <a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'/home/omicron/Omicron2/code/src/'</tt><tt class="py-op">)</tt> </tt>
@@ -218,20 +218,20 @@ webservice.request_search_id.ERROR" class="py-name" href="#" onclick="return doc
 <a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">            @param self: Pointer to the current request_handler instance.</tt> </tt>
 <a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">            @type self: request_handler</tt> </tt>
 <a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">            @param platforms: List of underscore(_) separated values that indicate which social media to use. </tt> </tt>
-<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">            @type platforms: String </tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">            @type platforms: L{str} </tt> </tt>
 <a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">            @param tags: List of Underscore(_) separated values that is used for the search tags.</tt> </tt>
-<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">            @type tags: String</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">            @type tags: L{str}</tt> </tt>
 <a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">            @param function: Which processing function to apply after the data has been collected.</tt> </tt>
-<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">            @type function: String</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">            @type function: L{str}</tt> </tt>
 <a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">            @param location_type: Either area or radius.</tt> </tt>
-<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">            @type location_type: String</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">            @type location_type: L{str}</tt> </tt>
 <a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">            @param location: If location_type has the value "area" then location must be in the following format "country state city" else \</tt> </tt>
 <a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">            if location_type has the value "radius" then location must be in the following format "longitude_latitude_&lt;radius&gt;" </tt> </tt>
-<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">            @type location: String</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">            @type location: L{str}</tt> </tt>
 <a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">            @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format &lt;/level/x/y.png&gt;</tt> </tt>
-<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">            @type directory: String</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">            @type directory: L{str}</tt> </tt>
 <a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">            @param user_id: The id that will be used to search the for the search data in the mongo database.</tt> </tt>
-<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">            @type user_id: String </tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">            @type user_id: L{str}</tt> </tt>
 <a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">            @return: This will vary between request depending on what processing functions are applied to the social data that was mined.</tt> </tt>
 <a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">            @rtype: inconsistent</tt> </tt>
 <a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
@@ -275,13 +275,13 @@ webservice.request_search_id.ERROR" class="py-name" href="#" onclick="return doc
 </div><div id="twitter_app_only_authorisation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="twitter_app_only_authorisation-expanded"><a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
 <a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        Application only authorisation method for twitter</tt> </tt>
 <a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">        @return: access token used to authenticate with twitter as an application, if failure returns 'Error'</tt> </tt>
-<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: String,</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: L{str}</tt> </tt>
 <a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
 <a name="twitter_app_only_authorisation.GET"></a><div id="twitter_app_only_authorisation.GET-def"><a name="L205"></a><tt class="py-lineno">205</tt> <a class="py-toggle" href="#" id="twitter_app_only_authorisation.GET-toggle" onclick="return toggle('twitter_app_only_authorisation.GET');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="webservice.twitter_app_only_authorisation-class.html#GET">GET</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 </div><div id="twitter_app_only_authorisation.GET-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="twitter_app_only_authorisation.GET-expanded"><a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
 <a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">            Application only authorisation method for twitter</tt> </tt>
 <a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">            @return: access token used to authenticate with twitter as an application, if failure returns 'Error'</tt> </tt>
-<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">            @rtype: String,</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">            @rtype: L{str}</tt> </tt>
 <a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
 <a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-name">twitterobject</tt> <tt class="py-op">=</tt> <tt class="py-name">sp</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Class social_platform.twitter_platform=social_platform.twitter_platform-class.html"><a title="social_platform.twitter_platform" class="py-name" href="#" onclick="return doclink('link-36', 'twitter_platform', 'link-36');">twitter_platform</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 <a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt><tt class="py-op">(</tt><tt class="py-name">twitterobject</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method social_platform.instagram_platform.authenticate()=social_platform.instagram_platform-class.html#authenticate,Method social_platform.social_platform.authenticate()=social_platform.social_platform-class.html#authenticate,Method social_platform.twitter_platform.authenticate()=social_platform.twitter_platform-class.html#authenticate"><a title="social_platform.instagram_platform.authenticate
@@ -479,7 +479,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:23:00 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
