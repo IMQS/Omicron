@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>webservice.redirect_handler</title>
+  <title>webservice.user_authorisation</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -35,7 +35,7 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="webservice-module.html">Module&nbsp;webservice</a> ::
-        Class&nbsp;redirect_handler
+        Class&nbsp;user_authorisation
       </span>
     </td>
     <td>
@@ -45,15 +45,16 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="webservice.redirect_handler-class.html"
+            >]&nbsp;|&nbsp;<a href="webservice.user_authorisation-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class redirect_handler</h1><p class="nomargin-top"><span class="codelink"><a href="webservice-pysrc.html#redirect_handler">source&nbsp;code</a></span></p>
-<p>For all redirects from social media logins for user authentication</p>
+<h1 class="epydoc">Class user_authorisation</h1><p class="nomargin-top"><span class="codelink"><a href="webservice-pysrc.html#user_authorisation">source&nbsp;code</a></span></p>
+<p>Authenticates a user to use the social media sites as authenticated by
+  their profile</p>
 
 <hr />
 <div class="fields">      <p><strong>Attention:</strong>
@@ -82,9 +83,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="webservice.redirect_handler-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="webservice.user_authorisation-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      2 Phase authentication for the user</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="webservice-pysrc.html#redirect_handler.GET">source&nbsp;code</a></span>
+            <span class="codelink"><a href="webservice-pysrc.html#user_authorisation.GET">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -100,44 +102,12 @@
         <tr>
           <td><span class="summary-sig"><a name="POST"></a><span class="summary-sig-name">POST</span>(<span class="summary-sig-arg">self</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="webservice-pysrc.html#redirect_handler.POST">source&nbsp;code</a></span>
+            <span class="codelink"><a href="webservice-pysrc.html#user_authorisation.POST">source&nbsp;code</a></span>
             
           </td>
         </tr>
       </table>
       
-    </td>
-  </tr>
-</table>
-<!-- ==================== CLASS VARIABLES ==================== -->
-<a name="section-ClassVariables"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Class Variables</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariables"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="OK"></a><span class="summary-name">OK</span> = <code title="{'success': 'True'}">{'success': 'True'}</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="ERROR"></a><span class="summary-name">ERROR</span> = <code title="{'success': 'False'}">{'success': 'False'}</code>
     </td>
   </tr>
 </table>
@@ -169,18 +139,15 @@
   <h3 class="epydoc"><span class="sig"><span class="sig-name">GET</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="webservice-pysrc.html#redirect_handler.GET">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="webservice-pysrc.html#user_authorisation.GET">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>2 Phase authentication for the user</p>
   <dl class="fields">
   </dl>
-<div class="fields">      <p><strong>To Do:</strong>
-        Needs to redirect to the login to social platform page where it should 
-    be waiting for a 'code'                which twitter/instagram has sent
-    to  this page as a parameter. Needs to redirect with this code to 
-    original page
+<div class="fields">      <p><strong>Attention:</strong>
+        Not implemented in Project Omicron
       </p>
 </div></td></tr></table>
 </div>
@@ -208,7 +175,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:23:00 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

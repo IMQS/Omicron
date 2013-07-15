@@ -2,7 +2,7 @@
 '''
 Created on 19 Jun 2013
 
-@author: S. Schreiber
+@author: S. Schreiber, J. J. Martin
 '''
 import sys, os
 sys.path.append('/home/omicron/Omicron2/code/src/')
@@ -147,20 +147,20 @@ class request_handler(object):
             @param self: Pointer to the current request_handler instance.
             @type self: request_handler
             @param platforms: List of underscore(_) separated values that indicate which social media to use. 
-            @type platforms: String 
+            @type platforms: L{str} 
             @param tags: List of Underscore(_) separated values that is used for the search tags.
-            @type tags: String
+            @type tags: L{str}
             @param function: Which processing function to apply after the data has been collected.
-            @type function: String
+            @type function: L{str}
             @param location_type: Either area or radius.
-            @type location_type: String
+            @type location_type: L{str}
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
             if location_type has the value "radius" then location must be in the following format "longitude_latitude_<radius>" 
-            @type location: String
+            @type location: L{str}
             @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
-            @type directory: String
+            @type directory: L{str}
             @param user_id: The id that will be used to search the for the search data in the mongo database.
-            @type user_id: String 
+            @type user_id: L{str}
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: inconsistent
         '''
@@ -200,13 +200,13 @@ class twitter_app_only_authorisation:
     '''
         Application only authorisation method for twitter
         @return: access token used to authenticate with twitter as an application, if failure returns 'Error'
-        @rtype: String,
+        @rtype: L{str}
     '''
     def GET(self):
         ''' 
             Application only authorisation method for twitter
             @return: access token used to authenticate with twitter as an application, if failure returns 'Error'
-            @rtype: String,
+            @rtype: L{str}
         '''
         twitterobject = sp.twitter_platform()
         if(twitterobject.authenticate()):
@@ -329,7 +329,7 @@ class request_search_id(object):
             @rtype: L{str}
         '''
         raw_data = web.input()
-        db = db_handler(IP="superfluous.imqs.co.za")
+        db = db_handler()
         user_query = raw_data['query']
         user_time = datetime.datetime.now()
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
@@ -341,7 +341,8 @@ urls = ("/request_handler", "request_handler",
         "/authorise", "twitter_app_only_authorisation",
         "/index.*", "index",
         "/main.*", "main",
-        "/request_search_id", "request_search_id",
+        "/request_search_id", "request_search_id", 
+        "/", "index",
         "/user_auth","user_authorisation")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.

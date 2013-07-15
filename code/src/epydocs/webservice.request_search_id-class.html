@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>globalmaptiles.GlobalGeodetic</title>
+  <title>webservice.request_search_id</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -34,8 +34,8 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        <a href="globalmaptiles-module.html">Module&nbsp;globalmaptiles</a> ::
-        Class&nbsp;GlobalGeodetic
+        <a href="webservice-module.html">Module&nbsp;webservice</a> ::
+        Class&nbsp;request_search_id
       </span>
     </td>
     <td>
@@ -45,56 +45,23 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="globalmaptiles.GlobalGeodetic-class.html"
+            >]&nbsp;|&nbsp;<a href="webservice.request_search_id-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class GlobalGeodetic</h1><p class="nomargin-top"><span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class request_search_id</h1><p class="nomargin-top"><span class="codelink"><a href="webservice-pysrc.html#request_search_id">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
-        <strong class="uidshort">GlobalGeodetic</strong>
+        <strong class="uidshort">request_search_id</strong>
 </pre>
 
 <hr />
-<pre class="literalblock">
-
-TMS Global Geodetic Profile
----------------------------
-
-Functions necessary for generation of global tiles in Plate Carre projection,
-EPSG:4326, &quot;unprojected profile&quot;.
-
-Such tiles are compatible with Google Earth (as any other EPSG:4326 rasters)
-and you can overlay the tiles on top of OpenLayers base map.
-
-Pixel and tile coordinates are in TMS notation (origin [0,0] in bottom-left).
-
-What coordinate conversions do we need for TMS Global Geodetic tiles?
-
-  Global Geodetic tiles are using geodetic coordinates (latitude,longitude)
-  directly as planar coordinates XY (it is also called Unprojected or Plate
-  Carre). We need only scaling to pixel pyramid and cutting to tiles.
-  Pyramid has on top level two tiles, so it is not square but rectangle.
-  Area [-180,-90,180,90] is scaled to 512x256 pixels.
-  TMS has coordinate origin (for pixels and tiles) in bottom-left corner.
-  Rasters are in EPSG:4326 and therefore are compatible with Google Earth.
-
-     LatLon      &lt;-&gt;      Pixels      &lt;-&gt;     Tiles     
-
- WGS84 coordinates   Pixels in pyramid  Tiles in pyramid
-     lat/lon         XY pixels Z zoom      XYZ from TMS 
-    EPSG:4326                                           
-     .----.                ----                         
-    /      \     &lt;-&gt;    /--------/    &lt;-&gt;      TMS      
-    \      /         /--------------/                   
-     -----        /--------------------/                
-   WMS, KML    Web Clients, Google Earth  TileMapService
-
-</pre>
+<p>Returns the search id needed to find and return the correct results 
+  from the database.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -115,15 +82,15 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="globalmaptiles.GlobalGeodetic-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">tileSize</span>=<span class="summary-sig-default">256</span>)</span><br />
-      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td><span class="summary-sig"><a href="webservice.request_search_id-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rest call that returns the search id needed to search, find and 
+      return data.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="webservice-pysrc.html#request_search_id.GET">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -133,75 +100,15 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="LatLonToPixels"></a><span class="summary-sig-name">LatLonToPixels</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">lat</span>,
-        <span class="summary-sig-arg">lon</span>,
-        <span class="summary-sig-arg">zoom</span>)</span><br />
-      Converts lat/lon to pixel coordinates in given zoom of the EPSG:4326 
-      pyramid</td>
+          <td><span class="summary-sig"><a href="webservice.request_search_id-class.html#POST" class="summary-sig-name">POST</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rest call that returns the search id needed to search, find and 
+      return data.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.LatLonToPixels">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="PixelsToTile"></a><span class="summary-sig-name">PixelsToTile</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">px</span>,
-        <span class="summary-sig-arg">py</span>)</span><br />
-      Returns coordinates of the tile covering region in pixel coordinates</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.PixelsToTile">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="Resolution"></a><span class="summary-sig-name">Resolution</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">zoom</span>)</span><br />
-      Resolution (arc/pixel) for given zoom level (measured at Equator)</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.Resolution">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="TileBounds"></a><span class="summary-sig-name">TileBounds</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">tx</span>,
-        <span class="summary-sig-arg">ty</span>,
-        <span class="summary-sig-arg">zoom</span>)</span><br />
-      Returns bounds of the given tile</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.TileBounds">source&nbsp;code</a></span>
+            <span class="codelink"><a href="webservice-pysrc.html#request_search_id.POST">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -216,6 +123,7 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
       <code>__format__</code>,
       <code>__getattribute__</code>,
       <code>__hash__</code>,
+      <code>__init__</code>,
       <code>__new__</code>,
       <code>__reduce__</code>,
       <code>__reduce_ex__</code>,
@@ -225,6 +133,38 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
       <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="OK"></a><span class="summary-name">OK</span> = <code title="{'success': 'True'}">{'success': 'True'}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ERROR"></a><span class="summary-name">ERROR</span> = <code title="{'success': 'False'}">{'success': 'False'}</code>
     </td>
   </tr>
 </table>
@@ -271,28 +211,63 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
   </td>
 </tr>
 </table>
-<a name="__init__"></a>
+<a name="GET"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">tileSize</span>=<span class="sig-default">256</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GET</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="globalmaptiles-pysrc.html#GlobalGeodetic.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="webservice-pysrc.html#request_search_id.GET">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <p>Rest call that returns the search id needed to search, find and return
+  data.</p>
   <dl class="fields">
-    <dt>Overrides:
-        object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
-    </dt>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="webservice.request_search_id-class.html" 
+          class="link">request_search_id</a>) - Current instance of the <a 
+          href="webservice.request_search_id-class.html" 
+          class="link">request_search_id</a> object.</li>
+        <li><strong class="pname"><code>query</code></strong> (<code class="link">str</code>) - Formated string that contains the follow parameters platforms, 
+          location, function,</li>
+    </ul></dd>
+    <dt>Returns: <code class="link">str</code></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="POST"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">POST</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="webservice-pysrc.html#request_search_id.POST">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Rest call that returns the search id needed to search, find and return
+  data.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="webservice.request_search_id-class.html" 
+          class="link">request_search_id</a>) - Current instance of the <a 
+          href="webservice.request_search_id-class.html" 
+          class="link">request_search_id</a> object.</li>
+        <li><strong class="pname"><code>query</code></strong> (<code class="link">str</code>) - Formated string that contains the follow parameters platforms, 
+          location, function,</li>
+    </ul></dd>
+    <dt>Returns: <code class="link">str</code></dt>
   </dl>
 </td></tr></table>
 </div>
@@ -320,7 +295,7 @@ What coordinate conversions do we need for TMS Global Geodetic tiles?
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:23:00 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

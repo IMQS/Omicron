@@ -81,12 +81,48 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">JSON Object</span>
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="webservice.request_handler-class.html#GET_with_user_id" class="summary-sig-name">GET_with_user_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">raw_data</span>)</span><br />
+      Handles GET requests received from users with user_id.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="webservice-pysrc.html#request_handler.GET_with_user_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="webservice.request_handler-class.html#GET_without_user_id" class="summary-sig-name">GET_without_user_id</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">raw_data</span>)</span><br />
+      Handles GET requests received from users without user_id.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="webservice-pysrc.html#request_handler.GET_without_user_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">inconsistent</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="webservice.request_handler-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Handles GET requests received from users.</td>
+      Handles GET call made from the user.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="webservice-pysrc.html#request_handler.GET">source&nbsp;code</a></span>
             
@@ -98,12 +134,12 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">JSON Object</span>
+      <span class="summary-type">inconsistent</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="webservice.request_handler-class.html#POST" class="summary-sig-name">POST</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Handles POST requests received from users.</td>
+      Handles POST call made from the user.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="webservice-pysrc.html#request_handler.POST">source&nbsp;code</a></span>
             
@@ -154,14 +190,21 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="OK"></a><span class="summary-name">OK</span> = <code title="{'success': 'True'}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">success</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">True</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+        <a name="OK"></a><span class="summary-name">OK</span> = <code title="{'success': 'True'}">{'success': 'True'}</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="ERROR"></a><span class="summary-name">ERROR</span> = <code title="{'success': 'False'}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">success</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">False</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+        <a name="ERROR"></a><span class="summary-name">ERROR</span> = <code title="{'success': 'False'}">{'success': 'False'}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="root"></a><span class="summary-name">root</span> = <code title="&quot;/home/omicron/Omicron2/code/src/&quot;">&quot;/home/omicron/Omicron2/code/src/&quot;</code>
     </td>
   </tr>
 </table>
@@ -208,6 +251,50 @@ object --+
   </td>
 </tr>
 </table>
+<a name="GET_with_user_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GET_with_user_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">raw_data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="webservice-pysrc.html#request_handler.GET_with_user_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handles GET requests received from users with user_id. <a 
+  href="webservice.request_handler-class.html#GET" 
+  class="link">request_handler.GET</a></p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GET_without_user_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GET_without_user_id</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">raw_data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="webservice-pysrc.html#request_handler.GET_without_user_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Handles GET requests received from users without user_id. <a 
+  href="webservice.request_handler-class.html#GET" 
+  class="link">request_handler.GET</a></p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
 <a name="GET"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -222,7 +309,10 @@ object --+
     </td>
   </tr></table>
   
-  <p>Handles GET requests received from users.</p>
+  <p>Handles GET call made from the user. Interprets the parameters, 
+  gathers the data, run the specified function, if directory is set returns
+  the correct image else returns the level zero tile. Note all these 
+  parameters gets received via a GET call, web.py handles it.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -241,8 +331,10 @@ object --+
           &quot;longitude_latitude_&lt;radius&gt;&quot;</li>
         <li><strong class="pname"><code>directory</code></strong> (String) - The value that leaflet adds at the end to find a specific tile 
           and it is in the following format &lt;/level/x/y.png&gt;</li>
+        <li><strong class="pname"><code>user_id</code></strong> (String) - The id that will be used to search the for the search data in the
+          mongo database.</li>
     </ul></dd>
-    <dt>Returns: JSON Object</dt>
+    <dt>Returns: inconsistent</dt>
         <dd>This will vary between request depending on what processing 
           functions are applied to the social data that was mined.</dd>
   </dl>
@@ -262,27 +354,32 @@ object --+
     </td>
   </tr></table>
   
-  <p>Handles POST requests received from users.</p>
+  <p>Handles POST call made from the user. Interprets the parameters, 
+  gathers the data, run the specified function, if directory is set returns
+  the correct image else returns the level zero tile. Note all these 
+  parameters gets received via a POST call, web.py handles it.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (request_handler) - Pointer to the current request_handler instance.</li>
-        <li><strong class="pname"><code>platforms</code></strong> (String) - List of hash(#) separated values that indicate which social media
-          to use.</li>
-        <li><strong class="pname"><code>tags</code></strong> (String) - List of Underscore(_) separated values that is used for the 
+        <li><strong class="pname"><code>platforms</code></strong> (<code class="link">str</code>) - List of underscore(_) separated values that indicate which social
+          media to use.</li>
+        <li><strong class="pname"><code>tags</code></strong> (<code class="link">str</code>) - List of Underscore(_) separated values that is used for the 
           search tags.</li>
-        <li><strong class="pname"><code>function</code></strong> (String) - Which processing function to apply after the data has been 
+        <li><strong class="pname"><code>function</code></strong> (<code class="link">str</code>) - Which processing function to apply after the data has been 
           collected.</li>
-        <li><strong class="pname"><code>location_type</code></strong> (String) - Either area or radius.</li>
-        <li><strong class="pname"><code>location</code></strong> (String) - If location_type has the value &quot;area&quot; then location 
+        <li><strong class="pname"><code>location_type</code></strong> (<code class="link">str</code>) - Either area or radius.</li>
+        <li><strong class="pname"><code>location</code></strong> (<code class="link">str</code>) - If location_type has the value &quot;area&quot; then location 
           must be in the following format &quot;country state city&quot; 
           else             if location_type has the value 
           &quot;radius&quot; then location must be in the following format 
-          &quot;longitude#latitude#&lt;radius&gt;&quot;</li>
-        <li><strong class="pname"><code>directory</code></strong> (String) - The value that leaflet adds at the end to find a specific tile 
+          &quot;longitude_latitude_&lt;radius&gt;&quot;</li>
+        <li><strong class="pname"><code>directory</code></strong> (<code class="link">str</code>) - The value that leaflet adds at the end to find a specific tile 
           and it is in the following format &lt;/level/x/y.png&gt;</li>
+        <li><strong class="pname"><code>user_id</code></strong> (<code class="link">str</code>) - The id that will be used to search the for the search data in the
+          mongo database.</li>
     </ul></dd>
-    <dt>Returns: JSON Object</dt>
+    <dt>Returns: inconsistent</dt>
         <dd>This will vary between request depending on what processing 
           functions are applied to the social data that was mined.</dd>
   </dl>
@@ -312,7 +409,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jul  3 15:51:29 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

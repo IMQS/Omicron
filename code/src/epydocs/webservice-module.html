@@ -56,7 +56,7 @@
 
 <hr />
 <div class="fields">      <p><strong>Author:</strong>
-        S. Schreiber
+        S. Schreiber, J. J. Martin
       </p>
 </div><!-- ==================== CLASSES ==================== -->
 <a name="section-Classes"></a>
@@ -88,14 +88,24 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="webservice.redirect_handler-class.html" class="summary-name">redirect_handler</a><br />
-      For all redirects from social media logins
+      For all redirects from social media logins for user authentication
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="webservice.authorisation-class.html" class="summary-name">authorisation</a>
+        <a href="webservice.twitter_app_only_authorisation-class.html" class="summary-name">twitter_app_only_authorisation</a><br />
+      Application only authorisation method for twitter
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice.user_authorisation-class.html" class="summary-name">user_authorisation</a><br />
+      Authenticates a user to use the social media sites as authenticated
+        by their profile
     </td>
   </tr>
 <tr>
@@ -110,6 +120,15 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="webservice.main-class.html" class="summary-name">main</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="webservice.request_search_id-class.html" class="summary-name">request_search_id</a><br />
+      Returns the search id needed to find and return the correct results
+        from the database.
     </td>
   </tr>
 </table>
@@ -134,22 +153,18 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="render"></a><span class="summary-name">render</span> = <code title="web.template.render('~/Omicron2/code/src/web/html')">web.template.render('~/Omicron2/code/src/web/html')</code>
+        <a href="webservice-module.html#render" class="summary-name">render</a> = <code title="web.template.render('/home/omicron/Omicron2/code/src/web/html')">web.template.render('/home/omicron/Omicron2/code/src/<code class="variable-ellipsis">...</code></code><br />
+      Sets the directory for the html files.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="webservice-module.html#urls" class="summary-name">urls</a> = <code title="('/request_handler',
- 'request_handler',
- '/redirect',
- 'redirect_handler',
- '/authorise',
- 'authorisation',
- '/index.*',
- 'index',
-..."><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">/request_handler</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">request_handler</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">/redirect</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">r</code><code class="variable-ellipsis">...</code></code><br />
+        <a href="webservice-module.html#urls" class="summary-name">urls</a> = <code title="&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;redirect_handler&quot;\
+, &quot;/authorise&quot;, &quot;twitter_app_only_authorisation&quot;, &quot;/index.*&quot;, &quot;index&quot;,\
+ &quot;/main.*&quot;, &quot;main&quot;, &quot;/request_search_id&quot;, &quot;request_search_id&quot;, &quot;/&quot;, &quot;i\
+ndex&quot;, &quot;/user_auth&quot;, &quot;user_authorisation&quot;">&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;re<code class="variable-ellipsis">...</code></code><br />
       Groups the URL's and their corresponding actions.
     </td>
   </tr>
@@ -165,7 +180,9 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code>
+        <a name="application"></a><span class="summary-name">application</span> = <code title="app.wsgifunc()">app.wsgifunc()</code><br />
+      Creates the application function that is needed for the swgi mod to 
+      work.
     </td>
   </tr>
 </table>
@@ -187,6 +204,24 @@
   </td>
 </tr>
 </table>
+<a name="render"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">render</h3>
+  <p>Sets the directory for the html files.</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+web.template.render('/home/omicron/Omicron2/code/src/web/html')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="urls"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -199,15 +234,10 @@
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">/request_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">request_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">/redirect</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">redirect_handler</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">/authorise</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">authorisation</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">/index.*</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">index</code><code class="variable-quote">'</code><code class="variable-op">,</code>
-<code class="variable-ellipsis">...</code>
+&quot;/request_handler&quot;, &quot;request_handler&quot;, &quot;/redirect&quot;, &quot;redirect_handler&quot;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, &quot;/authorise&quot;, &quot;twitter_app_only_authorisation&quot;, &quot;/index.*&quot;, &quot;index&quot;,<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ &quot;/main.*&quot;, &quot;main&quot;, &quot;/request_search_id&quot;, &quot;request_search_id&quot;, &quot;/&quot;, &quot;i<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ndex&quot;, &quot;/user_auth&quot;, &quot;user_authorisation&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -237,7 +267,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jul  3 15:51:29 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

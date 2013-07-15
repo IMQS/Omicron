@@ -102,7 +102,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">String.</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -179,7 +179,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Dictionary</span>
+      <span class="summary-type"><code class="link">dict</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -332,7 +332,7 @@
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: String.</dt>
+    <dt>Returns: <code class="link">str</code></dt>
         <dd>Returns the current platform's name.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#get_platform_name">social_platform.get_platform_name</a>
@@ -364,10 +364,11 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of key words.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of key words.</li>
         <li><strong class="pname"><code>gps_center</code></strong> (Tuple of floats) - It is a tuple that consists of longitude and latitude.</li>
-        <li><strong class="pname"><code>radius</code></strong> (float) - Is the distance (in km) from the gps_center that will be covered 
+        <li><strong class="pname"><code>radius</code></strong> (<code class="link">float</code>) - Is the distance (in km) from the gps_center that will be covered 
           by the search.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -404,8 +405,8 @@
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List) - A list of tags to search for.</li>
-        <li><strong class="pname"><code>search_region</code></strong> (String) - Name of the search_region - in the following format &lt;country 
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>search_region</code></strong> (<code class="link">str</code>) - Name of the search_region - in the following format &lt;country 
           state city&gt;.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -449,7 +450,8 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (social_platform) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
+          class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
     <dt>Returns: Boolean</dt>
         <dd>True, if the authentication process completed successfully.
@@ -489,7 +491,7 @@
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Dictionary</dt>
+    <dt>Returns: <code class="link">dict</code></dt>
         <dd>A dictionary with the basic header information of an http 
           request.</dd>
     <dt>Overrides:
@@ -520,7 +522,7 @@
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
-        <li><strong class="pname"><code>selected_properties</code></strong> (List) - List of properties that should be kept after stripping. Has to be
+        <li><strong class="pname"><code>selected_properties</code></strong> (<code class="link">list</code>) - List of properties that should be kept after stripping. Has to be
           one or more of the following 'tags', 'location' or 'post'.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -555,7 +557,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jul  3 15:51:29 2013
+    Generated by Epydoc 3.0.1 on Mon Jul 15 11:23:00 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

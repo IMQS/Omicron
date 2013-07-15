@@ -42,11 +42,11 @@ class social_platform(object):
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @param search_tags: A list of tags to search for.
-            @type search_tags: List
+            @type search_tags: L{list}
             @param gps_center: A tuple consisting of longitude and latitude GPS coordinates.
             @type gps_center: A tuple of floats
             @param radius: The radius from the L{gps_center} that forms the circular region to be searched.
-            @type radius: Float
+            @type radius: L{float}
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object
@@ -61,9 +61,9 @@ class social_platform(object):
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @param search_tags: A list of tags to search for.
-            @type search_tags: List
+            @type search_tags: L{list}
             @param search_region: Name of the search_region - in the following format <country state city>.
-            @type search_region: String
+            @type search_region: L{str}
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object
@@ -90,7 +90,7 @@ class social_platform(object):
             @type self: L{social_platform}
             @return: True, if the social platform is able to connect to its online API. \
             False, if the social platform is unable to connect to its online API.
-            @rtype: Boolean
+            @rtype: L{bool}
         '''
         print "Testing Connection"
         try:
@@ -106,11 +106,11 @@ class social_platform(object):
         @param self: Pointer to the current object.
         @type self: L{social_platform}
         @param encrypted_data: A encrypted response from a reST call that needs to be decrypted.
-        @type encrypted_data: String
+        @type encrypted_data: L{str}
         @param headers: The header response from the server, containing the encryption method.
         @type headers: Dictionary
         @return None: if one or more missing parameters or Unknown decryption method used on the server else it returns the Decrypted data.
-        @rtype: String
+        @rtype: L{str}
         '''
         if (encrypted_data == None):
             print "No encrypted data"
@@ -137,7 +137,7 @@ class social_platform(object):
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @return: a dictionary with the basic header information of an http request.
-            @rtype: Dictionary
+            @rtype: L{dict}
         '''
         raise NotImplementedError
     def strip_data(self, input_data=None, selected_properties=None):
@@ -149,7 +149,7 @@ class social_platform(object):
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
             @param selected_properties: List of strings - either 'tags', 'location' or 'post'.
-            @type selected_properties: List
+            @type selected_properties: L{list}
             @return: The stripped data.
             @rtype: JSON Object 
         '''
@@ -175,7 +175,7 @@ class twitter_platform(social_platform):
             @param self: Pointer to the current object.
             @type self: L{social_platform}            
             @return: Returns the current platform's name.
-            @rtype: String.
+            @rtype: L{str}
         '''
         return "twitter"    
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
@@ -183,13 +183,13 @@ class twitter_platform(social_platform):
             and the following error message will be returned "query not suitable".
             
             @param self: Pointer to the current object.
-            @type self: social_platform  
+            @type self: L{social_platform}  
             @param search_tags: A list of key words.
-            @type search_tags: List 
+            @type search_tags: L{list} 
             @param gps_center: It is a tuple that consists of longitude and latitude.
             @type gps_center: Tuple of floats
             @param radius: Is the distance (in km) from the gps_center that will be covered by the search.
-            @type radius: float 
+            @type radius: L{float} 
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object
@@ -239,9 +239,9 @@ class twitter_platform(social_platform):
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @param search_tags: A list of tags to search for.
-            @type search_tags: List
+            @type search_tags: L{list}
             @param search_region: Name of the search_region - in the following format <country state city>.
-            @type search_region: String
+            @type search_region: L{str}
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object'''
@@ -258,7 +258,7 @@ class twitter_platform(social_platform):
             saves access_token in the object, also returns access_token
             TODO: Not all Exceptions have been caught  !
             @param self: Pointer to the current object.
-            @type self: social_platform
+            @type self: L{social_platform}
         '''
         urllib2.quote(self.consumer_key)  # URL encoding
         urllib2.quote(self.consumer_secret)  # URL encoding
@@ -299,7 +299,7 @@ class twitter_platform(social_platform):
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @return: A dictionary with the basic header information of an http request.
-            @rtype: Dictionary
+            @rtype: L{dict}
         '''
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
         return headers
@@ -311,7 +311,7 @@ class twitter_platform(social_platform):
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
             @param selected_properties: List of properties that should be kept after stripping. Has to be one or more of the following 'tags', 'location' or 'post'.
-            @type selected_properties: List
+            @type selected_properties: L{list}
             @return: The stripped data.
             @rtype: JSON Object 
         '''
@@ -374,10 +374,10 @@ class instagram_platform(social_platform):
             @param self: Pointer to the current object.
             @type self: L{social_platform}            
             @return: Returns the current platform's name.
-            @rtype: String.
+            @rtype: L{str}
         '''
         return "instagram"    
-    def request_center_radius(self, criteria=None, center=None, radius=None):
+    def request_center_radius(self, criteria=None, gps_center=None, radius=None):
         "TODO:"     
         raise NotImplementedError
     def request_region(self, criteria=None, area=None):
