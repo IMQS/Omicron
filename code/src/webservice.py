@@ -303,7 +303,7 @@ class request_search_id(object):
             @rtype: L{str}
         '''
         raw_data = web.input()
-        db = db_handler(IP="superfluous.imqs.co.za")
+        db = db_handler()
         user_query = raw_data['query']
         user_time = datetime.datetime.now()
         user_id = db.store_social_data(time=user_time, query=user_query, social_data='', database_name='omicron', collection_name='request_information')
@@ -315,7 +315,8 @@ urls = ("/request_handler", "request_handler",
         "/authorise", "authorisation",
         "/index.*", "index",
         "/main.*", "main",
-        "/request_search_id", "request_search_id")#:Groups the URL's and their corresponding actions.
+        "/request_search_id", "request_search_id", 
+        "/","index")#:Groups the URL's and their corresponding actions.
 
 app = web.application(urls, globals()) #:Creates a Application to delegate requests based on path.
 
