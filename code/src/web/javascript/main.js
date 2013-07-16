@@ -9,9 +9,11 @@ function initmap(input,bool,search_id) {
 		console.log("Returning already setup");
 		return;
 	}
-	var loader = document.getElementsByTagName("img");
-	loader[0].style = "display:none";
-	var map = L.map('mapHolder').setView([ 51.505, -0.09 ], 0);
+/*	var loader = document.getElementsByTagName("img");
+	loader[0].style = "display:none"; */
+	var mapholder = document.getElementById('mapHolder')
+	mapholder.innerHTML=""
+	var map = L.map('mapHolder').setView([ -33, 18 ], 6);
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		/* 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' */
 		maxZoom : 18
