@@ -84,7 +84,7 @@ class request_handler(object):
         location = raw_data["location"].lstrip('u').split("_")
         l_x_y = str(raw_data["directory"]).split("/")[1:]
         auth_codes_ = None
-        if(raw_data.__contains('auth_codes')):
+        if(raw_data.__contains__('auth_codes')):
             auth_codes_ = raw_data['auth_codes']
             
         gatewayO = gateway()

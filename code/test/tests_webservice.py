@@ -6,6 +6,7 @@ Created on 11 Jul 2013
 import unittest
 import web
 import webservice as ws
+import webservice
 
 class test_webservice(unittest.TestCase):
     '''
@@ -14,29 +15,64 @@ class test_webservice(unittest.TestCase):
     
     def test_request_handler_without_id_1(self):
         '''
-            
+            Test a basic call to L{webservice.request_handler} to make shore it can handle a call with a full set of parameters and not just the search id.
         '''
-        pass
-    
+        self.set_up_webinput()
+        web.ctx.env = {'QUERY_STRING':'tags=%23imqs_%23nolights&location=-33.96_18.83_2000&location_type=radius&platforms=twitter&function=heat_map&directory=/0/0/0.png','REQUEST_METHOD':'GET'}
+        #try:    
+        redirectObj = ws.request_handler()
+        dict_ = {}
+        answer = redirectObj.GET()
+        if dict_.__class__ == answer.__class__:
+            assert False
+        else:
+            assert True
+        #except:
+        #    assert False
+        
+        
     def test_reqeust_with_id(self):
         '''
+             Test a basic call to L{webservice.request_handler} to make shore it can handle a call with just the search id.
         '''
-        pass
-    
-    def test_authorisation(self):
-        '''
-        '''
-        pass
+        self.set_up_webinput()
+        web.ctx.env = {'QUERY_STRING':'user_id=51e3ee88922e5618149b610a&directory=/0/0/0.png','REQUEST_METHOD':'GET'}
+        try:    
+            redirectObj = ws.request_handler()
+            dict_ = {}
+            answer = redirectObj.GET()
+            if dict_.__class__ == answer.__class__:
+                assert False
+            else:
+                assert True
+        except:
+            assert False
     
     def test_request_search_id_get(self):
         '''
+            Test basic functionality that should not error with GET call
         '''
-        pass
+        self.set_up_webinput()
+        web.ctx.env = {'QUERY_STRING':'','REQUEST_METHOD':'GET'}
+        try:
+            redirectObj = ws.request_search_id()
+            redirectObj.GET()
+            assert True
+        except:
+            assert False
+    def test_request_search_id_get_full(self):
+        '''
+            Test basic functionality that should not error with GET call
+        '''
+        self.set_up_webinput()
+        web.ctx.env = {'QUERY_STRING':'tags=%23imqs_%23nolights&location=-33.96_18.83_2000&location_type=radius&platforms=twitter&function=heat_map','REQUEST_METHOD':'GET'}
+        try:
+            redirectObj = ws.request_search_id()
+            redirectObj.GET()
+            assert True
+        except:
+            assert False
     
-    def test_request_search_id_post(self):
-        '''
-        '''
-        pass
 
     def test_redirect_handler1(self):
         '''
