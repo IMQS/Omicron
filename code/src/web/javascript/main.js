@@ -2,7 +2,7 @@
  * Sets up leaflet and removes the loading gif from the <div>
  * then adds the base maps from open street maps and adds heatmap layer from superfluous.imqs.co.za
  */
-function initmap(input,bool,search_id) {
+function initmap(bool, search_id, geo_point_data) {
 	if(bool == true){
 		console.log("Returning already setup");
 		return;
@@ -20,11 +20,13 @@ function initmap(input,bool,search_id) {
 					{
 						maxZoom : 18
 					});
-	L.control.layers(null, {
-		"Heat map" : heatmap
-	}).addTo(map);
 	
-
+	var geo_points = L.geoJson(JSON.parse(geo_point_data));
+	
+	L.control.layers(null, {
+		"Heat map" : heatmap,
+		"Points":geo_points
+	}).addTo(map);	
 }
 /**
  * Makes a request to the superfluous.imqs.co.za database that stores the query and gets a user id back which is use to uniquly identify the query
@@ -32,7 +34,7 @@ function initmap(input,bool,search_id) {
  * @param request_params : the http request parameters
  * @param callback_params : the parameters for the call back function
  */
-function database_request(callback,request_params,callback_params) // How can I use this callback?
+function database_request(callback, request_params) // How can I use this callback?
 {
 	var request = new XMLHttpRequest();
 	var boolean = false;
@@ -52,7 +54,7 @@ function database_request(callback,request_params,callback_params) // How can I 
 		console.log("checking");
 		if(request.readyState == 4 && request.status==200){
 			console.log("Pushing call back");
-			callback(callback_params,boolean,search_id);
+			callback(initmap,boolean,search_id);
 			boolean = true;
 		}
 
@@ -81,7 +83,43 @@ function OnRun() {
 		alert("Please go to the main page to get authenticated ")
 	}
 	twitter = encodeURIComponent(twitter)
-	database_request(initmap,input+"&auth_codes="+twitter,input);
+	database_request(geo_point_request,input+"&auth_codes="+twitter);
 	console.log(input+"&authcodes="+twitter);
 	console.log("Completed ");
+}
+
+/**
+ * 
+ */
+function geo_point_request(callback, bool, search_id) // How can I use this callback?
+{
+	var request = new XMLHttpRequest();
+	var boolean = false;
+	if (bool == true) { 
+		return;
+	}
+	request.onreadystatechange = function() {
+		if (request.readyState != 4) {
+			return; // Another callback here
+
+		}
+		if (request.status != 200) {
+			return;
+		}
+
+		var geo_data = request.responseText
+		console.log(geo_data);
+
+//		boolean = true;
+		console.log("checking");
+		if(request.readyState == 4 && request.status==200){
+			console.log("Pushing call back");
+			callback(boolean, search_id, geo_data);
+			boolean = true;
+		}
+
+	}
+	console.log("Opening port");
+	request.open("GET", "http://superfluous.imqs.co.za/omicron/request_handler?user_id="+search_id+"&function=geo_coords");
+	request.send();
 }

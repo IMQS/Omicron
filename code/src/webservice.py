@@ -71,6 +71,23 @@ class request_handler(object):
                 msg = Exception.message
                 return_data_and_status = self.ERROR
                 return_data_and_status["message"] = msg
+        elif (function == "geo_coords"):
+            if str(query_data['data']) == '':
+                gateway0 = gateway()
+                query_data['data'] = gateway0.execute_requests( query_data['query']['platforms'], query_data['query']['tags'],
+                                                                 (float(query_data['query']['location'][0]),float(query_data['query']['location'][1])), radius=float(query_data['query']['location'][2])
+                                                                 , selected_properties=['location'], search_region=None, auth_codes=None)
+                db.store_social_data_by_id(obj_id=user_id, social_data=query_data['data'],collection_name="request_information")
+            total_coords = []
+            for platform in query_data['query']['platforms']:
+                total_coords = total_coords + query_data['data'][platform]['location']
+            try:
+                return_data_and_status = mp.coords_to_geojson(total_coords)
+            except Exception:
+                msg = "The points could not be generated."
+                msg = Exception.message
+                return_data_and_status = self.ERROR
+                return_data_and_status["message"] = msg
         else :
             msg = "The function that was specified was not found."
             return_data_and_status = self.ERROR
@@ -112,6 +129,18 @@ class request_handler(object):
                 return_data_and_status = open(self.root+"heatmaps/"+l_x_y[0] +"_" + l_x_y[1] + "_" + l_x_y[2],"rb").read()
             except Exception:
                 msg = "The heatmap could not be generated or stored"
+                msg = Exception.message
+                return_data_and_status = self.ERROR
+                return_data_and_status["message"] = msg
+        elif (function == "geo_coords"):
+            query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'],auth_codes=auth_codes_)
+            total_coords = []
+            for platform in platforms:
+                total_coords = total_coords + query_data[platform]['location']
+            try:
+                return_data_and_status = mp.coords_to_geojson(total_coords)
+            except Exception:
+                msg = "The points could not be generated."
                 msg = Exception.message
                 return_data_and_status = self.ERROR
                 return_data_and_status["message"] = msg
