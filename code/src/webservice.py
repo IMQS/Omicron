@@ -41,7 +41,7 @@ class request_handler(object):
         '''
         return_data_and_status = {}
         
-        l_x_y = str(raw_data["directory"]).split("/")[1:]
+        
         user_id = raw_data['user_id']
         
         db = db_handler()
@@ -52,6 +52,7 @@ class request_handler(object):
         function = query_data['query']['function']
         
         if (function == "heat_map"):
+            l_x_y = str(raw_data["directory"]).split("/")[1:]
             if str(query_data['data']) == '':
                 gateway0 = gateway()
                 query_data['data'] = gateway0.execute_requests( query_data['query']['platforms'], query_data['query']['tags'],
@@ -110,14 +111,13 @@ class request_handler(object):
         tags = raw_data["tags"].lstrip('u').split("_")
         function = raw_data["function"]
         location_type = raw_data["location_type"]
-        location = raw_data["location"].lstrip('u').split("_")
-        l_x_y = str(raw_data["directory"]).split("/")[1:]
+        location = raw_data["location"].lstrip('u').split("_")  
         auth_codes_ = None
         if(raw_data.__contains__('auth_codes')):
-            auth_codes_ = raw_data['auth_codes']
-            
+            auth_codes_ = raw_data['auth_codes']     
         gatewayO = gateway()
         if (function == "heat_map"):
+            l_x_y = str(raw_data["directory"]).split("/")[1:]
             query_data = gatewayO.execute_requests(platforms, tags, (float(location[0]),float(location[1])),float(location[2]),['location'],auth_codes=auth_codes_)
             total_coords = []
             for platform in platforms:
