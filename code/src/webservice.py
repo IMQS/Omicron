@@ -31,10 +31,11 @@ class request_handler(object):
     def GET_with_user_id(self, raw_data):
         '''
             Handles GET requests received from users with user_id.
+            
             @param self: Pointer to the current request_handler instance.
-            @type self: L{request_handler.GET}
-            @param raw_data:
-            @type raw_data:
+            @type self: L{request_handler}
+            @param raw_data: The object returned from web.input() Note: This can also be a normal dictionary.
+            @type raw_data: L{web.utils.Storage}
             @return: The return value will change according to the given input. If it's a heapmap a .png file will be return else if the tweet point layer is selected then 
             @rtype: dynamic  
         '''
@@ -79,7 +80,13 @@ class request_handler(object):
     def GET_without_user_id(self, raw_data):
         '''
             Handles GET requests received from users without user_id.
-            L{request_handler.GET}
+            
+            @param self: Pointer to the current request_handler instance.
+            @type self: L{request_handler}
+            @param raw_data: The object returned from web.input() Note: This can also be a normal dictionary.
+            @type raw_data: L{web.utils.Storage}
+            @return: The return value will change according to the given input. If it's a heapmap a .png file will be return else if the tweet point layer is selected then 
+            @rtype: dynamic  
         '''
         return_data_and_status = {}
         platforms = raw_data["platforms"].lstrip('u').split("_")
@@ -135,7 +142,9 @@ class request_handler(object):
             @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
             @type directory: String
             @param user_id: The id that will be used to search the for the search data in the mongo database.
-            @type user_id: String 
+            @type user_id: String
+            @param auth_codes: The authorise token/data that can be used to authenticate the selected social platform. {<platform_name>: "data needed"}
+            @type auth_codes: L{dict}  
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: inconsistent
             
@@ -156,20 +165,22 @@ class request_handler(object):
             @param self: Pointer to the current request_handler instance.
             @type self: request_handler
             @param platforms: List of underscore(_) separated values that indicate which social media to use. 
-            @type platforms: L{str} 
+            @type platforms: String 
             @param tags: List of Underscore(_) separated values that is used for the search tags.
-            @type tags: L{str}
+            @type tags: String
             @param function: Which processing function to apply after the data has been collected.
-            @type function: L{str}
+            @type function: String
             @param location_type: Either area or radius.
-            @type location_type: L{str}
+            @type location_type: String
             @param location: If location_type has the value "area" then location must be in the following format "country state city" else \
             if location_type has the value "radius" then location must be in the following format "longitude_latitude_<radius>" 
-            @type location: L{str}
+            @type location: String
             @param directory: The value that leaflet adds at the end to find a specific tile and it is in the following format </level/x/y.png>
-            @type directory: L{str}
+            @type directory: String
             @param user_id: The id that will be used to search the for the search data in the mongo database.
-            @type user_id: L{str}
+            @type user_id: String
+            @param auth_codes: The authorise token/data that can be used to authenticate the selected social platform. {<platform_name>: "data needed"}
+            @type auth_codes: L{dict}  
             @return: This will vary between request depending on what processing functions are applied to the social data that was mined.
             @rtype: inconsistent
         '''
@@ -268,15 +279,49 @@ class user_authorisation:
         raise NotImplementedError
 
 class index(object):
+    '''
+        Used to load the index page via a GET call. The POST call is not supported.
+    '''
     def GET(self):
+        '''
+            Returns the index page.
+            
+            @param self: Pointer to the current L{webservice.index}  instance.
+            @type self: L{webservice.index}
+            @return: The index webstie.
+            @rtype: L{str} 
+        '''
         return render.index()
     def POST(self):
+        '''
+            This function is not supported.
+            @return: A dictionary  that contains success:false and msg:POST call not supported. 
+        '''
         return {'success':'false','msg':'POST call not supported'}
 
 class main(object):
+    '''
+        Used to load the main page via a GET or POST call.
+    '''
     def GET(self):
+        '''
+            Returns the main page.
+            
+            @param self: Pointer to the current L{webservice.main} instance.
+            @type self: L{webservice.main}
+            @return: The index webstie.
+            @rtype: L{str} 
+        '''
         return render.main()
     def POST(self):
+        '''
+            Returns the main page.
+            
+            @param self: Pointer to the current L{webservice.main} instance.
+            @type self: L{webservice.main}
+            @return: The index webstie.
+            @rtype: L{str} 
+        '''
         return render.main()
 
 class request_search_id(object):
