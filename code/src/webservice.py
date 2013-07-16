@@ -23,7 +23,7 @@ render = web.template.render('/home/omicron/Omicron2/code/src/web/html')#: Sets 
 
 class request_handler(object):
     '''
-        Handles all incoming GET and POST requests
+        Handles incoming GET and POST requests. The output may vary between the input.If the heatmap or point tweetlayer function is specified then it can interact with leaflet.   
     '''
     OK = {'success':'True'}
     ERROR = {'success':'False'}
@@ -31,7 +31,12 @@ class request_handler(object):
     def GET_with_user_id(self, raw_data):
         '''
             Handles GET requests received from users with user_id.
-            L{request_handler.GET}
+            @param self: Pointer to the current request_handler instance.
+            @type self: L{request_handler.GET}
+            @param raw_data:
+            @type raw_data:
+            @return: The return value will change according to the given input. If it's a heapmap a .png file will be return else if the tweet point layer is selected then 
+            @rtype: dynamic  
         '''
         return_data_and_status = {}
         
