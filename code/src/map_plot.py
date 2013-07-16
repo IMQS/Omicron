@@ -176,7 +176,7 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
     import Image
     heatmap = heatmap[::-1]
     if colour:
-        from matplotlib.pyplot import cm
+        from matplotlib import colors
         
         print "Saving colour heatmap to " + path + "..."
         
@@ -186,7 +186,17 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         heatmap = heatmap / 5.
         print"\t\tDone."
         
-        heatmap_color = Image.fromarray(np.uint8(cm.hot(heatmap, alpha=0.5, bytes=True)))
+        cdict = [(0.0,      (1.0, 0.0, 0.0, 0.0)),
+                 (0.365079, (1.0, 0.0, 0.0, 0.5)),
+                 (0.746032, (1.0, 1.0, 0.0, 0.5)),
+                 (1.0,      (1.0, 1.0, 1.0, 0.5))]
+        # excerpt from the registered 'hot' colormap:
+        # '_segmentdata': {'blue': ((0.0, 0.0, 0.0), (0.746032, 0.0, 0.0), (1.0, 1.0, 1.0)),
+                        # 'green': ((0.0, 0.0, 0.0), (0.365079, 0.0, 0.0), (0.746032, 1.0, 1.0), (1.0, 1.0, 1.0)),
+                        # 'red': ((0.0, 0.0416, 0.0416), (0.365079, 1.0, 1.0), (1.0, 1.0, 1.0))}
+        
+        cmap_hot = colors.LinearSegmentedColormap.from_list(name='yes', colors=cdict)
+        heatmap_color = Image.fromarray(np.uint8(cmap_hot(heatmap, bytes=True)))
         e = time()
         
         print "\tTime to convert to colour: " + str(e - s)
@@ -226,7 +236,7 @@ if __name__ == "__main__":
     #technopark = [[-33.964807, 18.8372767]]
     #madagascar = [[-20,47]]
     
-    tile = heatmap_tile(level = 2, x = 1, y = 2, coords=hundred_random)
+    tile = heatmap_tile(level = 0, x = 0, y = 0, coords=hundred_random)
     #show_heatmap(tile)
     #show_3D_heatmap(tile)
     save_heatmap(tile, path="/home/marzul/test.png", colour=True)
