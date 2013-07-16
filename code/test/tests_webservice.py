@@ -36,7 +36,7 @@ class test_webservice(unittest.TestCase):
              Test a basic call to L{webservice.request_handler} to make shore it can handle a call with just the search id.
         '''
         self.set_up_webinput()
-        web.ctx.env = {'QUERY_STRING':'user_id=51e3ee88922e5618149b610a&directory=/0/0/0.png','REQUEST_METHOD':'GET'}
+        web.ctx.env = {'QUERY_STRING':'user_id=51e4ea7fc0efee6c9e1461cf&directory=/0/0/0.png','REQUEST_METHOD':'GET'}
         try:    
             redirectObj = ws.request_handler()
             dict_ = {}
