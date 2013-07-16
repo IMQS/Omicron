@@ -208,23 +208,60 @@ class twitter_platform(social_platform):
             tags['geocode'] = str(gps_center[0]) + "," + str(gps_center[1]) + "," + str(radius) + "km"
         
         
-        params = urllib.urlencode(tags)
+        
+        
+        params = "?"+urllib.urlencode(tags)
         conn = httplib.HTTPSConnection(self.https_connection_string)
         head = self.authenticate_headers()
-        conn.request("GET", "/1.1/search/tweets.json?" + params, "", head)
-        response = conn.getresponse()
-        if(response.status != 200):
-            print "Error Failed to get Twitter data"
-            if(response.status == 401):
-                print "http 401 error invalid or expired bearer token please re-authenticate "
-            elif(response.status == 403):
-                print "http 403 error Your credentials do not allow access to this resource"
-            return None
-        result_set = response.read()
-        result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
-        conn.close()
-        result_set = json.loads(result_set)
+        data = []
+        for i in xrange(3):
+            conn.request("GET","/1.1/search/tweets.json"+params,"",head)
+            response = conn.getresponse()
+            if(response.status != 200):
+                print "Error Failed to get Twitter data"
+                if(response.status == 401):
+                    print "http 401 error invalid or expired bearer token please re-authenticate "
+                elif(response.status == 403):
+                    print "http 403 error Your credentials do not allow access to this resource"
+                return None
+            
+            result_set = response.read()
+            result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
+            conn.close()
+        #    print type(s)
+            var = json.loads(result_set)
+            data.append(var)
+        #    print type(#    print type(var)
+            if(var['search_metadata'].__contains__('next_results')):
+                params = var['search_metadata']['next_results']
+            else:
+                break
+            if(len(data) > 1):
+                for i in xrange(len(data)-1):
+                    for j in xrange(len(data[i+1]['statuses'])):
+                        data[0]['statuses'].append(data[i+1]['statuses'])
+            result_set = data[0]
+
+        '''       
+            params = urllib.urlencode(tags)
+            conn = httplib.HTTPSConnection(self.https_connection_string)
+            head = self.authenticate_headers()
+            conn.request("GET", "/1.1/search/tweets.json?" + params, "", head)
+            response = conn.getresponse()
+            if(response.status != 200):
+                print "Error Failed to get Twitter data"
+                if(response.status == 401):
+                    print "http 401 error invalid or expired bearer token please re-authenticate "
+                elif(response.status == 403):
+                    print "http 403 error Your credentials do not allow access to this resource"
+                return None
+            result_set = response.read()
+            result_set = self.decrypt_response(encrypted_data=result_set, headers=response.getheaders())
+            conn.close()
+            result_set = json.loads(result_set)
+        '''
         return result_set
+
     def request_region(self, search_tags=None, search_region=None):
         ''' Queries the underlining social API using a search area defined by a region. \
             If any of the parameters are not included then the query is rejected \
