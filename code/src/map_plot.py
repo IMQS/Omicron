@@ -176,7 +176,8 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
     import Image
     heatmap = heatmap[::-1]
     if colour:
-        from matplotlib import colors
+        #from matplotlib import colors
+        from matplotlib.pyplot import cm
         
         print "Saving colour heatmap to " + path + "..."
         
@@ -186,17 +187,18 @@ def save_heatmap(heatmap, path='./image.png', colour=False):
         heatmap = heatmap / 5.
         print"\t\tDone."
         
-        cdict = [(0.0,      (1.0, 0.0, 0.0, 0.0)),
-                 (0.365079, (1.0, 0.0, 0.0, 0.5)),
-                 (0.746032, (1.0, 1.0, 0.0, 0.5)),
-                 (1.0,      (1.0, 1.0, 1.0, 0.5))]
         # excerpt from the registered 'hot' colormap:
         # '_segmentdata': {'blue': ((0.0, 0.0, 0.0), (0.746032, 0.0, 0.0), (1.0, 1.0, 1.0)),
                         # 'green': ((0.0, 0.0, 0.0), (0.365079, 0.0, 0.0), (0.746032, 1.0, 1.0), (1.0, 1.0, 1.0)),
                         # 'red': ((0.0, 0.0416, 0.0416), (0.365079, 1.0, 1.0), (1.0, 1.0, 1.0))}
+        #cdict = [(0.0,      (1.0, 0.0, 0.0, 0.0)),
+        #         (0.365079, (1.0, 0.0, 0.0, 0.5)),
+        #         (0.746032, (1.0, 1.0, 0.0, 0.5)),
+        #         (1.0,      (1.0, 1.0, 1.0, 0.5))]
+        #cmap_hot = colors.LinearSegmentedColormap.from_list(name='yes', colors=cdict)
+        #heatmap_color = Image.fromarray(np.uint8(cmap_hot(heatmap, bytes=True)))
         
-        cmap_hot = colors.LinearSegmentedColormap.from_list(name='yes', colors=cdict)
-        heatmap_color = Image.fromarray(np.uint8(cmap_hot(heatmap, bytes=True)))
+        heatmap_color = Image.fromarray(np.uint8(cm.hot(heatmap, alpha=0.5, bytes=True)))
         e = time()
         
         print "\tTime to convert to colour: " + str(e - s)
