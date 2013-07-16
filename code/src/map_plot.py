@@ -217,9 +217,9 @@ def coords_to_geojson(coords):
     @rtype: GeoJSON object
     '''
     import json
-    obj = {u'type':u'FeatureCollection', u'features':{u'type':u'Feature', u'geometry':[]}}
+    obj = {u'type':u'FeatureCollection', u'features':[]}
     for point in coords:
-        obj[u'features'][u'geometry'].append({u'type':u'Point',u'coordinates':[str(point[0]),str(point[1])]})
+        obj[u'features'].append({u'type':u'Feature', u'geometry':{u'type':u'Point',u'coordinates':[point[1],point[0]]}})
     return json.dumps(obj)
 
 if __name__ == "__main__":
