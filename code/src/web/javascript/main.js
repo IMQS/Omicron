@@ -1,16 +1,12 @@
 /**
- * 
+ * Sets up leaflet and removes the loading gif from the <div>
+ * then adds the base maps from open street maps and adds heatmap layer from superfluous.imqs.co.za
  */
 function initmap(input,bool,search_id) {
-//	alert(input)
-//	input = '?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000'
-	// set up the map
 	if(bool == true){
 		console.log("Returning already setup");
 		return;
 	}
-/*	var loader = document.getElementsByTagName("img");
-	loader[0].style = "display:none"; */
 	var mapholder = document.getElementById('mapHolder')
 	mapholder.innerHTML=""
 	var map = L.map('mapHolder').setView([ -33, 18 ], 6);
@@ -30,22 +26,12 @@ function initmap(input,bool,search_id) {
 	
 
 }
-/*
-function get_input() {
-	var str = decodeURIComponent(window.location.search);
-	var objURL = {};
-	str.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function($0, $1, $2,
-			$3) {
-		objURL[$1] = $3;
-	});
-	return objURL;
-}
-
-function process_input(input) {
-	input["location_type"]
-}
-*/
-
+/**
+ * Makes a request to the superfluous.imqs.co.za database that stores the query and gets a user id back which is use to uniquly identify the query
+ * @param callback : function pointer to the function that must be called after the http request has completed
+ * @param request_params : the http request parameters
+ * @param callback_params : the parameters for the call back function
+ */
 function database_request(callback,request_params,callback_params) // How can I use this callback?
 {
 	var request = new XMLHttpRequest();
@@ -72,17 +58,16 @@ function database_request(callback,request_params,callback_params) // How can I 
 
 	}
 	console.log("Opening port");
-//	request.setRequestHeader("Content-length", 1);
 	request.open("GET", "http://superfluous.imqs.co.za/omicron/request_search_id"+request_params);
 	request.send();
 }
 /**
- * 
+ * First and only function thats called from the html document, checks if there is an twitter access token for this session 
+ * and makes the first REST call to the database on superfluous to request a user id (search id) that will be used to uniquely identify the 
+ * query
  */
 function OnRun() {
-	var input = window.location.search;
-//	alert("Starting");
-//	var input = "?function=heat_map&platforms=twitter&tags=%23IMQS&location_type=radius&location=-33.964818_18.8372568_50000" 
+	var input = window.location.search; 
 	var twitter = "Disabled";
 	if (typeof (Storage) !== "undefined") {
 		if (sessionStorage.twitter_authentication_code) {

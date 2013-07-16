@@ -134,10 +134,6 @@ function OnSubmit() {
 	}
 
 	platforms.value = checkedplatform;
-/*	var form = document.getElementById("form");
-	form.action = "http://superfluous.imqs.co.za/omicron/main.html"+parameters;
-	console.log(form);
-*/
 	return true;
 }
 /**
@@ -189,7 +185,6 @@ function store_codes(twitter_access_token, override) {
 			document.getElementById("result").innerHTML = "Successfully Authorised old codes cleared";
 			EnableButtons();
 		} else if (!sessionStorage.twitter_authentication_code) {
-			// sessionStorage.twitter_authentication_code=authenticate();
 			sessionStorage.twitter_authentication_code = twitter_access_token;
 			document.getElementById("result").innerHTML = "Successfully Authorised";
 			EnableButtons();
@@ -217,6 +212,9 @@ function OnRun() {
 	}
 
 }
+/**
+ * Since all buttons for submission for the search engine are disabled once the authentication has completed  javascript will re-enable them
+ */
 function EnableButtons(){
 	var forms = document.getElementsByTagName("form");
 	for(var i = 0;i<forms.length;i++){
@@ -264,8 +262,9 @@ function check_authentication() {
 }
 /**
  * Validates access token TODO validate the access_token somehow, no method with
- * the twitter api to tell if access token is expired without doing a manuel
+ * the twitter api to tell if access token is expired without doing a manual
  * request and get rejected
+ * Note : Twitter has no implementation for this at this time this method will always return true
  * @returns true: If its a valid token.
  * @returns false: If the token is expired.
  */
