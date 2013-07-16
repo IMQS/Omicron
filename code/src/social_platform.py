@@ -214,7 +214,7 @@ class twitter_platform(social_platform):
         conn = httplib.HTTPSConnection(self.https_connection_string)
         head = self.authenticate_headers()
         data = []
-        for i in xrange(3):
+        for i in xrange(1):
             conn.request("GET","/1.1/search/tweets.json"+params,"",head)
             response = conn.getresponse()
             if(response.status != 200):
@@ -240,7 +240,7 @@ class twitter_platform(social_platform):
                 for i in xrange(len(data)-1):
                     for j in xrange(len(data[i+1]['statuses'])):
                         data[0]['statuses'].append(data[i+1]['statuses'])
-            result_set = data[0]
+        result_set = data[0]
 
         '''       
             params = urllib.urlencode(tags)
