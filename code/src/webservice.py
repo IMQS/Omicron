@@ -34,7 +34,7 @@ class request_handler(object):
             @param self: Pointer to the current request_handler instance.
             @type self: L{request_handler}
             @param raw_data: The object returned from web.input() Note: This can also be a normal dictionary.
-            @type raw_data: L{web.utils.Storage}
+            @type raw_data: web.utils.Storage
             @return: The return value will change according to the given input. If it's a heapmap a .png file will be return else if the tweet point layer is selected then 
             @rtype: dynamic  
         '''
@@ -102,7 +102,7 @@ class request_handler(object):
             @param self: Pointer to the current request_handler instance.
             @type self: L{request_handler}
             @param raw_data: The object returned from web.input() Note: This can also be a normal dictionary.
-            @type raw_data: L{web.utils.Storage}
+            @type raw_data: web.utils.Storage
             @return: The return value will change according to the given input. If it's a heapmap a .png file will be return else if the tweet point layer is selected then 
             @rtype: dynamic  
         '''
