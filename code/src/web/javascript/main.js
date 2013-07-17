@@ -10,7 +10,7 @@ function initmap(bool, search_id, geo_point_data) {
 	var mapholder = document.getElementById('mapHolder')
 	mapholder.innerHTML=""
 	mapholder.style.borderStyle = 'solid'
-	mapholder.style.borderColor = 'grey'
+	mapholder.style.borderColor = 'rgba(0,0,0,0.1)'
 	var map = L.map('mapHolder').setView([ -33, 18 ], 6);
 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		/* 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' */
