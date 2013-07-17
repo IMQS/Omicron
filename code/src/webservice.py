@@ -52,6 +52,7 @@ class request_handler(object):
         function = query_data['query']['function']
         if (raw_data.__contains__("function")):
             function = raw_data["function"]
+        
         if (function == "heat_map"):
             l_x_y = str(raw_data["directory"]).split("/")[1:]
             if str(query_data['data']) == '':
