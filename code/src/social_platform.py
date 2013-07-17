@@ -11,13 +11,11 @@ import StringIO
 import ast
 import urllib2
 import json
-from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
-
-
 
 class social_platform(object):
     '''
         Underlying data type which is extended by each social platform to communicate with that social network's API
+        @attention: Abstract Object, create instance of L{twitter_platform} and L{instagram_platform}.
     ''' 
     def __init__(self):
         self.access_token = None
@@ -29,7 +27,7 @@ class social_platform(object):
             @param self: Pointer to the current object.
             @type self: L{social_platform}       
             @return: Returns the current platform's name.
-            @rtype: String
+            @rtype: L{str}
         '''
         raise NotImplementedError
     def request_center_radius(self, search_tags=None, gps_center=None, radius=None):
@@ -37,16 +35,16 @@ class social_platform(object):
             Queries the underlining social API using a search area defined by a circle. If any of the parameters are not included then the query is rejected and "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: L{social_platform}
+            @type self: L{social_platform}.
             @param search_tags: A list of tags to search for.
-            @type search_tags: L{list}
+            @type search_tags: L{list}.
             @param gps_center: A tuple consisting of longitude and latitude GPS coordinates.
-            @type gps_center: A tuple of floats
+            @type gps_center: A tuple of floats.
             @param radius: The radius from the L{gps_center} that forms the circular region to be searched.
-            @type radius: L{float}
+            @type radius: L{float}.
             
-            @return: result_set a JSON Object containing the resulting data from the request to the API
-            @rtype: JSON Object
+            @return: result_set a JSON Object containing the resulting data from the request to the API.
+            @rtype: JSON Object.
         '''
         raise NotImplementedError
     def request_region(self, search_tags=None, search_region=None):
@@ -54,11 +52,11 @@ class social_platform(object):
             Queries the underlying social API using a search area defined by a region. If any of the parameters are not included then the query is rejected and the "some parameters of query are missing" will be returned.
             
             @param self: Pointer to the current object.
-            @type self: L{social_platform}
+            @type self: L{social_platform}.
             @param search_tags: A list of tags to search for.
-            @type search_tags: L{list}
+            @type search_tags: L{list}.
             @param search_region: Name of the search_region - in the following format <country state city>.
-            @type search_region: L{str}
+            @type search_region: L{str}.
             
             @return: result_set a JSON Object containing the resulting data from the request to the API
             @rtype: JSON Object
@@ -74,7 +72,7 @@ class social_platform(object):
             False, if the authentication process failed. Fails under the following conditions, \
             Connection error, http error code, error if decrypted data doesn't have the correct values. 
             access token in dictionary doesnt exist.
-            @rtype: Boolean
+            @rtype: L{bool}
         '''
         raise NotImplementedError
     def test_connection(self):
@@ -102,7 +100,7 @@ class social_platform(object):
         @param encrypted_data: A encrypted response from a REST call that needs to be decrypted.
         @type encrypted_data: L{str}
         @param headers: The header response from the server, containing the encryption method.
-        @type headers: Dictionary
+        @type headers: L{dict}
         @return None: if one or more missing parameters or Unknown decryption method used on the server else it returns the Decrypted data.
         @rtype: L{str}
         '''
@@ -153,7 +151,7 @@ class twitter_platform(social_platform):
     ''' Class for connecting to the Twitter API
     '''
     def __init__(self):
-        '''Constructor defines the consumer_key, consumer_secret, HttpsConnection string, the Test connection URL, the httpsOauthstring and the access_token
+        '''Constructor defines the consumer_key, consumer_secret, HttpsConnection string, the Test connection URL, the httpsOauthstring and the access_token.
             @param self: Pointer to the current object.
             @type self: L{social_platform}
         '''
@@ -229,7 +227,7 @@ class twitter_platform(social_platform):
         ''' Queries the underlining social API using a search area defined by a region. \
             If any of the parameters are not included then the query is rejected \
             and the "some parameters of query are missing" will be returned.
-            F
+            
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @param search_tags: A list of tags to search for.
@@ -248,11 +246,12 @@ class twitter_platform(social_platform):
             HTTPS request as "'Authorization': 'Basic %s' %EncodedString" with parameters to the request "'grant_type':'client_credentials'".
             A HTTPS POST is made on port 443 with the Headers and Parameters to the websites Authentication api, then a getresponse() call is made by the
             HTTPS connection,read and then decrypted using gzip. With the resulting data a string which is casted into a dictionary for easy access.
+            Saves access_token in the object.
             
-            saves access_token in the object, also returns access_token
-            TODO: Not all Exceptions have been caught  !
             @param self: Pointer to the current object.
             @type self: L{social_platform}
+            @return: True, if authentication is completed, False if failed.
+            @rtype: L{bool}
         '''
         urllib2.quote(self.consumer_key)  # URL encoding
         urllib2.quote(self.consumer_secret)  # URL encoding
@@ -289,24 +288,24 @@ class twitter_platform(social_platform):
         return True
     def authenticate_headers(self):
         ''' Returns an authorised header for a REST call. Uses self.access_token initialised in L{authenticate()}.  
-            Note : L{authenticate()} method must first be called
+            Note : L{authenticate()} method must first be called.
             @param self: Pointer to the current object.
-            @type self: L{social_platform}
+            @type self: L{social_platform}.
             @return: A dictionary with the basic header information of an http request.
-            @rtype: L{dict}
+            @rtype: L{dict}.
         '''
         headers = { "User-Agent":"TeamOmicron", "Authorization": "Bearer %s" % self.access_token, "Content-type": "application/x-www-form-urlencoded;charset=UTF-8", 'Accept-Encoding': 'gzip,deflate'} 
         return headers
 
     def strip_data(self, input_data=None, selected_properties=None):
         '''
-        Strips the given raw data so that only the selected properties remain.
+            Strips the given raw data so that only the selected properties remain.
             
-            @param input_data: Raw data that needs to be  
+            @param input_data: Raw data that needs to be  processed.
             @type input_data: JSON Object
             @param selected_properties: List of properties that should be kept after stripping. Has to be one or more of the following 'tags', 'location' or 'post'.
             @type selected_properties: L{list}
-            @return: The stripped data.
+            @return: The stripped data. If not all parameters are given it will return None.
             @rtype: JSON Object 
         '''
         
@@ -344,11 +343,20 @@ class twitter_platform(social_platform):
         
     
 class instagram_platform(social_platform):
+    '''
+        Class used for logging into instagram using user authorisation
+        @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
+    '''
+    
     def __init__(self):
-        '''Constructor defines the client_id, client_secret, HttpsConnection string, the Test connection URL, the httpsOauthstring and the access_token
-            @param self: Pointer to the current object.
-            @type self: L{social_platform}
         '''
+            Constructor defines the client_id, client_secret, HttpsConnection string, the Test connection URL, the httpsOauthstring and the access_token.
+            @param self: Pointer to the current object.
+            @type self: L{social_platform}.
+            @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
+
+        '''
+        from instagram.client import InstagramAPI
         self.client_id = "209d4256fd0540f6b23e6ee4c82821f4"
         self.client_secret = "6bbde185375e4ec4b4178555a0387cf8"
         self.https_connection_string = "api.instagram.com:443"
@@ -357,13 +365,14 @@ class instagram_platform(social_platform):
         
         self.access_token = None
         
-        self.redirect = "http://0.0.0.0:8080/redirect?platform=instagram"
+        self.redirect = "http://0.0.0.0:8080/redirect?platform=instagram" # this is the string instagram has as the redirect after the user logs in
         self.api = InstagramAPI(client_id=self.client_id, client_secret=self.client_secret, redirect_uri=self.redirect)
 #       self.redirect = self.api.get_authorize_login_url(scope = "")
         
     def get_platform_name(self):
         '''
             Returns the name of the social platform of the object it is applied to.
+            @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
             @param self: Pointer to the current object.
             @type self: L{social_platform}            
             @return: Returns the current platform's name.
@@ -371,10 +380,14 @@ class instagram_platform(social_platform):
         '''
         return "instagram"    
     def request_center_radius(self, criteria=None, gps_center=None, radius=None):
-        "TODO:"     
+        '''
+            @attention: Not implemented
+        '''     
         raise NotImplementedError
     def request_region(self, criteria=None, area=None):
-        "TODO:"
+        '''
+            @attention: Not implemented
+        '''     
         raise NotImplementedError        
     def authenticate(self,code=None):
         ''' Instagram authentication, must be called twice to authenticate completely, first call of authentication takes no parameters and requests \
@@ -382,7 +395,7 @@ class instagram_platform(social_platform):
             Once the code has been requested instagram will redirect to the servers redirect site 'superfluous.imqs.co.za/Omicron/redirect' with parameters \
             platform=instagram and code="some code" such that the site would be 'superfluous.imqs.co.za/Omicron/redirect?platform=instagram&code="some code"' \
             at this redirect site you must call this method again but with the code as the parameter to complete the authentication for the instance of this object
-            
+            @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
             @param code: A code generated by Instagrams servers, on first call for authentication this must be None.
             @type code: String
             
@@ -397,12 +410,15 @@ class instagram_platform(social_platform):
             
         
     def authenticate_headers(self):
+        '''
+            @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram
+        '''     
         raise NotImplementedError    
     
     def strip_data(self, input_data=None, selected_properties=None):
         '''
-        Strips the given raw data so that only the selected properties remain.
-            
+            Strips the given raw data so that only the selected properties remain.
+            @attention: Class Not implemented in project omicron, Incomplete class, requires from instagram.client import InstagramAPI #downloadable at https://github.com/Instagram/python-instagram    
             @param input_data: Raw data that needs to be  
             @type input_data: JSON Object
             @param selected_properties: List of properties that should be kept after stripping.
