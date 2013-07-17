@@ -43,7 +43,7 @@ class gateway(object):
             
             @param self: A pointer to the current object.
             @type self: Gateway.
-            @param platforms: L{list} of social media platforms (L{social_platforms}).
+            @param platforms: L{list} of social media platforms (L{social_platform}).
             @type platforms: L{list} of L{str}.
             @param search_tags: L{list} of key words (tags) that will be used in the search.
             @type search_tags: L{list} of L{str}.

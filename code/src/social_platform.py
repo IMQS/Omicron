@@ -125,7 +125,7 @@ class social_platform(object):
         return decrypted_data 
     def authenticate_headers(self):
         ''' Returns an authorised headers for a REST call. Uses self.access_token initialised in L{authenticate()}.  
-            Note : authenticate() method must first be called 
+            Note : L{authenticate} method must first be called 
             @param self: Pointer to the current object.
             @type self: L{social_platform}
             @return: a dictionary with the basic header information of an http request.
