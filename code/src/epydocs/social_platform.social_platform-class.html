@@ -66,10 +66,18 @@ object --+
 </dd></dl>
 
 <hr />
-<p>Underlying data type which is extended by each social platform to
+<p>Underlying data type which is extended by each social platform to 
   communicate with that social network's API</p>
 
-<!-- ==================== INSTANCE METHODS ==================== -->
+<hr />
+<div class="fields">      <p><strong>Attention:</strong>
+        Abstract Object, create instance of <a 
+        href="social_platform.twitter_platform-class.html" 
+        class="link">twitter_platform</a> and <a 
+        href="social_platform.instagram_platform-class.html" 
+        class="link">instagram_platform</a>.
+      </p>
+</div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
@@ -105,7 +113,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">String</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -123,7 +131,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">JSON Object</span>
+      <span class="summary-type">JSON Object.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -151,7 +159,7 @@ object --+
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#request_region" class="summary-sig-name">request_region</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">search_tags</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">search_region</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Queries the underlining social API using a search area defined by a 
+      Queries the underlying social API using a search area defined by a 
       region.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.request_region">source&nbsp;code</a></span>
@@ -164,7 +172,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Boolean</span>
+      <span class="summary-type"><code class="link">bool</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -189,7 +197,7 @@ object --+
         <tr>
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#test_connection" class="summary-sig-name">test_connection</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Pings a server to test if it is able to communicate to the network 
-      before making any calls         to it's reST API</td>
+      before making any calls to its REST API</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.test_connection">source&nbsp;code</a></span>
             
@@ -208,7 +216,7 @@ object --+
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#decrypt_response" class="summary-sig-name">decrypt_response</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">encrypted_data</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">headers</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Decrypts response from a reST call.</td>
+      Decrypts response from a REST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.decrypt_response">source&nbsp;code</a></span>
             
@@ -225,7 +233,7 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.social_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns an authorised headers for a reST call.</td>
+      Returns an authorised headers for a REST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#social_platform.authenticate_headers">source&nbsp;code</a></span>
             
@@ -363,7 +371,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: String</dt>
+    <dt>Returns: <code class="link">str</code></dt>
         <dd>Returns the current platform's name.</dd>
   </dl>
 </td></tr></table>
@@ -386,22 +394,22 @@ object --+
   </tr></table>
   
   <p>Queries the underlining social API using a search area defined by a 
-  circle.             If any of the parameters are not included then the 
-  query is rejected             and &quot;some parameters of query are 
-  missing&quot; will be returned.</p>
+  circle. If any of the parameters are not included then the query is 
+  rejected and &quot;some parameters of query are missing&quot; will be 
+  returned.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
-          class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of tags to search for.</li>
-        <li><strong class="pname"><code>gps_center</code></strong> (A tuple of floats) - A tuple consisting of longitude and latitude GPS coordinates.</li>
-        <li><strong class="pname"><code>radius</code></strong> (<code class="link">float</code>) - The radius from the <code class="link">gps_center</code> that 
+          class="link">social_platform</a>.) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>.) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>gps_center</code></strong> (A tuple of floats.) - A tuple consisting of longitude and latitude GPS coordinates.</li>
+        <li><strong class="pname"><code>radius</code></strong> (<code class="link">float</code>.) - The radius from the <code class="link">gps_center</code> that 
           forms the circular region to be searched.</li>
     </ul></dd>
-    <dt>Returns: JSON Object</dt>
+    <dt>Returns: JSON Object.</dt>
         <dd>result_set a JSON Object containing the resulting data from the 
-          request to the API</dd>
+          request to the API.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -421,17 +429,17 @@ object --+
     </td>
   </tr></table>
   
-  <p>Queries the underlining social API using a search area defined by a 
-  region.             If any of the parameters are not included then the 
-  query is rejected             and the &quot;some parameters of query are 
-  missing&quot; will be returned.</p>
+  <p>Queries the underlying social API using a search area defined by a 
+  region. If any of the parameters are not included then the query is 
+  rejected and the &quot;some parameters of query are missing&quot; will be
+  returned.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
-          class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>) - A list of tags to search for.</li>
-        <li><strong class="pname"><code>search_region</code></strong> (<code class="link">str</code>) - Name of the search_region - in the following format &lt;country 
+          class="link">social_platform</a>.) - Pointer to the current object.</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code>.) - A list of tags to search for.</li>
+        <li><strong class="pname"><code>search_region</code></strong> (<code class="link">str</code>.) - Name of the search_region - in the following format &lt;country 
           state city&gt;.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
@@ -463,7 +471,7 @@ object --+
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Boolean</dt>
+    <dt>Returns: <code class="link">bool</code></dt>
         <dd>True, if the authentication process completed successfully.
           False, if the authentication process failed. Fails under the 
           following conditions,             Connection error, http error 
@@ -487,7 +495,7 @@ object --+
   </tr></table>
   
   <p>Pings a server to test if it is able to communicate to the network 
-  before making any calls         to it's reST API</p>
+  before making any calls to its REST API</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -517,14 +525,14 @@ object --+
     </td>
   </tr></table>
   
-  <p>Decrypts response from a reST call.</p>
+  <p>Decrypts response from a REST call.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
-        <li><strong class="pname"><code>encrypted_data</code></strong> (<code class="link">str</code>) - A encrypted response from a reST call that needs to be decrypted.</li>
-        <li><strong class="pname"><code>headers</code></strong> (Dictionary) - The header response from the server, containing the encryption 
+        <li><strong class="pname"><code>encrypted_data</code></strong> (<code class="link">str</code>) - A encrypted response from a REST call that needs to be decrypted.</li>
+        <li><strong class="pname"><code>headers</code></strong> (<code class="link">dict</code>) - The header response from the server, containing the encryption 
           method.</li>
     </ul></dd>
     <dt>Returns: <code class="link">str</code></dt>
@@ -545,7 +553,7 @@ object --+
     </td>
   </tr></table>
   
-  <p>Returns an authorised headers for a reST call. Uses self.access_token 
+  <p>Returns an authorised headers for a REST call. Uses self.access_token 
   initialised in <a 
   href="social_platform.instagram_platform-class.html#authenticate" 
   class="link">authenticate()</a>. Note : authenticate() method must first 
@@ -617,7 +625,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
+    Generated by Epydoc 3.0.1 on Wed Jul 17 09:13:29 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

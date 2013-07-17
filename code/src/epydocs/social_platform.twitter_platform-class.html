@@ -90,7 +90,7 @@
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Constructor defines the consumer_key, consumer_secret, 
       HttpsConnection string, the Test connection URL, the httpsOauthstring
-      and the access_token</td>
+      and the access_token.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.__init__">source&nbsp;code</a></span>
             
@@ -161,7 +161,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Boolean</span>
+      <span class="summary-type"><code class="link">bool</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -179,12 +179,12 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type"><code class="link">dict</code></span>
+      <span class="summary-type"><code class="link">dict</code>.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="social_platform.twitter_platform-class.html#authenticate_headers" class="summary-sig-name">authenticate_headers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns an authorised header for a reST call.</td>
+      Returns an authorised header for a REST call.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="social_platform-pysrc.html#twitter_platform.authenticate_headers">source&nbsp;code</a></span>
             
@@ -297,7 +297,7 @@
   
   <p>Constructor defines the consumer_key, consumer_secret, HttpsConnection
   string, the Test connection URL, the httpsOauthstring and the 
-  access_token</p>
+  access_token.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -399,7 +399,7 @@
   <p>Queries the underlining social API using a search area defined by a 
   region.             If any of the parameters are not included then the 
   query is rejected             and the &quot;some parameters of query are 
-  missing&quot; will be returned. F</p>
+  missing&quot; will be returned.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -444,21 +444,16 @@
   is made on port 443 with the Headers and Parameters to the websites 
   Authentication api, then a getresponse() call is made by the HTTPS 
   connection,read and then decrypted using gzip. With the resulting data a 
-  string which is casted into a dictionary for easy access.</p>
-  <p>saves access_token in the object, also returns access_token TODO: Not 
-  all Exceptions have been caught  !</p>
+  string which is casted into a dictionary for easy access. Saves 
+  access_token in the object.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
           class="link">social_platform</a>) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: Boolean</dt>
-        <dd>True, if the authentication process completed successfully.
-          False, if the authentication process failed. Fails under the 
-          following conditions,             Connection error, http error 
-          code, error if decrypted data doesn't have the correct values. 
-          access token in dictionary doesnt exist.</dd>
+    <dt>Returns: <code class="link">bool</code></dt>
+        <dd>True, if authentication is completed, False if failed.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#authenticate">social_platform.authenticate</a>
     </dt>
@@ -479,19 +474,19 @@
     </td>
   </tr></table>
   
-  <p>Returns an authorised header for a reST call. Uses self.access_token 
+  <p>Returns an authorised header for a REST call. Uses self.access_token 
   initialised in <a 
   href="social_platform.twitter_platform-class.html#authenticate" 
   class="link">authenticate()</a>. Note : <a 
   href="social_platform.twitter_platform-class.html#authenticate" 
-  class="link">authenticate()</a> method must first be called</p>
+  class="link">authenticate()</a> method must first be called.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (<a href="social_platform.social_platform-class.html" 
-          class="link">social_platform</a>) - Pointer to the current object.</li>
+          class="link">social_platform</a>.) - Pointer to the current object.</li>
     </ul></dd>
-    <dt>Returns: <code class="link">dict</code></dt>
+    <dt>Returns: <code class="link">dict</code>.</dt>
         <dd>A dictionary with the basic header information of an http 
           request.</dd>
     <dt>Overrides:
@@ -521,12 +516,13 @@
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be</li>
+        <li><strong class="pname"><code>input_data</code></strong> (JSON Object) - Raw data that needs to be  processed.</li>
         <li><strong class="pname"><code>selected_properties</code></strong> (<code class="link">list</code>) - List of properties that should be kept after stripping. Has to be
           one or more of the following 'tags', 'location' or 'post'.</li>
     </ul></dd>
     <dt>Returns: JSON Object</dt>
-        <dd>The stripped data.</dd>
+        <dd>The stripped data. If not all parameters are given it will return
+          None.</dd>
     <dt>Overrides:
         <a href="social_platform.social_platform-class.html#strip_data">social_platform.strip_data</a>
     </dt>
@@ -557,7 +553,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
+    Generated by Epydoc 3.0.1 on Wed Jul 17 09:13:29 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

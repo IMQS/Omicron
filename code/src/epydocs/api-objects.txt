@@ -1,6 +1,5 @@
 database	database-module.html
 gateway	gateway-module.html
-gateway.__warningregistry__	gateway-module.html#__warningregistry__
 gateway.__package__	gateway-module.html#__package__
 globalmaptiles	globalmaptiles-module.html
 globalmaptiles.__package__	globalmaptiles-module.html#__package__

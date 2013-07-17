@@ -60,7 +60,9 @@ object --+
 </pre>
 
 <hr />
-<p>Handles all incoming GET and POST requests</p>
+<p>Handles incoming GET and POST requests. The output may vary between 
+  the input.If the heatmap or point tweetlayer function is specified then 
+  it can interact with leaflet.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -81,7 +83,7 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">dynamic</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -99,7 +101,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">dynamic</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -266,10 +268,19 @@ object --+
     </td>
   </tr></table>
   
-  <p>Handles GET requests received from users with user_id. <a 
-  href="webservice.request_handler-class.html#GET" 
-  class="link">request_handler.GET</a></p>
+  <p>Handles GET requests received from users with user_id.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="webservice.request_handler-class.html" 
+          class="link">request_handler</a>) - Pointer to the current request_handler instance.</li>
+        <li><strong class="pname"><code>raw_data</code></strong> (<code class="link">web.utils.Storage</code>) - The object returned from web.input() Note: This can also be a 
+          normal dictionary.</li>
+    </ul></dd>
+    <dt>Returns: dynamic</dt>
+        <dd>The return value will change according to the given input. If 
+          it's a heapmap a .png file will be return else if the tweet point
+          layer is selected then</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -288,10 +299,19 @@ object --+
     </td>
   </tr></table>
   
-  <p>Handles GET requests received from users without user_id. <a 
-  href="webservice.request_handler-class.html#GET" 
-  class="link">request_handler.GET</a></p>
+  <p>Handles GET requests received from users without user_id.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>self</code></strong> (<a href="webservice.request_handler-class.html" 
+          class="link">request_handler</a>) - Pointer to the current request_handler instance.</li>
+        <li><strong class="pname"><code>raw_data</code></strong> (<code class="link">web.utils.Storage</code>) - The object returned from web.input() Note: This can also be a 
+          normal dictionary.</li>
+    </ul></dd>
+    <dt>Returns: dynamic</dt>
+        <dd>The return value will change according to the given input. If 
+          it's a heapmap a .png file will be return else if the tweet point
+          layer is selected then</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -333,6 +353,9 @@ object --+
           and it is in the following format &lt;/level/x/y.png&gt;</li>
         <li><strong class="pname"><code>user_id</code></strong> (String) - The id that will be used to search the for the search data in the
           mongo database.</li>
+        <li><strong class="pname"><code>auth_codes</code></strong> (<code class="link">dict</code>) - The authorise token/data that can be used to authenticate the 
+          selected social platform. {&lt;platform_name&gt;: &quot;data 
+          needed&quot;}</li>
     </ul></dd>
     <dt>Returns: inconsistent</dt>
         <dd>This will vary between request depending on what processing 
@@ -362,22 +385,25 @@ object --+
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (request_handler) - Pointer to the current request_handler instance.</li>
-        <li><strong class="pname"><code>platforms</code></strong> (<code class="link">str</code>) - List of underscore(_) separated values that indicate which social
+        <li><strong class="pname"><code>platforms</code></strong> (String) - List of underscore(_) separated values that indicate which social
           media to use.</li>
-        <li><strong class="pname"><code>tags</code></strong> (<code class="link">str</code>) - List of Underscore(_) separated values that is used for the 
+        <li><strong class="pname"><code>tags</code></strong> (String) - List of Underscore(_) separated values that is used for the 
           search tags.</li>
-        <li><strong class="pname"><code>function</code></strong> (<code class="link">str</code>) - Which processing function to apply after the data has been 
+        <li><strong class="pname"><code>function</code></strong> (String) - Which processing function to apply after the data has been 
           collected.</li>
-        <li><strong class="pname"><code>location_type</code></strong> (<code class="link">str</code>) - Either area or radius.</li>
-        <li><strong class="pname"><code>location</code></strong> (<code class="link">str</code>) - If location_type has the value &quot;area&quot; then location 
+        <li><strong class="pname"><code>location_type</code></strong> (String) - Either area or radius.</li>
+        <li><strong class="pname"><code>location</code></strong> (String) - If location_type has the value &quot;area&quot; then location 
           must be in the following format &quot;country state city&quot; 
           else             if location_type has the value 
           &quot;radius&quot; then location must be in the following format 
           &quot;longitude_latitude_&lt;radius&gt;&quot;</li>
-        <li><strong class="pname"><code>directory</code></strong> (<code class="link">str</code>) - The value that leaflet adds at the end to find a specific tile 
+        <li><strong class="pname"><code>directory</code></strong> (String) - The value that leaflet adds at the end to find a specific tile 
           and it is in the following format &lt;/level/x/y.png&gt;</li>
-        <li><strong class="pname"><code>user_id</code></strong> (<code class="link">str</code>) - The id that will be used to search the for the search data in the
+        <li><strong class="pname"><code>user_id</code></strong> (String) - The id that will be used to search the for the search data in the
           mongo database.</li>
+        <li><strong class="pname"><code>auth_codes</code></strong> (<code class="link">dict</code>) - The authorise token/data that can be used to authenticate the 
+          selected social platform. {&lt;platform_name&gt;: &quot;data 
+          needed&quot;}</li>
     </ul></dd>
     <dt>Returns: inconsistent</dt>
         <dd>This will vary between request depending on what processing 
@@ -409,7 +435,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
+    Generated by Epydoc 3.0.1 on Wed Jul 17 09:13:29 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

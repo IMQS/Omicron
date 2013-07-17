@@ -82,7 +82,8 @@ object --+
 </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">social_platform.</span>
+      <span class="summary-type"><a href="social_platform-module.html" 
+      class="link">social_platform</a>.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -100,7 +101,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">GeoJSON Array.</span>
+      <span class="summary-type"><code class="link">dict</code>.</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -130,7 +131,7 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="gateway.gateway-class.html#GET" class="summary-sig-name">GET</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Only for handling reST calls to the gateway.</td>
+      Only for handling REST calls to the gateway.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="gateway-pysrc.html#gateway.GET">source&nbsp;code</a></span>
             
@@ -147,7 +148,7 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="gateway.gateway-class.html#POST" class="summary-sig-name">POST</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      This function is only for handling rest calls to /gateway.</td>
+      This function is only for handling REST calls to /gateway.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="gateway-pysrc.html#gateway.POST">source&nbsp;code</a></span>
             
@@ -241,10 +242,11 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self</code></strong> (Gateway.) - A pointer to the current object.</li>
-        <li><strong class="pname"><code>names</code></strong> (List of strings.) - List of names.</li>
+        <li><strong class="pname"><code>self</code></strong> (<a href="gateway.gateway-class.html" class="link">gateway</a>.) - A pointer to the current object.</li>
+        <li><strong class="pname"><code>names</code></strong> (<code class="link">list</code> of <code class="link">str</code>.) - List of names.</li>
     </ul></dd>
-    <dt>Returns: social_platform.</dt>
+    <dt>Returns: <a href="social_platform-module.html" 
+      class="link">social_platform</a>.</dt>
         <dd>List of social_platform objects.</dd>
   </dl>
 </td></tr></table>
@@ -271,18 +273,22 @@ object --+
   </tr></table>
   
   <p>Cycles through each variable in the platform list and executes a 
-  search with the given keywords on each platform.</p>
+  search with the given keywords on each platform. All parameters except 
+  for the auth_codes are required.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>self</code></strong> (Gateway.) - A pointer to the current object.</li>
-        <li><strong class="pname"><code>platforms</code></strong> (List of strings.) - List of social media platforms.</li>
-        <li><strong class="pname"><code>search_tags</code></strong> (List of strings.) - List of key words (tags) that will be used in the search.</li>
-        <li><strong class="pname"><code>authcodes</code></strong> - A dictionary of authorisation codes.</li>
-        <li><strong class="pname"><code>auth_codes</code></strong> (dictionary.)</li>
+        <li><strong class="pname"><code>platforms</code></strong> (<code class="link">list</code> of <code class="link">str</code>.) - <code class="link">list</code> of social media platforms (<code 
+          class="link">social_platforms</code>).</li>
+        <li><strong class="pname"><code>search_tags</code></strong> (<code class="link">list</code> of <code class="link">str</code>.) - <code class="link">list</code> of key words (tags) that will be 
+          used in the search.</li>
+        <li><strong class="pname"><code>authcodes</code></strong> - A <code class="link">dict</code> of authorisation codes.</li>
+        <li><strong class="pname"><code>auth_codes</code></strong> (<code class="link">dict</code>.)</li>
     </ul></dd>
-    <dt>Returns: GeoJSON Array.</dt>
-        <dd>The raw data that from the social media APIs.</dd>
+    <dt>Returns: <code class="link">dict</code>.</dt>
+        <dd>The raw data that from the social media APIs, Returns False if 
+          not all parameters are specified, auth_codes is optional</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -300,7 +306,7 @@ object --+
     </td>
   </tr></table>
   
-  <p>Only for handling reST calls to the gateway.</p>
+  <p>Only for handling REST calls to the gateway.</p>
   <p>Cycles through each variable in the platform list and executes a 
   search with the given keywords (tags) on each platform. Parameter 
   platforms and search_tags are encoded into the GET call.</p>
@@ -314,7 +320,10 @@ object --+
     <dt>Returns: GeoJSON array</dt>
         <dd>The raw data that was fetched from the social media API's.</dd>
   </dl>
-</td></tr></table>
+<div class="fields">      <p><strong>Attention:</strong>
+        Not Implemented.
+      </p>
+</div></td></tr></table>
 </div>
 <a name="POST"></a>
 <div>
@@ -330,7 +339,7 @@ object --+
     </td>
   </tr></table>
   
-  <p>This function is only for handling rest calls to /gateway. Cycles 
+  <p>This function is only for handling REST calls to /gateway. Cycles 
   through each variable in the platform list and executes a search with the
   given keywords on each platform. Parameter platforms and search_tags are 
   encoded into a JSON Object that will be received from a POST call.</p>
@@ -343,7 +352,10 @@ object --+
     <dt>Returns: GeoJSON array</dt>
         <dd>The raw data that was fetched from the social media API's.</dd>
   </dl>
-</td></tr></table>
+<div class="fields">      <p><strong>Attention:</strong>
+        Not Implemented.
+      </p>
+</div></td></tr></table>
 </div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
@@ -369,7 +381,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Jul 15 11:28:37 2013
+    Generated by Epydoc 3.0.1 on Wed Jul 17 09:13:29 2013
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
