@@ -131,7 +131,7 @@ class test_webservice(unittest.TestCase):
         self.set_up_webinput()
         web.ctx.env = {'QUERY_STRING':'platform=twitter','REQUEST_METHOD':'POST'} 
         redirectObj = ws.redirect_handler() 
-        self.assertEqual(redirectObj.POST(),"Not Implemented")
+        self.assertEqual(redirectObj.POST(),"Not Implemented.")
         reload(web)
         
     def set_up_webinput(self):
