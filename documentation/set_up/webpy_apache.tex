@@ -33,7 +33,6 @@ Type the following commands into the terminal:
 \item Create a python file in the \verb#/var/www/webpy-app/<app name># directory. Lets call it \verb#main.py#
 \item \verb#cd /etc/apache2/sites-available#
 \item Create file without an extension with the name same name as your project, lets call it \verb#<project name># . Note the project name could be the same as your \verb#<app name># but it does not have to be.
-\item \verb#sudo cp ./<project name> ../sites-enabled#
 \end{itemize}
 \subsection{Configure Apache 2.4}
 Firstly connect the server IP to a name. Note that \framebox{www.mysite.co.za} refers to the server name. Next go to the \verb#/etc# directory and open the file hosts. Add \framebox{127.0.0.1 mysite.co.za} just below localhost. Note that I am using the localhost IP address as my server IP for this demonstration. Save the file -- you will need to have super user privileges to do this.
@@ -54,6 +53,11 @@ Navigate to \verb#/etc/apache2/sites-enabled#, open the $<$project name$>$ file 
         SetHandler wsgi-script
         Options ExecCGI FollowSymlinks
 </Files>
+<Directory />
+        Order Allow,Deny
+        Allow From All
+        Options -Indexes
+</Directory>
 <Directory /var/www/webpy-app/<app name>>
         Options +ExecCGI +Indexes +MultiViews +FollowSymLinks
         AllowOverride None
@@ -62,9 +66,42 @@ Navigate to \verb#/etc/apache2/sites-enabled#, open the $<$project name$>$ file 
 </Directory>
 </VirtualHost>
 \end{verbatim}
+Here is an example.
+\begin{verbatim}
+<VirtualHost *:80>
+     #ServerAdmin [your admin mail address]
+     ServerName omicron.imqs.co.za
+     ServerAlias omicron.imqs.co.za
+     DocumentRoot /home/ubuntu/Omicron/code/src
+     DirectoryIndex webservice.py
+     WSGIScriptAlias /omicron /home/ubuntu/Omicron/code/src/webservice.py/
+     ErrorLog /home/ubuntu/Omicron/code/src/logs/error.log
+
+     CustomLog /home/ubuntu/Omicron/code/src/logs/access.log combined
+     addType text/html .py
+     Alias /web /home/ubuntu/Omicron/code/src/web
+ <Directory />
+        Order Allow,Deny
+        Allow From All
+        Options -Indexes
+    </Directory>
+<Files webservice.py>
+        SetHandler wsgi-script
+        Options ExecCGI FollowSymlinks
+</Files>
+<Directory /home/ubuntu/Omicron/code/src>
+        AddHandler server-parsed .js
+        Options +ExecCGI +Indexes +MultiViews +FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        allow from all
+</Directory>
+</VirtualHost>           
+\end{verbatim}
 You can test the configuration by typing the following command:
 \begin{itemize}
 \item \verb#sudo apachectl configtest#
+\item \verb#sudo a2ensite <project name>#
 \end{itemize}
 Only continue if the last line reads "\verb3Syntax OK3".
 Navigate to \verb#/var/www/webpy-app/<app name>/#, open \verb#main.py# and type the following:
