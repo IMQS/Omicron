@@ -1,0 +1,12 @@
+\documentclass[a4paper]{article}
+\begin{document}
+The urls for the webservice.
+For the request handler.
+If the headmap option is selected the directory parameter must be specified and
+must be in the following format. directory=/<level>/<x>/<y>.png.
+If the user_id parameter is in the GET or POST request then all of
+the parameter can be left out except if the heatmap function is specified then 
+then directory parameter needs to be added.
+In request_search_id if no parameters are given then it will only return the
+user_id. If All of then parameters(function, platforms, tags, location, location_type) is specified then it will do a search and add the search results to the database and return the user_id. The auth_codes parameters is optional and should be a dictionary same format as a python one.
+\end{document}
