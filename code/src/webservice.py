@@ -41,7 +41,6 @@ class request_handler(object):
         '''
         return_data_and_status = {}
         
-        
         user_id = raw_data['user_id']
         
         db = db_handler()
@@ -50,7 +49,7 @@ class request_handler(object):
         db.close_database()
         
         function = query_data['query']['function']
-        if (raw_data.__contains__("function")):
+        if (raw_data.__contains__("function")):# If the function is set then it will override the default that was stored in the database. 
             function = raw_data["function"]
         
         if (function == "heat_map"):
