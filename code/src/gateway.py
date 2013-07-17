@@ -52,7 +52,7 @@ class gateway(object):
             @return: The raw data that from the social media APIs, Returns False if not all parameters are specified, auth_codes is optional
             @rtype: L{dict}.
         '''
-        if(platforms == None or search_tags == None or gps_center == None or radius == None or selected_properties == None or search_region == None  ):
+        if(platforms == None or search_tags == None or gps_center == None or (radius == None and search_region == None) or selected_properties == None ):
             return False
         is_valid = self._available_social_media(platforms)
         return_data = {}

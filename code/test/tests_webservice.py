@@ -19,16 +19,16 @@ class test_webservice(unittest.TestCase):
         '''
         self.set_up_webinput()
         web.ctx.env = {'QUERY_STRING':'tags=%23imqs_%23nolights&location=-33.96_18.83_2000&location_type=radius&platforms=twitter&function=heat_map&directory=/0/0/0.png','REQUEST_METHOD':'GET'}
-        try:    
-            redirectObj = ws.request_handler()
-            dict_ = {}
-            answer = redirectObj.GET()
-            if dict_.__class__ == answer.__class__:
-                assert False
-            else:
-                assert True
-        except:
+#        try:    
+        redirectObj = ws.request_handler()
+        dict_ = {}
+        answer = redirectObj.GET()
+        if dict_.__class__ == answer.__class__:
             assert False
+        else:
+            assert True
+#        except:
+#            assert False
         
         
     def test_reqeust_with_id(self):
